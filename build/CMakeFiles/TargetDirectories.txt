@@ -1,0 +1,4 @@
+/home/pi/projects/raytracer/build/CMakeFiles/edit_cache.dir
+/home/pi/projects/raytracer/build/CMakeFiles/rebuild_cache.dir
+/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir
+/home/pi/projects/raytracer/build/CMakeFiles/PCHLib.dir
