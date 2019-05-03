@@ -308,6 +308,8 @@ void Renderer::renderBucketV2(RenderBucket& bucket, Camera& camera)
 			}		
 	}
 	
+	bucket.finished = true;
+	
 }
 
 void Renderer::renderBucket(RenderBucket& bucket, Camera& camera)
