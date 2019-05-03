@@ -1,6 +1,7 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
+#include <ctime>
 #include "pch.h"
 
 
@@ -11,6 +12,7 @@
 #include "raycaster2.h"
 #include "kdnode.h"
 
+
 struct OGL_geometry_data
 {
 	std::vector<float> vertices;
@@ -20,6 +22,28 @@ struct OGL_geometry_data
 	glm::vec3 rotate = glm::vec3(0.0, 0.0, 0.0);
 	glm::vec3 scale = glm::vec3(1.0, 1.0, 1.0);
 	
+};
+
+struct Color
+{
+	float r;
+	float g;
+	float b;
+	float a;
+};
+
+struct RenderBucket
+{
+	int x;
+	int y;
+	
+	int width = 32;
+	int height = 32;
+	
+	int render_width = 320;
+	int render_height = 240;
+	
+	bool finished = false;
 };
 
 class Renderer
@@ -35,17 +59,22 @@ class Renderer
 		
 		
 		int init(int limit);
-		void initFBO();
-		void drawFBO();
+		void initFBO(int width, int height);
+		void drawFBO(int r_width, int r_height);
 		void setCamPosFromPolar(float u, float v, float _radius);
 		void buildRenderGeometry();
-		void render();
+		void displayScene();
 		bool shouldClose();
 		
 		Mesh loadMesh(std::string path);
 		
-		void renderMaterials(int w, int h, Camera& camera, std::vector<Mesh>& meshes);
-		void renderBucket(int x_start, int y_start, int b_width, int b_height, int r_width, int r_height, Camera& camera);
+		//~ void renderMaterials(int w, int h, Camera& camera, std::vector<Mesh>& meshes);
+		std::vector<RenderBucket> createBuckets(int size, int r_width, int r_height);
+		void renderBucket(RenderBucket& bucket, Camera& camera);
+		void renderBucketV2(RenderBucket& bucket, Camera& camera);
+		void renderBuckets(std::vector<RenderBucket>& buckets, Camera& camera);
+		
+		
 		
 		void buildKDTree();
 		void displayKDTree();
@@ -92,7 +121,10 @@ class Renderer
 		
 		Texture fbo;
 		unsigned int fbo_vbo, fbo_texture_id;
+		bool show_fbo = false;
 		
+		int render_width;
+		int render_height;
 		std::vector<unsigned char> render_buffer_data;
 		
 			

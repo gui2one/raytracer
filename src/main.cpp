@@ -142,7 +142,7 @@ int main(int argc, char ** argv){
 
 	while(!renderer.shouldClose()){
 			
-		renderer.render();
+		renderer.displayScene();
 
 	}		
 

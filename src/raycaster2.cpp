@@ -92,7 +92,7 @@ bool Raycaster2::ray_triangle_intersect(Ray& ray, glm::vec3& vtx_a, glm::vec3& v
 
 Ray Raycaster2::castRay(ClickData click_data, Camera& camera)
 {
-	//~ glm::vec2 screen_pos = toScreenSpace(click_data);
+
 	glm::vec3 screen_world_pos = screenToWorld( click_data, camera);
 	glm::vec3 direction = screen_world_pos;
 	
@@ -106,23 +106,7 @@ Ray Raycaster2::castRay(ClickData click_data, Camera& camera)
 	
 	vec_mult_by_matrix(ray.direction, view_matrix, true);
 	
-	//~ ray.direction = glm::normalize(ray.direction);
-	//~ ray.direction = ray.direction * glm::vec3(1000.0, 1000.0, 1000.0);
-	
-	
-	
-	// plane intersect test 
-	//~ glm::vec3 plane_normal = glm::vec3(0.0,0.0,1.0);
-	//~ glm::vec3 plane_position = glm::vec3(0.0,0.0,0.0);
-	//~ 
-	//~ glm::vec3 hitP = glm::vec3(0.0, 0.0, 0.0);
-	
-	
-	//~ int hit = ray_plane_intersect(plane_normal, plane_position, ray.origin, ray.direction, hitP);
-	//~ 
-	//~ if( hit){
-		//~ printf(" hit position : %.2f %.2f %.2f\n", hitP.x, hitP.y, hitP.z);
-	//~ }
+
 	return ray;
 }
 
@@ -134,7 +118,7 @@ glm::vec3 Raycaster2::screenToWorld(ClickData click_data, Camera& camera)
 	
 	float x_pos = click_data.x - (float)(click_data.width) / 2.0;
 	float y_pos =  (float)(click_data.height) / 2.0 - click_data.y;
-	float z_pos = -( (float)(click_data.height) / 2.0) / tan( degToRad(45.0)*0.5 );
+	float z_pos = -( (float)(click_data.height) / 2.0) / tan( camera.fov*0.5 );
 	//~ printf("screen z pos --> %f\n", z_pos);
 	glm::vec3 world_pos = glm::vec3(x_pos, y_pos, z_pos);
 	
@@ -303,9 +287,10 @@ bool Raycaster2::intersectMeshes(ClickData click_data, Camera& camera, std::vect
 		
 		if( mesh_hits.size() > 0){
 				
-			std::sort( mesh_hits.begin(), mesh_hits.end(), [camera](HitData hit1,HitData hit2){
-				float dist1 = glm::distance(camera.position, hit1.position);
-				float dist2 = glm::distance(camera.position, hit2.position);
+			glm::vec3 cam_pos = camera.position;	
+			std::sort( mesh_hits.begin(), mesh_hits.end(), [cam_pos](HitData hit1,HitData hit2){
+				float dist1 = glm::distance(cam_pos, hit1.position);
+				float dist2 = glm::distance(cam_pos, hit2.position);
 				return dist1 < dist2;
 			});
 			

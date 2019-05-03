@@ -63,41 +63,22 @@ static void saveToBitmap2(std::string file_name, int width, int height, int* red
 	fclose(f);	
 }
 
-static void alphaMask(int w, int h, Camera& camera, Mesh& mesh)
+static float clampf(float value, float min, float max )
 {
-	
-	Raycaster2 raycaster;
-	int red[w*h];
-	int green[w*h];
-	int blue[w*h];
-	
-	ClickData click_data;
-	click_data.width = 640;
-	click_data.height = 480;
-	//~ saveToBitmap2(red);
-	for (int y = 0; y < h; y++)
-	{
-		click_data.y = (float)click_data.height / (float)h * y;
-		for (int x = 0; x < w; x++)
-		{
-			int index = x + y * w;
-			click_data.x = (float)click_data.width / (float)w * x;
-			
-			HitData hit_data;
-			
-			red[index] = raycaster.intersectMesh(click_data, camera, mesh, hit_data) == true ? 255 : 0;
-			green[index] = red[index];
-			blue[index] = red[index];
-		}
-		int progress = (float)y / (float)h * 100.0;
-		printf("progress %d%\n",progress);
+	if(value > max){
+		
+		return max;
+		
+	}else if (value < min){
+		
+		return min;
+		
+	}else{
+		
+		return value;
 	}
-	saveToBitmap2("alpha_mask.bmp",w, h, red, green ,blue);
-	printf("done alpha mask\n");
 	
 }
-
-
 
 
 
@@ -248,7 +229,7 @@ void Renderer::displayKDTree()
 	
 }
 
-void Renderer::renderBucket(int x_start, int y_start, int b_width, int b_height, int r_width, int r_height, Camera& camera)
+void Renderer::renderBucketV2(RenderBucket& bucket, Camera& camera)
 {
 	Raycaster2 raycaster;
 	
@@ -256,13 +237,94 @@ void Renderer::renderBucket(int x_start, int y_start, int b_width, int b_height,
 	click_data.width = 640;
 	click_data.height = 480;
 		
-	for (int y = y_start; y < y_start+b_height; y++)
-	{
-		click_data.y = (float)click_data.height / (float)r_height * (float)y;
 		
-		for (int x = x_start; x < x_start+b_width; x++)
+	std::vector<Ray> rays;
+	rays.clear();
+	rays.reserve(bucket.width * bucket.height);
+	
+	
+	// cast all rays
+	for (int y = bucket.y; y < bucket.y+bucket.height; y++)
+	{
+		click_data.y = (float)click_data.height / (float)bucket.render_height * (float)y;
+		
+		for (int x = bucket.x; x < bucket.x+bucket.width; x++)
 		{
-			click_data.x = (float)click_data.width / (float)r_width * (float)x;
+			click_data.x = (float)click_data.width / (float)bucket.render_width * (float)x;
+			
+			bool hit_tri = false;
+			//~ HitData hit_data;
+			//~ hit_tri = raycaster.intersectMeshes(click_data, camera, meshes, hit_data);
+			
+			Ray ray = raycaster.castRay(click_data, camera);
+			rays.emplace_back(ray);
+		}
+	}	
+	
+	
+	// then intersect
+	for (int i = 0; i < rays.size(); i++)
+	{
+			bool hit_tri = false;
+			std::vector<HitData> hit_datas;
+			bool hit2 = raycaster.intersectKDNode(rays[i], kd_nodes[0], camera, hit_datas);
+			if( hit2 )
+			{
+				//~ 
+				
+				std::sort(hit_datas.begin(), hit_datas.end(), [camera](HitData data1 , HitData data2){
+					float dist1 = glm::distance(data1.position, camera.position);
+					float dist2 = glm::distance(data2.position, camera.position);
+					return dist1 < dist2;
+				});			
+				if( hit_datas.size() > 0)
+				{	
+				//~ 
+					hit_tri = true;
+				}
+			}				
+			
+			
+			long int index = (bucket.x + (i%bucket.width)) + (bucket.y + i/bucket.width) * bucket.render_width;
+			
+			if(hit_tri){
+				
+				float dist = glm::distance(camera.position, hit_datas[0].position);
+				
+				
+				
+				int depth = 255 - (int)(clampf((float)dist, 0.0, 5.0) / 5.0 * 255.0);
+				
+				render_buffer_data[(index * 4)] = (unsigned char)depth;
+				render_buffer_data[(index * 4)+1] = (unsigned char)depth;
+				render_buffer_data[(index * 4)+2] = (unsigned char)depth;
+
+
+			}else{
+				render_buffer_data[(index * 4)] = (unsigned char)0;
+				render_buffer_data[(index * 4)+1] = (unsigned char)0;
+				render_buffer_data[(index * 4)+2] = (unsigned char)0;
+			
+			}		
+	}
+	
+}
+
+void Renderer::renderBucket(RenderBucket& bucket, Camera& camera)
+{
+	Raycaster2 raycaster;
+	
+	ClickData click_data;
+	click_data.width = 640;
+	click_data.height = 480;
+		
+	for (int y = bucket.y; y < bucket.y+bucket.height; y++)
+	{
+		click_data.y = (float)click_data.height / (float)bucket.render_height * (float)y;
+		
+		for (int x = bucket.x; x < bucket.x+bucket.width; x++)
+		{
+			click_data.x = (float)click_data.width / (float)bucket.render_width * (float)x;
 			
 			bool hit_tri = false;
 			//~ HitData hit_data;
@@ -288,7 +350,7 @@ void Renderer::renderBucket(int x_start, int y_start, int b_width, int b_height,
 			}				
 			
 			
-			long int index = x + y * 320;			
+			long int index = x + y * bucket.render_width;
 			
 			if(hit_tri){
 				
@@ -296,7 +358,7 @@ void Renderer::renderBucket(int x_start, int y_start, int b_width, int b_height,
 				
 				
 				
-				int depth = 255 - (int)((float)dist / 10.0 * 255.0);
+				int depth = 255 - (int)(clampf((float)dist, 0.0, 5.0) / 5.0 * 255.0);
 				
 				render_buffer_data[(index * 4)] = (unsigned char)depth;
 				render_buffer_data[(index * 4)+1] = (unsigned char)depth;
@@ -312,87 +374,63 @@ void Renderer::renderBucket(int x_start, int y_start, int b_width, int b_height,
 		}
 	}
 	
+	bucket.finished = true;
+	
 }
 
-void Renderer::renderMaterials(int w, int h, Camera& camera, std::vector<Mesh>& meshes)
+void Renderer::renderBuckets(std::vector<RenderBucket>& buckets, Camera& camera)
 {
+	std::clock_t start;
+	double duration;
 	
-	Raycaster2 raycaster;
-	int red[w*h];
-	int green[w*h];
-	int blue[w*h];
+	start = std::clock();
 	
-	ClickData click_data;
-	click_data.width = 640;
-	click_data.height = 480;
-	//~ saveToBitmap2(red);
-	for (int y = 0; y < h; y++)
+	show_fbo = true;
+	initFBO(render_width, render_height);
+	for (int i = 0; i < buckets.size(); i++)
 	{
-		click_data.y = (float)click_data.height / (float)h * (float)y;
-		for (int x = 0; x < w; x++)
-		{
-			click_data.x = (float)click_data.width / (float)w * (float)x;
-			
-			bool hit_tri = false;
-			//~ HitData hit_data;
-			//~ hit_tri = raycaster.intersectMeshes(click_data, camera, meshes, hit_data);
-			
-			Ray ray = raycaster.castRay(click_data, camera);
-			std::vector<HitData> hit_datas;
-			bool hit2 = raycaster.intersectKDNode(ray, kd_nodes[0], camera, hit_datas);
-			if( hit2 )
-			{
-				//~ 
-				
-				std::sort(hit_datas.begin(), hit_datas.end(), [camera](HitData data1 , HitData data2){
-					float dist1 = glm::distance(data1.position, camera.position);
-					float dist2 = glm::distance(data2.position, camera.position);
-					return dist1 < dist2;
-				});			
-				if( hit_datas.size() > 0)
-				{	
-				//~ 
-					hit_tri = true;
-				}
-			}				
-			
-			
-			long int index = x + y * w;
-			if(hit_tri){
-				
-				float dist = glm::distance(camera.position, hit_datas[0].position);
-				
-				
-				
-				int depth = 255 - (int)((float)dist / 10.0 * 255.0);
-				
-				render_buffer_data[(index * 4)] = (unsigned char)depth;
-				render_buffer_data[(index * 4)+1] = (unsigned char)depth;
-				render_buffer_data[(index * 4)+2] = (unsigned char)depth;
-				//~ render_buffer_data[index+3] = (unsigned char)255;
-				
-				red[index] = depth;
-				green[index] = depth;
-				blue[index] = depth;
-			}else{
-				render_buffer_data[(index * 4)] = (unsigned char)0;
-				render_buffer_data[(index * 4)+1] = (unsigned char)0;
-				render_buffer_data[(index * 4)+2] = (unsigned char)0;
-				//~ render_buffer_data[index+3] = (unsigned char)0;				
-				red[index] =  0;
-				green[index] = 0;
-				blue[index] = 0;				
-			}
-		}
+		renderBucketV2(buckets[i], camera);
 		
-		if(y % 20 == 0) render();
-		
-		int progress = (float)y / (float)h * 100.0;
-		printf("progress %d%\n",progress);
+		displayScene();
 	}
-	saveToBitmap2("materials.bmp", w, h, red, green ,blue);
-	printf("done Render Materials\n");
 	
+    duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
+
+    printf("duration %f\n", duration);	
+	
+}
+
+std::vector<RenderBucket> Renderer::createBuckets(int size, int r_width, int r_height)
+{
+	std::vector<RenderBucket> buckets;
+	
+	for (int y = 0; y < r_height; y += size)
+	{
+		for (int x = 0; x < r_width; x += size)
+		{
+			RenderBucket b;
+			b.x = x;
+			b.y = y;
+			if( x + size > r_width){
+				b.width = size - (x+size - r_width);
+			}else{				
+				b.width = size;
+			}
+			
+			if( y + size > r_height){
+				b.height = size - (y+size - r_height);
+			}else{				
+				b.height = size;
+			}			
+			
+			b.render_width = r_width;
+			b.render_height = r_height;
+			
+			buckets.push_back(b);
+		}
+	}
+	
+	return buckets;
 }
 
 void Renderer::cursor_pos_callback(GLFWwindow* window, double xpos, double ypos)
@@ -460,13 +498,13 @@ void Renderer::mouse_button_callback(GLFWwindow* window, int button, int action,
 		click_data.height = height;
 
 		Raycaster2 raycaster;
-		HitData hit_data;
-		bool hit = raycaster.intersectMeshes(click_data, app->camera, app->meshes, hit_data);
-
-		if( hit ){
-			hit_data.print();
-
-		}
+		//~ HitData hit_data;
+		//~ bool hit = raycaster.intersectMeshes(click_data, app->camera, app->meshes, hit_data);
+//~ 
+		//~ if( hit ){
+			//~ hit_data.print();
+//~ 
+		//~ }
 		
 		Ray ray = raycaster.castRay(click_data, app->camera);
 		std::vector<HitData> hit_datas;
@@ -503,9 +541,14 @@ void Renderer::char_mods_callback(GLFWwindow* window, unsigned int key, int acti
 	{
 		// saveToBitmap2();
 	}else if( (char)key == 'r' ){
-		//~ alphaMask(320, 240, app->camera, app->meshes[0]);
-		//~ app->renderMaterials(320, 240, app->camera, app->meshes);
-		app->renderBucket(10,10,64,64, 320, 240, app->camera);
+		
+
+		
+		std::vector<RenderBucket> buckets;
+		buckets = app->createBuckets(32, app->render_width, app->render_height);
+		app->renderBuckets( buckets, app->camera);
+	}else if( (char)key == 's' ){
+		app->show_fbo = !app->show_fbo;
 	}
 
 }
@@ -517,20 +560,34 @@ void Renderer::setCamPosFromPolar(float u, float v, float _radius)
         camera.position.z = cos(v) * _radius;
 }
 
-void Renderer::initFBO()
+void Renderer::initFBO(int width, int height)
 {
+	
+	int r_width = width;
+	int r_height = height;
+	
 	GLCall(glDeleteBuffers(1, &fbo_vbo));
 	GLCall(glGenBuffers(1, &fbo_vbo));
 	
+	int w_width, w_height;
+	glfwGetWindowSize(window, &w_width, &w_height);
+	
+	float fbo_min_x = -( (float)r_width / (float)w_width);
+	float fbo_min_y = -( (float)r_height / (float)w_height);
+	
+	float fbo_max_x = ( (float)r_width / (float)w_width);
+	float fbo_max_y = ( (float)r_height / (float)w_height);
+	
+	
 	float fbo_vertices[6*3 + 6*2] = {
 		// position        //uvs
-		-0.5,-0.5, 0.0,    0.0, 1.0,
-		 0.5,-0.5, 0.0,    1.0, 1.0,
-		 0.5, 0.5, 0.0,    1.0, 0.0,
+		fbo_min_x,fbo_min_y, 0.0,    0.0, 1.0,
+		fbo_max_x,fbo_min_y, 0.0,    1.0, 1.0,
+		fbo_max_x,fbo_max_y, 0.0,    1.0, 0.0,
 		 
-		-0.5,-0.5, 0.0,    0.0, 1.0,
-		 0.5, 0.5, 0.0,    1.0, 0.0,
-		-0.5, 0.5, 0.0,    0.0, 0.0
+		fbo_min_x,fbo_min_y, 0.0,    0.0, 1.0,
+		fbo_max_x,fbo_max_y, 0.0,    1.0, 0.0,
+		fbo_min_x,fbo_max_y, 0.0,    0.0, 0.0
 				
 	};
 	
@@ -538,9 +595,7 @@ void Renderer::initFBO()
 	GLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(float) * (6*3 + 6*2), fbo_vertices, GL_DYNAMIC_DRAW));
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 	
-	
-	int r_width = 320;
-	int r_height = 240;
+
 
 	render_buffer_data.clear();
 	render_buffer_data.reserve(r_width * r_height * 4);
@@ -572,10 +627,10 @@ void Renderer::initFBO()
 	GLCall(glBindTexture(GL_TEXTURE_2D, 0));	
 }
 
-void Renderer::drawFBO()
+void Renderer::drawFBO(int r_width, int r_height)
 {
-	int r_width = 320;
-	int r_height = 240;
+	//~ int r_width = 320;
+	//~ int r_height = 240;
 	GLCall(glBindTexture(GL_TEXTURE_2D, fbo_texture_id));
 	GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, r_width, r_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, render_buffer_data.data()));
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, fbo_vbo));
@@ -599,7 +654,9 @@ void Renderer::drawFBO()
 int Renderer::init(int limit)
 {
 
-
+	render_width = 640;
+	render_height = 480;
+	
 	//~ std::cout << "raytracer PROJECT" << std::endl;
 
 	if(!glfwInit()){
@@ -645,7 +702,7 @@ int Renderer::init(int limit)
 	fbo_shader.createShader();	
 	
 	
-	initFBO();
+	initFBO(render_width,render_height);
 	//~ kd_node = new KDNode(limit);
 }
 
@@ -723,7 +780,7 @@ void Renderer::buildRenderGeometry()
 
 }
 
-void Renderer::render()
+void Renderer::displayScene()
 {
 		GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 		GLCall(glClearColor(0.2,0.5,0.2,1.0));
@@ -789,14 +846,18 @@ void Renderer::render()
 
 		//~ displayKDTree();
 		
-		GLCall(glDisable(GL_DEPTH_TEST));
-		GLCall(glUseProgram(0));
-
 		
-		fbo_shader.useProgram();
-		drawFBO();
-
 		GLCall(glUseProgram(0));
+
+		if( show_fbo )
+		{
+			GLCall(glDisable(GL_DEPTH_TEST));
+			
+			fbo_shader.useProgram();
+			drawFBO(render_width,render_height);
+
+			GLCall(glUseProgram(0));
+		}
 		
 		glfwSwapBuffers(window);
 		glfwPollEvents();

@@ -375,6 +375,8 @@ renderer.h
 /home/pi/projects/raytracer/src/renderer.h
 
 /home/pi/projects/raytracer/src/renderer.h
+ctime
+-
 pch.h
 /home/pi/projects/raytracer/src/pch.h
 camera.h
