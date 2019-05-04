@@ -35,7 +35,9 @@ void createMeshes()
 			Mesh m = loader.assimp_load(loaded_mesh_datas[i].path);
 			m.triangulate();
 			m.computeNormals();
-			m.material.color = glm::vec3(0.2,0.9,0.0);
+			
+			Color clr;
+			m.material.color = clr;
 			
 			float scale = loaded_mesh_datas[i].scale;
 			

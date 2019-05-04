@@ -163,6 +163,33 @@ home/pi/projects/raytracer/src/camera.cpp.s:
 	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/camera.cpp.s
 .PHONY : home/pi/projects/raytracer/src/camera.cpp.s
 
+home/pi/projects/raytracer/src/color.o: home/pi/projects/raytracer/src/color.cpp.o
+
+.PHONY : home/pi/projects/raytracer/src/color.o
+
+# target to build an object file
+home/pi/projects/raytracer/src/color.cpp.o:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/color.cpp.o
+.PHONY : home/pi/projects/raytracer/src/color.cpp.o
+
+home/pi/projects/raytracer/src/color.i: home/pi/projects/raytracer/src/color.cpp.i
+
+.PHONY : home/pi/projects/raytracer/src/color.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer/src/color.cpp.i:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/color.cpp.i
+.PHONY : home/pi/projects/raytracer/src/color.cpp.i
+
+home/pi/projects/raytracer/src/color.s: home/pi/projects/raytracer/src/color.cpp.s
+
+.PHONY : home/pi/projects/raytracer/src/color.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer/src/color.cpp.s:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/color.cpp.s
+.PHONY : home/pi/projects/raytracer/src/color.cpp.s
+
 home/pi/projects/raytracer/src/kdnode.o: home/pi/projects/raytracer/src/kdnode.cpp.o
 
 .PHONY : home/pi/projects/raytracer/src/kdnode.o
@@ -500,6 +527,9 @@ help:
 	@echo "... home/pi/projects/raytracer/src/camera.o"
 	@echo "... home/pi/projects/raytracer/src/camera.i"
 	@echo "... home/pi/projects/raytracer/src/camera.s"
+	@echo "... home/pi/projects/raytracer/src/color.o"
+	@echo "... home/pi/projects/raytracer/src/color.i"
+	@echo "... home/pi/projects/raytracer/src/color.s"
 	@echo "... home/pi/projects/raytracer/src/kdnode.o"
 	@echo "... home/pi/projects/raytracer/src/kdnode.i"
 	@echo "... home/pi/projects/raytracer/src/kdnode.s"

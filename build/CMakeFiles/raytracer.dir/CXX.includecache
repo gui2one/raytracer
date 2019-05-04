@@ -148,6 +148,14 @@ camera.h
 pch.h
 /home/pi/projects/raytracer/src/pch.h
 
+/home/pi/projects/raytracer/src/color.cpp
+color.h
+/home/pi/projects/raytracer/src/color.h
+
+/home/pi/projects/raytracer/src/color.h
+pch.h
+/home/pi/projects/raytracer/src/pch.h
+
 /home/pi/projects/raytracer/src/include/assimp/./Compiler/poppack1.h
 
 /home/pi/projects/raytracer/src/include/assimp/./Compiler/pushpack1.h
@@ -385,12 +393,16 @@ texture.h
 /home/pi/projects/raytracer/src/texture.h
 mesh.h
 /home/pi/projects/raytracer/src/mesh.h
+rtmaterial.h
+/home/pi/projects/raytracer/src/rtmaterial.h
 shader.h
 /home/pi/projects/raytracer/src/shader.h
 raycaster2.h
 /home/pi/projects/raytracer/src/raycaster2.h
 kdnode.h
 /home/pi/projects/raytracer/src/kdnode.h
+color.h
+/home/pi/projects/raytracer/src/color.h
 
 /home/pi/projects/raytracer/src/rtmaterial.cpp
 rtmaterial.h
@@ -399,6 +411,8 @@ rtmaterial.h
 /home/pi/projects/raytracer/src/rtmaterial.h
 pch.h
 /home/pi/projects/raytracer/src/pch.h
+color.h
+/home/pi/projects/raytracer/src/color.h
 
 /home/pi/projects/raytracer/src/shader.cpp
 shader.h

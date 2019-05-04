@@ -8,10 +8,11 @@
 #include "camera.h"
 #include "texture.h"
 #include "mesh.h"
+#include "rtmaterial.h"
 #include "shader.h"
 #include "raycaster2.h"
 #include "kdnode.h"
-
+#include "color.h"
 
 struct OGL_geometry_data
 {
@@ -24,13 +25,7 @@ struct OGL_geometry_data
 	
 };
 
-struct Color
-{
-	float r;
-	float g;
-	float b;
-	float a;
-};
+
 
 struct RenderBucket
 {
@@ -69,6 +64,9 @@ class Renderer
 		Mesh loadMesh(std::string path);
 		
 		//~ void renderMaterials(int w, int h, Camera& camera, std::vector<Mesh>& meshes);
+		
+		Color shade(Face face, RTMaterial material);
+		
 		std::vector<RenderBucket> createBuckets(int size, int r_width, int r_height);
 		void renderBucket(RenderBucket& bucket, Camera& camera);
 		void renderBucketV2(RenderBucket& bucket, Camera& camera);

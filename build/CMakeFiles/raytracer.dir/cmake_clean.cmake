@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/camera.cpp.o"
   "CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/raycaster2.cpp.o"
   "CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/mesh_utils.cpp.o"
+  "CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/color.cpp.o"
   "CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/rtmaterial.cpp.o"
   "CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/renderer.cpp.o"
   "CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/shader.cpp.o"

@@ -80,8 +80,6 @@ static float clampf(float value, float min, float max )
 	
 }
 
-
-
 Renderer::Renderer()
 {
 
@@ -229,6 +227,16 @@ void Renderer::displayKDTree()
 	
 }
 
+Color Renderer::shade(Face face, RTMaterial material)
+{
+	Color clr = material.color;
+	//~ clr.r = 1.0;
+	//~ clr.g = 0.0;
+	//~ clr.b = 0.0;
+	//~ clr.a = 1.0;
+	return  clr;
+}
+
 void Renderer::renderBucketV2(RenderBucket& bucket, Camera& camera)
 {
 	Raycaster2 raycaster;
@@ -289,19 +297,17 @@ void Renderer::renderBucketV2(RenderBucket& bucket, Camera& camera)
 			
 			if(hit_tri){
 				
-				float dist = glm::distance(camera.position, hit_datas[0].position);
+				Color clr = shade(meshes[0].faces[ hit_datas[0].face_id], meshes[0].material);
+				//~ float dist = glm::distance(camera.position, hit_datas[0].position);
+				//~ int depth = 255 - (int)(clampf((float)dist, 0.0, 5.0) / 5.0 * 255.0);
 				
-				
-				
-				int depth = 255 - (int)(clampf((float)dist, 0.0, 5.0) / 5.0 * 255.0);
-				
-				render_buffer_data[(index * 4)] = (unsigned char)depth;
-				render_buffer_data[(index * 4)+1] = (unsigned char)depth;
-				render_buffer_data[(index * 4)+2] = (unsigned char)depth;
+				render_buffer_data[(index * 4)+0] = (unsigned char)((int)(clr.r*255.0));
+				render_buffer_data[(index * 4)+1] = (unsigned char)((int)(clr.g*255.0));
+				render_buffer_data[(index * 4)+2] = (unsigned char)((int)(clr.b*255.0));
 
 
 			}else{
-				render_buffer_data[(index * 4)] = (unsigned char)0;
+				render_buffer_data[(index * 4)+0] = (unsigned char)0;
 				render_buffer_data[(index * 4)+1] = (unsigned char)0;
 				render_buffer_data[(index * 4)+2] = (unsigned char)0;
 			
@@ -820,9 +826,9 @@ void Renderer::displayScene()
 		for (int i = 0; i < meshes.size(); i++)
 		{
 			GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 
-				meshes[i].material.color.x,
-				meshes[i].material.color.y,
-				meshes[i].material.color.z,
+				meshes[i].material.color.r,
+				meshes[i].material.color.g,
+				meshes[i].material.color.b,
 				1.0
 			));
 			

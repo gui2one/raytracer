@@ -23,6 +23,7 @@ add_executable(raytracer
 	../src/raycaster2.cpp
 	../src/utils/mesh_utils.cpp
 	
+	../src/color.cpp
 	../src/rtmaterial.cpp
 	
 	../src/renderer.cpp

@@ -3,13 +3,13 @@
 
 
 #include "pch.h"
-
+#include "color.h"
 class RTMaterial
 {
 	public:
 		RTMaterial();
 		
-		glm::vec3 color;
+		Color color;
 			
 	private:
 		/* add your private declarations */
