@@ -116,10 +116,20 @@ glm::vec3 Raycaster2::screenToWorld(ClickData click_data, Camera& camera)
 	// there I build the image plane	
 	// dz = - ( height /2 ) / tan( fov * 0.5)
 	
-	float x_pos = click_data.x - (float)(click_data.width) / 2.0;
-	float y_pos =  (float)(click_data.height) / 2.0 - click_data.y;
+	
+	// do I need to offset by half a pixel size ? 
+	
+	float offset_x = -(1.0/ (float)click_data.width) * 0.5; 
+	float offset_y = -(1.0/ (float)click_data.height) * 0.5; 
+	offset_x = 0.0;
+	offset_y = 0.0;
+	
+	/////
+	
+	float x_pos = click_data.x + offset_x - (float)(click_data.width) / 2.0;
+	float y_pos =  (float)(click_data.height) / 2.0 - click_data.y + offset_y;
 	float z_pos = -( (float)(click_data.height) / 2.0) / tan( camera.fov*0.5 );
-	//~ printf("screen z pos --> %f\n", z_pos);
+	
 	glm::vec3 world_pos = glm::vec3(x_pos, y_pos, z_pos);
 	
 	return world_pos;
@@ -213,6 +223,8 @@ bool Raycaster2::intersectBoudingBox(
 
 bool Raycaster2::intersectMesh(ClickData click_data, Camera& camera, Mesh& mesh, HitData& _hit_data)
 {
+	
+	//// why a new ray ???!!!	
 	Ray ray = castRay(click_data, camera);
 	std::vector<HitData> hits;
 	for (int tri_id = 0; tri_id < mesh.faces.size(); tri_id++)

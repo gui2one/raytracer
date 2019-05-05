@@ -113,3 +113,13 @@ void MeshUtils::scale(Mesh& _mesh, glm::vec3 _scale)
 	}	
 }
 
+void MeshUtils::rotate(Mesh& _mesh, glm::vec3 _rot)
+{
+	for (int i = 0; i < _mesh.points.size(); i++)
+	{
+		_mesh.points[i].position = glm::rotateX(_mesh.points[i].position, _rot.x);
+		_mesh.points[i].position = glm::rotateY(_mesh.points[i].position, _rot.y);
+		_mesh.points[i].position = glm::rotateZ(_mesh.points[i].position, _rot.z);
+		
+	}	
+}

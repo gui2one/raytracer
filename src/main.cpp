@@ -12,6 +12,8 @@ struct LoadedMeshData
 {
 	std::string path;
 	float scale = 1.0;
+	glm::vec3 rotate;
+	glm::vec3 translate;
 	
 };
 
@@ -40,9 +42,12 @@ void createMeshes()
 			m.material.color = clr;
 			
 			float scale = loaded_mesh_datas[i].scale;
-			
+			glm::vec3 rotate = loaded_mesh_datas[i].rotate;
+			glm::vec3 translate = loaded_mesh_datas[i].translate;
 			printf("scale --> %.3f \n", scale);
 			mesh_utils.scale(m, glm::vec3(scale, scale, scale));
+			mesh_utils.rotate(m, glm::vec3(rotate.x, rotate.y, rotate.z));
+			mesh_utils.translate(m, glm::vec3(translate.x, translate.y, translate.z));
 			meshes.push_back(m);
 			
 		}
@@ -98,12 +103,17 @@ int main(int argc, char ** argv){
 							float y = std::atof(std::string(argv[temp_i+2]).c_str());
 							float z = std::atof(std::string(argv[temp_i+3]).c_str());
 							printf("TRANSLATING !!!! %.3f %.3f %.3f\n", x, y ,z);
+							
+							m_data.translate = glm::vec3(x, y, z);
 							temp_i += 4;
 						}else if( cmd2 == "-r"){
 							float x = std::atof(std::string(argv[temp_i+1]).c_str());
 							float y = std::atof(std::string(argv[temp_i+2]).c_str());
 							float z = std::atof(std::string(argv[temp_i+3]).c_str());
 							printf("ROTATING !!!! %.3f %.3f %.3f\n", x, y ,z);
+							
+							m_data.rotate = glm::vec3(x, y, z);
+							
 							temp_i += 4;
 						}
 						

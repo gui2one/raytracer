@@ -14,8 +14,10 @@ class MeshUtils
 		
 		Mesh uniquePoints(Mesh input_mesh);
 		
-		void translate(Mesh& _mesh, glm::vec3 _vec);
+		
 		void scale(Mesh& _mesh, glm::vec3 _scale);
+		void translate(Mesh& _mesh, glm::vec3 _vec);
+		void rotate(Mesh& _mesh, glm::vec3 _vec);
 			
 	private:
 		/* add your private declarations */

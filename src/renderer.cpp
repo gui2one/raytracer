@@ -227,13 +227,17 @@ void Renderer::displayKDTree()
 	
 }
 
-Color Renderer::shade(Face face, RTMaterial material)
+Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material)
 {
 	Color clr = material.color;
-	//~ clr.r = 1.0;
-	//~ clr.g = 0.0;
-	//~ clr.b = 0.0;
-	//~ clr.a = 1.0;
+	glm::vec3 A, B, C;
+	
+	glm::vec3 normal = mesh.points[face.getVertex(0).point_id].normal;
+	
+	clr.r = clampf(normal.x, 0.0,1.0);
+	clr.g = clampf(normal.y, 0.0,1.0);
+	clr.b = clampf(normal.z, 0.0,1.0);
+	clr.a = 1.0;
 	return  clr;
 }
 
@@ -254,11 +258,11 @@ void Renderer::renderBucketV2(RenderBucket& bucket, Camera& camera)
 	// cast all rays
 	for (int y = bucket.y; y < bucket.y+bucket.height; y++)
 	{
-		click_data.y = (float)click_data.height / (float)bucket.render_height * (float)y;
+		click_data.y = ((float)click_data.height / (float)bucket.render_height * (float)(y));
 		
 		for (int x = bucket.x; x < bucket.x+bucket.width; x++)
 		{
-			click_data.x = (float)click_data.width / (float)bucket.render_width * (float)x;
+			click_data.x = ((float)click_data.width / (float)bucket.render_width * (float)(x));
 			
 			bool hit_tri = false;
 			//~ HitData hit_data;
@@ -297,7 +301,7 @@ void Renderer::renderBucketV2(RenderBucket& bucket, Camera& camera)
 			
 			if(hit_tri){
 				
-				Color clr = shade(meshes[0].faces[ hit_datas[0].face_id], meshes[0].material);
+				Color clr = shade(meshes[0], meshes[0].faces[ hit_datas[0].face_id], meshes[0].material);
 				//~ float dist = glm::distance(camera.position, hit_datas[0].position);
 				//~ int depth = 255 - (int)(clampf((float)dist, 0.0, 5.0) / 5.0 * 255.0);
 				
@@ -386,26 +390,68 @@ void Renderer::renderBucket(RenderBucket& bucket, Camera& camera)
 	
 }
 
+
 void Renderer::renderBuckets(std::vector<RenderBucket>& buckets, Camera& camera)
 {
-	std::clock_t start;
-	double duration;
-	
-	start = std::clock();
-	
 	show_fbo = true;
 	initFBO(render_width, render_height);
+	
+	std::clock_t start;
+	double duration = 0.0;
+	
+	start = std::clock();
+
+	TaskQueue<RenderTask> queue(4);
+	
 	for (int i = 0; i < buckets.size(); i++)
 	{
-		renderBucketV2(buckets[i], camera);
-		
-		displayScene();
+		queue.QueueTask(RenderTask(this, buckets[i]));
 	}
+
 	
+	
+	
+	std::vector<RenderTaskResult> __results;
+    while (queue.TasksCompleted()){
+      RenderTaskResult __result = queue.GetCompletedTaskResult();
+      __results.push_back(__result);
+    }	
+	
+	int old_num = -1;
+	  while (queue.NumPendingTasks()){
+		std::cout << queue.NumPendingTasks() << "\n";
+		//~ LOG(INFO) << "All tasks submitted, waiting for last tasks to complete... \r\r";
+		boost::this_thread::sleep(boost::posix_time::milliseconds(100));
+		
+		if(old_num != queue.NumPendingTasks()){
+			old_num = queue.NumPendingTasks();
+			displayScene();
+		}
+	  }	
+	
+	for (int id = 0; id < __results.size(); id++)
+	{
+		printf("result %d -> i == %d\n", id, __results[id].data.size());
+	}
+
+	
+	
+	
+	//~ 
+
+	//~ 
+
+	//~ for (int i = 0; i < buckets.size(); i++)
+	//~ {
+		//~ renderBucketV2(buckets[i], camera);
+		//~ 
+		//~ displayScene();
+	//~ }
+	//~ 
     duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
 
     printf("duration %f\n", duration);	
-	
+	printf("DONE\n");
 }
 
 std::vector<RenderBucket> Renderer::createBuckets(int size, int r_width, int r_height)
@@ -555,6 +601,7 @@ void Renderer::char_mods_callback(GLFWwindow* window, unsigned int key, int acti
 		std::vector<RenderBucket> buckets;
 		buckets = app->createBuckets(32, app->render_width, app->render_height);
 		app->renderBuckets( buckets, app->camera);
+		printf("DONE... \n");
 	}else if( (char)key == 's' ){
 		app->show_fbo = !app->show_fbo;
 	}
@@ -790,6 +837,7 @@ void Renderer::buildRenderGeometry()
 
 void Renderer::displayScene()
 {
+		
 		GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 		GLCall(glClearColor(0.2,0.5,0.2,1.0));
 

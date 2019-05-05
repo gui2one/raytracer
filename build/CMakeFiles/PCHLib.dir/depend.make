@@ -3,7 +3,6 @@
 
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/pch.cpp
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/pch.h
-CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/./detail/setup.hpp
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.hpp
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.inl
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x3.hpp
@@ -183,6 +182,10 @@ CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/project
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/gtc/vec1.hpp
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/gtx/matrix_decompose.hpp
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/gtx/matrix_decompose.inl
+CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/gtx/rotate_vector.hpp
+CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/gtx/rotate_vector.inl
+CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/gtx/transform.hpp
+CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/gtx/transform.inl
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/integer.hpp
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/mat2x2.hpp
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/mat2x3.hpp

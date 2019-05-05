@@ -14,18 +14,10 @@
 #include "kdnode.h"
 #include "color.h"
 
-struct OGL_geometry_data
-{
-	std::vector<float> vertices;
-	std::vector<unsigned> indices;
-	
-	glm::vec3 translate = glm::vec3(0.0, 0.0, 0.0);
-	glm::vec3 rotate = glm::vec3(0.0, 0.0, 0.0);
-	glm::vec3 scale = glm::vec3(1.0, 1.0, 1.0);
-	
-};
+//~ #include "include/boost/threadpool.hpp"
+//~ using namespace boost::threadpool;
 
-
+#include "include/taskqueue.hpp"
 
 struct RenderBucket
 {
@@ -41,6 +33,17 @@ struct RenderBucket
 	bool finished = false;
 };
 
+
+struct OGL_geometry_data
+{
+	std::vector<float> vertices;
+	std::vector<unsigned> indices;
+	
+	glm::vec3 translate = glm::vec3(0.0, 0.0, 0.0);
+	glm::vec3 rotate = glm::vec3(0.0, 0.0, 0.0);
+	glm::vec3 scale = glm::vec3(1.0, 1.0, 1.0);
+	
+};
 class Renderer
 {
 	public:
@@ -65,7 +68,7 @@ class Renderer
 		
 		//~ void renderMaterials(int w, int h, Camera& camera, std::vector<Mesh>& meshes);
 		
-		Color shade(Face face, RTMaterial material);
+		Color shade(Mesh& mesh, Face& face, RTMaterial material);
 		
 		std::vector<RenderBucket> createBuckets(int size, int r_width, int r_height);
 		void renderBucket(RenderBucket& bucket, Camera& camera);
@@ -128,6 +131,62 @@ class Renderer
 			
 	private:
 		/* add your private declarations */
+};
+
+
+
+struct testTaskResult{
+	int i;
+};
+
+struct testTask{
+	typedef testTaskResult result_type;
+	
+	testTask(int n): i_(n){
+		//~ boost::this_thread::sleep(boost::posix_time::milliseconds(1000));
+		//~ std::cout << "doing task " << n << "\n";
+	}
+	
+	result_type operator()(){
+		
+		result_type result;
+		result.i = i_ * i_;
+		return result;
+	}
+	
+	int i_;
+};
+
+struct RenderTaskResult{
+	std::vector<unsigned char> data;
+};
+
+struct RenderTask{
+	typedef RenderTaskResult result_type;
+	
+	RenderTask(Renderer * renderer, RenderBucket& bucket): m_renderer(renderer), m_bucket(bucket)
+	{
+
+	}
+	
+	result_type operator ()(){
+		
+		result_type result;
+		m_renderer->renderBucketV2(m_bucket, m_renderer->camera);
+		//~ m_renderer->displayScene();
+		std::vector<unsigned char> chars(3);
+		chars[0] = (unsigned char)5;
+		chars[1] = (unsigned char)15;
+		chars[2] = (unsigned char)42;
+		m_data = chars; 		
+		result.data = m_data;
+		
+		return result;
+	}
+	
+	std::vector<unsigned char> m_data;
+	Renderer * m_renderer;
+	RenderBucket m_bucket;
 };
 
 #endif /* RENDERER_H */ 
