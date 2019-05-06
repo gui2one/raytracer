@@ -6,6 +6,7 @@
 
 
 #include "camera.h"
+#include "light.h"
 #include "texture.h"
 #include "mesh.h"
 #include "rtmaterial.h"
@@ -24,8 +25,8 @@ struct RenderBucket
 	int x;
 	int y;
 	
-	int width = 32;
-	int height = 32;
+	int width = 100;
+	int height = 100;
 	
 	int render_width = 320;
 	int render_height = 240;
@@ -51,6 +52,7 @@ class Renderer
 		
 		
 		static void char_mods_callback(GLFWwindow* window, unsigned int key, int action);
+		static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 		static void cursor_pos_callback(GLFWwindow* window, double xpos, double ypos);
 		static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);    
 		static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -59,7 +61,7 @@ class Renderer
 		int init(int limit);
 		void initFBO(int width, int height);
 		void drawFBO(int r_width, int r_height);
-		void setCamPosFromPolar(float u, float v, float _radius);
+		void setCamPosFromPolar(float u, float v, float _radius, glm::vec3 center = glm::vec3(0.0,0.0,0.0));
 		void buildRenderGeometry();
 		void displayScene();
 		bool shouldClose();
@@ -68,11 +70,11 @@ class Renderer
 		
 		//~ void renderMaterials(int w, int h, Camera& camera, std::vector<Mesh>& meshes);
 		
-		Color shade(Mesh& mesh, Face& face, RTMaterial material);
+		Color shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_data);
 		
 		std::vector<RenderBucket> createBuckets(int size, int r_width, int r_height);
+		
 		void renderBucket(RenderBucket& bucket, Camera& camera);
-		void renderBucketV2(RenderBucket& bucket, Camera& camera);
 		void renderBuckets(std::vector<RenderBucket>& buckets, Camera& camera);
 		
 		
@@ -109,6 +111,10 @@ class Renderer
 		float camera_u_pos = 0.5;
 		float camera_v_pos = PI / 4.0 ;
 		float camera_orbit_radius = 5.0;
+		glm::vec3 camera_view_center = glm::vec3(0.0, 0.0, 0.0);
+		
+		std::vector<Light> lights;
+		
 		
 		bool left_mouse_button_down = false;
 		bool left_mouse_dragging = false;
@@ -172,7 +178,7 @@ struct RenderTask{
 	result_type operator ()(){
 		
 		result_type result;
-		m_renderer->renderBucketV2(m_bucket, m_renderer->camera);
+		m_renderer->renderBucket(m_bucket, m_renderer->camera);
 		//~ m_renderer->displayScene();
 		std::vector<unsigned char> chars(3);
 		chars[0] = (unsigned char)5;

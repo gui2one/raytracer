@@ -7,15 +7,18 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/pi/projects/raytracer/src/camera.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/camera.cpp.o"
   "/home/pi/projects/raytracer/src/color.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/color.cpp.o"
   "/home/pi/projects/raytracer/src/kdnode.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/kdnode.cpp.o"
+  "/home/pi/projects/raytracer/src/light.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/light.cpp.o"
   "/home/pi/projects/raytracer/src/main.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/main.cpp.o"
   "/home/pi/projects/raytracer/src/mesh.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/mesh.cpp.o"
   "/home/pi/projects/raytracer/src/raycaster2.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/raycaster2.cpp.o"
   "/home/pi/projects/raytracer/src/renderer.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/renderer.cpp.o"
   "/home/pi/projects/raytracer/src/rtmaterial.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/rtmaterial.cpp.o"
+  "/home/pi/projects/raytracer/src/scene_file_loader.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/scene_file_loader.cpp.o"
   "/home/pi/projects/raytracer/src/shader.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/shader.cpp.o"
   "/home/pi/projects/raytracer/src/texture.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/texture.cpp.o"
   "/home/pi/projects/raytracer/src/utils/mesh_utils.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/mesh_utils.cpp.o"
   "/home/pi/projects/raytracer/src/utils/objLoader.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/objLoader.cpp.o"
+  "/home/pi/projects/raytracer/src/vector3.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vector3.cpp.o"
   "/home/pi/projects/raytracer/src/vendor/stb_image.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vendor/stb_image.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

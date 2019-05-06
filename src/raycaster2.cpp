@@ -37,6 +37,14 @@ static int ray_plane_intersect(glm::vec3 planeN, glm::vec3 planeP, glm::vec3 poi
     return  K>= 0.0 && K <= 1.0;
 }
 
+static Ray offset_ray(Ray& src, float amount)
+{
+	Ray ray;
+	ray.direction = src.direction;
+	ray.origin = src.origin + (glm::normalize(src.direction) * amount);
+	
+	return ray;
+}
 
 static bool point_in_triangle(glm::vec3& bary)
 {
@@ -101,6 +109,7 @@ Ray Raycaster2::castRay(ClickData click_data, Camera& camera)
 	
 	glm::mat4 view_matrix = glm::lookAt(camera.position, camera.target_position, camera.up_vector);
 	
+
 	ray.origin = camera.position;
 	ray.direction = direction;
 	
@@ -119,18 +128,15 @@ glm::vec3 Raycaster2::screenToWorld(ClickData click_data, Camera& camera)
 	
 	// do I need to offset by half a pixel size ? 
 	
-	float offset_x = -(1.0/ (float)click_data.width) * 0.5; 
-	float offset_y = -(1.0/ (float)click_data.height) * 0.5; 
-	offset_x = 0.0;
-	offset_y = 0.0;
+
 	
 	/////
 	
-	float x_pos = click_data.x + offset_x - (float)(click_data.width) / 2.0;
-	float y_pos =  (float)(click_data.height) / 2.0 - click_data.y + offset_y;
+	float x_pos = (float)click_data.x - (float)(click_data.width) / 2.0;
+	float y_pos =  (float)(click_data.height) / 2.0 - (float)click_data.y;
 	float z_pos = -( (float)(click_data.height) / 2.0) / tan( camera.fov*0.5 );
 	
-	glm::vec3 world_pos = glm::vec3(x_pos, y_pos, z_pos);
+	glm::vec3 world_pos = glm::vec3(x_pos, y_pos, z_pos) ;
 	
 	return world_pos;
 	
@@ -316,62 +322,50 @@ bool Raycaster2::intersectMeshes(ClickData click_data, Camera& camera, std::vect
 }
 
 
-bool Raycaster2::intersectKDNode(Ray& ray, KDNode * kd_node, Camera& camera, std::vector<HitData>& hit_datas)
+bool Raycaster2::intersectKDNode(Ray& ray, KDNode * kd_node, int mesh_id, std::vector<HitData>& hit_datas, bool bail_early)
 {
 	
-	//~ Ray ray = castRay(click_data, camera);
-	
-	bool hit; // = kd_node->bbox.intersect(ray);
+	bool hit;
 	KDNode * target = kd_node;
 	
 	if( kd_node->bbox.intersect(ray))
 	{
-		//~ printf("------- HIT KDNode\n");
-		//~ printf("\tdepth : %d\n", kd_node->depth);
-		//~ printf("\tleft num triangles : %d\n", kd_node->left->triangles.size());
-		//~ printf("\tright num triangles : %d\n\n", kd_node->right->triangles.size());
+
 		if( kd_node->left->triangles.size() > 0 || kd_node->right->triangles.size() > 0)
 		{
 			//~ printf("------- checking left and right \n");
-			bool hit_left = intersectKDNode(ray, kd_node->left, camera, hit_datas);
-			bool hit_right = intersectKDNode(ray, kd_node->right, camera, hit_datas);
-			//~ printf("\tLeft hit : %d \n", hit_left);
-			//~ printf("\tRight hit : %d \n\n", hit_right);
+			bool hit_left = intersectKDNode(ray, kd_node->left,  mesh_id, hit_datas);
+			bool hit_right = intersectKDNode(ray, kd_node->right, mesh_id, hit_datas);
+
 			return hit_left || hit_right;
 			
 		}else{
 		
 			//~ printf("------- reached leaf\n");
-			//~ printf("\tdepth : %d\n", kd_node->depth);
-			//~ printf("\tnum triangles : %d\n\n", kd_node->triangles.size());
-			
-			//~ std::vector<HitData> hit_datas;
+
 			for (int i = 0; i < kd_node->triangles.size(); i++)
 			{
 				glm::vec3 hit_pos;
 				bool hit_tri = ray_triangle_intersect(ray, kd_node->triangles[i]->A, kd_node->triangles[i]->B, kd_node->triangles[i]->C, hit_pos);
 				if(hit_tri)
 				{
-					HitData data;
-					data.position = hit_pos;
-					data.face_id = kd_node->triangles[i]->id;
-					hit_datas.push_back(data);
-					//~ printf("TRIANGLE HIT !!!!!!\n");
-					//~ printf("\t id : %d\n", data.face_id);					
+					glm::vec3 collide_dir = hit_pos - ray.origin;
+					if( glm::dot( collide_dir, ray.direction) > 0.0){
+						
+						HitData data;
+						data.position = hit_pos;
+						data.face_id = kd_node->triangles[i]->id;
+						data.mesh_id = mesh_id;
+						hit_datas.push_back(data);
+						
+						if( bail_early ) return true;
+						//~ printf("TRIANGLE HIT !!!!!!\n");
+						//~ printf("\t id : %d\n", data.face_id);							
+					}
+				
 				}
 			}
-			
-			// sort by distance from camera
-			//~ std::sort(hit_datas.begin(), hit_datas.end(), [camera](HitData data1 , HitData data2){
-				//~ float dist1 = glm::distance(data1.position, camera.position);
-				//~ float dist2 = glm::distance(data2.position, camera.position);
-				//~ return dist1 < dist2;
-			//~ });
-			
-			//~ if(hit_datas.size() > 0)
-			//~ {
-				//~ printf("KD polygon hit : %d\n", hit_datas[0].face_id);
-			//~ }
+
 			
 			
 			return true;
@@ -382,3 +376,54 @@ bool Raycaster2::intersectKDNode(Ray& ray, KDNode * kd_node, Camera& camera, std
 	
 	return false;
 }
+
+bool Raycaster2::intersectKDNodes(Ray& ray, std::vector<KDNode *> kd_nodes, std::vector<HitData>& hit_datas, bool bail_early)
+{
+	int num_hits = 0;
+	for (int i = 0; i < kd_nodes.size(); i++)
+	{
+		bool hit = intersectKDNode(ray, kd_nodes[i], i, hit_datas);
+		if(hit){
+			
+			num_hits++;
+			
+		}
+	}
+	
+	if( num_hits > 0){
+		return true;
+	}else{
+		return false;
+	}
+	
+}
+
+bool Raycaster2::shadowRay(glm::vec3 pos, std::vector<KDNode *> kd_nodes, Light& light)
+{
+	
+	glm::vec3 dir = glm::normalize((light.position - pos));
+	Ray ray;
+	ray.origin = pos; 
+	ray.direction = dir;
+	
+	ray = offset_ray(ray, 0.0001);
+	std::vector<HitData> hit_datas;
+	bool hit = intersectKDNodes(ray, kd_nodes, hit_datas, true);
+	
+	if(hit){
+		if(hit_datas.size() > 0){
+			//~ printf("shadow ray !!!!\n");
+			return true;
+		}else{
+			return false;
+		}
+		
+		
+	}else{
+		//~ printf("NO Shadow ray !!!!\n");
+		return false;
+	}
+}
+
+
+

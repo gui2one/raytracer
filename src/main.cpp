@@ -12,8 +12,8 @@ struct LoadedMeshData
 {
 	std::string path;
 	float scale = 1.0;
-	glm::vec3 rotate;
-	glm::vec3 translate;
+	glm::vec3 rotate  = glm::vec3(0.0,0.0,0.0);
+	glm::vec3 translate = glm::vec3(0.0,0.0,0.0);
 	
 };
 
@@ -35,8 +35,7 @@ void createMeshes()
 		for (int i = 0; i < loaded_mesh_datas.size(); i++)
 		{
 			Mesh m = loader.assimp_load(loaded_mesh_datas[i].path);
-			m.triangulate();
-			m.computeNormals();
+
 			
 			Color clr;
 			m.material.color = clr;
@@ -46,8 +45,13 @@ void createMeshes()
 			glm::vec3 translate = loaded_mesh_datas[i].translate;
 			printf("scale --> %.3f \n", scale);
 			mesh_utils.scale(m, glm::vec3(scale, scale, scale));
-			mesh_utils.rotate(m, glm::vec3(rotate.x, rotate.y, rotate.z));
+			mesh_utils.rotate(m, glm::vec3(rotate.x * PI /180.0, rotate.y * PI /180.0, rotate.z * PI /180.0));
 			mesh_utils.translate(m, glm::vec3(translate.x, translate.y, translate.z));
+			
+			//~ m.triangulate();
+			//~ m = mesh_utils.uniquePoints(m);
+			m.computeNormals();
+			
 			meshes.push_back(m);
 			
 		}
@@ -71,6 +75,8 @@ int main(int argc, char ** argv){
 		
 		if(argc % 2 != 1){
 			printf("bad command...\n");
+			printf("arg --> %s\n", argv[1]);
+			
 		}else{
 			
 			for (int i = 1; i < (argc-1); i+=2)

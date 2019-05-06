@@ -7,11 +7,16 @@ class Color
 {
 	public:
 		Color();
+		Color(double r, double g, double b, double a);
 		
-		float r;
-		float g;
-		float b;
-		float a;
+		double r;
+		double g;
+		double b;
+		double a;
+		
+		
+		
+		void serialize(JSON::Adapter& adapter);
 	private:
 		/* add your private declarations */
 };

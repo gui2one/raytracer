@@ -3,6 +3,7 @@
 
 #include "pch.h"
 #include "camera.h"
+#include "light.h"
 #include "mesh.h"
 #include "kdnode.h"
 #include "ray.h"
@@ -17,6 +18,7 @@ struct HitData
 {
 	glm::vec3 position;
 	unsigned int face_id;
+	unsigned int mesh_id;
 	
 	void print(){
 		printf("Hit Data : \n");
@@ -43,10 +45,13 @@ class Raycaster2
 		bool ray_triangle_intersect(Ray& ray, glm::vec3& vtx_a, glm::vec3& vtx_b, glm::vec3& vtx_c, glm::vec3& hit_pos);
 		
 		bool intersectBoudingBox(ClickData _click_data, Camera& _camera, Mesh& _target_mesh, HitData& _hit_data);
-						
+		
 		bool intersectMesh(ClickData click_data, Camera& camera, Mesh& mesh, HitData& _hit_data);
 		bool intersectMeshes(ClickData click_data, Camera& camera, std::vector<Mesh>& meshes, HitData& _hit_data);
-		bool intersectKDNode(Ray& ray, KDNode * kd_node, Camera& camera, std::vector<HitData>& hit_datas);
+		bool intersectKDNode(Ray& ray, KDNode * kd_node, int mesh_id, std::vector<HitData>& hit_datas, bool bail_early = false);
+		bool intersectKDNodes(Ray& ray, std::vector<KDNode *> kd_nodes, std::vector<HitData>& hit_datas, bool bail_early = false);
+		
+		bool shadowRay(glm::vec3 pos, std::vector<KDNode *> kd_nodes, Light& light);
 			
 	private:
 		/* add your private declarations */

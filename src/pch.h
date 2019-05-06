@@ -8,6 +8,8 @@
 
 #include "vendor/stb_image.h"
 
+#include "esj/json_reader.h"
+#include "esj/json_writer.h"
 
 #include <string>
 #include <iostream>

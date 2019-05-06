@@ -3,6 +3,7 @@
 
 #include "../pch.h"
 #include "../mesh.h"
+#include "../vector3.h"
 
 class MeshUtils
 {

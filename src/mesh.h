@@ -3,6 +3,8 @@
 
 #include "pch.h"
 #include "rtmaterial.h"
+#include "vector3.h"
+
 struct Point
 {
 	Point(){}
@@ -21,7 +23,9 @@ struct Point
 	glm::vec3 position;
 	glm::vec3 normal;
 };
-struct Vertex{
+
+struct Vertex
+{
 	
 	Vertex(){}
 	Vertex(unsigned int _point_id){
@@ -58,7 +62,8 @@ class Face
 		std::vector<Vertex> vertices;
 };
 
-struct BoundingBox{
+struct BoundingBox
+{
 	glm::vec3 position;
 	glm::vec3 size;
 };

@@ -23,12 +23,16 @@ link_directories(../src/libs/)
 #~ link_directories(../src/include/google/)
 add_executable(raytracer
 
+	../src/scene_file_loader.cpp
 	../src/kdnode.cpp
+	
+	../src/vector3.cpp
 	
 	../src/utils/objLoader.cpp
 	../src/main.cpp
 	../src/mesh.cpp
 	../src/camera.cpp
+	../src/light.cpp
 	
 	#~ ../src/raycaster.cpp
 	../src/raycaster2.cpp

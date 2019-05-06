@@ -217,6 +217,33 @@ home/pi/projects/raytracer/src/kdnode.cpp.s:
 	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/kdnode.cpp.s
 .PHONY : home/pi/projects/raytracer/src/kdnode.cpp.s
 
+home/pi/projects/raytracer/src/light.o: home/pi/projects/raytracer/src/light.cpp.o
+
+.PHONY : home/pi/projects/raytracer/src/light.o
+
+# target to build an object file
+home/pi/projects/raytracer/src/light.cpp.o:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/light.cpp.o
+.PHONY : home/pi/projects/raytracer/src/light.cpp.o
+
+home/pi/projects/raytracer/src/light.i: home/pi/projects/raytracer/src/light.cpp.i
+
+.PHONY : home/pi/projects/raytracer/src/light.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer/src/light.cpp.i:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/light.cpp.i
+.PHONY : home/pi/projects/raytracer/src/light.cpp.i
+
+home/pi/projects/raytracer/src/light.s: home/pi/projects/raytracer/src/light.cpp.s
+
+.PHONY : home/pi/projects/raytracer/src/light.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer/src/light.cpp.s:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/light.cpp.s
+.PHONY : home/pi/projects/raytracer/src/light.cpp.s
+
 home/pi/projects/raytracer/src/main.o: home/pi/projects/raytracer/src/main.cpp.o
 
 .PHONY : home/pi/projects/raytracer/src/main.o
@@ -379,6 +406,33 @@ home/pi/projects/raytracer/src/rtmaterial.cpp.s:
 	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/rtmaterial.cpp.s
 .PHONY : home/pi/projects/raytracer/src/rtmaterial.cpp.s
 
+home/pi/projects/raytracer/src/scene_file_loader.o: home/pi/projects/raytracer/src/scene_file_loader.cpp.o
+
+.PHONY : home/pi/projects/raytracer/src/scene_file_loader.o
+
+# target to build an object file
+home/pi/projects/raytracer/src/scene_file_loader.cpp.o:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/scene_file_loader.cpp.o
+.PHONY : home/pi/projects/raytracer/src/scene_file_loader.cpp.o
+
+home/pi/projects/raytracer/src/scene_file_loader.i: home/pi/projects/raytracer/src/scene_file_loader.cpp.i
+
+.PHONY : home/pi/projects/raytracer/src/scene_file_loader.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer/src/scene_file_loader.cpp.i:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/scene_file_loader.cpp.i
+.PHONY : home/pi/projects/raytracer/src/scene_file_loader.cpp.i
+
+home/pi/projects/raytracer/src/scene_file_loader.s: home/pi/projects/raytracer/src/scene_file_loader.cpp.s
+
+.PHONY : home/pi/projects/raytracer/src/scene_file_loader.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer/src/scene_file_loader.cpp.s:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/scene_file_loader.cpp.s
+.PHONY : home/pi/projects/raytracer/src/scene_file_loader.cpp.s
+
 home/pi/projects/raytracer/src/shader.o: home/pi/projects/raytracer/src/shader.cpp.o
 
 .PHONY : home/pi/projects/raytracer/src/shader.o
@@ -487,6 +541,33 @@ home/pi/projects/raytracer/src/utils/objLoader.cpp.s:
 	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/objLoader.cpp.s
 .PHONY : home/pi/projects/raytracer/src/utils/objLoader.cpp.s
 
+home/pi/projects/raytracer/src/vector3.o: home/pi/projects/raytracer/src/vector3.cpp.o
+
+.PHONY : home/pi/projects/raytracer/src/vector3.o
+
+# target to build an object file
+home/pi/projects/raytracer/src/vector3.cpp.o:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vector3.cpp.o
+.PHONY : home/pi/projects/raytracer/src/vector3.cpp.o
+
+home/pi/projects/raytracer/src/vector3.i: home/pi/projects/raytracer/src/vector3.cpp.i
+
+.PHONY : home/pi/projects/raytracer/src/vector3.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer/src/vector3.cpp.i:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vector3.cpp.i
+.PHONY : home/pi/projects/raytracer/src/vector3.cpp.i
+
+home/pi/projects/raytracer/src/vector3.s: home/pi/projects/raytracer/src/vector3.cpp.s
+
+.PHONY : home/pi/projects/raytracer/src/vector3.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer/src/vector3.cpp.s:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vector3.cpp.s
+.PHONY : home/pi/projects/raytracer/src/vector3.cpp.s
+
 home/pi/projects/raytracer/src/vendor/stb_image.o: home/pi/projects/raytracer/src/vendor/stb_image.cpp.o
 
 .PHONY : home/pi/projects/raytracer/src/vendor/stb_image.o
@@ -533,6 +614,9 @@ help:
 	@echo "... home/pi/projects/raytracer/src/kdnode.o"
 	@echo "... home/pi/projects/raytracer/src/kdnode.i"
 	@echo "... home/pi/projects/raytracer/src/kdnode.s"
+	@echo "... home/pi/projects/raytracer/src/light.o"
+	@echo "... home/pi/projects/raytracer/src/light.i"
+	@echo "... home/pi/projects/raytracer/src/light.s"
 	@echo "... home/pi/projects/raytracer/src/main.o"
 	@echo "... home/pi/projects/raytracer/src/main.i"
 	@echo "... home/pi/projects/raytracer/src/main.s"
@@ -551,6 +635,9 @@ help:
 	@echo "... home/pi/projects/raytracer/src/rtmaterial.o"
 	@echo "... home/pi/projects/raytracer/src/rtmaterial.i"
 	@echo "... home/pi/projects/raytracer/src/rtmaterial.s"
+	@echo "... home/pi/projects/raytracer/src/scene_file_loader.o"
+	@echo "... home/pi/projects/raytracer/src/scene_file_loader.i"
+	@echo "... home/pi/projects/raytracer/src/scene_file_loader.s"
 	@echo "... home/pi/projects/raytracer/src/shader.o"
 	@echo "... home/pi/projects/raytracer/src/shader.i"
 	@echo "... home/pi/projects/raytracer/src/shader.s"
@@ -563,6 +650,9 @@ help:
 	@echo "... home/pi/projects/raytracer/src/utils/objLoader.o"
 	@echo "... home/pi/projects/raytracer/src/utils/objLoader.i"
 	@echo "... home/pi/projects/raytracer/src/utils/objLoader.s"
+	@echo "... home/pi/projects/raytracer/src/vector3.o"
+	@echo "... home/pi/projects/raytracer/src/vector3.i"
+	@echo "... home/pi/projects/raytracer/src/vector3.s"
 	@echo "... home/pi/projects/raytracer/src/vendor/stb_image.o"
 	@echo "... home/pi/projects/raytracer/src/vendor/stb_image.i"
 	@echo "... home/pi/projects/raytracer/src/vendor/stb_image.s"

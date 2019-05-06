@@ -227,21 +227,49 @@ void Renderer::displayKDTree()
 	
 }
 
-Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material)
+Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_data)
 {
-	Color clr = material.color;
-	glm::vec3 A, B, C;
+	Raycaster2 raycaster;
 	
-	glm::vec3 normal = mesh.points[face.getVertex(0).point_id].normal;
+	Color clr(0.0,0.0,0.0,1.0); //= material.color;
+	glm::vec3 normal = mesh.points[face.getVertex(1).point_id].normal;
 	
-	clr.r = clampf(normal.x, 0.0,1.0);
-	clr.g = clampf(normal.y, 0.0,1.0);
-	clr.b = clampf(normal.z, 0.0,1.0);
+	
+	
+	for (int i = 0; i < lights.size(); i++)
+	{
+		
+		glm::vec3 light_dir = lights[i].position - hit_data.position;
+		light_dir = glm::normalize(light_dir);
+		float light_dist = glm::distance( lights[i].position, hit_data.position);
+		float dot = glm::dot(glm::normalize(normal) , light_dir);
+		
+		dot *= 1.0/ (light_dist * light_dist);
+		dot *= lights[i].intensity;
+		//~ dot *= 10.0;
+		
+		bool is_shadow;
+		
+		if(dot > 0.0)
+			is_shadow = raycaster.shadowRay( hit_data.position, kd_nodes, lights[i]);
+		else
+			is_shadow = true;
+		 
+		float shadow = (is_shadow == true) ? 0.0 : 1.0;
+		
+		
+		//~ clr.r = clampf(normal.x, 0.0,1.0);
+		//~ clr.g = clampf(normal.y, 0.0,1.0);
+		//~ clr.b = clampf(normal.z, 0.0,1.0);
+		clr.r += clampf(dot * mesh.material.color.r  * lights[i].color.r * shadow, 0.0,1.0);
+		clr.g += clampf(dot * mesh.material.color.g  * lights[i].color.g * shadow, 0.0,1.0);
+		clr.b += clampf(dot * mesh.material.color.b  * lights[i].color.b * shadow, 0.0,1.0);
+	}		
 	clr.a = 1.0;
 	return  clr;
 }
 
-void Renderer::renderBucketV2(RenderBucket& bucket, Camera& camera)
+void Renderer::renderBucket(RenderBucket& bucket, Camera& camera)
 {
 	Raycaster2 raycaster;
 	
@@ -279,7 +307,8 @@ void Renderer::renderBucketV2(RenderBucket& bucket, Camera& camera)
 	{
 			bool hit_tri = false;
 			std::vector<HitData> hit_datas;
-			bool hit2 = raycaster.intersectKDNode(rays[i], kd_nodes[0], camera, hit_datas);
+			
+			bool hit2 = raycaster.intersectKDNodes(rays[i], kd_nodes, hit_datas);
 			if( hit2 )
 			{
 				//~ 
@@ -296,12 +325,14 @@ void Renderer::renderBucketV2(RenderBucket& bucket, Camera& camera)
 				}
 			}				
 			
+
+			
 			
 			long int index = (bucket.x + (i%bucket.width)) + (bucket.y + i/bucket.width) * bucket.render_width;
 			
 			if(hit_tri){
 				
-				Color clr = shade(meshes[0], meshes[0].faces[ hit_datas[0].face_id], meshes[0].material);
+				Color clr = shade(meshes[hit_datas[0].mesh_id], meshes[hit_datas[0].mesh_id].faces[ hit_datas[0].face_id], meshes[hit_datas[0].mesh_id].material, hit_datas[0]);
 				//~ float dist = glm::distance(camera.position, hit_datas[0].position);
 				//~ int depth = 255 - (int)(clampf((float)dist, 0.0, 5.0) / 5.0 * 255.0);
 				
@@ -321,75 +352,6 @@ void Renderer::renderBucketV2(RenderBucket& bucket, Camera& camera)
 	bucket.finished = true;
 	
 }
-
-void Renderer::renderBucket(RenderBucket& bucket, Camera& camera)
-{
-	Raycaster2 raycaster;
-	
-	ClickData click_data;
-	click_data.width = 640;
-	click_data.height = 480;
-		
-	for (int y = bucket.y; y < bucket.y+bucket.height; y++)
-	{
-		click_data.y = (float)click_data.height / (float)bucket.render_height * (float)y;
-		
-		for (int x = bucket.x; x < bucket.x+bucket.width; x++)
-		{
-			click_data.x = (float)click_data.width / (float)bucket.render_width * (float)x;
-			
-			bool hit_tri = false;
-			//~ HitData hit_data;
-			//~ hit_tri = raycaster.intersectMeshes(click_data, camera, meshes, hit_data);
-			
-			Ray ray = raycaster.castRay(click_data, camera);
-			std::vector<HitData> hit_datas;
-			bool hit2 = raycaster.intersectKDNode(ray, kd_nodes[0], camera, hit_datas);
-			if( hit2 )
-			{
-				//~ 
-				
-				std::sort(hit_datas.begin(), hit_datas.end(), [camera](HitData data1 , HitData data2){
-					float dist1 = glm::distance(data1.position, camera.position);
-					float dist2 = glm::distance(data2.position, camera.position);
-					return dist1 < dist2;
-				});			
-				if( hit_datas.size() > 0)
-				{	
-				//~ 
-					hit_tri = true;
-				}
-			}				
-			
-			
-			long int index = x + y * bucket.render_width;
-			
-			if(hit_tri){
-				
-				float dist = glm::distance(camera.position, hit_datas[0].position);
-				
-				
-				
-				int depth = 255 - (int)(clampf((float)dist, 0.0, 5.0) / 5.0 * 255.0);
-				
-				render_buffer_data[(index * 4)] = (unsigned char)depth;
-				render_buffer_data[(index * 4)+1] = (unsigned char)depth;
-				render_buffer_data[(index * 4)+2] = (unsigned char)depth;
-
-
-			}else{
-				render_buffer_data[(index * 4)] = (unsigned char)0;
-				render_buffer_data[(index * 4)+1] = (unsigned char)0;
-				render_buffer_data[(index * 4)+2] = (unsigned char)0;
-			
-			}			
-		}
-	}
-	
-	bucket.finished = true;
-	
-}
-
 
 void Renderer::renderBuckets(std::vector<RenderBucket>& buckets, Camera& camera)
 {
@@ -418,40 +380,42 @@ void Renderer::renderBuckets(std::vector<RenderBucket>& buckets, Camera& camera)
     }	
 	
 	int old_num = -1;
-	  while (queue.NumPendingTasks()){
-		std::cout << queue.NumPendingTasks() << "\n";
+	std::cout << "\n";
+	while (queue.NumPendingTasks()){
+
 		//~ LOG(INFO) << "All tasks submitted, waiting for last tasks to complete... \r\r";
 		boost::this_thread::sleep(boost::posix_time::milliseconds(100));
-		
+
 		if(old_num != queue.NumPendingTasks()){
+			std::cout  << "\r"  << "Rendering Tasks : " << (buckets.size() - queue.NumPendingTasks()) << " / " << buckets.size() << "      " << std::flush;
 			old_num = queue.NumPendingTasks();
 			displayScene();
 		}
-	  }	
-	
-	for (int id = 0; id < __results.size(); id++)
-	{
-		printf("result %d -> i == %d\n", id, __results[id].data.size());
-	}
+	}	
+	  
+	std::cout << "\n";
 
-	
-	
-	
-	//~ 
 
-	//~ 
 
-	//~ for (int i = 0; i < buckets.size(); i++)
-	//~ {
-		//~ renderBucketV2(buckets[i], camera);
-		//~ 
-		//~ displayScene();
-	//~ }
-	//~ 
     duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
 
-    printf("duration %f\n", duration);	
-	printf("DONE\n");
+    printf("duration %f\n", duration / 4.0);	
+    
+    
+    int red[render_width * render_height];
+    int green[render_width * render_height];
+    int blue[render_width * render_height];
+    
+    for (int i = 0; i < render_buffer_data.size() / 4; i++)
+	{
+		red[i]   = render_buffer_data[(i * 4) + 0];
+		green[i] = render_buffer_data[(i * 4) + 1];
+		blue[i]  = render_buffer_data[(i * 4) + 2];
+	}
+	
+    
+    saveToBitmap2("render.bmp", render_width, render_height, red, green, blue);
+	printf("SAVE BITMAP\n");
 }
 
 std::vector<RenderBucket> Renderer::createBuckets(int size, int r_width, int r_height)
@@ -519,7 +483,7 @@ void Renderer::cursor_pos_callback(GLFWwindow* window, double xpos, double ypos)
 				//~ printf("--------------------------------\n");
 
 
-                app->setCamPosFromPolar(app->camera_u_pos, app->camera_v_pos, app->camera_orbit_radius);
+                app->setCamPosFromPolar(app->camera_u_pos, app->camera_v_pos, app->camera_orbit_radius, app->camera_view_center);
 
         }
 
@@ -562,7 +526,7 @@ void Renderer::mouse_button_callback(GLFWwindow* window, int button, int action,
 		
 		Ray ray = raycaster.castRay(click_data, app->camera);
 		std::vector<HitData> hit_datas;
-		bool hit2 = raycaster.intersectKDNode(ray, app->kd_nodes[0], app->camera, hit_datas);
+		bool hit2 = raycaster.intersectKDNodes(ray, app->kd_nodes, hit_datas);
 		if( hit2 ){
 			//~ printf("hit bbox !!!!!!!!!!\n");
 			
@@ -608,15 +572,30 @@ void Renderer::char_mods_callback(GLFWwindow* window, unsigned int key, int acti
 
 }
 
-void Renderer::setCamPosFromPolar(float u, float v, float _radius)
+void Renderer::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-        camera.position.x = sin(u)* sin(v) * _radius;
-        camera.position.y = cos(u)* sin(v) * _radius;
-        camera.position.z = cos(v) * _radius;
+	Renderer* app = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
+    //~ printf("cur key is %d\n" ,scancode);
+    if (key == GLFW_KEY_LEFT && action == GLFW_PRESS){
+			printf("GLFW_KEY_LEFT %d\n" ,scancode);
+			app->camera_view_center.x += 0.5;
+			app->setCamPosFromPolar(app->camera_u_pos, app->camera_v_pos, app->camera_orbit_radius, app->camera_view_center);
+	}
+        
+}
+
+void Renderer::setCamPosFromPolar(float u, float v, float _radius, glm::vec3 center)
+{
+        camera.position.x = (sin(u)* sin(v) * _radius) + center.x;
+        camera.position.y = (cos(u)* sin(v) * _radius) + center.y;
+        camera.position.z = (cos(v) * _radius) + center.z;
+        
+        camera.target_position = center;
 }
 
 void Renderer::initFBO(int width, int height)
 {
+	
 	
 	int r_width = width;
 	int r_height = height;
@@ -627,12 +606,17 @@ void Renderer::initFBO(int width, int height)
 	int w_width, w_height;
 	glfwGetWindowSize(window, &w_width, &w_height);
 	
+	//~ if(r_width > w_width)r_width = w_width;
+	//~ if(r_height > w_height)r_height = w_height;
+	
 	float fbo_min_x = -( (float)r_width / (float)w_width);
+	if(fbo_min_x < -1.0) fbo_min_x = -1.0;
 	float fbo_min_y = -( (float)r_height / (float)w_height);
-	
+	if(fbo_min_y < -1.0) fbo_min_y = -1.0;
 	float fbo_max_x = ( (float)r_width / (float)w_width);
+	if(fbo_max_x > 1.0) fbo_max_x = 1.0;
 	float fbo_max_y = ( (float)r_height / (float)w_height);
-	
+	if(fbo_max_y > 1.0) fbo_max_y = 1.0;
 	
 	float fbo_vertices[6*3 + 6*2] = {
 		// position        //uvs
@@ -709,8 +693,8 @@ void Renderer::drawFBO(int r_width, int r_height)
 int Renderer::init(int limit)
 {
 
-	render_width = 640;
-	render_height = 480;
+	render_width = 640 ;
+	render_height = 480 ;
 	
 	//~ std::cout << "raytracer PROJECT" << std::endl;
 
@@ -743,6 +727,7 @@ int Renderer::init(int limit)
 	glfwSetWindowUserPointer(window, this);
 
 	glfwSetCharModsCallback(window, char_mods_callback);
+	glfwSetKeyCallback(window, key_callback);
 	glfwSetCursorPosCallback(window, cursor_pos_callback);
 	glfwSetMouseButtonCallback(window, mouse_button_callback);
 
@@ -756,6 +741,18 @@ int Renderer::init(int limit)
 
 	fbo_shader.createShader();	
 	
+	
+	Light light1;
+	light1.position = glm::vec3(-2.0, -1.5, 4.0);
+	light1.color = Color(0.5, 1.0, 0.5, 1.0);
+	light1.intensity = 2.0;
+	lights.push_back(light1);
+	
+	Light light2;
+	light2.position = glm::vec3(3.0, 1.5, 5.0);
+	light2.color = Color(1.0, 0.5, 0.5, 1.0);
+	light2.intensity = 5.0;
+	lights.push_back(light2);	
 	
 	initFBO(render_width,render_height);
 	//~ kd_node = new KDNode(limit);
@@ -870,6 +867,13 @@ void Renderer::displayScene()
 		GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
 		
 		
+		// send lights data to opengl shader
+		
+		
+		float light_positions[3] = { lights[0].position.x, lights[0].position.y, lights[0].position.z};
+		GLCall(
+			glUniform3fv(glGetUniformLocation(default_shader.m_id, "u_light_positions"), 1, light_positions)
+		);
 		
 		for (int i = 0; i < meshes.size(); i++)
 		{

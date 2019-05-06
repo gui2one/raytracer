@@ -53,7 +53,7 @@ Mesh MeshUtils::makeSimpleBox(float w, float h)
 	
 	
 	
-
+	
 	mesh.faces.reserve(6);
 	mesh.faces.insert( mesh.faces.end(), {
 		Face( { Vertex(0), Vertex(1), Vertex(2), Vertex(3) }),

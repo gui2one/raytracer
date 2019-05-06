@@ -9,8 +9,10 @@ class RTMaterial
 	public:
 		RTMaterial();
 		
+		
 		Color color;
-			
+		
+		float shininess;	
 	private:
 		/* add your private declarations */
 };

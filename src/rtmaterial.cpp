@@ -1,7 +1,7 @@
 #include "rtmaterial.h"
 
 
-RTMaterial::RTMaterial()
+RTMaterial::RTMaterial():color(Color(0.6,0.6,1.0,1.0)), shininess(0.5)
 {
 	
 }
