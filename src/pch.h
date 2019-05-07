@@ -7,6 +7,7 @@
 #include <GLFW/glfw3.h>
 
 #include "vendor/stb_image.h"
+#include "vendor/stb_image_write.h"
 
 #include "esj/json_reader.h"
 #include "esj/json_writer.h"

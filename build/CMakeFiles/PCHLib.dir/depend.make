@@ -222,4 +222,5 @@ CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/project
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vec4.hpp
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vector_relational.hpp
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image.h
+CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 

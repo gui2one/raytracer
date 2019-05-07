@@ -11801,6 +11801,8 @@ GLFW/glfw3.h
 -
 vendor/stb_image.h
 /home/pi/projects/raytracer/src/vendor/stb_image.h
+vendor/stb_image_write.h
+/home/pi/projects/raytracer/src/vendor/stb_image_write.h
 esj/json_reader.h
 /home/pi/projects/raytracer/src/esj/json_reader.h
 esj/json_writer.h
@@ -13424,5 +13426,25 @@ emmintrin.h
 intrin.h
 -
 arm_neon.h
+-
+
+/home/pi/projects/raytracer/src/vendor/stb_image_write.cpp
+stb_image_write.h
+/home/pi/projects/raytracer/src/vendor/stb_image_write.h
+
+/home/pi/projects/raytracer/src/vendor/stb_image_write.h
+stdlib.h
+-
+stdio.h
+-
+stdarg.h
+-
+stdlib.h
+-
+string.h
+-
+math.h
+-
+assert.h
 -
 

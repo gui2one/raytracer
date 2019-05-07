@@ -9,6 +9,17 @@ static Ray offset_ray(Ray& src, float amount)
 	return ray;
 }
 
+static void stbi_save(int w, int h, int* data){
+	//~ int stbi_write_jpg(char const *filename, int w, int h, int comp, const void *data, int quality);
+	
+	int saved = stbi_write_jpg("stbi_test.jpg", w, h, 0, data,5);
+	if(saved){
+		printf("saved !!! \n");
+	}else{
+		printf("NOT saved !!! \n");
+	}
+}
+
 static void saveToBitmap2(std::string file_name, int width, int height, int* red, int* green, int* blue)
 {
 	//~ printf("RED : %d\n",red[0]);
@@ -249,6 +260,7 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 		dot *= lights[i].intensity;
 		//~ dot *= 10.0;
 		
+		
 		bool is_shadow;
 		
 		if(dot > 0.0)
@@ -262,34 +274,36 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 		//~ clr.r = clampf(normal.x, 0.0,1.0);
 		//~ clr.g = clampf(normal.y, 0.0,1.0);
 		//~ clr.b = clampf(normal.z, 0.0,1.0);
-		clr.r += clampf(dot * mesh.material.color.r  * lights[i].color.r * shadow, 0.0,1.0);
-		clr.g += clampf(dot * mesh.material.color.g  * lights[i].color.g * shadow, 0.0,1.0);
-		clr.b += clampf(dot * mesh.material.color.b  * lights[i].color.b * shadow, 0.0,1.0);
+		clr.r += clampf(dot * mesh.material.color.r *  lights[i].color.r * shadow, 0.0,1.0);
+		clr.g += clampf(dot * mesh.material.color.g *  lights[i].color.g * shadow, 0.0,1.0);
+		clr.b += clampf(dot * mesh.material.color.b *  lights[i].color.b * shadow, 0.0,1.0);
 	}	
 	
-	
-	// reflection ray
-	Ray refl_ray;
-	refl_ray.origin = hit_data.position;
-	
-	refl_ray.direction = glm::reflect( view_dir , normal);
-	
-	refl_ray = offset_ray(refl_ray, 0.001);
-	
-	std::vector<HitData> refl_hit_datas;
-	bool refl_hit = raycaster.intersectKDNodes(refl_ray, kd_nodes, camera, refl_hit_datas);
-	
-	if(refl_hit_datas.size() > 0)
+	if(material.refl_amount > 0.0)
 	{
-		Color refl_clr = shade(
-			meshes[refl_hit_datas[0].mesh_id], 
-			meshes[refl_hit_datas[0].mesh_id].faces[refl_hit_datas[0].face_id], 
-			meshes[refl_hit_datas[0].mesh_id].material,
-			refl_hit_datas[0]);
+		// reflection ray
+		Ray refl_ray;
+		refl_ray.origin = hit_data.position;
 		
-		clr.r += refl_clr.r * 0.5;
-		clr.g += refl_clr.g * 0.5;
-		clr.b += refl_clr.b * 0.5;
+		refl_ray.direction = glm::reflect( view_dir , normal);
+		
+		refl_ray = offset_ray(refl_ray, 0.001);
+		
+		std::vector<HitData> refl_hit_datas;
+		bool refl_hit = raycaster.intersectKDNodes(refl_ray, kd_nodes, camera, refl_hit_datas);
+		
+		if(refl_hit_datas.size() > 0)
+		{
+			Color refl_clr = shade(
+				meshes[refl_hit_datas[0].mesh_id], 
+				meshes[refl_hit_datas[0].mesh_id].faces[refl_hit_datas[0].face_id], 
+				meshes[refl_hit_datas[0].mesh_id].material,
+				refl_hit_datas[0]);
+			
+			clr.r += refl_clr.r * material.refl_amount;
+			clr.g += refl_clr.g * material.refl_amount;
+			clr.b += refl_clr.b * material.refl_amount;
+		}
 	}
 	clr.a = 1.0;
 	return  clr;
@@ -719,8 +733,8 @@ void Renderer::drawFBO(int r_width, int r_height)
 int Renderer::init(int limit)
 {
 
-	render_width = 640 *2;
-	render_height = 480 *2;
+	render_width = 320 *1;
+	render_height = 240 *1;
 	
 	//~ std::cout << "raytracer PROJECT" << std::endl;
 
@@ -770,16 +784,31 @@ int Renderer::init(int limit)
 	
 	Light light1;
 	light1.position = glm::vec3(-2.0, -1.5, 4.0);
-	light1.color = Color(0.5, 1.0, 0.5, 1.0);
+	light1.color = Color(1.0, 1.0, 1.0, 1.0);
 	light1.intensity = 2.0;
 	lights.push_back(light1);
 	
 	Light light2;
 	light2.position = glm::vec3(3.0, 1.5, 5.0);
-	light2.color = Color(1.0, 0.5, 0.5, 1.0);
+	light2.color = Color(1.0, 1.0, 1.0, 1.0);
 	light2.intensity = 5.0;
 	lights.push_back(light2);	
 	
+	// materials
+	RTMaterial material1;
+	material1.color = Color(0.3, 0.3,1.0,1.0);
+	material1.refl_amount = 1.0;
+	materials.push_back(material1);
+
+	RTMaterial material2;
+	material2.color = Color(0.0,0.0,0.0,1.0);
+	material2.refl_amount = 0.3;
+	materials.push_back(material2);
+	
+	RTMaterial material3;
+	material3.color = Color(0.2,1.0,0.2,1.0);
+	materials.push_back(material3);
+		
 	initFBO(render_width,render_height);
 	//~ kd_node = new KDNode(limit);
 }
@@ -792,7 +821,7 @@ void Renderer::buildRenderGeometry()
 
 	for (int i = 0; i < meshes.size(); i++)
 	{
-
+		meshes[i].material = materials[i];
 		OGL_geometry_data geo_data;
 		for(int pt_id = 0; pt_id < meshes[i].points.size(); pt_id++)
 		{

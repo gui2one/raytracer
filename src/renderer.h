@@ -114,6 +114,7 @@ class Renderer
 		glm::vec3 camera_view_center = glm::vec3(0.0, 0.0, 0.0);
 		
 		std::vector<Light> lights;
+		std::vector<RTMaterial> materials;
 		
 		
 		bool left_mouse_button_down = false;

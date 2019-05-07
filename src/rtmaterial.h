@@ -12,7 +12,8 @@ class RTMaterial
 		
 		Color color;
 		
-		float shininess;	
+		double shininess;	
+		double refl_amount;
 	private:
 		/* add your private declarations */
 };

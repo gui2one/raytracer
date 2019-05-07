@@ -46,6 +46,7 @@ add_executable(raytracer
 	../src/texture.cpp
 	
 	../src/vendor/stb_image.cpp
+	../src/vendor/stb_image_write.cpp
 	
 	
 )

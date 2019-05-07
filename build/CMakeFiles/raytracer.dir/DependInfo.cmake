@@ -20,6 +20,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/pi/projects/raytracer/src/utils/objLoader.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/objLoader.cpp.o"
   "/home/pi/projects/raytracer/src/vector3.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vector3.cpp.o"
   "/home/pi/projects/raytracer/src/vendor/stb_image.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vendor/stb_image.cpp.o"
+  "/home/pi/projects/raytracer/src/vendor/stb_image_write.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vendor/stb_image_write.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -595,6 +595,33 @@ home/pi/projects/raytracer/src/vendor/stb_image.cpp.s:
 	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vendor/stb_image.cpp.s
 .PHONY : home/pi/projects/raytracer/src/vendor/stb_image.cpp.s
 
+home/pi/projects/raytracer/src/vendor/stb_image_write.o: home/pi/projects/raytracer/src/vendor/stb_image_write.cpp.o
+
+.PHONY : home/pi/projects/raytracer/src/vendor/stb_image_write.o
+
+# target to build an object file
+home/pi/projects/raytracer/src/vendor/stb_image_write.cpp.o:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vendor/stb_image_write.cpp.o
+.PHONY : home/pi/projects/raytracer/src/vendor/stb_image_write.cpp.o
+
+home/pi/projects/raytracer/src/vendor/stb_image_write.i: home/pi/projects/raytracer/src/vendor/stb_image_write.cpp.i
+
+.PHONY : home/pi/projects/raytracer/src/vendor/stb_image_write.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer/src/vendor/stb_image_write.cpp.i:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vendor/stb_image_write.cpp.i
+.PHONY : home/pi/projects/raytracer/src/vendor/stb_image_write.cpp.i
+
+home/pi/projects/raytracer/src/vendor/stb_image_write.s: home/pi/projects/raytracer/src/vendor/stb_image_write.cpp.s
+
+.PHONY : home/pi/projects/raytracer/src/vendor/stb_image_write.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer/src/vendor/stb_image_write.cpp.s:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vendor/stb_image_write.cpp.s
+.PHONY : home/pi/projects/raytracer/src/vendor/stb_image_write.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -656,6 +683,9 @@ help:
 	@echo "... home/pi/projects/raytracer/src/vendor/stb_image.o"
 	@echo "... home/pi/projects/raytracer/src/vendor/stb_image.i"
 	@echo "... home/pi/projects/raytracer/src/vendor/stb_image.s"
+	@echo "... home/pi/projects/raytracer/src/vendor/stb_image_write.o"
+	@echo "... home/pi/projects/raytracer/src/vendor/stb_image_write.i"
+	@echo "... home/pi/projects/raytracer/src/vendor/stb_image_write.s"
 .PHONY : help
 
 

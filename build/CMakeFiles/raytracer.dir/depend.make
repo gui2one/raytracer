@@ -223,6 +223,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/camera.cpp.o: /home/pi/p
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/camera.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vec4.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/camera.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vector_relational.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/camera.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image.h
+CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/camera.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/color.cpp.o: ../src/include/esj/arm/convert.h
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/color.cpp.o: ../src/include/esj/arm/json_ex.h
@@ -446,6 +447,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/color.cpp.o: /home/pi/pr
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/color.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vec4.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/color.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vector_relational.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/color.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image.h
+CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/color.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/kdnode.cpp.o: ../src/include/esj/arm/convert.h
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/kdnode.cpp.o: ../src/include/esj/arm/json_ex.h
@@ -670,6 +672,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/kdnode.cpp.o: /home/pi/p
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/kdnode.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vec4.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/kdnode.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vector_relational.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/kdnode.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image.h
+CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/kdnode.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/light.cpp.o: ../src/include/esj/arm/convert.h
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/light.cpp.o: ../src/include/esj/arm/json_ex.h
@@ -894,6 +897,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/light.cpp.o: /home/pi/pr
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/light.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vec4.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/light.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vector_relational.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/light.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image.h
+CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/light.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/main.cpp.o: ../src/include/assimp/color4.h
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/main.cpp.o: ../src/include/assimp/color4.inl
@@ -2129,6 +2133,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/main.cpp.o: /home/pi/pro
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/main.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vec4.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/main.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vector_relational.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/main.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image.h
+CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/main.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/mesh.cpp.o: ../src/include/esj/arm/convert.h
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/mesh.cpp.o: ../src/include/esj/arm/json_ex.h
@@ -2355,6 +2360,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/mesh.cpp.o: /home/pi/pro
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/mesh.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vec4.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/mesh.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vector_relational.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/mesh.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image.h
+CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/mesh.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/raycaster2.cpp.o: ../src/include/esj/arm/convert.h
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/raycaster2.cpp.o: ../src/include/esj/arm/json_ex.h
@@ -2586,6 +2592,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/raycaster2.cpp.o: /home/
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/raycaster2.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vec4.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/raycaster2.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vector_relational.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/raycaster2.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image.h
+CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/raycaster2.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/renderer.cpp.o: ../src/include/esj/arm/convert.h
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/renderer.cpp.o: ../src/include/esj/arm/json_ex.h
@@ -3794,6 +3801,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/renderer.cpp.o: /home/pi
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/renderer.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vec4.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/renderer.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vector_relational.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/renderer.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image.h
+CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/renderer.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/rtmaterial.cpp.o: ../src/include/esj/arm/convert.h
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/rtmaterial.cpp.o: ../src/include/esj/arm/json_ex.h
@@ -4018,6 +4026,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/rtmaterial.cpp.o: /home/
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/rtmaterial.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vec4.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/rtmaterial.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vector_relational.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/rtmaterial.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image.h
+CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/rtmaterial.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/scene_file_loader.cpp.o: ../src/include/esj/arm/convert.h
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/scene_file_loader.cpp.o: ../src/include/esj/arm/json_ex.h
@@ -4241,6 +4250,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/scene_file_loader.cpp.o:
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vec4.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vector_relational.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image.h
+CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/shader.cpp.o: ../src/include/esj/arm/convert.h
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/shader.cpp.o: ../src/include/esj/arm/json_ex.h
@@ -4464,6 +4474,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/shader.cpp.o: /home/pi/p
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/shader.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vec4.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/shader.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vector_relational.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/shader.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image.h
+CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/shader.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/texture.cpp.o: ../src/include/esj/arm/convert.h
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/texture.cpp.o: ../src/include/esj/arm/json_ex.h
@@ -4687,6 +4698,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/texture.cpp.o: /home/pi/
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/texture.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vec4.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/texture.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vector_relational.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/texture.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image.h
+CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/texture.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/mesh_utils.cpp.o: ../src/include/esj/arm/convert.h
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/mesh_utils.cpp.o: ../src/include/esj/arm/json_ex.h
@@ -4914,6 +4926,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/mesh_utils.cpp.o: 
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/mesh_utils.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vec4.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/mesh_utils.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vector_relational.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/mesh_utils.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image.h
+CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/mesh_utils.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/objLoader.cpp.o: ../src/include/assimp/color4.h
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/objLoader.cpp.o: ../src/include/assimp/color4.inl
@@ -5169,6 +5182,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/objLoader.cpp.o: /
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/objLoader.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vec4.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/objLoader.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vector_relational.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/objLoader.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image.h
+CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/objLoader.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vector3.cpp.o: ../src/include/esj/arm/convert.h
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vector3.cpp.o: ../src/include/esj/arm/json_ex.h
@@ -5392,7 +5406,11 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vector3.cpp.o: /home/pi/
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vector3.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vec4.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vector3.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/vector_relational.hpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vector3.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image.h
+CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vector3.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vendor/stb_image.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image.cpp
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vendor/stb_image.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image.h
+
+CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vendor/stb_image_write.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image_write.cpp
+CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vendor/stb_image_write.cpp.o: /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 

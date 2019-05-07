@@ -15,6 +15,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/shader.cpp.o"
   "CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/texture.cpp.o"
   "CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vendor/stb_image.cpp.o"
+  "CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/vendor/stb_image_write.cpp.o"
   "raytracer.pdb"
   "raytracer"
 )
