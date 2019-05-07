@@ -377,7 +377,7 @@ bool Raycaster2::intersectKDNode(Ray& ray, KDNode * kd_node, int mesh_id, std::v
 	return false;
 }
 
-bool Raycaster2::intersectKDNodes(Ray& ray, std::vector<KDNode *> kd_nodes, std::vector<HitData>& hit_datas, bool bail_early)
+bool Raycaster2::intersectKDNodes(Ray& ray, std::vector<KDNode *> kd_nodes, Camera& camera,  std::vector<HitData>& hit_datas, bool bail_early)
 {
 	int num_hits = 0;
 	for (int i = 0; i < kd_nodes.size(); i++)
@@ -391,6 +391,12 @@ bool Raycaster2::intersectKDNodes(Ray& ray, std::vector<KDNode *> kd_nodes, std:
 	}
 	
 	if( num_hits > 0){
+		
+		std::sort(hit_datas.begin(), hit_datas.end(), [camera](HitData data1 , HitData data2){
+			float dist1 = glm::distance(data1.position, camera.position);
+			float dist2 = glm::distance(data2.position, camera.position);
+			return dist1 < dist2;
+		});			
 		return true;
 	}else{
 		return false;
@@ -398,7 +404,7 @@ bool Raycaster2::intersectKDNodes(Ray& ray, std::vector<KDNode *> kd_nodes, std:
 	
 }
 
-bool Raycaster2::shadowRay(glm::vec3 pos, std::vector<KDNode *> kd_nodes, Light& light)
+bool Raycaster2::shadowRay(glm::vec3 pos, std::vector<KDNode *> kd_nodes, Camera& camera, Light& light)
 {
 	
 	glm::vec3 dir = glm::normalize((light.position - pos));
@@ -408,7 +414,7 @@ bool Raycaster2::shadowRay(glm::vec3 pos, std::vector<KDNode *> kd_nodes, Light&
 	
 	ray = offset_ray(ray, 0.0001);
 	std::vector<HitData> hit_datas;
-	bool hit = intersectKDNodes(ray, kd_nodes, hit_datas, true);
+	bool hit = intersectKDNodes(ray, kd_nodes, camera, hit_datas, true);
 	
 	if(hit){
 		if(hit_datas.size() > 0){

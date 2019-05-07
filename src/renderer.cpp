@@ -1,4 +1,14 @@
 #include "renderer.h"
+
+static Ray offset_ray(Ray& src, float amount)
+{
+	Ray ray;
+	ray.direction = src.direction;
+	ray.origin = src.origin + (glm::normalize(src.direction) * amount);
+	
+	return ray;
+}
+
 static void saveToBitmap2(std::string file_name, int width, int height, int* red, int* green, int* blue)
 {
 	//~ printf("RED : %d\n",red[0]);
@@ -198,9 +208,6 @@ void Renderer::buildKDTreeBBoxes(std::vector<KDBoundingBox> bboxes)
 
 void Renderer::displayKDTree()
 {
-
-
-	
 	
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, kdtree_vbo));
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, kdtree_ibo));
@@ -213,18 +220,12 @@ void Renderer::displayKDTree()
 	
 	GLCall(glDrawElements(GL_LINES, kdtree_indices.size() , GL_UNSIGNED_INT, nullptr ));
 	
-	
 	GLCall(glDisableVertexAttribArray(0));
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));	
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));	
-	
 
-	
 	//~ printf(" Node num triangles --> %d\n", node_ptr->triangles.size());
-	
 
-	
-	
 }
 
 Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_data)
@@ -233,7 +234,7 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 	
 	Color clr(0.0,0.0,0.0,1.0); //= material.color;
 	glm::vec3 normal = mesh.points[face.getVertex(1).point_id].normal;
-	
+	glm::vec3 view_dir = glm::normalize( (hit_data.position - camera.position) );
 	
 	
 	for (int i = 0; i < lights.size(); i++)
@@ -251,7 +252,7 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 		bool is_shadow;
 		
 		if(dot > 0.0)
-			is_shadow = raycaster.shadowRay( hit_data.position, kd_nodes, lights[i]);
+			is_shadow = raycaster.shadowRay( hit_data.position, kd_nodes, camera, lights[i]);
 		else
 			is_shadow = true;
 		 
@@ -264,7 +265,32 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 		clr.r += clampf(dot * mesh.material.color.r  * lights[i].color.r * shadow, 0.0,1.0);
 		clr.g += clampf(dot * mesh.material.color.g  * lights[i].color.g * shadow, 0.0,1.0);
 		clr.b += clampf(dot * mesh.material.color.b  * lights[i].color.b * shadow, 0.0,1.0);
-	}		
+	}	
+	
+	
+	// reflection ray
+	Ray refl_ray;
+	refl_ray.origin = hit_data.position;
+	
+	refl_ray.direction = glm::reflect( view_dir , normal);
+	
+	refl_ray = offset_ray(refl_ray, 0.001);
+	
+	std::vector<HitData> refl_hit_datas;
+	bool refl_hit = raycaster.intersectKDNodes(refl_ray, kd_nodes, camera, refl_hit_datas);
+	
+	if(refl_hit_datas.size() > 0)
+	{
+		Color refl_clr = shade(
+			meshes[refl_hit_datas[0].mesh_id], 
+			meshes[refl_hit_datas[0].mesh_id].faces[refl_hit_datas[0].face_id], 
+			meshes[refl_hit_datas[0].mesh_id].material,
+			refl_hit_datas[0]);
+		
+		clr.r += refl_clr.r * 0.5;
+		clr.g += refl_clr.g * 0.5;
+		clr.b += refl_clr.b * 0.5;
+	}
 	clr.a = 1.0;
 	return  clr;
 }
@@ -308,16 +334,16 @@ void Renderer::renderBucket(RenderBucket& bucket, Camera& camera)
 			bool hit_tri = false;
 			std::vector<HitData> hit_datas;
 			
-			bool hit2 = raycaster.intersectKDNodes(rays[i], kd_nodes, hit_datas);
+			bool hit2 = raycaster.intersectKDNodes(rays[i], kd_nodes, camera, hit_datas);
 			if( hit2 )
 			{
 				//~ 
 				
-				std::sort(hit_datas.begin(), hit_datas.end(), [camera](HitData data1 , HitData data2){
-					float dist1 = glm::distance(data1.position, camera.position);
-					float dist2 = glm::distance(data2.position, camera.position);
-					return dist1 < dist2;
-				});			
+				//~ std::sort(hit_datas.begin(), hit_datas.end(), [camera](HitData data1 , HitData data2){
+					//~ float dist1 = glm::distance(data1.position, camera.position);
+					//~ float dist2 = glm::distance(data2.position, camera.position);
+					//~ return dist1 < dist2;
+				//~ });			
 				if( hit_datas.size() > 0)
 				{	
 				//~ 
@@ -526,7 +552,7 @@ void Renderer::mouse_button_callback(GLFWwindow* window, int button, int action,
 		
 		Ray ray = raycaster.castRay(click_data, app->camera);
 		std::vector<HitData> hit_datas;
-		bool hit2 = raycaster.intersectKDNodes(ray, app->kd_nodes, hit_datas);
+		bool hit2 = raycaster.intersectKDNodes(ray, app->kd_nodes, app->camera, hit_datas);
 		if( hit2 ){
 			//~ printf("hit bbox !!!!!!!!!!\n");
 			
@@ -693,8 +719,8 @@ void Renderer::drawFBO(int r_width, int r_height)
 int Renderer::init(int limit)
 {
 
-	render_width = 640 ;
-	render_height = 480 ;
+	render_width = 640 *2;
+	render_height = 480 *2;
 	
 	//~ std::cout << "raytracer PROJECT" << std::endl;
 

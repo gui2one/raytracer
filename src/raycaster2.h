@@ -49,9 +49,9 @@ class Raycaster2
 		bool intersectMesh(ClickData click_data, Camera& camera, Mesh& mesh, HitData& _hit_data);
 		bool intersectMeshes(ClickData click_data, Camera& camera, std::vector<Mesh>& meshes, HitData& _hit_data);
 		bool intersectKDNode(Ray& ray, KDNode * kd_node, int mesh_id, std::vector<HitData>& hit_datas, bool bail_early = false);
-		bool intersectKDNodes(Ray& ray, std::vector<KDNode *> kd_nodes, std::vector<HitData>& hit_datas, bool bail_early = false);
+		bool intersectKDNodes(Ray& ray, std::vector<KDNode *> kd_nodes, Camera& camera, std::vector<HitData>& hit_datas, bool bail_early = false);
 		
-		bool shadowRay(glm::vec3 pos, std::vector<KDNode *> kd_nodes, Light& light);
+		bool shadowRay(glm::vec3 pos, std::vector<KDNode *> kd_nodes, Camera& camera, Light& light);
 			
 	private:
 		/* add your private declarations */
