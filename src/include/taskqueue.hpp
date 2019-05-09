@@ -97,6 +97,13 @@ public:
     futures_.erase(iter); // discard this future
     return result;
   }
+  
+  
+  void Stop()
+  {
+	  io_service_.stop();
+	  threads_.join_all(); 
+  }
 
 private:
   boost::asio::io_service io_service_;

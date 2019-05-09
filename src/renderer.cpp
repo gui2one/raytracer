@@ -477,11 +477,17 @@ void Renderer::renderBuckets(std::vector<RenderBucket>& buckets, Camera& camera)
 
 		//~ LOG(INFO) << "All tasks submitted, waiting for last tasks to complete... \r\r";
 		boost::this_thread::sleep(boost::posix_time::milliseconds(100));
-
-		if(old_num != queue.NumPendingTasks()){
-			std::cout  << "\r"  << "Rendering Tasks : " << (buckets.size() - queue.NumPendingTasks()) << " / " << buckets.size() << "      " << std::flush;
-			old_num = queue.NumPendingTasks();
-			displayScene();
+		
+		if(b_cancel_render){
+			queue.Stop();
+			b_cancel_render = false;
+			break;
+		}else{
+			if(old_num != queue.NumPendingTasks()){
+				std::cout  << "\r"  << "Rendering Tasks : " << (buckets.size() - queue.NumPendingTasks()) << " / " << buckets.size() << "      " << std::flush;
+				old_num = queue.NumPendingTasks();
+				displayScene();
+			}
 		}
 	}
 
@@ -747,6 +753,9 @@ void Renderer::key_callback(GLFWwindow* window, int key, int scancode, int actio
 			app->camera_view_center.z += x_template.z * 0.1 * (key == GLFW_KEY_RIGHT ? 1.0 : -1.0) ;
 
 			app->setCamPosFromPolar(app->camera_u_pos, app->camera_v_pos, app->camera_orbit_radius, app->camera_view_center);
+	}if( key == GLFW_KEY_ESCAPE && action == GLFW_PRESS){
+		printf("escape \n");
+		app->b_cancel_render = true;
 	}
 
 }

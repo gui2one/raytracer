@@ -78,6 +78,7 @@ class Renderer
 		void renderBucket(RenderBucket& bucket, Camera& camera);
 		void renderBuckets(std::vector<RenderBucket>& buckets, Camera& camera);
 		
+		bool b_cancel_render = false;
 		
 		
 		void buildKDTree();
