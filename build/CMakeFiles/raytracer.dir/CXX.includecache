@@ -11832,11 +11832,11 @@ csignal
 pch.h
 /home/pi/projects/raytracer/src/pch.h
 
-/home/pi/projects/raytracer/src/raycaster2.cpp
-raycaster2.h
-/home/pi/projects/raytracer/src/raycaster2.h
+/home/pi/projects/raytracer/src/raycaster.cpp
+raycaster.h
+/home/pi/projects/raytracer/src/raycaster.h
 
-/home/pi/projects/raytracer/src/raycaster2.h
+/home/pi/projects/raytracer/src/raycaster.h
 pch.h
 /home/pi/projects/raytracer/src/pch.h
 camera.h
@@ -11859,6 +11859,8 @@ ctime
 -
 pch.h
 /home/pi/projects/raytracer/src/pch.h
+utils/system_utils.h
+/home/pi/projects/raytracer/src/utils/system_utils.h
 camera.h
 /home/pi/projects/raytracer/src/camera.h
 light.h
@@ -11871,8 +11873,8 @@ rtmaterial.h
 /home/pi/projects/raytracer/src/rtmaterial.h
 shader.h
 /home/pi/projects/raytracer/src/shader.h
-raycaster2.h
-/home/pi/projects/raytracer/src/raycaster2.h
+raycaster.h
+/home/pi/projects/raytracer/src/raycaster.h
 kdnode.h
 /home/pi/projects/raytracer/src/kdnode.h
 color.h
@@ -11957,6 +11959,22 @@ stdio.h
 /home/pi/projects/raytracer/src/include/assimp/scene.h
 ../include/assimp/postprocess.h
 /home/pi/projects/raytracer/src/include/assimp/postprocess.h
+
+/home/pi/projects/raytracer/src/utils/system_utils.cpp
+system_utils.h
+/home/pi/projects/raytracer/src/utils/system_utils.h
+
+/home/pi/projects/raytracer/src/utils/system_utils.h
+../pch.h
+/home/pi/projects/raytracer/src/pch.h
+linux/limits.h
+/home/pi/projects/raytracer/src/utils/linux/limits.h
+unistd.h
+/home/pi/projects/raytracer/src/utils/unistd.h
+dirent.h
+/home/pi/projects/raytracer/src/utils/dirent.h
+sys/stat.h
+/home/pi/projects/raytracer/src/utils/sys/stat.h
 
 /home/pi/projects/raytracer/src/vector3.cpp
 vector3.h
@@ -13429,6 +13447,8 @@ arm_neon.h
 -
 
 /home/pi/projects/raytracer/src/vendor/stb_image_write.cpp
+stb_image.h
+/home/pi/projects/raytracer/src/vendor/stb_image.h
 stb_image_write.h
 /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 

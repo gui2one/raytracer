@@ -27,15 +27,16 @@ add_executable(raytracer
 	../src/kdnode.cpp
 	
 	../src/vector3.cpp
-	
+
+	../src/utils/system_utils.cpp	
 	../src/utils/objLoader.cpp
 	../src/main.cpp
 	../src/mesh.cpp
 	../src/camera.cpp
 	../src/light.cpp
 	
-	#~ ../src/raycaster.cpp
-	../src/raycaster2.cpp
+	
+	../src/raycaster.cpp
 	../src/utils/mesh_utils.cpp
 	
 	../src/color.cpp

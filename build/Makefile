@@ -325,32 +325,32 @@ home/pi/projects/raytracer/src/pch.cpp.s:
 	$(MAKE) -f CMakeFiles/PCHLib.dir/build.make CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.s
 .PHONY : home/pi/projects/raytracer/src/pch.cpp.s
 
-home/pi/projects/raytracer/src/raycaster2.o: home/pi/projects/raytracer/src/raycaster2.cpp.o
+home/pi/projects/raytracer/src/raycaster.o: home/pi/projects/raytracer/src/raycaster.cpp.o
 
-.PHONY : home/pi/projects/raytracer/src/raycaster2.o
+.PHONY : home/pi/projects/raytracer/src/raycaster.o
 
 # target to build an object file
-home/pi/projects/raytracer/src/raycaster2.cpp.o:
-	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/raycaster2.cpp.o
-.PHONY : home/pi/projects/raytracer/src/raycaster2.cpp.o
+home/pi/projects/raytracer/src/raycaster.cpp.o:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/raycaster.cpp.o
+.PHONY : home/pi/projects/raytracer/src/raycaster.cpp.o
 
-home/pi/projects/raytracer/src/raycaster2.i: home/pi/projects/raytracer/src/raycaster2.cpp.i
+home/pi/projects/raytracer/src/raycaster.i: home/pi/projects/raytracer/src/raycaster.cpp.i
 
-.PHONY : home/pi/projects/raytracer/src/raycaster2.i
+.PHONY : home/pi/projects/raytracer/src/raycaster.i
 
 # target to preprocess a source file
-home/pi/projects/raytracer/src/raycaster2.cpp.i:
-	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/raycaster2.cpp.i
-.PHONY : home/pi/projects/raytracer/src/raycaster2.cpp.i
+home/pi/projects/raytracer/src/raycaster.cpp.i:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/raycaster.cpp.i
+.PHONY : home/pi/projects/raytracer/src/raycaster.cpp.i
 
-home/pi/projects/raytracer/src/raycaster2.s: home/pi/projects/raytracer/src/raycaster2.cpp.s
+home/pi/projects/raytracer/src/raycaster.s: home/pi/projects/raytracer/src/raycaster.cpp.s
 
-.PHONY : home/pi/projects/raytracer/src/raycaster2.s
+.PHONY : home/pi/projects/raytracer/src/raycaster.s
 
 # target to generate assembly for a file
-home/pi/projects/raytracer/src/raycaster2.cpp.s:
-	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/raycaster2.cpp.s
-.PHONY : home/pi/projects/raytracer/src/raycaster2.cpp.s
+home/pi/projects/raytracer/src/raycaster.cpp.s:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/raycaster.cpp.s
+.PHONY : home/pi/projects/raytracer/src/raycaster.cpp.s
 
 home/pi/projects/raytracer/src/renderer.o: home/pi/projects/raytracer/src/renderer.cpp.o
 
@@ -541,6 +541,33 @@ home/pi/projects/raytracer/src/utils/objLoader.cpp.s:
 	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/objLoader.cpp.s
 .PHONY : home/pi/projects/raytracer/src/utils/objLoader.cpp.s
 
+home/pi/projects/raytracer/src/utils/system_utils.o: home/pi/projects/raytracer/src/utils/system_utils.cpp.o
+
+.PHONY : home/pi/projects/raytracer/src/utils/system_utils.o
+
+# target to build an object file
+home/pi/projects/raytracer/src/utils/system_utils.cpp.o:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/system_utils.cpp.o
+.PHONY : home/pi/projects/raytracer/src/utils/system_utils.cpp.o
+
+home/pi/projects/raytracer/src/utils/system_utils.i: home/pi/projects/raytracer/src/utils/system_utils.cpp.i
+
+.PHONY : home/pi/projects/raytracer/src/utils/system_utils.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer/src/utils/system_utils.cpp.i:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/system_utils.cpp.i
+.PHONY : home/pi/projects/raytracer/src/utils/system_utils.cpp.i
+
+home/pi/projects/raytracer/src/utils/system_utils.s: home/pi/projects/raytracer/src/utils/system_utils.cpp.s
+
+.PHONY : home/pi/projects/raytracer/src/utils/system_utils.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer/src/utils/system_utils.cpp.s:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/system_utils.cpp.s
+.PHONY : home/pi/projects/raytracer/src/utils/system_utils.cpp.s
+
 home/pi/projects/raytracer/src/vector3.o: home/pi/projects/raytracer/src/vector3.cpp.o
 
 .PHONY : home/pi/projects/raytracer/src/vector3.o
@@ -653,9 +680,9 @@ help:
 	@echo "... home/pi/projects/raytracer/src/pch.o"
 	@echo "... home/pi/projects/raytracer/src/pch.i"
 	@echo "... home/pi/projects/raytracer/src/pch.s"
-	@echo "... home/pi/projects/raytracer/src/raycaster2.o"
-	@echo "... home/pi/projects/raytracer/src/raycaster2.i"
-	@echo "... home/pi/projects/raytracer/src/raycaster2.s"
+	@echo "... home/pi/projects/raytracer/src/raycaster.o"
+	@echo "... home/pi/projects/raytracer/src/raycaster.i"
+	@echo "... home/pi/projects/raytracer/src/raycaster.s"
 	@echo "... home/pi/projects/raytracer/src/renderer.o"
 	@echo "... home/pi/projects/raytracer/src/renderer.i"
 	@echo "... home/pi/projects/raytracer/src/renderer.s"
@@ -677,6 +704,9 @@ help:
 	@echo "... home/pi/projects/raytracer/src/utils/objLoader.o"
 	@echo "... home/pi/projects/raytracer/src/utils/objLoader.i"
 	@echo "... home/pi/projects/raytracer/src/utils/objLoader.s"
+	@echo "... home/pi/projects/raytracer/src/utils/system_utils.o"
+	@echo "... home/pi/projects/raytracer/src/utils/system_utils.i"
+	@echo "... home/pi/projects/raytracer/src/utils/system_utils.s"
 	@echo "... home/pi/projects/raytracer/src/vector3.o"
 	@echo "... home/pi/projects/raytracer/src/vector3.i"
 	@echo "... home/pi/projects/raytracer/src/vector3.s"

@@ -1,73 +1,60 @@
 #include "raycaster.h"
 
-
 Raycaster::Raycaster()
 {
-	//~ printf("I am a raycaster ....\n");
+	
 }
 
-static void vec_mult_by_matrix( glm::vec3 & _vec, glm::mat4 & _mat, bool invert = false){
-	
-	glm::vec4 temp_vec4 = glm::vec4(_vec.x, _vec.y, _vec.z,1.0f);
-	
-	
-	if( invert){
-		_vec = glm::inverse(_mat) * temp_vec4 ;
-	} else{
-		_vec = _mat * temp_vec4;
-		//~ printf("__VEC X : %.3f\n", _vec.x);
-	}
 
-}
 
-Ray Raycaster::ray_from_camera(ClickData click_data, Camera& camera)
+static float degToRad(float degrees)
 {
+	return ((degrees * PI) / 180.0);
+}
 
-	printf("camera position --> %.2f %.2f %.2f\n", camera.position.x, camera.position.y, camera.position.z);
-	printf("click data : \n");
-	printf("\tx : %.3f\n", click_data.x);
-	printf("\ty : %.3f\n", click_data.y);
-	printf("\twidth : %d\n", click_data.width);
-	printf("\theight : %d\n", click_data.height);
-	glm::vec3 screen_pos = glm::vec3((float)click_data.x, (float)click_data.y, 1.0f);
-	
-				
-		//~ glm::vec3 rayDir = glm::vec3(0.0f, 0.0f , -1.0f);
-		
-		glm::mat4 projection = camera.projection;
-		glm::mat4 view = glm::mat4(1.0f);
+static void vec_mult_by_matrix( glm::vec3 & _vec, glm::mat4 & _mat, bool invert = false)
+{
+    
+        glm::vec4 temp_vec4 = glm::vec4(_vec.x, _vec.y, _vec.z,1.0f);
+    
+    
+        if( invert){
+                _vec = glm::inverse(_mat) * temp_vec4 ;
+        } else{
+                _vec = _mat * temp_vec4;
+                //~ printf("__VEC X : %.3f\n", _vec.x);
+        }
 
-		
-		
-		// not sure why I need this, but it gets rid off a nasty offset 
-		// found a solution here : https://stackoverflow.com/questions/48514387/can-anyone-explain-this-small-offset-from-ray-casting-by-mouse-click?rq=1
-		// but the guy says he forced projection[3][3] to be 0.0, I have to do 1.0f for this to work
-		
-		projection[3][3] = 1.0f; 
+}
 
-		
+static int ray_plane_intersect(glm::vec3 planeN, glm::vec3 planeP, glm::vec3 pointP, glm::vec3 rayDir, glm::vec3& hitP)
+{
+    glm::vec3 W = planeP - pointP;
 
-		view *= glm::lookAt(
-								camera.position, 
-								camera.target_position, 
-								camera.up_vector
-							);			
-							
-		glm::vec4 dir = inverse(projection * view)* glm::vec4(screen_pos.x, screen_pos.y, screen_pos.z, 1.0f) ;
-		dir /= dir.w *0.5f;	
-	
-	
+    float K = glm::dot(W, planeN) / glm::dot( rayDir, planeN);
+
+    hitP = pointP + ( K * rayDir);
+    return  K>= 0.0 && K <= 1.0;
+}
+
+static Ray offset_ray(Ray& src, float amount)
+{
 	Ray ray;
-	ray.pos = camera.position;
-	ray.dir = glm::vec3(dir.x, dir.y, dir.z);
+	ray.direction = src.direction;
+	ray.origin = src.origin + (glm::normalize(src.direction) * amount);
 	
-	glm::vec3 norm = glm::normalize(ray.dir);
-	
-	printf("ray direction  --> %.2f %.2f %.2f\n", norm.x, norm.y, norm.z);
 	return ray;
 }
-		
-static glm::vec3 cartesian_to_barycentric(glm::vec3 p, glm::vec3 a, glm::vec3 b, glm::vec3 c)
+
+static bool point_in_triangle(glm::vec3& bary)
+{
+	bool result = 	0.0 <= bary.x && bary.x <= 1.0 &&
+					0.0 <= bary.y && bary.y <= 1.0 &&
+					0.0 <= bary.z && bary.z <= 1.0;
+	return result;
+}
+
+static glm::vec3 cartesian_to_barycentric(glm::vec3& p, glm::vec3& a, glm::vec3& b, glm::vec3& c)
 {
     glm::vec3 v0 = b - a, v1 = c - a, v2 = p - a;
     float d00 = glm::dot(v0, v0);
@@ -85,25 +72,7 @@ static glm::vec3 cartesian_to_barycentric(glm::vec3 p, glm::vec3 a, glm::vec3 b,
     return glm::vec3(u,v,w);
 }
 
-int Raycaster::ray_plane_intersect(glm::vec3 planeN, glm::vec3 planeP, glm::vec3 pointP, glm::vec3 rayDir, glm::vec3& hitP)
-{
-    glm::vec3 W = planeP - pointP;
-    
-    float K = glm::dot(W, planeN) / glm::dot( rayDir, planeN);
-    
-    hitP = pointP + ( K * rayDir);
-    return  K>= 0.0 && K <= 1.0;
-}
-
-static bool point_in_triangle(glm::vec3 bary)
-{
-	bool result = 	0.0 <= bary.x && bary.x <= 1.0 &&
-					0.0 <= bary.y && bary.y <= 1.0 &&
-					0.0 <= bary.z && bary.z <= 1.0;
-	return result;
-}
-
-bool Raycaster::ray_triangle_intersect(Ray& ray, glm::vec3 vtx_a, glm::vec3 vtx_b, glm::vec3 vtx_c)
+bool Raycaster::ray_triangle_intersect(Ray& ray, glm::vec3& vtx_a, glm::vec3& vtx_b, glm::vec3& vtx_c, glm::vec3& hit_pos)
 {
 		glm::vec3 plane_pos = (vtx_a + vtx_b + vtx_c);
 		plane_pos = plane_pos / 3.0f;
@@ -113,76 +82,78 @@ bool Raycaster::ray_triangle_intersect(Ray& ray, glm::vec3 vtx_a, glm::vec3 vtx_
 		glm::vec3 plane_normal = glm::normalize(glm::cross( (vtx_b - vtx_a) , (vtx_c - vtx_a) ));
 		
 		glm::vec3 hitP = glm::vec3(0.0f);
-		int hit = ray_plane_intersect(plane_normal, plane_pos, ray.pos, ray.dir, hitP);	
+		int hit = ray_plane_intersect(plane_normal, plane_pos, ray.origin, ray.direction, hitP);	
 		if(hit){
-			printf("just hit plane\n");
+			//~ printf("just hit plane\n");
 		}
-		if( point_in_triangle( cartesian_to_barycentric(hitP, vtx_a, vtx_b, vtx_c)))
+		glm::vec3 pt = cartesian_to_barycentric(hitP, vtx_a, vtx_b, vtx_c);
+		if( point_in_triangle( pt ))
 		{
-			printf("IN TRIANGLE !!!!!!\n");
+			//~ printf("IN TRIANGLE !!!!!!\n");
+			hit_pos = hitP;
 			return true;
 		}	
 		
 		return false;	
 }
 
-std::vector<int> Raycaster::check_triangles(Ray& ray, Mesh& mesh)
+
+Ray Raycaster::castRay(ClickData click_data, Camera& camera)
 {
-	std::vector<int> triangles_ids;
+
+	glm::vec3 screen_world_pos = screenToWorld( click_data, camera);
+	glm::vec3 direction = screen_world_pos;
 	
-	for (int i = 0; i < mesh.faces.size(); i += 3)
-	{
-		//~ printf("triangle number %d\n", i / 3);
-		
-		// ray vs plane intersection first
-		
-		//~ glm::vec3 vtx_a = object->mesh.vertices[object->mesh.indices[i]].position;
-		//~ vec_mult_by_matrix(vtx_a, object->transforms);
-//~ 
-		//~ 
-		//~ glm::vec3 vtx_b = object->mesh.vertices[object->mesh.indices[i+1]].position;
-		//~ vec_mult_by_matrix(vtx_b, object->transforms);
-		//~ 
-		//~ glm::vec3 vtx_c = object->mesh.vertices[object->mesh.indices[i+2]].position;
-		//~ vec_mult_by_matrix(vtx_c, object->transforms);
-				//~ 
-		//~ bool hit = ray_triangle_intersect(ray, vtx_a, vtx_b, vtx_c);
-		//~ 
-		//~ if(hit)
-		//~ {				
-			//~ printf("hit triangle !! \n");			
-			//~ triangles_ids.push_back(i/3);			
-		//~ }
-	}
+	Ray ray;
+	ray.origin = glm::vec3(0.0,0.0,0.0);
 	
-	return triangles_ids;
+	glm::mat4 view_matrix = glm::lookAt(camera.position, camera.target_position, camera.up_vector);
+	
+
+	ray.origin = camera.position;
+	ray.direction = direction;
+	
+	vec_mult_by_matrix(ray.direction, view_matrix, true);
+	
+
+	return ray;
+}
+
+
+glm::vec3 Raycaster::screenToWorld(ClickData click_data, Camera& camera)
+{
+	// there I build the image plane	
+	// dz = - ( height /2 ) / tan( fov * 0.5)
+	
+	
+	// do I need to offset by half a pixel size ? 
+	
+
+	
+	/////
+	
+	float x_pos = (float)click_data.x - (float)(click_data.width) / 2.0;
+	float y_pos =  (float)(click_data.height) / 2.0 - (float)click_data.y;
+	float z_pos = -( (float)(click_data.height) / 2.0) / tan( camera.fov*0.5 );
+	
+	glm::vec3 world_pos = glm::vec3(x_pos, y_pos, z_pos) ;
+	
+	return world_pos;
 	
 }
 
 bool Raycaster::intersectBoudingBox(
 						ClickData _click_data, 
 						Camera& _camera, 
-						Mesh& _target_mesh)
+						Mesh& _target_mesh,
+						HitData& hit_data)
 {
-	
-	
-	//~ double pos_x = _click_data.x;
-	//~ double pos_y = _click_data.y;
-	//~ 
-	//~ 
-	//~ float width = (float)_click_data.width;
-	//~ float height = (float)_click_data.height;
-	//~ 
-	//~ float x = (2.0f * pos_x) / width - 1.0f;
-	//~ float y = 1.0f - (2.0f * pos_y) / height;	
 
-
-		
 		BoundingBox AABB = _target_mesh.computeAABB();
 		
 		glm::vec3 bbox_pos = AABB.position;
 		glm::vec3 bbox_size = AABB.size;
-		glm::vec3 bbox_center = bbox_pos + glm::vec3(bbox_size.x/2.0f, bbox_size.y/2.0f, bbox_size.y/2.0f) ;		
+		glm::vec3 bbox_center = bbox_pos + glm::vec3(bbox_size.x/2.0f, bbox_size.y/2.0f, bbox_size.z/2.0f) ;		
 		
 	
 		// build bbox out of triangles for intersection by ray
@@ -225,7 +196,7 @@ bool Raycaster::intersectBoudingBox(
 		// now perform triangle intersections
 		
 		
-		Ray ray = ray_from_camera(_click_data, _camera);
+		Ray ray = castRay(_click_data, _camera);
 		
 		for (int id = 0; id < indices.size()/3; id++)
 		{
@@ -233,11 +204,14 @@ bool Raycaster::intersectBoudingBox(
 			glm::vec3 vtx_b = bbox_vertices[indices[(id*3) + 1]];
 			glm::vec3 vtx_c = bbox_vertices[indices[(id*3) + 2]];
 			
-			bool hit = ray_triangle_intersect(ray , vtx_a, vtx_b, vtx_c);
+			glm::vec3 hit_pos;
+			bool hit = ray_triangle_intersect(ray , vtx_a, vtx_b, vtx_c, hit_pos);
 			
 			if(hit)
 			{
 				//~ printf(" just hit boudingox triangle !!! for fuck sake !!!\n");
+				hit_data.position = hit_pos;
+				hit_data.face_id = id;
 				return true;
 			}else{
 				//~ printf("no hit\n");
@@ -253,63 +227,186 @@ bool Raycaster::intersectBoudingBox(
 	return false;
 }
 
-bool Raycaster::intersectMeshes(
-						ClickData _click_data, 
-						Camera& _camera, 
-						std::vector<Mesh> _target_meshes)
+bool Raycaster::intersectMesh(ClickData click_data, Camera& camera, Mesh& mesh, HitData& _hit_data)
 {
 	
-	//~ 
-	//~ double pos_x, pos_y;
-	//~ glfwGetCursorPos(_window->win, &pos_x, &pos_y);
-	//~ 
-	//~ float width = _window->width;
-	//~ float height = _window->height;
-//~ 
-	//~ float x = (2.0f * pos_x) / width - 1.0f;
-	//~ float y = 1.0f - (2.0f * pos_y) / height;
-	//~ 
-	//~ Ray  ray = ray_from_camera(_window, x, y);	
-	//~ 
-//~ 
-		//~ 
-	//~ for (int i = 0; i < _target_objects.size(); i++)
-	//~ {
-		//~ Entity3D * cur = _target_objects[i];
-		//~ 
-		//~ Object * p_object = nullptr;
-		//~ if( p_object = dynamic_cast<Object *>(cur)){
-			//~ 
-			//~ bool hit_bbox = intersectBoudingBox(_window, _camera, p_object);
-			//~ 
-			//~ if( hit_bbox)
-			//~ {
-				//~ std::vector<int> triangles_ids = check_triangles(ray, p_object);
-				//~ if( triangles_ids.size() > 0){
-									//~ 
-	//~ 
-					//~ 
-					//~ _result_objects.push_back(p_object);
-				//~ }				
-			//~ }
-		//~ }
-	//~ }
-	//~ 
-	//~ if( _result_objects.size() > 0 ){
-		//~ 
-		//~ sort( _result_objects.begin(), _result_objects.end(), [_camera](Entity3D* obj1, Entity3D* obj2 ){
-			//~ 
-				//~ float dist1 = glm::distance(obj1->position, _camera.position);
-				//~ float dist2 = glm::distance(obj2->position, _camera.position);
-				//~ return (dist1 < dist2);
-		//~ } );
-		//~ return true;
-	//~ }
+	//// why a new ray ???!!!	
+	Ray ray = castRay(click_data, camera);
+	std::vector<HitData> hits;
+	for (int tri_id = 0; tri_id < mesh.faces.size(); tri_id++)
+	{
+		Face& face = mesh.faces[tri_id];
+		glm::vec3 vtx_a = mesh.points[face.getVertex(0).point_id].position;
+		glm::vec3 vtx_b = mesh.points[face.getVertex(1).point_id].position;
+		glm::vec3 vtx_c = mesh.points[face.getVertex(2).point_id].position;
 		
+		glm::vec3 hit_pos;
+		bool hit = ray_triangle_intersect(ray ,vtx_a , vtx_b, vtx_c, hit_pos);
 		
-
+		if(hit){
+			HitData temp_data;
+			temp_data.position = hit_pos;
+			temp_data.face_id = tri_id;
+			//~ printf("hit Mesh object !!! \n");
+			hits.push_back(temp_data);
+			//~ return true;
+		}
+		
+	}
+	
+	
+	std::sort(hits.begin(), hits.end(), [camera](HitData hit1, HitData hit2){
+		float dist1 = glm::distance(hit1.position, camera.position);
+		float dist2 = glm::distance(hit2.position, camera.position);
+		return dist1 < dist2;
+	});
+	
+	if( hits.size() > 0)
+	{
+		_hit_data = hits[0];
+		return true;
+	}
+	
+	
 	return false;
 }
+
+bool Raycaster::intersectMeshes(ClickData click_data, Camera& camera, std::vector<Mesh>& meshes, HitData& _hit_data)
+{
+	std::vector<int> hit_ids;
+	for(int mesh_id = 0; mesh_id < meshes.size(); mesh_id++)
+	{
+		HitData bbox_hit_data;
+		bool hit_bbox = intersectBoudingBox( click_data, camera, meshes[mesh_id], bbox_hit_data);
+		if(hit_bbox)
+		{
+			//~ printf("hit bbox %d\n", mesh_id);
+			//~ bbox_hit_data.print();
+			hit_ids.push_back(mesh_id);
+			//~ return true;
+		}
+	}
+	
+	if(hit_ids.size() > 0)
+	{
+		
+		std::vector<HitData> mesh_hits;
+		for (int i = 0; i < hit_ids.size(); i++)
+		{
+			Mesh& cur_mesh = meshes[hit_ids[i]];
+			HitData mesh_hit_data;
+			bool hit_mesh = intersectMesh(click_data, camera, cur_mesh, mesh_hit_data);
+			
+			if( hit_mesh){
+				mesh_hits.push_back(mesh_hit_data);
+				//~ printf("HIT MESH !!!!!\n");
+			}
+		}
+		
+		if( mesh_hits.size() > 0){
+				
+			glm::vec3 cam_pos = camera.position;	
+			std::sort( mesh_hits.begin(), mesh_hits.end(), [cam_pos](HitData hit1,HitData hit2){
+				float dist1 = glm::distance(cam_pos, hit1.position);
+				float dist2 = glm::distance(cam_pos, hit2.position);
+				return dist1 < dist2;
+			});
+			
+			_hit_data = mesh_hits[0];
+			return true;
+		}
+		
+	}
+	
+	return false;
+}
+
+
+bool Raycaster::intersectKDNode(Ray& ray, KDNode * kd_node, int mesh_id, std::vector<HitData>& hit_datas, bool bail_early)
+{
+	
+	bool hit;
+	KDNode * target = kd_node;
+	
+	if( kd_node->bbox.intersect(ray))
+	{
+
+		if( kd_node->left->triangles.size() > 0 || kd_node->right->triangles.size() > 0)
+		{
+			//~ printf("------- checking left and right \n");
+			bool hit_left = intersectKDNode(ray, kd_node->left,  mesh_id, hit_datas, bail_early);
+			bool hit_right = intersectKDNode(ray, kd_node->right, mesh_id, hit_datas, bail_early);
+
+			return hit_left || hit_right;
+			
+		}else{
+		
+			//~ printf("------- reached leaf\n");
+
+			for (int i = 0; i < kd_node->triangles.size(); i++)
+			{
+				glm::vec3 hit_pos;
+				bool hit_tri = ray_triangle_intersect(ray, kd_node->triangles[i]->A, kd_node->triangles[i]->B, kd_node->triangles[i]->C, hit_pos);
+				if(hit_tri)
+				{
+					glm::vec3 collide_dir = hit_pos - ray.origin;
+					if( glm::dot( collide_dir, ray.direction) > 0.0){
+						
+						HitData data;
+						data.position = hit_pos;
+						data.ray_origin = ray.origin;
+						data.ray_direction = ray.direction;
+						data.face_id = kd_node->triangles[i]->id;
+						data.mesh_id = mesh_id;
+						hit_datas.push_back(data);
+						
+						if( bail_early ) return true;
+						//~ printf("TRIANGLE HIT !!!!!!\n");
+						//~ printf("\t id : %d\n", data.face_id);							
+					}
+				
+				}
+			}
+
+			
+			
+			return true;
+		}
+		
+		
+	}
+	
+	return false;
+}
+
+bool Raycaster::intersectKDNodes(Ray& ray, std::vector<KDNode *> kd_nodes, std::vector<HitData>& hit_datas, bool bail_early)
+{
+	int num_hits = 0;
+	for (int i = 0; i < kd_nodes.size(); i++)
+	{
+		bool hit = intersectKDNode(ray, kd_nodes[i], i, hit_datas, bail_early);
+		if(hit){
+			
+			num_hits++;
+			
+		}
+	}
+	
+	if( num_hits > 0){
+		
+		std::sort(hit_datas.begin(), hit_datas.end(), [ray](HitData data1 , HitData data2){
+			float dist1 = glm::distance(data1.position, ray.origin);
+			float dist2 = glm::distance(data2.position, ray.origin);
+			return dist1 < dist2;
+		});			
+		return true;
+	}else{
+		return false;
+	}
+	
+}
+
+
 
 
 

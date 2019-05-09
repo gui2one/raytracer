@@ -49,7 +49,7 @@ void createMeshes()
 			mesh_utils.translate(m, glm::vec3(translate.x, translate.y, translate.z));
 			
 			//~ m.triangulate();
-			//~ m = mesh_utils.uniquePoints(m);
+			m = mesh_utils.uniquePoints(m);
 			m.computeNormals();
 			
 			meshes.push_back(m);

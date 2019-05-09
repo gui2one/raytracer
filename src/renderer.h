@@ -4,6 +4,7 @@
 #include <ctime>
 #include "pch.h"
 
+#include "utils/system_utils.h"
 
 #include "camera.h"
 #include "light.h"
@@ -11,7 +12,7 @@
 #include "mesh.h"
 #include "rtmaterial.h"
 #include "shader.h"
-#include "raycaster2.h"
+#include "raycaster.h"
 #include "kdnode.h"
 #include "color.h"
 
@@ -70,7 +71,7 @@ class Renderer
 		
 		//~ void renderMaterials(int w, int h, Camera& camera, std::vector<Mesh>& meshes);
 		
-		Color shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_data);
+		Color shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_data, int depth = 0);
 		
 		std::vector<RenderBucket> createBuckets(int size, int r_width, int r_height);
 		

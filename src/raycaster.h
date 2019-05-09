@@ -1,16 +1,33 @@
-#ifndef RAYCASTER_H
-#define RAYCASTER_H
+#ifndef RAYCASTER2_H
+#define RAYCASTER2_H
 
 #include "pch.h"
 #include "camera.h"
+#include "light.h"
 #include "mesh.h"
+#include "kdnode.h"
+#include "ray.h"
+//~ struct Ray
+//~ {	
+	//~ glm::vec3 origin;
+	//~ glm::vec3 direction;
+		//~ 
+//~ };
 
-
-struct Ray{
+struct HitData
+{
+	glm::vec3 position;
+	glm::vec3 ray_origin;
+	glm::vec3 ray_direction;
+	unsigned int face_id;
+	unsigned int mesh_id;
 	
-	glm::vec3 pos;
-	glm::vec3 dir;
-	
+	void print(){
+		printf("Hit Data : \n");
+		printf("\tposition : %.3f %.3f %.3f\n", position.x, position.y, position.z);
+		printf("\tface_id : %d\n", face_id);
+		printf("--------------------\n");
+	}
 };
 
 struct ClickData
@@ -18,20 +35,28 @@ struct ClickData
 	double x, y;
 	int width, height;
 };
+
 class Raycaster
 {
 	public:
 		Raycaster();
-		Ray ray_from_camera(ClickData click_data, Camera& camera);
-		bool intersectBoudingBox(ClickData click_data, Camera& _camera, Mesh& _target_mesh);
-		bool intersectMeshes(ClickData click_data, Camera& _camera, std::vector<Mesh> _target_meshes);
+		Ray castRay(ClickData click_data, Camera& camera);
+		//~ glm::vec2 toScreenSpace(ClickData click_data);
+		glm::vec3 screenToWorld(ClickData click_data, Camera& camera);
 		
-		int ray_plane_intersect(glm::vec3 planeN, glm::vec3 planeP, glm::vec3 pointP, glm::vec3 rayDir, glm::vec3& hitP);
-		bool ray_triangle_intersect(Ray& ray, glm::vec3 vtx_a, glm::vec3 vtx_b, glm::vec3 vtx_c);
+		bool ray_triangle_intersect(Ray& ray, glm::vec3& vtx_a, glm::vec3& vtx_b, glm::vec3& vtx_c, glm::vec3& hit_pos);
 		
-		std::vector<int> check_triangles(Ray& ray, Mesh& mesh);
+		bool intersectBoudingBox(ClickData _click_data, Camera& _camera, Mesh& _target_mesh, HitData& _hit_data);
+		
+		bool intersectMesh(ClickData click_data, Camera& camera, Mesh& mesh, HitData& _hit_data);
+		bool intersectMeshes(ClickData click_data, Camera& camera, std::vector<Mesh>& meshes, HitData& _hit_data);
+		bool intersectKDNode(Ray& ray, KDNode * kd_node, int mesh_id, std::vector<HitData>& hit_datas, bool bail_early = false);
+		bool intersectKDNodes(Ray& ray, std::vector<KDNode *> kd_nodes, std::vector<HitData>& hit_datas, bool bail_early = false);
+		
+		
+			
 	private:
 		/* add your private declarations */
 };
 
-#endif /* RAYCASTER_H */ 
+#endif /* RAYCASTER2_H */ 
