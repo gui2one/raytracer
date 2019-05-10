@@ -273,12 +273,13 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 	glm::vec3 normalC = mesh.points[face.getVertex(2).point_id].normal;
 	
 	normal = (normalA * bary.x) + (normalB * bary.y) + (normalC * bary.z);
-	normal = (normal / 3.0f);
+	//~ normal = (normal / 3.0f);
 	
 	//~ glm::vec3 normal = mesh.points[face.getVertex(1).point_id].normal;
 	glm::vec3 view_dir = glm::normalize( (hit_data.position - hit_data.ray_origin) );
 
-
+	float diff_amount = 1.0;
+	
 	for (int i = 0; i < lights.size(); i++)
 	{
 
@@ -287,8 +288,9 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 		float light_dist = glm::distance( lights[i].position, hit_data.position);
 		float dot = glm::dot(glm::normalize(normal) , light_dir);
 
-		dot *= 1.0/ (light_dist * light_dist);
-		dot *= lights[i].intensity;
+		diff_amount = dot;
+		diff_amount *= 1.0/ (light_dist * light_dist);
+		diff_amount *= lights[i].intensity;
 		//~ dot *= 10.0;
 
 
@@ -300,7 +302,7 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 		Ray shadow_ray;
 		shadow_ray.origin = hit_data.position;
 		shadow_ray.direction = glm::vec3((lights[i].position - hit_data.position));
-		shadow_ray = offset_ray(shadow_ray, 0.001);
+		shadow_ray = offset_ray(shadow_ray, 0.0001);
 		
 		
 		
@@ -323,16 +325,11 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 			}
 		}
 		
-		
-		/////
+		float dot2 = clampf(glm::dot(glm::normalize(normal) , view_dir),-1.0, 0.0);
 
-
-		//~ clr.r = clampf(normal.x, 0.0,1.0);
-		//~ clr.g = clampf(normal.y, 0.0,1.0);
-		//~ clr.b = clampf(normal.z, 0.0,1.0);
-		clr.r += clampf(dot * mesh.material.color.r *  lights[i].color.r  * (1.0-shadow_amount), 0.0,1.0);
-		clr.g += clampf(dot * mesh.material.color.g *  lights[i].color.g  * (1.0-shadow_amount), 0.0,1.0);
-		clr.b += clampf(dot * mesh.material.color.b *  lights[i].color.b  * (1.0-shadow_amount), 0.0,1.0);
+		clr.r += clampf(diff_amount * mesh.material.color.r *  lights[i].color.r  * (1.0-shadow_amount) * (-dot2), 0.0,1.0);
+		clr.g += clampf(diff_amount * mesh.material.color.g *  lights[i].color.g  * (1.0-shadow_amount) * (-dot2), 0.0,1.0);
+		clr.b += clampf(diff_amount * mesh.material.color.b *  lights[i].color.b  * (1.0-shadow_amount) * (-dot2), 0.0,1.0);
 	}
 
 	if(material.refl_amount > 0.0 && depth < 2)
@@ -341,9 +338,9 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 		Ray refl_ray;
 		refl_ray.origin = hit_data.position;
 
-		refl_ray.direction = glm::reflect( view_dir , normal * -1.0f);
+		refl_ray.direction = glm::reflect( view_dir , normal * 1.0f);
 
-		refl_ray = offset_ray(refl_ray, 0.001);
+		refl_ray = offset_ray(refl_ray, 0.0001);
 
 		std::vector<HitData> refl_hit_datas;
 		depth++;
@@ -351,6 +348,7 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 
 		if(refl_hit_datas.size() > 0)
 		{
+			float dot2 = clampf(glm::dot(glm::normalize(normal) , view_dir),-1.0, 0.0);
 			Color refl_clr = shade(
 				meshes[refl_hit_datas[0].mesh_id],
 				meshes[refl_hit_datas[0].mesh_id].faces[refl_hit_datas[0].face_id],
@@ -358,9 +356,9 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 				refl_hit_datas[0],
 				depth);
 
-			clr.r += refl_clr.r * material.refl_amount;
-			clr.g += refl_clr.g * material.refl_amount;
-			clr.b += refl_clr.b * material.refl_amount;
+			clr.r += refl_clr.r * material.refl_amount * (1.0-(-dot2));
+			clr.g += refl_clr.g * material.refl_amount * (1.0-(-dot2));
+			clr.b += refl_clr.b * material.refl_amount * (1.0-(-dot2));
 		}
 	}
 	
@@ -500,20 +498,6 @@ void Renderer::renderBuckets(std::vector<RenderBucket>& buckets, Camera& camera)
     printf("duration %f\n", duration / 4.0);
 
 
-    int red[render_width * render_height];
-    int green[render_width * render_height];
-    int blue[render_width * render_height];
-
-    for (int i = 0; i < render_buffer_data.size() / 4; i++)
-	{
-		red[i]   = render_buffer_data[(i * 4) + 0];
-		green[i] = render_buffer_data[(i * 4) + 1];
-		blue[i]  = render_buffer_data[(i * 4) + 2];
-	}
-
-
-    //~ saveToBitmap2("render.bmp", render_width, render_height, red, green, blue);
-	//~ printf("SAVE BITMAP\n");
 	
 	
 	// stbi save test
@@ -955,18 +939,18 @@ int Renderer::init(int limit, int render_width_, int render_height_)
 
 	// materials
 	RTMaterial material1;
-	material1.color = Color(1.0, 1.0, 0.8, 1.0);
-	material1.refl_amount = 0.2;
+	material1.color = Color(0.9, 0.0, 0.0, 1.0);
+	material1.refl_amount = 0.9;
 	materials.push_back(material1);
 
 	RTMaterial material2;
 	material2.color = Color(1.0,1.0,1.0,1.0);
-	material2.refl_amount = 0.8;
+	material2.refl_amount = 0.3;
 	materials.push_back(material2);
 
 	RTMaterial material3;
-	material3.color = Color(0.2,1.0,0.2,1.0);
-	material3.refl_amount = 0.8;
+	material3.color = Color(0.2,0.2,0.2,1.0);
+	material3.refl_amount = 0.9;
 	materials.push_back(material3);
 
 	initFBO(render_width,render_height);
