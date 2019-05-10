@@ -1,6 +1,6 @@
 #!/bin/bash
 ./raytracer \
--o ../src/res/obj/sphere_normals.obj \
+-o ../src/res/obj/monkey.obj \
 	-s 1.0 \
 	-r 90.0 0.0 0.0 \
 	-t 0.0 0.0 1.0 \
@@ -11,4 +11,6 @@
 	-s 0.3 \
 	-r 90.0 0.0 0.0 \
 	-t 2.0 2.0 1.0 \
--limit 100
+-limit 100 \
+-rw 320 \
+-rh 240

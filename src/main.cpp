@@ -22,6 +22,8 @@ std::vector<LoadedMeshData> loaded_mesh_datas;
 std::vector<Mesh> meshes;
 
 int kd_polygon_limit = 50;
+int render_width = 320;
+int render_height = 240;
 
 Renderer renderer;
 
@@ -49,7 +51,7 @@ void createMeshes()
 			mesh_utils.translate(m, glm::vec3(translate.x, translate.y, translate.z));
 			
 			//~ m.triangulate();
-			m = mesh_utils.uniquePoints(m);
+			//~ m = mesh_utils.uniquePoints(m);
 			m.computeNormals();
 			
 			meshes.push_back(m);
@@ -71,83 +73,84 @@ void createMeshes()
 int main(int argc, char ** argv){
 	
 	
-	if(argc > 1){
-		
-		if(argc % 2 != 1){
-			printf("bad command...\n");
-			printf("arg --> %s\n", argv[1]);
+	if(argc > 1){		
 			
-		}else{
+		for (int i = 1; i < (argc-1); i+=2)
+		{
+			std::string cmd(argv[i]);
+			std::string arg(argv[i+1]);
 			
-			for (int i = 1; i < (argc-1); i+=2)
-			{
-				std::string cmd(argv[i]);
-				std::string arg(argv[i+1]);
+			if( cmd == "-o" ){
+				LoadedMeshData m_data;
+				m_data.path = arg;
 				
-				if( cmd == "-o" ){
-					LoadedMeshData m_data;
-					m_data.path = arg;
-					
-					
-					int temp_i = i+2;
-					
-					std::string cmd2(argv[temp_i]);
-					std::string arg2(argv[temp_i+1]);
-					while( (cmd2 == "-s" || cmd2 == "-r" || cmd2 == "-t") && argv[temp_i] != NULL)// || argv[temp_i] == "-t" || argv[temp_i] == "-r")
-					{
-						//~ printf("--------WHILE----------\n");
-						//~ 
-						if( cmd2 == "-s" ){
-							//~ // scaling
-							printf("SCALING !!!!%s\n", argv[temp_i]);
-							m_data.scale = std::atof(std::string(argv[temp_i+1]).c_str());
-							
-							temp_i += 2;
-							
-						}else if( cmd2 == "-t"){
-							float x = std::atof(std::string(argv[temp_i+1]).c_str());
-							float y = std::atof(std::string(argv[temp_i+2]).c_str());
-							float z = std::atof(std::string(argv[temp_i+3]).c_str());
-							printf("TRANSLATING !!!! %.3f %.3f %.3f\n", x, y ,z);
-							
-							m_data.translate = glm::vec3(x, y, z);
-							temp_i += 4;
-						}else if( cmd2 == "-r"){
-							float x = std::atof(std::string(argv[temp_i+1]).c_str());
-							float y = std::atof(std::string(argv[temp_i+2]).c_str());
-							float z = std::atof(std::string(argv[temp_i+3]).c_str());
-							printf("ROTATING !!!! %.3f %.3f %.3f\n", x, y ,z);
-							
-							m_data.rotate = glm::vec3(x, y, z);
-							
-							temp_i += 4;
-						}
+				
+				int temp_i = i+2;
+				
+				std::string cmd2(argv[temp_i]);
+				std::string arg2(argv[temp_i+1]);
+				while( (cmd2 == "-s" || cmd2 == "-r" || cmd2 == "-t") && argv[temp_i] != NULL)// || argv[temp_i] == "-t" || argv[temp_i] == "-r")
+				{
+					//~ printf("--------WHILE----------\n");
+					//~ 
+					if( cmd2 == "-s" ){
+						//~ // scaling
+						printf("SCALING !!!!%s\n", argv[temp_i]);
+						m_data.scale = std::atof(std::string(argv[temp_i+1]).c_str());
 						
+						temp_i += 2;
 						
-						if( argv[temp_i] != NULL)
-							cmd2 = std::string(argv[temp_i]);
-						else
-							break;
+					}else if( cmd2 == "-t"){
+						float x = std::atof(std::string(argv[temp_i+1]).c_str());
+						float y = std::atof(std::string(argv[temp_i+2]).c_str());
+						float z = std::atof(std::string(argv[temp_i+3]).c_str());
+						printf("TRANSLATING !!!! %.3f %.3f %.3f\n", x, y ,z);
+						
+						m_data.translate = glm::vec3(x, y, z);
+						temp_i += 4;
+					}else if( cmd2 == "-r"){
+						float x = std::atof(std::string(argv[temp_i+1]).c_str());
+						float y = std::atof(std::string(argv[temp_i+2]).c_str());
+						float z = std::atof(std::string(argv[temp_i+3]).c_str());
+						printf("ROTATING !!!! %.3f %.3f %.3f\n", x, y ,z);
+						
+						m_data.rotate = glm::vec3(x, y, z);
+						
+						temp_i += 4;
 					}
 					
-					i = temp_i - 2; // -2 because i goes back to the for loop and is incremented by 2
-
-					loaded_mesh_datas.push_back(m_data);
-				}
-				else if(cmd == "-limit"){
-					kd_polygon_limit = atoi(arg.c_str());
+					
+					if( argv[temp_i] != NULL)
+						cmd2 = std::string(argv[temp_i]);
+					else
+						break;
 				}
 				
-				printf("-----------------------\n");
-				printf("command  :%s\n", cmd.c_str());
-				printf("argument :%s\n", arg.c_str());				
-				printf("°°°°°°°°°°°°°°°°°°°°°°°\n\n");
+				i = temp_i - 2; // -2 because i goes back to the for loop and is incremented by 2
+
+				loaded_mesh_datas.push_back(m_data);
+			}
+			else if(cmd == "-limit"){
+				kd_polygon_limit = atoi(arg.c_str());
+				
+			}else if(cmd == "-rw"){
+				printf("setting render width \n");
+				render_width = atoi(arg.c_str());
+			}else if(cmd == "-rh"){
+				printf("setting render width \n");
+				render_height = atoi(arg.c_str());
 			}
 			
-
+			printf("-----------------------\n");
+			printf("command  :%s\n", cmd.c_str());
+			printf("argument :%s\n", arg.c_str());				
+			printf("°°°°°°°°°°°°°°°°°°°°°°°\n\n");
 		}
+			
+
+		
 	}
-	renderer.init(kd_polygon_limit);
+	renderer.init(kd_polygon_limit, render_width, render_height);
 	
 	createMeshes();
 

@@ -54,7 +54,7 @@ static bool point_in_triangle(glm::vec3& bary)
 	return result;
 }
 
-static glm::vec3 cartesian_to_barycentric(glm::vec3& p, glm::vec3& a, glm::vec3& b, glm::vec3& c)
+glm::vec3 Raycaster::cartesian_to_barycentric(glm::vec3& p, glm::vec3& a, glm::vec3& b, glm::vec3& c)
 {
     glm::vec3 v0 = b - a, v1 = c - a, v2 = p - a;
     float d00 = glm::dot(v0, v0);

@@ -244,16 +244,12 @@ void Renderer::displayKDTree()
 
 	GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0));
 
-	//~ GLCall(glPointSize(10));
-	//~ GLCall(glDrawArrays(GL_POINTS,0, 8));
 
 	GLCall(glDrawElements(GL_LINES, kdtree_indices.size() , GL_UNSIGNED_INT, nullptr ));
 
 	GLCall(glDisableVertexAttribArray(0));
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
-
-	//~ printf(" Node num triangles --> %d\n", node_ptr->triangles.size());
 
 }
 
@@ -262,7 +258,24 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 	Raycaster raycaster;
 
 	Color clr(0.0,0.0,0.0,1.0); //= material.color;
-	glm::vec3 normal = mesh.points[face.getVertex(1).point_id].normal;
+	
+	// interpolate normal from barycentric coordinates
+	glm::vec3 A, B, C;
+	
+	A = mesh.points[face.getVertex(0).point_id].position;
+	B = mesh.points[face.getVertex(1).point_id].position;
+	C = mesh.points[face.getVertex(2).point_id].position;
+	glm::vec3 normal;
+	glm::vec3 bary = raycaster.cartesian_to_barycentric(hit_data.position, A, B, C);
+	
+	glm::vec3 normalA = mesh.points[face.getVertex(0).point_id].normal;
+	glm::vec3 normalB = mesh.points[face.getVertex(1).point_id].normal;
+	glm::vec3 normalC = mesh.points[face.getVertex(2).point_id].normal;
+	
+	normal = (normalA * bary.x) + (normalB * bary.y) + (normalC * bary.z);
+	normal = (normal / 3.0f);
+	
+	//~ glm::vec3 normal = mesh.points[face.getVertex(1).point_id].normal;
 	glm::vec3 view_dir = glm::normalize( (hit_data.position - hit_data.ray_origin) );
 
 
@@ -292,7 +305,7 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 		
 		
 		std::vector<HitData> shadow_hit_datas;
-		bool shadow_hit = raycaster.intersectKDNodes(shadow_ray, kd_nodes, shadow_hit_datas, true);
+		bool shadow_hit = raycaster.intersectKDNodes(shadow_ray, kd_nodes, shadow_hit_datas, false);
 		
 		if(shadow_hit){
 			if(shadow_hit_datas.size() > 0){
@@ -322,13 +335,13 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 		clr.b += clampf(dot * mesh.material.color.b *  lights[i].color.b  * (1.0-shadow_amount), 0.0,1.0);
 	}
 
-	if(material.refl_amount > 0.0 && depth < 5)
+	if(material.refl_amount > 0.0 && depth < 2)
 	{
 		// reflection ray
 		Ray refl_ray;
 		refl_ray.origin = hit_data.position;
 
-		refl_ray.direction = glm::reflect( view_dir , normal);
+		refl_ray.direction = glm::reflect( view_dir , normal * -1.0f);
 
 		refl_ray = offset_ray(refl_ray, 0.001);
 
@@ -356,7 +369,7 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 	clr.r = clampf(clr.r, 0.0, 1.0);
 	clr.g = clampf(clr.g, 0.0, 1.0);
 	clr.b= clampf(clr.b, 0.0, 1.0);
-	clr.a = clampf(clr.r, 0.0, 1.0);
+	clr.a = 1.0;
 	
 	return  clr;
 }
@@ -403,26 +416,17 @@ void Renderer::renderBucket(RenderBucket& bucket, Camera& camera)
 			bool hit2 = raycaster.intersectKDNodes(rays[i], kd_nodes, hit_datas);
 			if( hit2 )
 			{
-				//~
 
-				//~ std::sort(hit_datas.begin(), hit_datas.end(), [camera](HitData data1 , HitData data2){
-					//~ float dist1 = glm::distance(data1.position, camera.position);
-					//~ float dist2 = glm::distance(data2.position, camera.position);
-					//~ return dist1 < dist2;
-				//~ });
 				if( hit_datas.size() > 0)
 				{
-				//~
 					hit_tri = true;
 				}
 			}
-
-
-
-
+			
 			long int index = (bucket.x + (i%bucket.width)) + (bucket.y + i/bucket.width) * bucket.render_width;
 
-			if(hit_tri){
+			if(hit_tri)
+			{
 
 				Color clr = shade(meshes[hit_datas[0].mesh_id], meshes[hit_datas[0].mesh_id].faces[ hit_datas[0].face_id], meshes[hit_datas[0].mesh_id].material, hit_datas[0]);
 				//~ float dist = glm::distance(camera.position, hit_datas[0].position);
@@ -492,11 +496,7 @@ void Renderer::renderBuckets(std::vector<RenderBucket>& buckets, Camera& camera)
 	}
 
 	std::cout << "\n";
-
-
-
     duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
-
     printf("duration %f\n", duration / 4.0);
 
 
@@ -512,8 +512,8 @@ void Renderer::renderBuckets(std::vector<RenderBucket>& buckets, Camera& camera)
 	}
 
 
-    saveToBitmap2("render.bmp", render_width, render_height, red, green, blue);
-	printf("SAVE BITMAP\n");
+    //~ saveToBitmap2("render.bmp", render_width, render_height, red, green, blue);
+	//~ printf("SAVE BITMAP\n");
 	
 	
 	// stbi save test
@@ -522,16 +522,9 @@ void Renderer::renderBuckets(std::vector<RenderBucket>& buckets, Camera& camera)
 	int index = 0;
 	for (int i = 0; i < render_width*render_height; i++)
 	{
-
-
-			//~ 
-			data[index++] = (int)render_buffer_data[i * 4 + 0];
-			data[index++] = (int)render_buffer_data[i * 4 + 1];
-			data[index++] = (int)render_buffer_data[i * 4 + 2];
-			
-			//~ 
-
-
+		data[index++] = (int)render_buffer_data[i * 4 + 0];
+		data[index++] = (int)render_buffer_data[i * 4 + 1];
+		data[index++] = (int)render_buffer_data[i * 4 + 2];
 	}
 
 	stbi_save(render_width ,render_height, data);
@@ -661,13 +654,6 @@ void Renderer::mouse_button_callback(GLFWwindow* window, int button, int action,
 		click_data.height = height;
 
 		Raycaster raycaster;
-		//~ HitData hit_data;
-		//~ bool hit = raycaster.intersectMeshes(click_data, app->camera, app->meshes, hit_data);
-//~
-		//~ if( hit ){
-			//~ hit_data.print();
-//~
-		//~ }
 
 		Ray ray = raycaster.castRay(click_data, app->camera);
 		std::vector<HitData> hit_datas;
@@ -683,6 +669,15 @@ void Renderer::mouse_button_callback(GLFWwindow* window, int button, int action,
 			if( hit_datas.size() > 0)
 			{
 				printf("polygon hit --> %d\n", hit_datas[0].face_id);
+				
+				Face f = app->meshes[hit_datas[0].mesh_id].faces[hit_datas[0].face_id];
+				glm::vec3 A = app->meshes[hit_datas[0].mesh_id].points[f.getVertex(0).point_id].position;
+				glm::vec3 B = app->meshes[hit_datas[0].mesh_id].points[f.getVertex(1).point_id].position;
+				glm::vec3 C = app->meshes[hit_datas[0].mesh_id].points[f.getVertex(2).point_id].position;
+				
+				glm::vec3 bary = raycaster.cartesian_to_barycentric(hit_datas[0].position, A, B, C);
+				
+				printf("barycentric coords : %.3f %.3f %.3f \n", bary.x, bary.y, bary.z);
 			}
 		}
 
@@ -883,10 +878,10 @@ void Renderer::drawFBO(int r_width, int r_height)
 	GLCall(glBindTexture(GL_TEXTURE_2D, 0));
 }
 
-int Renderer::init(int limit)
+int Renderer::init(int limit, int render_width_, int render_height_)
 {
 
-
+	
 
 	SystemUtils sys_utils;
 	bool test1 = sys_utils.check_dir_exists(".", "render");
@@ -896,8 +891,8 @@ int Renderer::init(int limit)
 	printf(" test 2 ==> %s\n", (test2 ? "true": "false"));
 
 
-	render_width = 320 *1;
-	render_height = 240 *1;
+	render_width = render_width_;
+	render_height = render_height_;
 
 	//~ std::cout << "raytracer PROJECT" << std::endl;
 
@@ -960,8 +955,8 @@ int Renderer::init(int limit)
 
 	// materials
 	RTMaterial material1;
-	material1.color = Color(0.0, 0.0, 0.0, 1.0);
-	material1.refl_amount = 0.9;
+	material1.color = Color(1.0, 1.0, 0.8, 1.0);
+	material1.refl_amount = 0.2;
 	materials.push_back(material1);
 
 	RTMaterial material2;
@@ -971,7 +966,7 @@ int Renderer::init(int limit)
 
 	RTMaterial material3;
 	material3.color = Color(0.2,1.0,0.2,1.0);
-	material3.refl_amount = 0.0;
+	material3.refl_amount = 0.8;
 	materials.push_back(material3);
 
 	initFBO(render_width,render_height);

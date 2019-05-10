@@ -59,7 +59,7 @@ class Renderer
 		static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 		
 		
-		int init(int limit);
+		int init(int kd_tree_limit, int render_width_ = 320, int render_height_ = 240);
 		void initFBO(int width, int height);
 		void drawFBO(int r_width, int r_height);
 		void setCamPosFromPolar(float u, float v, float _radius, glm::vec3 center = glm::vec3(0.0,0.0,0.0));
