@@ -11,6 +11,7 @@
 	-s 0.3 \
 	-r 90.0 0.0 0.0 \
 	-t 2.0 2.0 1.0 \
--limit 100 \
--rw 640 \
--rh 480
+--limit 100 \
+-rw 160 \
+-rh 120 \
+--scene-file "test_scene.json"

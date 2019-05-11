@@ -12,6 +12,7 @@ class Light
 		virtual ~Light();
 		
 		glm::vec3 position;
+		//~ Vector3 position;
 		float intensity;
 		Color color;		
 	

@@ -16,6 +16,7 @@ CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o
  ../src/include/esj/windows/json_ex.h
  /home/pi/projects/raytracer/src/pch.cpp
  /home/pi/projects/raytracer/src/pch.h
+ /home/pi/projects/raytracer/src/vector3.h
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.hpp
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.inl
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x3.hpp

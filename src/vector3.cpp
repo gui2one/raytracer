@@ -1,10 +1,10 @@
 #include "vector3.h"
 
-Vector3::Vector3(){
+Vector3::Vector3() : glm::vec3(0.0, 0.0, 0.0){
 	
 }
 
-Vector3::Vector3(double _x, double _y, double _z): glm::vec3(_x, _y, _z) 
+Vector3::Vector3(double x_, double y_, double z_): glm::vec3(x_, y_, z_)
 {
 	
 }

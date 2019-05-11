@@ -1,0 +1,55 @@
+{"json_scene":
+{
+	"materials":[
+		{"json_material" : 
+			{
+				"refl_amount":0.88,
+				"shininess":0.3,
+				"Color":{"r":0.1,"g":0.2,"b":0.3,"a":1.0}		
+			}
+		},
+		{"json_material":
+			{
+				"refl_amount":0,
+				"shininess":0.5,
+				"Color":{"r":0.0,"g":1.0,"b":0.0,"a":1.0}
+			}
+		},		
+		{"json_material":
+			{
+				"refl_amount":0,
+				"shininess":0.5,
+				"Color":{"r":0.0,"g":1.0,"b":0.0,"a":1.0}
+			}
+		}
+	]
+,
+
+	"file_meshes":[ 
+		{"json_file_mesh":
+			{
+				"path": "../src/res/obj/monkey.obj",
+				"translate" : [0.2222, 3.14,2.2],
+				"rotate" : [90.0,0.0,0.0]
+			}
+		},
+		{"json_file_mesh":
+			{
+				"path" : "../src/res/obj/cow.obj",
+				"translate" : [0.0, 0.0, 0.0],
+				"rotate" : [90.0,0.0,0.0]
+			}
+		
+		},
+		{"json_file_mesh":
+			{
+				"path" : "../src/res/obj/plane_normals.obj",
+				"translate" : [0.0, 0.0, 0.0],				
+				"rotate" : [90.0,0.0,0.0]
+			}
+		
+		}
+		
+	]
+}
+}

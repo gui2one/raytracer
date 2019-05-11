@@ -16,6 +16,8 @@
 #include "kdnode.h"
 #include "color.h"
 
+#include "scene_file_loader.h"
+
 //~ #include "include/boost/threadpool.hpp"
 //~ using namespace boost::threadpool;
 
@@ -46,6 +48,24 @@ struct OGL_geometry_data
 	glm::vec3 scale = glm::vec3(1.0, 1.0, 1.0);
 	
 };
+
+struct RenderOptions
+{
+	int kd_polygon_limit; // = 100;
+	int render_width; // = 320;
+	int render_height; // = 240;
+	
+	void serialize(JSON::Adapter& adapter)
+	{
+		JSON::Class root(adapter, "render_options");
+		JSON_E(adapter, kd_polygon_limit);
+		JSON_E(adapter, render_width);
+		JSON_T(adapter, render_height);
+	}
+	
+	
+};
+
 class Renderer
 {
 	public:
@@ -59,7 +79,7 @@ class Renderer
 		static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 		
 		
-		int init(int kd_tree_limit, int render_width_ = 320, int render_height_ = 240);
+		int init(std::string scene_file_, RenderOptions options_);
 		void initFBO(int width, int height);
 		void drawFBO(int r_width, int r_height);
 		void setCamPosFromPolar(float u, float v, float _radius, glm::vec3 center = glm::vec3(0.0,0.0,0.0));

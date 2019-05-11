@@ -25,16 +25,51 @@ static Ray offset_ray(Ray& src, float amount)
 	return ray;
 }
 
-static void stbi_save(int w, int h, unsigned char* data)
+static void stbi_save(std::string path, int w, int h, unsigned char* data)
 {
 	//~ int stbi_write_jpg(char const *filename, int w, int h, int comp, const void *data, int quality);
 
 	//~ int saved = stbi_write_jpg("stbi_test.jpg", w, h, 3, data,100);
-	int saved = stbi_write_png("stbi_test.png", w, h, 3, data, w * 3 * sizeof(unsigned char));
+	int saved = stbi_write_png( path.c_str() , w, h, 3, data, w * 3 * sizeof(unsigned char));
 	if(saved){
 		printf("saved !!! \n");
 	}else{
 		printf("NOT saved !!! \n");
+	}
+}
+
+static void save_render_to_file(int width, int height, unsigned char * data)
+{
+
+	SystemUtils sys_utils;
+	bool test_dir = sys_utils.check_dir_exists(".", "render");
+	
+	if( test_dir )
+	{
+		char buffer[500];
+		int n;
+		int inc = 0;
+		bool file_exists;
+		n = sprintf(buffer, "auto_save_%d.png", inc);
+		std::string test_name(buffer);
+		
+		while( file_exists = sys_utils.check_file_exists("render", test_name))
+		{
+			inc++;
+			sprintf(buffer, "auto_save_%d.png", inc);
+			test_name = std::string(buffer);
+			
+		}
+		
+		sprintf(buffer, "render/%s", test_name.c_str());
+		std::string final_path(buffer);
+		//~ printf("test name --> %s\n\n", test_name.c_str());		
+
+		//~ bool test2 = sys_utils.check_file_exists("render", test_name);	
+		
+		stbi_save(final_path.c_str(), width , height, data);
+	}else{
+		printf("Couldn't find a 'render' directory,\naborting saving... \n");
 	}
 }
 
@@ -123,6 +158,105 @@ Renderer::Renderer()
 {
 
 }
+
+int Renderer::init(std::string scene_file_ , RenderOptions options_)
+{
+
+
+
+
+	
+
+
+
+	render_width = options_.render_width;
+	render_height = options_.render_height;
+	kd_polygon_limit = options_.kd_polygon_limit;
+
+	//~ std::cout << "raytracer PROJECT" << std::endl;
+
+	if(!glfwInit()){
+		std::cout<<"Problem with GLFW"<< std::endl;
+		glfwTerminate();
+		return -1;
+	}
+
+	//~ std::cout<<"initializing GLFW"<< std::endl;
+	window = glfwCreateWindow(640,480, "raytracer", NULL, NULL);
+
+	if(!window){
+		std::cout << "Problem with window " << std::endl;
+		glfwTerminate();
+		return -1;
+	}
+
+	glfwMakeContextCurrent(window);
+
+
+	//~ camera.position = glm::vec3(0.0, 0.0, 2.4142);
+	camera.target_position = glm::vec3(0.0, 0.0, 0.0);
+	camera.up_vector = glm::vec3(0.0, 0.0, 1.0);
+
+	setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius);
+
+	glewInit();
+
+	glfwSetWindowUserPointer(window, this);
+
+	glfwSetCharModsCallback(window, char_mods_callback);
+	glfwSetKeyCallback(window, key_callback);
+	glfwSetCursorPosCallback(window, cursor_pos_callback);
+	glfwSetMouseButtonCallback(window, mouse_button_callback);
+	glfwSetScrollCallback(window, scroll_callback);
+	
+	default_shader.loadVertexShaderSource("../src/shaders/basic_shader.vert");
+	default_shader.loadFragmentShaderSource("../src/shaders/basic_shader.frag");
+
+	default_shader.createShader();
+
+	fbo_shader.loadVertexShaderSource("../src/shaders/fbo_shader.vert");
+	fbo_shader.loadFragmentShaderSource("../src/shaders/fbo_shader.frag");
+
+	fbo_shader.createShader();
+
+
+	Light light1;
+	light1.position = glm::vec3(2.0, 0.0, 1.5);
+	light1.color = Color(1.0, 1.0, 1.0, 1.0);
+	light1.intensity = 2.0;
+	lights.push_back(light1);
+
+	Light light2;
+	light2.position = glm::vec3(3.0, -3.0, 4.0);
+	light2.color = Color(1.0, 1.0, 1.0, 1.0);
+	light2.intensity = 5.0;
+	lights.push_back(light2);
+
+	// materials
+	//~ RTMaterial material1;
+	//~ material1.color = Color(0.9, 0.0, 0.0, 1.0);
+	//~ material1.refl_amount = 0.9;
+	//~ materials.push_back(material1);
+//~ 
+	//~ RTMaterial material2;
+	//~ material2.color = Color(1.0,1.0,1.0,1.0);
+	//~ material2.refl_amount = 0.3;
+	//~ materials.push_back(material2);
+//~ 
+	//~ RTMaterial material3;
+	//~ material3.color = Color(0.2,0.2,0.2,1.0);
+	//~ material3.refl_amount = 0.9;
+	//~ materials.push_back(material3);
+
+	SceneFileLoader scene_loader;
+	scene_loader.load(scene_file_, meshes, materials, lights);
+
+	buildRenderGeometry();
+	
+	initFBO(render_width,render_height);
+	//~ kd_node = new KDNode(limit);
+}
+
 
 Mesh Renderer::loadMesh(std::string path)
 {
@@ -260,23 +394,20 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 	Color clr(0.0,0.0,0.0,1.0); //= material.color;
 	
 	// interpolate normal from barycentric coordinates
-	glm::vec3 A, B, C;
-	
-	A = mesh.points[face.getVertex(0).point_id].position;
-	B = mesh.points[face.getVertex(1).point_id].position;
-	C = mesh.points[face.getVertex(2).point_id].position;
+
 	glm::vec3 normal;
-	glm::vec3 bary = raycaster.cartesian_to_barycentric(hit_data.position, A, B, C);
+	glm::vec3 bary =  hit_data.barycentric_coords; //raycaster.cartesian_to_barycentric(hit_data.position, A, B, C);
 	
 	glm::vec3 normalA = mesh.points[face.getVertex(0).point_id].normal;
 	glm::vec3 normalB = mesh.points[face.getVertex(1).point_id].normal;
 	glm::vec3 normalC = mesh.points[face.getVertex(2).point_id].normal;
 	
 	normal = (normalA * bary.x) + (normalB * bary.y) + (normalC * bary.z);
-	//~ normal = (normal / 3.0f);
 	
-	//~ glm::vec3 normal = mesh.points[face.getVertex(1).point_id].normal;
+	
+	
 	glm::vec3 view_dir = glm::normalize( (hit_data.position - hit_data.ray_origin) );
+	//~ glm::vec3 view_dir = hit_data.position - hit_data.ray_origin ;
 
 	float diff_amount = 1.0;
 	
@@ -307,7 +438,7 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 		
 		
 		std::vector<HitData> shadow_hit_datas;
-		bool shadow_hit = raycaster.intersectKDNodes(shadow_ray, kd_nodes, shadow_hit_datas, false);
+		bool shadow_hit = raycaster.intersectKDNodes(shadow_ray, kd_nodes, shadow_hit_datas, true);
 		
 		if(shadow_hit){
 			if(shadow_hit_datas.size() > 0){
@@ -511,7 +642,9 @@ void Renderer::renderBuckets(std::vector<RenderBucket>& buckets, Camera& camera)
 		data[index++] = (int)render_buffer_data[i * 4 + 2];
 	}
 
-	stbi_save(render_width ,render_height, data);
+
+	save_render_to_file(render_width, render_height, data);
+	
 	
 	/////
 	/////	
@@ -791,7 +924,7 @@ void Renderer::initFBO(int width, int height)
 	if(fbo_max_y > 1.0) fbo_max_y = 1.0;
 
 	float fbo_vertices[6*3 + 6*2] = {
-		// position        //uvs
+		// position                  //uvs: note --> v coords is flipped
 		fbo_min_x,fbo_min_y, 0.0,    0.0, 1.0,
 		fbo_max_x,fbo_min_y, 0.0,    1.0, 1.0,
 		fbo_max_x,fbo_max_y, 0.0,    1.0, 0.0,
@@ -862,100 +995,6 @@ void Renderer::drawFBO(int r_width, int r_height)
 	GLCall(glBindTexture(GL_TEXTURE_2D, 0));
 }
 
-int Renderer::init(int limit, int render_width_, int render_height_)
-{
-
-	
-
-	SystemUtils sys_utils;
-	bool test1 = sys_utils.check_dir_exists(".", "render");
-	bool test2 = sys_utils.check_dir_exists(".", "render_");
-	
-	printf(" test 1 ==> %s\n", (test1 ? "true": "false"));
-	printf(" test 2 ==> %s\n", (test2 ? "true": "false"));
-
-
-	render_width = render_width_;
-	render_height = render_height_;
-
-	//~ std::cout << "raytracer PROJECT" << std::endl;
-
-	if(!glfwInit()){
-		std::cout<<"Problem with GLFW"<< std::endl;
-		glfwTerminate();
-		return -1;
-	}
-
-	//~ std::cout<<"initializing GLFW"<< std::endl;
-	window = glfwCreateWindow(640,480, "raytracer", NULL, NULL);
-
-	if(!window){
-		std::cout << "Problem with window " << std::endl;
-		glfwTerminate();
-		return -1;
-	}
-
-	glfwMakeContextCurrent(window);
-
-
-	//~ camera.position = glm::vec3(0.0, 0.0, 2.4142);
-	camera.target_position = glm::vec3(0.0, 0.0, 0.0);
-	camera.up_vector = glm::vec3(0.0, 0.0, 1.0);
-
-	setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius);
-
-	glewInit();
-
-	glfwSetWindowUserPointer(window, this);
-
-	glfwSetCharModsCallback(window, char_mods_callback);
-	glfwSetKeyCallback(window, key_callback);
-	glfwSetCursorPosCallback(window, cursor_pos_callback);
-	glfwSetMouseButtonCallback(window, mouse_button_callback);
-	glfwSetScrollCallback(window, scroll_callback);
-	
-	default_shader.loadVertexShaderSource("../src/shaders/basic_shader.vert");
-	default_shader.loadFragmentShaderSource("../src/shaders/basic_shader.frag");
-
-	default_shader.createShader();
-
-	fbo_shader.loadVertexShaderSource("../src/shaders/fbo_shader.vert");
-	fbo_shader.loadFragmentShaderSource("../src/shaders/fbo_shader.frag");
-
-	fbo_shader.createShader();
-
-
-	Light light1;
-	light1.position = glm::vec3(2.0, 0.0, 1.5);
-	light1.color = Color(1.0, 1.0, 1.0, 1.0);
-	light1.intensity = 2.0;
-	lights.push_back(light1);
-
-	Light light2;
-	light2.position = glm::vec3(3.0, -3.0, 4.0);
-	light2.color = Color(1.0, 1.0, 1.0, 1.0);
-	light2.intensity = 5.0;
-	lights.push_back(light2);
-
-	// materials
-	RTMaterial material1;
-	material1.color = Color(0.9, 0.0, 0.0, 1.0);
-	material1.refl_amount = 0.9;
-	materials.push_back(material1);
-
-	RTMaterial material2;
-	material2.color = Color(1.0,1.0,1.0,1.0);
-	material2.refl_amount = 0.3;
-	materials.push_back(material2);
-
-	RTMaterial material3;
-	material3.color = Color(0.2,0.2,0.2,1.0);
-	material3.refl_amount = 0.9;
-	materials.push_back(material3);
-
-	initFBO(render_width,render_height);
-	//~ kd_node = new KDNode(limit);
-}
 
 void Renderer::buildRenderGeometry()
 {
@@ -1069,7 +1108,7 @@ void Renderer::displayScene()
 		// send lights data to opengl shader
 
 
-		float light_positions[3] = { lights[0].position.x, lights[0].position.y, lights[0].position.z};
+		float light_positions[3] = { (float)lights[0].position.x, (float)lights[0].position.y, (float)lights[0].position.z};
 		GLCall(
 			glUniform3fv(glGetUniformLocation(default_shader.m_id, "u_light_positions"), 1, light_positions)
 		);

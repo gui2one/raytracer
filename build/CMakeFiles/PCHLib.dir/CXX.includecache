@@ -145,8 +145,14 @@ vendor/glm/gtc/matrix_transform.hpp
 /home/pi/projects/raytracer/src/vendor/glm/gtc/matrix_transform.hpp
 vendor/glm/gtc/type_ptr.hpp
 /home/pi/projects/raytracer/src/vendor/glm/gtc/type_ptr.hpp
+vector3.h
+/home/pi/projects/raytracer/src/vector3.h
 csignal
 -
+
+/home/pi/projects/raytracer/src/vector3.h
+pch.h
+/home/pi/projects/raytracer/src/pch.h
 
 /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.hpp
 type_vec2.hpp

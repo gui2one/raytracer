@@ -17,6 +17,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/camera.cpp.o
  /home/pi/projects/raytracer/src/camera.cpp
  /home/pi/projects/raytracer/src/camera.h
  /home/pi/projects/raytracer/src/pch.h
+ /home/pi/projects/raytracer/src/vector3.h
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.hpp
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.inl
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x3.hpp
@@ -241,6 +242,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/color.cpp.o
  /home/pi/projects/raytracer/src/color.cpp
  /home/pi/projects/raytracer/src/color.h
  /home/pi/projects/raytracer/src/pch.h
+ /home/pi/projects/raytracer/src/vector3.h
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.hpp
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.inl
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x3.hpp
@@ -466,6 +468,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/kdnode.cpp.o
  /home/pi/projects/raytracer/src/kdnode.h
  /home/pi/projects/raytracer/src/pch.h
  /home/pi/projects/raytracer/src/ray.h
+ /home/pi/projects/raytracer/src/vector3.h
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.hpp
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.inl
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x3.hpp
@@ -691,6 +694,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/light.cpp.o
  /home/pi/projects/raytracer/src/light.cpp
  /home/pi/projects/raytracer/src/light.h
  /home/pi/projects/raytracer/src/pch.h
+ /home/pi/projects/raytracer/src/vector3.h
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.hpp
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.inl
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x3.hpp
@@ -1922,6 +1926,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/main.cpp.o
  /home/pi/projects/raytracer/src/raycaster.h
  /home/pi/projects/raytracer/src/renderer.h
  /home/pi/projects/raytracer/src/rtmaterial.h
+ /home/pi/projects/raytracer/src/scene_file_loader.h
  /home/pi/projects/raytracer/src/shader.h
  /home/pi/projects/raytracer/src/texture.h
  /home/pi/projects/raytracer/src/utils/mesh_utils.h
@@ -2596,6 +2601,19 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/raycaster.cpp.o
  /home/pi/projects/raytracer/src/vendor/stb_image.h
  /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/renderer.cpp.o
+ ../src/include/assimp/color4.h
+ ../src/include/assimp/color4.inl
+ ../src/include/assimp/config.h
+ ../src/include/assimp/defs.h
+ ../src/include/assimp/matrix3x3.h
+ ../src/include/assimp/matrix3x3.inl
+ ../src/include/assimp/matrix4x4.h
+ ../src/include/assimp/matrix4x4.inl
+ ../src/include/assimp/quaternion.h
+ ../src/include/assimp/types.h
+ ../src/include/assimp/vector2.h
+ ../src/include/assimp/vector2.inl
+ ../src/include/assimp/vector3.inl
  ../src/include/esj/arm/convert.h
  ../src/include/esj/arm/json_ex.h
  ../src/include/esj/json_adapter.h
@@ -3583,6 +3601,18 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/renderer.cpp.o
  /home/pi/Downloads/boost_1_50_0/boost/weak_ptr.hpp
  /home/pi/projects/raytracer/src/camera.h
  /home/pi/projects/raytracer/src/color.h
+ /home/pi/projects/raytracer/src/include/assimp/./Compiler/poppack1.h
+ /home/pi/projects/raytracer/src/include/assimp/./Compiler/pushpack1.h
+ /home/pi/projects/raytracer/src/include/assimp/Compiler/pstdint.h
+ /home/pi/projects/raytracer/src/include/assimp/anim.h
+ /home/pi/projects/raytracer/src/include/assimp/cimport.h
+ /home/pi/projects/raytracer/src/include/assimp/importerdesc.h
+ /home/pi/projects/raytracer/src/include/assimp/material.h
+ /home/pi/projects/raytracer/src/include/assimp/material.inl
+ /home/pi/projects/raytracer/src/include/assimp/metadata.h
+ /home/pi/projects/raytracer/src/include/assimp/postprocess.h
+ /home/pi/projects/raytracer/src/include/assimp/scene.h
+ /home/pi/projects/raytracer/src/include/assimp/types.h
  /home/pi/projects/raytracer/src/include/taskqueue.hpp
  /home/pi/projects/raytracer/src/kdnode.h
  /home/pi/projects/raytracer/src/light.h
@@ -3593,8 +3623,10 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/renderer.cpp.o
  /home/pi/projects/raytracer/src/renderer.cpp
  /home/pi/projects/raytracer/src/renderer.h
  /home/pi/projects/raytracer/src/rtmaterial.h
+ /home/pi/projects/raytracer/src/scene_file_loader.h
  /home/pi/projects/raytracer/src/shader.h
  /home/pi/projects/raytracer/src/texture.h
+ /home/pi/projects/raytracer/src/utils/objLoader.h
  /home/pi/projects/raytracer/src/utils/system_utils.h
  /home/pi/projects/raytracer/src/vector3.h
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.hpp
@@ -3822,6 +3854,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/rtmaterial.cpp.o
  /home/pi/projects/raytracer/src/pch.h
  /home/pi/projects/raytracer/src/rtmaterial.cpp
  /home/pi/projects/raytracer/src/rtmaterial.h
+ /home/pi/projects/raytracer/src/vector3.h
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.hpp
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.inl
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x3.hpp
@@ -4031,6 +4064,19 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/rtmaterial.cpp.o
  /home/pi/projects/raytracer/src/vendor/stb_image.h
  /home/pi/projects/raytracer/src/vendor/stb_image_write.h
 CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/scene_file_loader.cpp.o
+ ../src/include/assimp/color4.h
+ ../src/include/assimp/color4.inl
+ ../src/include/assimp/config.h
+ ../src/include/assimp/defs.h
+ ../src/include/assimp/matrix3x3.h
+ ../src/include/assimp/matrix3x3.inl
+ ../src/include/assimp/matrix4x4.h
+ ../src/include/assimp/matrix4x4.inl
+ ../src/include/assimp/quaternion.h
+ ../src/include/assimp/types.h
+ ../src/include/assimp/vector2.h
+ ../src/include/assimp/vector2.inl
+ ../src/include/assimp/vector3.inl
  ../src/include/esj/arm/convert.h
  ../src/include/esj/arm/json_ex.h
  ../src/include/esj/json_adapter.h
@@ -4043,9 +4089,29 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/scene_file_loader.cpp.o
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ /home/pi/projects/raytracer/src/color.h
+ /home/pi/projects/raytracer/src/include/assimp/./Compiler/poppack1.h
+ /home/pi/projects/raytracer/src/include/assimp/./Compiler/pushpack1.h
+ /home/pi/projects/raytracer/src/include/assimp/Compiler/pstdint.h
+ /home/pi/projects/raytracer/src/include/assimp/anim.h
+ /home/pi/projects/raytracer/src/include/assimp/camera.h
+ /home/pi/projects/raytracer/src/include/assimp/cimport.h
+ /home/pi/projects/raytracer/src/include/assimp/importerdesc.h
+ /home/pi/projects/raytracer/src/include/assimp/material.h
+ /home/pi/projects/raytracer/src/include/assimp/material.inl
+ /home/pi/projects/raytracer/src/include/assimp/metadata.h
+ /home/pi/projects/raytracer/src/include/assimp/postprocess.h
+ /home/pi/projects/raytracer/src/include/assimp/scene.h
+ /home/pi/projects/raytracer/src/include/assimp/texture.h
+ /home/pi/projects/raytracer/src/include/assimp/types.h
+ /home/pi/projects/raytracer/src/light.h
+ /home/pi/projects/raytracer/src/mesh.h
  /home/pi/projects/raytracer/src/pch.h
+ /home/pi/projects/raytracer/src/rtmaterial.h
  /home/pi/projects/raytracer/src/scene_file_loader.cpp
  /home/pi/projects/raytracer/src/scene_file_loader.h
+ /home/pi/projects/raytracer/src/utils/objLoader.h
+ /home/pi/projects/raytracer/src/vector3.h
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.hpp
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.inl
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x3.hpp
@@ -4270,6 +4336,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/shader.cpp.o
  /home/pi/projects/raytracer/src/pch.h
  /home/pi/projects/raytracer/src/shader.cpp
  /home/pi/projects/raytracer/src/shader.h
+ /home/pi/projects/raytracer/src/vector3.h
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.hpp
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.inl
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x3.hpp
@@ -4494,6 +4561,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/texture.cpp.o
  /home/pi/projects/raytracer/src/pch.h
  /home/pi/projects/raytracer/src/texture.cpp
  /home/pi/projects/raytracer/src/texture.h
+ /home/pi/projects/raytracer/src/vector3.h
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.hpp
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.inl
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x3.hpp
@@ -5202,6 +5270,7 @@ CMakeFiles/raytracer.dir/home/pi/projects/raytracer/src/utils/system_utils.cpp.o
  /home/pi/projects/raytracer/src/pch.h
  /home/pi/projects/raytracer/src/utils/system_utils.cpp
  /home/pi/projects/raytracer/src/utils/system_utils.h
+ /home/pi/projects/raytracer/src/vector3.h
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.hpp
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x2.inl
  /home/pi/projects/raytracer/src/vendor/glm/./detail/type_mat2x3.hpp

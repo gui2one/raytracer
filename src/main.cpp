@@ -24,8 +24,15 @@ std::vector<Mesh> meshes;
 int kd_polygon_limit = 50;
 int render_width = 320;
 int render_height = 240;
+std::string scene_file = "";
+
+
+
 
 Renderer renderer;
+
+RenderOptions options;
+
 
 
 void createMeshes()
@@ -130,7 +137,7 @@ int main(int argc, char ** argv){
 
 				loaded_mesh_datas.push_back(m_data);
 			}
-			else if(cmd == "-limit"){
+			else if(cmd == "-l" || cmd == "--limit"){
 				kd_polygon_limit = atoi(arg.c_str());
 				
 			}else if(cmd == "-rw"){
@@ -139,6 +146,10 @@ int main(int argc, char ** argv){
 			}else if(cmd == "-rh"){
 				printf("setting render width \n");
 				render_height = atoi(arg.c_str());
+			}else if(cmd == "-sf" || cmd == "--scene-file"){
+
+				scene_file = arg;
+				printf("loading scene file : %s\n", arg.c_str());				
 			}
 			
 			printf("-----------------------\n");
@@ -150,9 +161,15 @@ int main(int argc, char ** argv){
 
 		
 	}
-	renderer.init(kd_polygon_limit, render_width, render_height);
 	
-	createMeshes();
+	
+	options.kd_polygon_limit = 100;
+	options.render_width = 320;
+	options.render_height = 240;	
+	
+	renderer.init(scene_file, options);
+	
+	//~ createMeshes();
 
 	//~ printf("num points = %d\n", tri_mesh.points.size());
 	//~ printf("num faces = %d\n", tri_mesh.faces.size());	

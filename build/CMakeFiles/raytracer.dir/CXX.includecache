@@ -11825,6 +11825,8 @@ vendor/glm/gtc/matrix_transform.hpp
 /home/pi/projects/raytracer/src/vendor/glm/gtc/matrix_transform.hpp
 vendor/glm/gtc/type_ptr.hpp
 /home/pi/projects/raytracer/src/vendor/glm/gtc/type_ptr.hpp
+vector3.h
+/home/pi/projects/raytracer/src/vector3.h
 csignal
 -
 
@@ -11879,6 +11881,8 @@ kdnode.h
 /home/pi/projects/raytracer/src/kdnode.h
 color.h
 /home/pi/projects/raytracer/src/color.h
+scene_file_loader.h
+/home/pi/projects/raytracer/src/scene_file_loader.h
 include/taskqueue.hpp
 /home/pi/projects/raytracer/src/include/taskqueue.hpp
 
@@ -11899,6 +11903,16 @@ scene_file_loader.h
 /home/pi/projects/raytracer/src/scene_file_loader.h
 pch.h
 /home/pi/projects/raytracer/src/pch.h
+color.h
+/home/pi/projects/raytracer/src/color.h
+mesh.h
+/home/pi/projects/raytracer/src/mesh.h
+light.h
+/home/pi/projects/raytracer/src/light.h
+rtmaterial.h
+/home/pi/projects/raytracer/src/rtmaterial.h
+utils/objLoader.h
+/home/pi/projects/raytracer/src/utils/objLoader.h
 
 /home/pi/projects/raytracer/src/shader.cpp
 shader.h
