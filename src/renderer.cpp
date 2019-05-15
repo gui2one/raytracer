@@ -139,6 +139,7 @@ static void saveToBitmap2(std::string file_name, int width, int height, int* red
 
 static float clampf(float value, float min, float max )
 {
+	
 	if(value > max){
 
 		return max;
@@ -162,58 +163,43 @@ Renderer::Renderer()
 int Renderer::init(std::string scene_file_ , RenderOptions options_)
 {
 
-
-
-
+	window_width = 640;
+	window_height = 480;
+	if( SDL_Init(SDL_INIT_EVERYTHING) == 0){
+		printf("SDL OK !!!!\n");
+	}	
 	
+	uint32_t WindowFlags = SDL_WINDOW_OPENGL;
+	Window = SDL_CreateWindow("Raytracer SDL2", 0, 0, window_width, window_height, WindowFlags);
+	assert(Window);
+	SDL_GLContext Context = SDL_GL_CreateContext(Window);
 
-
-
+	glewInit();
 	render_width = options_.render_width;
 	render_height = options_.render_height;
 	kd_polygon_limit = options_.kd_polygon_limit;
 
 	//~ std::cout << "raytracer PROJECT" << std::endl;
 
-	if(!glfwInit()){
-		std::cout<<"Problem with GLFW"<< std::endl;
-		glfwTerminate();
-		return -1;
-	}
-
-	//~ std::cout<<"initializing GLFW"<< std::endl;
-	window = glfwCreateWindow(640,480, "raytracer", NULL, NULL);
-
-	if(!window){
-		std::cout << "Problem with window " << std::endl;
-		glfwTerminate();
-		return -1;
-	}
-
-	glfwMakeContextCurrent(window);
 
 
-	//~ camera.position = glm::vec3(0.0, 0.0, 2.4142);
+
+
+
+
+
+	
 	camera.target_position = glm::vec3(0.0, 0.0, 0.0);
 	camera.up_vector = glm::vec3(0.0, 0.0, 1.0);
-
+//~ 
 	setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius);
 
-	glewInit();
-
-	glfwSetWindowUserPointer(window, this);
-
-	glfwSetCharModsCallback(window, char_mods_callback);
-	glfwSetKeyCallback(window, key_callback);
-	glfwSetCursorPosCallback(window, cursor_pos_callback);
-	glfwSetMouseButtonCallback(window, mouse_button_callback);
-	glfwSetScrollCallback(window, scroll_callback);
 	
 	default_shader.loadVertexShaderSource("../src/shaders/basic_shader.vert");
 	default_shader.loadFragmentShaderSource("../src/shaders/basic_shader.frag");
 
 	default_shader.createShader();
-
+//~ 
 	fbo_shader.loadVertexShaderSource("../src/shaders/fbo_shader.vert");
 	fbo_shader.loadFragmentShaderSource("../src/shaders/fbo_shader.frag");
 
@@ -231,36 +217,129 @@ int Renderer::init(std::string scene_file_ , RenderOptions options_)
 	light2.color = Color(1.0, 1.0, 1.0, 1.0);
 	light2.intensity = 5.0;
 	lights.push_back(light2);
-
-	// materials
-	//~ RTMaterial material1;
-	//~ material1.color = Color(0.9, 0.0, 0.0, 1.0);
-	//~ material1.refl_amount = 0.9;
-	//~ materials.push_back(material1);
 //~ 
-	//~ RTMaterial material2;
-	//~ material2.color = Color(1.0,1.0,1.0,1.0);
-	//~ material2.refl_amount = 0.3;
-	//~ materials.push_back(material2);
+	//~ // materials
+	RTMaterial material1;
+	material1.color = Color(0.9, 0.0, 0.0, 1.0);
+	material1.refl_amount = 0.9;
+	materials.push_back(material1);
+
+	RTMaterial material2;
+	material2.color = Color(1.0,1.0,1.0,1.0);
+	material2.refl_amount = 0.3;
+	materials.push_back(material2);
+
+	RTMaterial material3;
+	material3.color = Color(1.0, 1.0, 1.0, 1.0);
+	material3.refl_amount = 0.9;
+	materials.push_back(material3);
+
+	//~ SceneFileLoader scene_loader;
+	//~ scene_loader.load(scene_file_, meshes, materials, lights);
 //~ 
-	//~ RTMaterial material3;
-	//~ material3.color = Color(0.2,0.2,0.2,1.0);
-	//~ material3.refl_amount = 0.9;
-	//~ materials.push_back(material3);
-
-	SceneFileLoader scene_loader;
-	scene_loader.load(scene_file_, meshes, materials, lights);
-
 	buildRenderGeometry();
 	
 	initFBO(render_width,render_height);
-	//~ kd_node = new KDNode(limit);
+	
 }
 
-
-Mesh Renderer::loadMesh(std::string path)
+void Renderer::manageEvents()
 {
+    SDL_Event Event;
+    while (SDL_PollEvent(&Event))
+    {
+		if (Event.type == SDL_QUIT)
+		{
+			running = false;
+		}else if(( SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT))){
+			
+			if( Event.type == SDL_MOUSEMOTION)
+			{
+				//~ printf("mouse motion :\n");
+				//~ printf("\tXREL -> %d\n", Event.motion.xrel);
+				//~ printf("\tYREL -> %d\n", Event.motion.yrel);
+			 
+			 
+			 
+				double rot_speed = 0.01;
 
+				camera_u_pos += (float)Event.motion.xrel * rot_speed;
+
+
+
+				camera_v_pos -= (float)Event.motion.yrel * rot_speed;
+
+				if(camera_v_pos < 0.2)
+						camera_v_pos = 0.2;
+				else if(camera_v_pos > PI-0.2)
+						camera_v_pos = PI-0.2;
+
+				//~ printf("delta : %.2f %.2f\n", (float)Event.motion.xrel, (float)Event.motion.yrel);
+				//~ printf("upos : %.2f -- vpos %.2f\n", camera_u_pos, camera_v_pos);
+				//~ printf("--------------------------------\n");
+
+
+				setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);		
+			} 
+		}else if( (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_RIGHT))){
+			if( Event.type == SDL_MOUSEMOTION)
+			{
+				mouse_delta_x = -(float)Event.motion.xrel;
+				//~ mouse_old_x = xpos;
+				mouse_delta_y = -(float)Event.motion.yrel;
+				//~ mouse_old_y = ypos;
+		
+				glm::mat4 view = glm::lookAt(
+					camera.position,
+					camera.target_position,
+					camera.up_vector
+					);
+		
+				glm::vec3 pan_dir = glm::vec3(mouse_delta_x, -mouse_delta_y, 0.0);
+		
+				vec_mult_by_matrix(pan_dir, view, true);
+				pan_dir = pan_dir - camera.position;
+				camera_view_center.x += pan_dir.x * 0.02;
+				camera_view_center.y += pan_dir.y * 0.02;
+				camera_view_center.z += pan_dir.z * 0.02;
+		
+				setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);				
+			}
+		}else if(Event.type == SDL_MOUSEWHEEL){
+			//~ printf("wheel event\n");
+			//~ printf("\twheel x : %d\n", Event.wheel.x);
+			//~ printf("\twheel y : %d\n", Event.wheel.y);
+			
+			camera_orbit_radius += (float)Event.wheel.y * -0.1;
+			setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);			
+		}else if(Event.type == SDL_KEYDOWN)
+		{
+			switch(Event.key.keysym.scancode){
+				case SDL_SCANCODE_R:{
+					printf("RRRRRRRR\n");
+					
+					printf("Starting Rendering... \n");
+			
+					std::vector<RenderBucket> buckets;
+					buckets = createBuckets(32, render_width, render_height);
+					renderBuckets( buckets, camera);
+					printf("DONE... \n");					
+					break;
+				}
+				case SDL_SCANCODE_S : {
+					show_fbo = !show_fbo;
+					break;
+				}
+				case SDL_SCANCODE_ESCAPE:{
+					b_cancel_render = true;
+				}
+				default : 
+					break;
+
+			}
+			printf("keyboard event\n");
+		}
+	}		
 }
 
 void Renderer::buildKDTree()
@@ -289,7 +368,7 @@ void Renderer::buildKDTree()
 
 		}
 
-		KDNode * kd_node = new KDNode();
+		KDNode * kd_node = new KDNode(kd_polygon_limit);
 		kd_node = kd_node->build(tris, 0);
 		kd_nodes.push_back(kd_node);
 		printf("created KDNode !!!!!\n");
@@ -683,208 +762,6 @@ std::vector<RenderBucket> Renderer::createBuckets(int size, int r_width, int r_h
 	return buckets;
 }
 
-void Renderer::cursor_pos_callback(GLFWwindow* window, double xpos, double ypos)
-{
-
-	Renderer* app = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
-
-	if(app->left_mouse_button_down)
-	{
-
-		app->mouse_delta_x = app->mouse_old_x - xpos;
-		app->mouse_old_x = xpos;
-		app->mouse_delta_y = app->mouse_old_y - ypos;
-		app->mouse_old_y = ypos;
-
-
-		double rot_speed = 0.01;
-
-		app->camera_u_pos -= app->mouse_delta_x * rot_speed;
-
-
-
-		app->camera_v_pos += app->mouse_delta_y * rot_speed;
-
-		if(app->camera_v_pos < 0.2)
-				app->camera_v_pos = 0.2;
-		else if(app->camera_v_pos > PI-0.2)
-				app->camera_v_pos = PI-0.2;
-
-		//~ printf("delta : %.2f %.2f\n", app->mouse_delta_x, app->mouse_delta_y);
-		//~ printf("upos : %.2f -- vpos %.2f\n", app->camera_u_pos, app->camera_v_pos);
-		//~ printf("--------------------------------\n");
-
-
-		app->setCamPosFromPolar(app->camera_u_pos, app->camera_v_pos, app->camera_orbit_radius, app->camera_view_center);
-
-	}else if(app->right_mouse_button_down){
-
-		app->mouse_delta_x = app->mouse_old_x - xpos;
-		app->mouse_old_x = xpos;
-		app->mouse_delta_y = app->mouse_old_y - ypos;
-		app->mouse_old_y = ypos;
-
-		glm::mat4 view = glm::lookAt(
-			app->camera.position,
-			app->camera.target_position,
-			app->camera.up_vector
-			);
-
-		glm::vec3 pan_dir = glm::vec3(app->mouse_delta_x, -app->mouse_delta_y, 0.0);
-
-		vec_mult_by_matrix(pan_dir, view, true);
-		pan_dir = pan_dir - app->camera.position;
-		app->camera_view_center.x += pan_dir.x * 0.02;
-		app->camera_view_center.y += pan_dir.y * 0.02;
-		app->camera_view_center.z += pan_dir.z * 0.02;
-
-		app->setCamPosFromPolar(app->camera_u_pos, app->camera_v_pos, app->camera_orbit_radius, app->camera_view_center);
-	}
-
-}
-
-void Renderer::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
-{
-	Renderer* app = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
-
-	if(button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
-	{
-		app->left_mouse_button_down = true;
-
-		double x_pos, y_pos;
-		glfwGetCursorPos(window, &x_pos, &y_pos);
-		app->mouse_old_x = x_pos;
-		app->mouse_old_y = y_pos;
-
-		int width, height;
-		glfwGetFramebufferSize(window, &width, &height);
-
-
-
-		// raycast test
-
-		ClickData click_data;
-
-		click_data.x = x_pos;
-		click_data.y = y_pos;
-		click_data.width = width;
-		click_data.height = height;
-
-		Raycaster raycaster;
-
-		Ray ray = raycaster.castRay(click_data, app->camera);
-		std::vector<HitData> hit_datas;
-		bool hit2 = raycaster.intersectKDNodes(ray, app->kd_nodes,  hit_datas);
-		if( hit2 ){
-			//~ printf("hit bbox !!!!!!!!!!\n");
-
-			std::sort(hit_datas.begin(), hit_datas.end(), [app](HitData data1 , HitData data2){
-				float dist1 = glm::distance(data1.position, app->camera.position);
-				float dist2 = glm::distance(data2.position, app->camera.position);
-				return dist1 < dist2;
-			});
-			if( hit_datas.size() > 0)
-			{
-				printf("polygon hit --> %d\n", hit_datas[0].face_id);
-				
-				Face f = app->meshes[hit_datas[0].mesh_id].faces[hit_datas[0].face_id];
-				glm::vec3 A = app->meshes[hit_datas[0].mesh_id].points[f.getVertex(0).point_id].position;
-				glm::vec3 B = app->meshes[hit_datas[0].mesh_id].points[f.getVertex(1).point_id].position;
-				glm::vec3 C = app->meshes[hit_datas[0].mesh_id].points[f.getVertex(2).point_id].position;
-				
-				glm::vec3 bary = raycaster.cartesian_to_barycentric(hit_datas[0].position, A, B, C);
-				
-				printf("barycentric coords : %.3f %.3f %.3f \n", bary.x, bary.y, bary.z);
-			}
-		}
-
-
-
-
-
-	}else if(button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
-	{
-		app->left_mouse_button_down = false;
-	}else if(button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
-	{
-		double x_pos, y_pos;
-		glfwGetCursorPos(window, &x_pos, &y_pos);
-		app->mouse_old_x = x_pos;
-		app->mouse_old_y = y_pos;
-
-		app->right_mouse_button_down = true;
-
-
-	}else if(button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
-	{
-
-		app->right_mouse_button_down = false;
-	}
-}
-
-void Renderer::char_mods_callback(GLFWwindow* window, unsigned int key, int action)
-{
-	Renderer* app = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
-
-	if( (char)key == 'B' ) // B
-	{
-		// saveToBitmap2();
-	}else if( (char)key == 'r' ){
-
-		printf("Starting Rendering... \n");
-
-		std::vector<RenderBucket> buckets;
-		buckets = app->createBuckets(32, app->render_width, app->render_height);
-		app->renderBuckets( buckets, app->camera);
-		printf("DONE... \n");
-	}else if( (char)key == 's' ){
-		app->show_fbo = !app->show_fbo;
-	}
-
-}
-
-void Renderer::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-	Renderer* app = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
-    //~ printf("cur key is %d\n" ,scancode);
-    if ((key == GLFW_KEY_LEFT  || key == GLFW_KEY_RIGHT ) && action == GLFW_PRESS){
-			printf("GLFW_KEY_LEFT %d\n" ,scancode);
-
-			glm::mat4 view = glm::lookAt(
-				app->camera.position,
-				app->camera.target_position,
-				app->camera.up_vector
-				);
-
-			glm::vec3 x_template = glm::vec3(1.0, 0.0, 0.0);
-
-			vec_mult_by_matrix(x_template, view, true);
-			x_template = x_template - app->camera.position;
-			app->camera_view_center.x += x_template.x * 0.1 * (key == GLFW_KEY_RIGHT ? 1.0 : -1.0) ;
-			app->camera_view_center.y += x_template.y * 0.1 * (key == GLFW_KEY_RIGHT ? 1.0 : -1.0) ;
-			app->camera_view_center.z += x_template.z * 0.1 * (key == GLFW_KEY_RIGHT ? 1.0 : -1.0) ;
-
-			app->setCamPosFromPolar(app->camera_u_pos, app->camera_v_pos, app->camera_orbit_radius, app->camera_view_center);
-	}if( key == GLFW_KEY_ESCAPE && action == GLFW_PRESS){
-		printf("escape \n");
-		app->b_cancel_render = true;
-	}
-
-}
-
-void Renderer::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-{
-	Renderer* app = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
-	//~ 
-	//~ printf("--------------\n");
-	//~ printf("\tx offset : %.3f\n", xoffset);
-	//~ printf("\ty offset : %.3f\n", yoffset);
-	
-	
-	app->camera_orbit_radius += yoffset * -0.1;
-	app->setCamPosFromPolar(app->camera_u_pos, app->camera_v_pos, app->camera_orbit_radius, app->camera_view_center);
-}
-
 void Renderer::setCamPosFromPolar(float u, float v, float _radius, glm::vec3 center)
 {
         camera.position.x = (sin(u)* sin(v) * _radius) + center.x;
@@ -908,8 +785,9 @@ void Renderer::initFBO(int width, int height)
 	GLCall(glDeleteBuffers(1, &fbo_vbo));
 	GLCall(glGenBuffers(1, &fbo_vbo));
 
-	int w_width, w_height;
-	glfwGetWindowSize(window, &w_width, &w_height);
+	int w_width = window_width;
+	int w_height = window_height;
+	
 
 	//~ if(r_width > w_width)r_width = w_width;
 	//~ if(r_height > w_height)r_height = w_height;
@@ -995,7 +873,6 @@ void Renderer::drawFBO(int r_width, int r_height)
 	GLCall(glBindTexture(GL_TEXTURE_2D, 0));
 }
 
-
 void Renderer::buildRenderGeometry()
 {
 	vbos.clear();
@@ -1008,12 +885,15 @@ void Renderer::buildRenderGeometry()
 		OGL_geometry_data geo_data;
 		for(int pt_id = 0; pt_id < meshes[i].points.size(); pt_id++)
 		{
+			//~ printf("t_coords --> %.3f %.3f \n",meshes[i].points[pt_id].t_coords.x, meshes[i].points[pt_id].t_coords.y );
 			glm::vec3 point_pos = meshes[i].points[pt_id].position;
 			glm::vec3 point_normal = meshes[i].points[pt_id].normal;
+			glm::vec2 t_coords = meshes[i].points[pt_id].t_coords;
 			geo_data.vertices.insert(
 				geo_data.vertices.end(), {
 					point_pos.x, point_pos.y, point_pos.z,
 					point_normal.x, point_normal.y, point_normal.z,
+					t_coords.x, t_coords.y
 				});
 		}
 
@@ -1060,109 +940,330 @@ void Renderer::buildRenderGeometry()
 
 	if(meshes.size() > 0)
 	{
-		printf("----- BUILDING KD TREE\n");
+		//~ printf("----- BUILDING KD TREE\n");
 		buildKDTree();
-		printf("KDnodes num : %d\n", kd_nodes.size());
-		collectKDBoungingBoxes(kd_nodes[0]);
-		printf("BBoxes vector size is %d\n", kd_bboxes.size());
-		buildKDTreeBBoxes(kd_bboxes);
+		//~ printf("KDnodes num : %d\n", kd_nodes.size());
+		//~ collectKDBoungingBoxes(kd_nodes[0]);
+		//~ printf("BBoxes vector size is %d\n", kd_bboxes.size());
+		//~ buildKDTreeBBoxes(kd_bboxes);
 	}
 
 }
 
 void Renderer::displayScene()
 {
-
-		GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
-		GLCall(glClearColor(0.2,0.5,0.2,1.0));
-
-		GLCall(glDisable(GL_CULL_FACE));
-		GLCall(glEnable(GL_DEPTH_TEST));
-		int width, height;
-
-		glfwGetFramebufferSize(window, &width, &height);
-		camera.setProjection(45.0f * (float)PI / 180.0f, (float)width / (float)height, 0.01f, 100.0f);
-		GLCall(glViewport(0,0,width, height));
-
-		//~ buildRenderGeometry();
+	
+	manageEvents();
+	
 
 
-		glm::mat4 model = glm::mat4(1.0f);
-		glm::mat4 view = glm::mat4(1.0f);
+	GLCall(glDisable(GL_CULL_FACE));
+	GLCall(glEnable(GL_DEPTH_TEST));
 
-
-
-		view *= glm::lookAt(
-			camera.position, //glm::vec3(0.0,  0.0, 3.0),
-			camera.target_position, //glm::vec3(0.0,  0.0, 0.0),
-			camera.up_vector //glm::vec3(0.0,  1.0, 0.0)
-		);
-
-		default_shader.useProgram();
-
-		GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(camera.projection)));
-		GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "view"), 1, GL_FALSE, glm::value_ptr(view)));
-		GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
-
-
-		// send lights data to opengl shader
-
-
-		float light_positions[3] = { (float)lights[0].position.x, (float)lights[0].position.y, (float)lights[0].position.z};
-		GLCall(
-			glUniform3fv(glGetUniformLocation(default_shader.m_id, "u_light_positions"), 1, light_positions)
-		);
-
-		for (int i = 0; i < meshes.size(); i++)
-		{
-			GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"),
-				meshes[i].material.color.r,
-				meshes[i].material.color.g,
-				meshes[i].material.color.b,
-				1.0
-			));
-
-			GLCall(glBindBuffer(GL_ARRAY_BUFFER, vbos[i]));
-			GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibos[i]));
-			GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, 0));
-			GLCall(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)(sizeof(float)*3)));
-			GLCall(glEnableVertexAttribArray(0));
-			GLCall(glEnableVertexAttribArray(1));
-
-
-			GLCall(glDrawElements(GL_TRIANGLES, geo_data_array[i].indices.size(), GL_UNSIGNED_INT, nullptr));
-
-			GLCall(glDisableVertexAttribArray(0));
-			GLCall(glDisableVertexAttribArray(1));
-			GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
-			GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
-			//~ printf("rendering  mesh %d\n", i);
-		}
+	
+	GLCall(glViewport(0,0,window_width, window_height));
+	
+	GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+	GLCall(glClearColor(0.2,0.5,0.2,1.0));		
+	
+	//~ printf("drawing %d\n", temp_inc_test++);
+	camera.setProjection(45.0f * (float)PI / 180.0f, (float)window_width / (float)window_height, 0.01f, 100.0f);
 
 
 
+	glm::mat4 model = glm::mat4(1.0f);
+	glm::mat4 view = glm::mat4(1.0f);
 
-		//~ displayKDTree();
 
 
-		GLCall(glUseProgram(0));
+	view *= glm::lookAt(
+		camera.position, //glm::vec3(0.0,  0.0, 3.0),
+		camera.target_position, //glm::vec3(0.0,  0.0, 0.0),
+		camera.up_vector //glm::vec3(0.0,  1.0, 0.0)
+	);
 
-		if( show_fbo )
-		{
-			GLCall(glDisable(GL_DEPTH_TEST));
+	default_shader.useProgram();
+	GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
+	GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(camera.projection)));
+	GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "view"), 1, GL_FALSE, glm::value_ptr(view)));
+	
 
-			fbo_shader.useProgram();
-			drawFBO(render_width,render_height);
 
-			GLCall(glUseProgram(0));
-		}
+	// send lights data to opengl shader
 
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+
+	float light_positions[6] = { 
+		(float)lights[0].position.x, (float)lights[0].position.y, (float)lights[0].position.z,
+		(float)lights[1].position.x, (float)lights[1].position.y, (float)lights[1].position.z		
+	};
+	GLCall(
+		glUniform3fv(glGetUniformLocation(default_shader.m_id, "u_light_positions"), 1, light_positions)
+	);
+
+	for (int i = 0; i < meshes.size(); i++)
+	{
+		//~ printf("drawing meshe %d\n", i);
+		//~ glUniform1i(glGetUniformLocation(default_shader.m_id,"u_tex"), 0);
+		
+		
+		GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"),
+			meshes[i].material.color.r,
+			meshes[i].material.color.g,
+			meshes[i].material.color.b,
+			1.0
+		));
+
+		GLCall(glBindBuffer(GL_ARRAY_BUFFER, vbos[i]));
+		GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibos[i]));
+		GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, 0));
+		GLCall(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(sizeof(float)*3)));
+		GLCall(glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(sizeof(float)*6)));
+		GLCall(glEnableVertexAttribArray(0));
+		GLCall(glEnableVertexAttribArray(1));
+		GLCall(glEnableVertexAttribArray(2));
+
+
+		GLCall(glDrawElements(GL_TRIANGLES, geo_data_array[i].indices.size(), GL_UNSIGNED_INT, nullptr));
+
+		GLCall(glDisableVertexAttribArray(0));
+		GLCall(glDisableVertexAttribArray(1));
+		GLCall(glDisableVertexAttribArray(2));
+		GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
+		GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
+	
+	}
+//~ 
+
+
+
+	//~ displayKDTree();
+
+
+	//~ GLCall(glUseProgram(0));
+
+	if( show_fbo )
+	{
+
+		GLCall(glDisable(GL_DEPTH_TEST));
+
+		fbo_shader.useProgram();
+		drawFBO(render_width,render_height);
+
+		//~ GLCall(glUseProgram(0));
+	}
+
+
+	SDL_GL_SwapWindow(Window);
+	
+
 }
 
 bool Renderer::shouldClose()
 {
-	return glfwWindowShouldClose(window);
+	return false;
 }
+
+//~ void Renderer::cursor_pos_callback(GLFWwindow* window, double xpos, double ypos)
+//~ {
+//~ 
+	//~ Renderer* app = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
+//~ 
+	//~ if(app->left_mouse_button_down)
+	//~ {
+//~ 
+		//~ app->mouse_delta_x = app->mouse_old_x - xpos;
+		//~ app->mouse_old_x = xpos;
+		//~ app->mouse_delta_y = app->mouse_old_y - ypos;
+		//~ app->mouse_old_y = ypos;
+//~ 
+//~ 
+		//~ double rot_speed = 0.01;
+//~ 
+		//~ app->camera_u_pos -= app->mouse_delta_x * rot_speed;
+//~ 
+//~ 
+//~ 
+		//~ app->camera_v_pos += app->mouse_delta_y * rot_speed;
+//~ 
+		//~ if(app->camera_v_pos < 0.2)
+				//~ app->camera_v_pos = 0.2;
+		//~ else if(app->camera_v_pos > PI-0.2)
+				//~ app->camera_v_pos = PI-0.2;
+//~ 
+		//~ printf("delta : %.2f %.2f\n", app->mouse_delta_x, app->mouse_delta_y);
+		//~ printf("upos : %.2f -- vpos %.2f\n", app->camera_u_pos, app->camera_v_pos);
+		//~ printf("--------------------------------\n");
+//~ 
+//~ 
+		//~ app->setCamPosFromPolar(app->camera_u_pos, app->camera_v_pos, app->camera_orbit_radius, app->camera_view_center);
+//~ 
+	//~ }else if(app->right_mouse_button_down){
+//~ 
+		//~ app->mouse_delta_x = app->mouse_old_x - xpos;
+		//~ app->mouse_old_x = xpos;
+		//~ app->mouse_delta_y = app->mouse_old_y - ypos;
+		//~ app->mouse_old_y = ypos;
+//~ 
+		//~ glm::mat4 view = glm::lookAt(
+			//~ app->camera.position,
+			//~ app->camera.target_position,
+			//~ app->camera.up_vector
+			//~ );
+//~ 
+		//~ glm::vec3 pan_dir = glm::vec3(app->mouse_delta_x, -app->mouse_delta_y, 0.0);
+//~ 
+		//~ vec_mult_by_matrix(pan_dir, view, true);
+		//~ pan_dir = pan_dir - app->camera.position;
+		//~ app->camera_view_center.x += pan_dir.x * 0.02;
+		//~ app->camera_view_center.y += pan_dir.y * 0.02;
+		//~ app->camera_view_center.z += pan_dir.z * 0.02;
+//~ 
+		//~ app->setCamPosFromPolar(app->camera_u_pos, app->camera_v_pos, app->camera_orbit_radius, app->camera_view_center);
+	//~ }
+//~ 
+//~ }
+
+//~ void Renderer::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+//~ {
+	//~ Renderer* app = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
+//~ 
+	//~ if(button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+	//~ {
+		//~ app->left_mouse_button_down = true;
+//~ 
+		//~ double x_pos, y_pos;
+		//~ glfwGetCursorPos(window, &x_pos, &y_pos);
+		//~ app->mouse_old_x = x_pos;
+		//~ app->mouse_old_y = y_pos;
+//~ 
+		//~ int width, height;
+		//~ glfwGetFramebufferSize(window, &width, &height);
+//~ 
+//~ 
+//~ 
+		//~ // raycast test
+//~ 
+		//~ ClickData click_data;
+//~ 
+		//~ click_data.x = x_pos;
+		//~ click_data.y = y_pos;
+		//~ click_data.width = width;
+		//~ click_data.height = height;
+//~ 
+		//~ Raycaster raycaster;
+//~ 
+		//~ Ray ray = raycaster.castRay(click_data, app->camera);
+		//~ std::vector<HitData> hit_datas;
+		//~ bool hit2 = raycaster.intersectKDNodes(ray, app->kd_nodes,  hit_datas);
+		//~ if( hit2 ){
+			//~ printf("hit bbox !!!!!!!!!!\n");
+//~ 
+			//~ std::sort(hit_datas.begin(), hit_datas.end(), [app](HitData data1 , HitData data2){
+				//~ float dist1 = glm::distance(data1.position, app->camera.position);
+				//~ float dist2 = glm::distance(data2.position, app->camera.position);
+				//~ return dist1 < dist2;
+			//~ });
+			//~ if( hit_datas.size() > 0)
+			//~ {
+				//~ printf("polygon hit --> %d\n", hit_datas[0].face_id);
+				//~ 
+				//~ Face f = app->meshes[hit_datas[0].mesh_id].faces[hit_datas[0].face_id];
+				//~ glm::vec3 A = app->meshes[hit_datas[0].mesh_id].points[f.getVertex(0).point_id].position;
+				//~ glm::vec3 B = app->meshes[hit_datas[0].mesh_id].points[f.getVertex(1).point_id].position;
+				//~ glm::vec3 C = app->meshes[hit_datas[0].mesh_id].points[f.getVertex(2).point_id].position;
+				//~ 
+				//~ glm::vec3 bary = raycaster.cartesian_to_barycentric(hit_datas[0].position, A, B, C);
+				//~ 
+				//~ printf("barycentric coords : %.3f %.3f %.3f \n", bary.x, bary.y, bary.z);
+			//~ }
+		//~ }
+//~ 
+//~ 
+//~ 
+//~ 
+//~ 
+	//~ }else if(button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+	//~ {
+		//~ app->left_mouse_button_down = false;
+	//~ }else if(button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
+	//~ {
+		//~ double x_pos, y_pos;
+		//~ glfwGetCursorPos(window, &x_pos, &y_pos);
+		//~ app->mouse_old_x = x_pos;
+		//~ app->mouse_old_y = y_pos;
+//~ 
+		//~ app->right_mouse_button_down = true;
+//~ 
+//~ 
+	//~ }else if(button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
+	//~ {
+//~ 
+		//~ app->right_mouse_button_down = false;
+	//~ }
+//~ }
+//~ 
+//~ void Renderer::char_mods_callback(GLFWwindow* window, unsigned int key, int action)
+//~ {
+	//~ Renderer* app = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
+//~ 
+	//~ if( (char)key == 'B' ) // B
+	//~ {
+		//~ // saveToBitmap2();
+	//~ }else if( (char)key == 'r' ){
+//~ 
+		//~ printf("Starting Rendering... \n");
+//~ 
+		//~ std::vector<RenderBucket> buckets;
+		//~ buckets = app->createBuckets(32, app->render_width, app->render_height);
+		//~ app->renderBuckets( buckets, app->camera);
+		//~ printf("DONE... \n");
+	//~ }else if( (char)key == 's' ){
+		//~ app->show_fbo = !app->show_fbo;
+	//~ }
+//~ 
+//~ }
+
+//~ void Renderer::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+//~ {
+	//~ Renderer* app = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
+    //~ printf("cur key is %d\n" ,scancode);
+    //~ if ((key == GLFW_KEY_LEFT  || key == GLFW_KEY_RIGHT ) && action == GLFW_PRESS){
+			//~ printf("GLFW_KEY_LEFT %d\n" ,scancode);
+//~ 
+			//~ glm::mat4 view = glm::lookAt(
+				//~ app->camera.position,
+				//~ app->camera.target_position,
+				//~ app->camera.up_vector
+				//~ );
+//~ 
+			//~ glm::vec3 x_template = glm::vec3(1.0, 0.0, 0.0);
+//~ 
+			//~ vec_mult_by_matrix(x_template, view, true);
+			//~ x_template = x_template - app->camera.position;
+			//~ app->camera_view_center.x += x_template.x * 0.1 * (key == GLFW_KEY_RIGHT ? 1.0 : -1.0) ;
+			//~ app->camera_view_center.y += x_template.y * 0.1 * (key == GLFW_KEY_RIGHT ? 1.0 : -1.0) ;
+			//~ app->camera_view_center.z += x_template.z * 0.1 * (key == GLFW_KEY_RIGHT ? 1.0 : -1.0) ;
+//~ 
+			//~ app->setCamPosFromPolar(app->camera_u_pos, app->camera_v_pos, app->camera_orbit_radius, app->camera_view_center);
+	//~ }if( key == GLFW_KEY_ESCAPE && action == GLFW_PRESS){
+		//~ printf("escape \n");
+		//~ app->b_cancel_render = true;
+	//~ }
+//~ 
+//~ }
+
+//~ void Renderer::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+//~ {
+	//~ Renderer* app = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
+	
+	//~ printf("--------------\n");
+	//~ printf("\tx offset : %.3f\n", xoffset);
+	//~ printf("\ty offset : %.3f\n", yoffset);
+	//~ 
+	//~ 
+	//~ app->camera_orbit_radius += yoffset * -0.1;
+	//~ app->setCamPosFromPolar(app->camera_u_pos, app->camera_v_pos, app->camera_orbit_radius, app->camera_view_center);
+//~ }
+
+
 

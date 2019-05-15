@@ -2,9 +2,12 @@
 #define PCH_H
 
 #include <algorithm>
+
 #include <GL/glew.h>
 
-#include <GLFW/glfw3.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_opengl.h>
+//~ #include <GLFW/glfw3.h>
 
 #include "vendor/stb_image.h"
 #include "vendor/stb_image_write.h"

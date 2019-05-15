@@ -23,10 +23,11 @@ void main()
 	//~ f_pos = vec3(model * vec4(position,1.0));
 	f_normal = normal;
 	//~ f_normal = mat3(transpose(inverse(model))) * normal;
+	f_t_coords = t_coords;
 	f_color = u_color;
 	//~ 
 	//~ 
-	//~ f_t_coords = t_coords;
+	
 	
 
 }

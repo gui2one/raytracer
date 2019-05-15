@@ -1,7 +1,7 @@
 #include "mesh.h"
 
 
-Mesh::Mesh()
+Mesh::Mesh() : translate(glm::vec3(0.0, 0.0, 0.0)),rotate(glm::vec3(0.0, 0.0, 0.0)), scale(glm::vec3(0.0, 0.0, 0.0))
 {
 	
 }
@@ -87,8 +87,8 @@ void Mesh::printData()
 void Mesh::computeNormals()
 {
 	// compute flat face normals
-	if( faces.size() > 2)
-	{
+	//~ if( faces.size() > 2)
+	//~ {
 		for (int face_id = 0; face_id < faces.size(); face_id++)
 		{
 			Point pA = points[faces[face_id].getVertex(0).point_id];
@@ -148,7 +148,7 @@ void Mesh::computeNormals()
 		
 		
 		
-	}
+	//~ }
 }
 
 

@@ -70,13 +70,7 @@ class Renderer
 {
 	public:
 		Renderer();
-		
-		
-		static void char_mods_callback(GLFWwindow* window, unsigned int key, int action);
-		static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-		static void cursor_pos_callback(GLFWwindow* window, double xpos, double ypos);
-		static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);    
-		static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+
 		
 		
 		int init(std::string scene_file_, RenderOptions options_);
@@ -87,7 +81,7 @@ class Renderer
 		void displayScene();
 		bool shouldClose();
 		
-		Mesh loadMesh(std::string path);
+		
 		
 		//~ void renderMaterials(int w, int h, Camera& camera, std::vector<Mesh>& meshes);
 		
@@ -124,9 +118,13 @@ class Renderer
 		std::vector<unsigned int> vbos;
 		std::vector<unsigned int> ibos;
 		
-		GLFWwindow * window;
-		
+		SDL_Window * Window;
+		bool running = true;
+		int window_width;
+		int window_height;
 		Shader default_shader, fbo_shader;
+		
+		void manageEvents();
 		
 		Camera camera;
 		
@@ -157,6 +155,8 @@ class Renderer
 		int render_height;
 		std::vector<unsigned char> render_buffer_data;
 		
+		
+		int temp_inc_test;
 			
 	private:
 		/* add your private declarations */

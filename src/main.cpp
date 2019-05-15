@@ -1,5 +1,10 @@
 #include "pch.h"
 
+#include <stdint.h>
+#include <assert.h>
+
+
+#include <GL/gl.h>
 //~ #include <thread>
 
 #include "mesh.h"
@@ -21,7 +26,7 @@ std::vector<std::string> file_mesh_paths;
 std::vector<LoadedMeshData> loaded_mesh_datas;
 std::vector<Mesh> meshes;
 
-int kd_polygon_limit = 50;
+int kd_polygon_limit = 10;
 int render_width = 320;
 int render_height = 240;
 std::string scene_file = "";
@@ -52,7 +57,7 @@ void createMeshes()
 			float scale = loaded_mesh_datas[i].scale;
 			glm::vec3 rotate = loaded_mesh_datas[i].rotate;
 			glm::vec3 translate = loaded_mesh_datas[i].translate;
-			printf("scale --> %.3f \n", scale);
+			//~ printf("scale --> %.3f \n", scale);
 			mesh_utils.scale(m, glm::vec3(scale, scale, scale));
 			mesh_utils.rotate(m, glm::vec3(rotate.x * PI /180.0, rotate.y * PI /180.0, rotate.z * PI /180.0));
 			mesh_utils.translate(m, glm::vec3(translate.x, translate.y, translate.z));
@@ -102,7 +107,7 @@ int main(int argc, char ** argv){
 					//~ 
 					if( cmd2 == "-s" ){
 						//~ // scaling
-						printf("SCALING !!!!%s\n", argv[temp_i]);
+						//~ printf("SCALING !!!!%s\n", argv[temp_i]);
 						m_data.scale = std::atof(std::string(argv[temp_i+1]).c_str());
 						
 						temp_i += 2;
@@ -111,7 +116,7 @@ int main(int argc, char ** argv){
 						float x = std::atof(std::string(argv[temp_i+1]).c_str());
 						float y = std::atof(std::string(argv[temp_i+2]).c_str());
 						float z = std::atof(std::string(argv[temp_i+3]).c_str());
-						printf("TRANSLATING !!!! %.3f %.3f %.3f\n", x, y ,z);
+						//~ printf("TRANSLATING !!!! %.3f %.3f %.3f\n", x, y ,z);
 						
 						m_data.translate = glm::vec3(x, y, z);
 						temp_i += 4;
@@ -119,7 +124,7 @@ int main(int argc, char ** argv){
 						float x = std::atof(std::string(argv[temp_i+1]).c_str());
 						float y = std::atof(std::string(argv[temp_i+2]).c_str());
 						float z = std::atof(std::string(argv[temp_i+3]).c_str());
-						printf("ROTATING !!!! %.3f %.3f %.3f\n", x, y ,z);
+						//~ printf("ROTATING !!!! %.3f %.3f %.3f\n", x, y ,z);
 						
 						m_data.rotate = glm::vec3(x, y, z);
 						
@@ -141,21 +146,21 @@ int main(int argc, char ** argv){
 				kd_polygon_limit = atoi(arg.c_str());
 				
 			}else if(cmd == "-rw"){
-				printf("setting render width \n");
+				//~ printf("setting render width \n");
 				render_width = atoi(arg.c_str());
 			}else if(cmd == "-rh"){
-				printf("setting render width \n");
+				//~ printf("setting render width \n");
 				render_height = atoi(arg.c_str());
 			}else if(cmd == "-sf" || cmd == "--scene-file"){
 
 				scene_file = arg;
-				printf("loading scene file : %s\n", arg.c_str());				
+				//~ printf("loading scene file : %s\n", arg.c_str());				
 			}
 			
-			printf("-----------------------\n");
-			printf("command  :%s\n", cmd.c_str());
-			printf("argument :%s\n", arg.c_str());				
-			printf("°°°°°°°°°°°°°°°°°°°°°°°\n\n");
+			//~ printf("-----------------------\n");
+			//~ printf("command  :%s\n", cmd.c_str());
+			//~ printf("argument :%s\n", arg.c_str());				
+			//~ printf("°°°°°°°°°°°°°°°°°°°°°°°\n\n");
 		}
 			
 
@@ -163,13 +168,13 @@ int main(int argc, char ** argv){
 	}
 	
 	
-	options.kd_polygon_limit = 100;
+	options.kd_polygon_limit = 10;
 	options.render_width = 320;
 	options.render_height = 240;	
 	
 	renderer.init(scene_file, options);
 	
-	//~ createMeshes();
+	createMeshes();
 
 	//~ printf("num points = %d\n", tri_mesh.points.size());
 	//~ printf("num faces = %d\n", tri_mesh.faces.size());	
@@ -178,7 +183,7 @@ int main(int argc, char ** argv){
 	camera.position.y = 5.0;
 		
 
-	while(!renderer.shouldClose()){
+	while(renderer.running){
 			
 		renderer.displayScene();
 

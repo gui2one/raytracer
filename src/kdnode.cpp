@@ -286,6 +286,8 @@ KDNode * KDNode::build(std::vector<Triangle*>& tris, int _depth) const
 		node->right = build(right_tris, _depth + 1);
 		
 	}else{
+		
+		//~ printf("reached polygon limit of %d!!\n", polygons_limit);
 		node->left = new KDNode();
 		node->right = new KDNode();
 		node->left->triangles = std::vector<Triangle*>();

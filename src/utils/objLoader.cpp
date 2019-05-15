@@ -2,11 +2,11 @@
 
 
 ObjLoader::ObjLoader(){
-	std::cout << "ObjLoader initiatied ----\n";
+	//~ std::cout << "ObjLoader initiatied ----\n";
 }
 
 ObjLoader::~ObjLoader(){
-	std::cout << "ObjLoader DELETED ----\n";
+	//~ std::cout << "ObjLoader DELETED ----\n";
 }
 
 
@@ -16,8 +16,8 @@ Mesh ObjLoader::assimp_load(std::string file_path){
 	
 	if(scene){
 		
-		std::cout << "ObjLoader assimp loading V2 : " << file_path << "\n";
-		std::cout << "----------------------------\n";
+		//~ std::cout << "ObjLoader assimp loading V2 : " << file_path << "\n";
+		//~ std::cout << "----------------------------\n";
 		
 		
 		std::vector<Point> points;
@@ -31,14 +31,15 @@ Mesh ObjLoader::assimp_load(std::string file_path){
 			point.normal.y = scene->mMeshes[0]->mNormals[i].y;
 			point.normal.z = scene->mMeshes[0]->mNormals[i].z;
 			
-			//~ if(scene->mMeshes[0]->HasTextureCoords(0)){
-				//~ 
-				//~ point.t_coords.x = scene->mMeshes[0]->mTextureCoords[0][i].x;
-				//~ point.t_coords.y = scene->mMeshes[0]->mTextureCoords[0][i].y;
-			//~ }else{
-				//~ point.t_coords.x = 0.0;
-				//~ point.t_coords.y = 0.0;
-			//~ }
+			if(scene->mMeshes[0]->HasTextureCoords(0)){
+				
+				//~ printf("getting t_coords from the model\n");
+				point.t_coords.x = scene->mMeshes[0]->mTextureCoords[0][i].x;
+				point.t_coords.y = scene->mMeshes[0]->mTextureCoords[0][i].y;
+			}else{
+				point.t_coords.x = 0.0;
+				point.t_coords.y = 0.0;
+			}
 			points.push_back(point);
 			//~ std::cout<< "Vertex " <<  "\n";
 			//~ std::cout << "\tX: " << vertex.position.x << ", Y: " << vertex.position.y << ", Z: " << vertex.position.z <<"\n";

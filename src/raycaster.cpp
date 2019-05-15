@@ -6,6 +6,9 @@ Raycaster::Raycaster()
 }
 
 
+static float distance_squared(glm::vec3 pt1, glm::vec3 pt2){
+	return (pt2.x - pt1.x)*(pt2.x - pt1.x) + (pt2.y - pt1.y)*(pt2.y - pt1.y) + (pt2.z - pt1.z)*(pt2.z - pt1.z);
+}
 
 static float degToRad(float degrees)
 {
@@ -145,7 +148,6 @@ glm::vec3 Raycaster::screenToWorld(ClickData click_data, Camera& camera)
 
 
 
-
 bool Raycaster::intersectKDNode(Ray& ray, KDNode * kd_node, int mesh_id, std::vector<HitData>& hit_datas, bool bail_early)
 {
 	
@@ -222,7 +224,9 @@ bool Raycaster::intersectKDNodes(Ray& ray, std::vector<KDNode *> kd_nodes, std::
 		
 		std::sort(hit_datas.begin(), hit_datas.end(), [ray](HitData data1 , HitData data2){
 			float dist1 = glm::distance(data1.position, ray.origin);
+			//~ float dist1 = distance_squared(data1.position, ray.origin);
 			float dist2 = glm::distance(data2.position, ray.origin);
+			//~ float dist2 = distance_squared(data2.position, ray.origin);
 			return dist1 < dist2;
 		});			
 		return true;
@@ -231,185 +235,4 @@ bool Raycaster::intersectKDNodes(Ray& ray, std::vector<KDNode *> kd_nodes, std::
 	}
 	
 }
-
-
-
-//~ bool Raycaster::intersectBoudingBox(
-						//~ ClickData _click_data, 
-						//~ Camera& _camera, 
-						//~ Mesh& _target_mesh,
-						//~ HitData& hit_data)
-//~ {
-//~ 
-		//~ BoundingBox AABB = _target_mesh.computeAABB();
-		//~ 
-		//~ glm::vec3 bbox_pos = AABB.position;
-		//~ glm::vec3 bbox_size = AABB.size;
-		//~ glm::vec3 bbox_center = bbox_pos + glm::vec3(bbox_size.x/2.0f, bbox_size.y/2.0f, bbox_size.z/2.0f) ;		
-		//~ 
-	//~ 
-		//~ // build bbox out of triangles for intersection by ray
-		//~ 
-		//~ std::vector<glm::vec3> bbox_vertices;
-		//~ 
-		//~ bbox_vertices.push_back(bbox_pos);
-		//~ bbox_vertices.push_back(bbox_pos + glm::vec3( bbox_size.x,        0.0f,        0.0f));
-		//~ bbox_vertices.push_back(bbox_pos + glm::vec3(        0.0f,        0.0f, bbox_size.z));
-		//~ bbox_vertices.push_back(bbox_pos + glm::vec3( bbox_size.x,        0.0f, bbox_size.z));
-		//~ 
-		//~ bbox_vertices.push_back(bbox_pos + glm::vec3(         0.0, bbox_size.y,        0.0f));
-		//~ bbox_vertices.push_back(bbox_pos + glm::vec3( bbox_size.x, bbox_size.y,        0.0f));
-		//~ bbox_vertices.push_back(bbox_pos + glm::vec3(        0.0f, bbox_size.y, bbox_size.z));
-		//~ bbox_vertices.push_back(bbox_pos + glm::vec3( bbox_size.x, bbox_size.y, bbox_size.z));
-		//~ 
-		//~ 
-		//~ 
-		//~ std::vector<int> indices;
-					//~ 
-		//~ indices.insert(indices.end(), {0, 2, 3});
-		//~ indices.insert(indices.end(), {0, 3, 1});
-		//~ 
-		//~ indices.insert(indices.end(), {1, 3, 7});
-		//~ indices.insert(indices.end(), {1, 7, 5});
-		//~ 
-		//~ indices.insert(indices.end(), {5, 7, 6});
-		//~ indices.insert(indices.end(), {5, 6, 4});
-		//~ 
-		//~ indices.insert(indices.end(), {4, 6, 2});
-		//~ indices.insert(indices.end(), {4, 2, 0});
-		//~ 
-		//~ indices.insert(indices.end(), {2, 6, 7});
-		//~ indices.insert(indices.end(), {2, 7, 3});
-		//~ 
-		//~ indices.insert(indices.end(), {0, 4, 5});
-		//~ indices.insert(indices.end(), {0, 5, 1});
-		//~ 
-		//~ 
-		//~ // now perform triangle intersections
-		//~ 
-		//~ 
-		//~ Ray ray = castRay(_click_data, _camera);
-		//~ 
-		//~ for (int id = 0; id < indices.size()/3; id++)
-		//~ {
-			//~ glm::vec3 vtx_a = bbox_vertices[indices[(id*3) + 0]];
-			//~ glm::vec3 vtx_b = bbox_vertices[indices[(id*3) + 1]];
-			//~ glm::vec3 vtx_c = bbox_vertices[indices[(id*3) + 2]];
-			//~ 
-			//~ glm::vec3 hit_pos;
-			//~ bool hit = ray_triangle_intersect(ray , vtx_a, vtx_b, vtx_c, hit_pos);
-			//~ 
-			//~ if(hit)
-			//~ {
-				//~ printf(" just hit boudingox triangle !!! for fuck sake !!!\n");
-				//~ hit_data.position = hit_pos;
-				//~ hit_data.face_id = id;
-				//~ return true;
-			//~ }else{
-				//~ printf("no hit\n");
-			//~ }
-		//~ }
-		//~ 
-	//~ 
-	//~ 
-		//~ 
-		//~ 
-	//~ 
-	//~ 
-	//~ return false;
-//~ }
-//~ 
-//~ bool Raycaster::intersectMesh(ClickData click_data, Camera& camera, Mesh& mesh, HitData& _hit_data)
-//~ {
-	//~ 
-	//~ //// why a new ray ???!!!	
-	//~ Ray ray = castRay(click_data, camera);
-	//~ std::vector<HitData> hits;
-	//~ for (int tri_id = 0; tri_id < mesh.faces.size(); tri_id++)
-	//~ {
-		//~ Face& face = mesh.faces[tri_id];
-		//~ glm::vec3 vtx_a = mesh.points[face.getVertex(0).point_id].position;
-		//~ glm::vec3 vtx_b = mesh.points[face.getVertex(1).point_id].position;
-		//~ glm::vec3 vtx_c = mesh.points[face.getVertex(2).point_id].position;
-		//~ 
-		//~ glm::vec3 hit_pos;
-		//~ bool hit = ray_triangle_intersect(ray ,vtx_a , vtx_b, vtx_c, hit_pos);
-		//~ 
-		//~ if(hit){
-			//~ HitData temp_data;
-			//~ temp_data.position = hit_pos;
-			//~ temp_data.face_id = tri_id;
-			
-			//~ hits.push_back(temp_data);
-			
-		//~ }
-		//~ 
-	//~ }
-	//~ 
-	//~ 
-	//~ std::sort(hits.begin(), hits.end(), [camera](HitData hit1, HitData hit2){
-		//~ float dist1 = glm::distance(hit1.position, camera.position);
-		//~ float dist2 = glm::distance(hit2.position, camera.position);
-		//~ return dist1 < dist2;
-	//~ });
-	//~ 
-	//~ if( hits.size() > 0)
-	//~ {
-		//~ _hit_data = hits[0];
-		//~ return true;
-	//~ }
-	//~ 
-	//~ 
-	//~ return false;
-//~ }
-//~ 
-//~ bool Raycaster::intersectMeshes(ClickData click_data, Camera& camera, std::vector<Mesh>& meshes, HitData& _hit_data)
-//~ {
-	//~ std::vector<int> hit_ids;
-	//~ for(int mesh_id = 0; mesh_id < meshes.size(); mesh_id++)
-	//~ {
-		//~ HitData bbox_hit_data;
-		//~ bool hit_bbox = intersectBoudingBox( click_data, camera, meshes[mesh_id], bbox_hit_data);
-		//~ if(hit_bbox)
-		//~ {
-			
-			
-			//~ hit_ids.push_back(mesh_id);
-			
-		//~ }
-	//~ }
-	//~ 
-	//~ if(hit_ids.size() > 0)
-	//~ {
-		//~ 
-		//~ std::vector<HitData> mesh_hits;
-		//~ for (int i = 0; i < hit_ids.size(); i++)
-		//~ {
-			//~ Mesh& cur_mesh = meshes[hit_ids[i]];
-			//~ HitData mesh_hit_data;
-			//~ bool hit_mesh = intersectMesh(click_data, camera, cur_mesh, mesh_hit_data);
-			//~ 
-			//~ if( hit_mesh){
-				//~ mesh_hits.push_back(mesh_hit_data);
-				//~ printf("HIT MESH !!!!!\n");
-			//~ }
-		//~ }
-		//~ 
-		//~ if( mesh_hits.size() > 0){
-				//~ 
-			//~ glm::vec3 cam_pos = camera.position;	
-			//~ std::sort( mesh_hits.begin(), mesh_hits.end(), [cam_pos](HitData hit1,HitData hit2){
-				//~ float dist1 = glm::distance(cam_pos, hit1.position);
-				//~ float dist2 = glm::distance(cam_pos, hit2.position);
-				//~ return dist1 < dist2;
-			//~ });
-			//~ 
-			//~ _hit_data = mesh_hits[0];
-			//~ return true;
-		//~ }
-		//~ 
-	//~ }
-	//~ 
-	//~ return false;
-//~ }
 

@@ -10,7 +10,7 @@ The output was:
 
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
 
-The C compiler identification is GNU, found in "/home/pi/projects/raytracer/build/CMakeFiles/3.6.2/CompilerIdC/a.out"
+The C compiler identification is GNU, found in "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/3.6.2/CompilerIdC/a.out"
 
 Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
 Compiler: /usr/bin/c++ 
@@ -23,33 +23,33 @@ The output was:
 
 Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
 
-The CXX compiler identification is GNU, found in "/home/pi/projects/raytracer/build/CMakeFiles/3.6.2/CompilerIdCXX/a.out"
+The CXX compiler identification is GNU, found in "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/3.6.2/CompilerIdCXX/a.out"
 
 Determining if the C compiler works passed with the following output:
-Change Dir: /home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp
+Change Dir: /home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_f95d3/fast"
-/usr/bin/make -f CMakeFiles/cmTC_f95d3.dir/build.make CMakeFiles/cmTC_f95d3.dir/build
-make[1]: Entering directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_f95d3.dir/testCCompiler.c.o
-/usr/bin/cc     -o CMakeFiles/cmTC_f95d3.dir/testCCompiler.c.o   -c /home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp/testCCompiler.c
-Linking C executable cmTC_f95d3
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f95d3.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_f95d3.dir/testCCompiler.c.o  -o cmTC_f95d3 -rdynamic 
-make[1]: Leaving directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_043b9/fast"
+/usr/bin/make -f CMakeFiles/cmTC_043b9.dir/build.make CMakeFiles/cmTC_043b9.dir/build
+make[1]: Entering directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_043b9.dir/testCCompiler.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_043b9.dir/testCCompiler.c.o   -c /home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_043b9
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_043b9.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_043b9.dir/testCCompiler.c.o  -o cmTC_043b9 -rdynamic 
+make[1]: Leaving directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
 
 
 Detecting C compiler ABI info compiled with the following output:
-Change Dir: /home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp
+Change Dir: /home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_91245/fast"
-/usr/bin/make -f CMakeFiles/cmTC_91245.dir/build.make CMakeFiles/cmTC_91245.dir/build
-make[1]: Entering directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_91245.dir/CMakeCCompilerABI.c.o
-/usr/bin/cc     -o CMakeFiles/cmTC_91245.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.6/Modules/CMakeCCompilerABI.c
-Linking C executable cmTC_91245
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_91245.dir/link.txt --verbose=1
-/usr/bin/cc      -v CMakeFiles/cmTC_91245.dir/CMakeCCompilerABI.c.o  -o cmTC_91245 -rdynamic  
+Run Build Command:"/usr/bin/make" "cmTC_c22ef/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c22ef.dir/build.make CMakeFiles/cmTC_c22ef.dir/build
+make[1]: Entering directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c22ef.dir/CMakeCCompilerABI.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_c22ef.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.6/Modules/CMakeCCompilerABI.c
+Linking C executable cmTC_c22ef
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c22ef.dir/link.txt --verbose=1
+/usr/bin/cc      -v CMakeFiles/cmTC_c22ef.dir/CMakeCCompilerABI.c.o  -o cmTC_c22ef -rdynamic  
 Using built-in specs.
 COLLECT_GCC=/usr/bin/cc
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-linux-gnueabihf/4.9/lto-wrapper
@@ -59,23 +59,23 @@ Thread model: posix
 gcc version 4.9.2 (Raspbian 4.9.2-10+deb8u1) 
 COMPILER_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.9/:/usr/lib/gcc/arm-linux-gnueabihf/4.9/:/usr/lib/gcc/arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.9/:/usr/lib/gcc/arm-linux-gnueabihf/
 LIBRARY_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.9/:/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../:/lib/arm-linux-gnueabihf/:/lib/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_91245' '-rdynamic' '-march=armv6' '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu'
- /usr/lib/gcc/arm-linux-gnueabihf/4.9/collect2 -plugin /usr/lib/gcc/arm-linux-gnueabihf/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-linux-gnueabihf/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccLmcQh5.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu -m armelf_linux_eabi -o cmTC_91245 /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/crtbegin.o -L/usr/lib/gcc/arm-linux-gnueabihf/4.9 -L/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../.. -L/lib/arm-linux-gnueabihf -L/usr/lib/arm-linux-gnueabihf CMakeFiles/cmTC_91245.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/arm-linux-gnueabihf/4.9/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crtn.o
-make[1]: Leaving directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_c22ef' '-rdynamic' '-march=armv6' '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu'
+ /usr/lib/gcc/arm-linux-gnueabihf/4.9/collect2 -plugin /usr/lib/gcc/arm-linux-gnueabihf/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-linux-gnueabihf/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccf4Ns6s.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu -m armelf_linux_eabi -o cmTC_c22ef /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/crtbegin.o -L/usr/lib/gcc/arm-linux-gnueabihf/4.9 -L/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../.. -L/lib/arm-linux-gnueabihf -L/usr/lib/arm-linux-gnueabihf CMakeFiles/cmTC_c22ef.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/arm-linux-gnueabihf/4.9/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crtn.o
+make[1]: Leaving directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
 
 
 Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp]
+  ignore line: [Change Dir: /home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_91245/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_91245.dir/build.make CMakeFiles/cmTC_91245.dir/build]
-  ignore line: [make[1]: Entering directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp']
-  ignore line: [Building C object CMakeFiles/cmTC_91245.dir/CMakeCCompilerABI.c.o]
-  ignore line: [/usr/bin/cc     -o CMakeFiles/cmTC_91245.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.6/Modules/CMakeCCompilerABI.c]
-  ignore line: [Linking C executable cmTC_91245]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_91245.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/cc      -v CMakeFiles/cmTC_91245.dir/CMakeCCompilerABI.c.o  -o cmTC_91245 -rdynamic  ]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_c22ef/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_c22ef.dir/build.make CMakeFiles/cmTC_c22ef.dir/build]
+  ignore line: [make[1]: Entering directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_c22ef.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/cc     -o CMakeFiles/cmTC_c22ef.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.6/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTC_c22ef]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c22ef.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/cc      -v CMakeFiles/cmTC_c22ef.dir/CMakeCCompilerABI.c.o  -o cmTC_c22ef -rdynamic  ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/cc]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-linux-gnueabihf/4.9/lto-wrapper]
@@ -85,13 +85,13 @@ Parsed C implicit link information from above output:
   ignore line: [gcc version 4.9.2 (Raspbian 4.9.2-10+deb8u1) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.9/:/usr/lib/gcc/arm-linux-gnueabihf/4.9/:/usr/lib/gcc/arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.9/:/usr/lib/gcc/arm-linux-gnueabihf/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.9/:/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../:/lib/arm-linux-gnueabihf/:/lib/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_91245' '-rdynamic' '-march=armv6' '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu']
-  link line: [ /usr/lib/gcc/arm-linux-gnueabihf/4.9/collect2 -plugin /usr/lib/gcc/arm-linux-gnueabihf/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-linux-gnueabihf/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccLmcQh5.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu -m armelf_linux_eabi -o cmTC_91245 /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/crtbegin.o -L/usr/lib/gcc/arm-linux-gnueabihf/4.9 -L/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../.. -L/lib/arm-linux-gnueabihf -L/usr/lib/arm-linux-gnueabihf CMakeFiles/cmTC_91245.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/arm-linux-gnueabihf/4.9/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_c22ef' '-rdynamic' '-march=armv6' '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu']
+  link line: [ /usr/lib/gcc/arm-linux-gnueabihf/4.9/collect2 -plugin /usr/lib/gcc/arm-linux-gnueabihf/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-linux-gnueabihf/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccf4Ns6s.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu -m armelf_linux_eabi -o cmTC_c22ef /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/crtbegin.o -L/usr/lib/gcc/arm-linux-gnueabihf/4.9 -L/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../.. -L/lib/arm-linux-gnueabihf -L/usr/lib/arm-linux-gnueabihf CMakeFiles/cmTC_c22ef.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/arm-linux-gnueabihf/4.9/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crtn.o]
     arg [/usr/lib/gcc/arm-linux-gnueabihf/4.9/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/arm-linux-gnueabihf/4.9/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/arm-linux-gnueabihf/4.9/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ccLmcQh5.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccf4Ns6s.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -108,7 +108,7 @@ Parsed C implicit link information from above output:
     arg [-m] ==> ignore
     arg [armelf_linux_eabi] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_91245] ==> ignore
+    arg [cmTC_c22ef] ==> ignore
     arg [/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crt1.o] ==> ignore
     arg [/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crti.o] ==> ignore
     arg [/usr/lib/gcc/arm-linux-gnueabihf/4.9/crtbegin.o] ==> ignore
@@ -117,7 +117,7 @@ Parsed C implicit link information from above output:
     arg [-L/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../..] ==> dir [/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../..]
     arg [-L/lib/arm-linux-gnueabihf] ==> dir [/lib/arm-linux-gnueabihf]
     arg [-L/usr/lib/arm-linux-gnueabihf] ==> dir [/usr/lib/arm-linux-gnueabihf]
-    arg [CMakeFiles/cmTC_91245.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [CMakeFiles/cmTC_c22ef.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [--as-needed] ==> ignore
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -146,17 +146,17 @@ Parsed C implicit link information from above output:
 
 
 Detecting C [-std=c11] compiler features compiled with the following output:
-Change Dir: /home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp
+Change Dir: /home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_4fa5f/fast"
-/usr/bin/make -f CMakeFiles/cmTC_4fa5f.dir/build.make CMakeFiles/cmTC_4fa5f.dir/build
-make[1]: Entering directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_4fa5f.dir/feature_tests.c.o
-/usr/bin/cc    -std=c11 -o CMakeFiles/cmTC_4fa5f.dir/feature_tests.c.o   -c /home/pi/projects/raytracer/build/CMakeFiles/feature_tests.c
-Linking C executable cmTC_4fa5f
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4fa5f.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_4fa5f.dir/feature_tests.c.o  -o cmTC_4fa5f -rdynamic 
-make[1]: Leaving directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_6eb3c/fast"
+/usr/bin/make -f CMakeFiles/cmTC_6eb3c.dir/build.make CMakeFiles/cmTC_6eb3c.dir/build
+make[1]: Entering directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6eb3c.dir/feature_tests.c.o
+/usr/bin/cc    -std=c11 -o CMakeFiles/cmTC_6eb3c.dir/feature_tests.c.o   -c /home/pi/projects/raytracer_SDL2/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_6eb3c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6eb3c.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_6eb3c.dir/feature_tests.c.o  -o cmTC_6eb3c -rdynamic 
+make[1]: Leaving directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -166,17 +166,17 @@ make[1]: Leaving directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTm
 
 
 Detecting C [-std=c99] compiler features compiled with the following output:
-Change Dir: /home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp
+Change Dir: /home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_d8592/fast"
-/usr/bin/make -f CMakeFiles/cmTC_d8592.dir/build.make CMakeFiles/cmTC_d8592.dir/build
-make[1]: Entering directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_d8592.dir/feature_tests.c.o
-/usr/bin/cc    -std=c99 -o CMakeFiles/cmTC_d8592.dir/feature_tests.c.o   -c /home/pi/projects/raytracer/build/CMakeFiles/feature_tests.c
-Linking C executable cmTC_d8592
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d8592.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_d8592.dir/feature_tests.c.o  -o cmTC_d8592 -rdynamic 
-make[1]: Leaving directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_1e180/fast"
+/usr/bin/make -f CMakeFiles/cmTC_1e180.dir/build.make CMakeFiles/cmTC_1e180.dir/build
+make[1]: Entering directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1e180.dir/feature_tests.c.o
+/usr/bin/cc    -std=c99 -o CMakeFiles/cmTC_1e180.dir/feature_tests.c.o   -c /home/pi/projects/raytracer_SDL2/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_1e180
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1e180.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_1e180.dir/feature_tests.c.o  -o cmTC_1e180 -rdynamic 
+make[1]: Leaving directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -186,17 +186,17 @@ make[1]: Leaving directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTm
 
 
 Detecting C [-std=c90] compiler features compiled with the following output:
-Change Dir: /home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp
+Change Dir: /home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_bd764/fast"
-/usr/bin/make -f CMakeFiles/cmTC_bd764.dir/build.make CMakeFiles/cmTC_bd764.dir/build
-make[1]: Entering directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_bd764.dir/feature_tests.c.o
-/usr/bin/cc    -std=c90 -o CMakeFiles/cmTC_bd764.dir/feature_tests.c.o   -c /home/pi/projects/raytracer/build/CMakeFiles/feature_tests.c
-Linking C executable cmTC_bd764
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bd764.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_bd764.dir/feature_tests.c.o  -o cmTC_bd764 -rdynamic 
-make[1]: Leaving directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_8562d/fast"
+/usr/bin/make -f CMakeFiles/cmTC_8562d.dir/build.make CMakeFiles/cmTC_8562d.dir/build
+make[1]: Entering directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_8562d.dir/feature_tests.c.o
+/usr/bin/cc    -std=c90 -o CMakeFiles/cmTC_8562d.dir/feature_tests.c.o   -c /home/pi/projects/raytracer_SDL2/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_8562d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8562d.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_8562d.dir/feature_tests.c.o  -o cmTC_8562d -rdynamic 
+make[1]: Leaving directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -204,30 +204,30 @@ make[1]: Leaving directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTm
     Feature record: C_FEATURE:0c_static_assert
     Feature record: C_FEATURE:0c_variadic_macros
 Determining if the CXX compiler works passed with the following output:
-Change Dir: /home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp
+Change Dir: /home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_c9263/fast"
-/usr/bin/make -f CMakeFiles/cmTC_c9263.dir/build.make CMakeFiles/cmTC_c9263.dir/build
-make[1]: Entering directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_c9263.dir/testCXXCompiler.cxx.o
-/usr/bin/c++      -o CMakeFiles/cmTC_c9263.dir/testCXXCompiler.cxx.o -c /home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX executable cmTC_c9263
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c9263.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTC_c9263.dir/testCXXCompiler.cxx.o  -o cmTC_c9263 -rdynamic 
-make[1]: Leaving directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_9fac7/fast"
+/usr/bin/make -f CMakeFiles/cmTC_9fac7.dir/build.make CMakeFiles/cmTC_9fac7.dir/build
+make[1]: Entering directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_9fac7.dir/testCXXCompiler.cxx.o
+/usr/bin/c++      -o CMakeFiles/cmTC_9fac7.dir/testCXXCompiler.cxx.o -c /home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_9fac7
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9fac7.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTC_9fac7.dir/testCXXCompiler.cxx.o  -o cmTC_9fac7 -rdynamic 
+make[1]: Leaving directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
 
 
 Detecting CXX compiler ABI info compiled with the following output:
-Change Dir: /home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp
+Change Dir: /home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_33867/fast"
-/usr/bin/make -f CMakeFiles/cmTC_33867.dir/build.make CMakeFiles/cmTC_33867.dir/build
-make[1]: Entering directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_33867.dir/CMakeCXXCompilerABI.cpp.o
-/usr/bin/c++      -o CMakeFiles/cmTC_33867.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.6/Modules/CMakeCXXCompilerABI.cpp
-Linking CXX executable cmTC_33867
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_33867.dir/link.txt --verbose=1
-/usr/bin/c++       -v CMakeFiles/cmTC_33867.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_33867 -rdynamic  
+Run Build Command:"/usr/bin/make" "cmTC_14194/fast"
+/usr/bin/make -f CMakeFiles/cmTC_14194.dir/build.make CMakeFiles/cmTC_14194.dir/build
+make[1]: Entering directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_14194.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/c++      -o CMakeFiles/cmTC_14194.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.6/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_14194
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_14194.dir/link.txt --verbose=1
+/usr/bin/c++       -v CMakeFiles/cmTC_14194.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_14194 -rdynamic  
 Using built-in specs.
 COLLECT_GCC=/usr/bin/c++
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-linux-gnueabihf/4.9/lto-wrapper
@@ -237,23 +237,23 @@ Thread model: posix
 gcc version 4.9.2 (Raspbian 4.9.2-10+deb8u1) 
 COMPILER_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.9/:/usr/lib/gcc/arm-linux-gnueabihf/4.9/:/usr/lib/gcc/arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.9/:/usr/lib/gcc/arm-linux-gnueabihf/
 LIBRARY_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.9/:/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../:/lib/arm-linux-gnueabihf/:/lib/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_33867' '-rdynamic' '-shared-libgcc' '-march=armv6' '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu'
- /usr/lib/gcc/arm-linux-gnueabihf/4.9/collect2 -plugin /usr/lib/gcc/arm-linux-gnueabihf/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-linux-gnueabihf/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/cc1CjlGn.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu -m armelf_linux_eabi -o cmTC_33867 /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/crtbegin.o -L/usr/lib/gcc/arm-linux-gnueabihf/4.9 -L/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../.. -L/lib/arm-linux-gnueabihf -L/usr/lib/arm-linux-gnueabihf CMakeFiles/cmTC_33867.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/arm-linux-gnueabihf/4.9/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crtn.o
-make[1]: Leaving directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_14194' '-rdynamic' '-shared-libgcc' '-march=armv6' '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu'
+ /usr/lib/gcc/arm-linux-gnueabihf/4.9/collect2 -plugin /usr/lib/gcc/arm-linux-gnueabihf/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-linux-gnueabihf/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccXVvPOQ.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu -m armelf_linux_eabi -o cmTC_14194 /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/crtbegin.o -L/usr/lib/gcc/arm-linux-gnueabihf/4.9 -L/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../.. -L/lib/arm-linux-gnueabihf -L/usr/lib/arm-linux-gnueabihf CMakeFiles/cmTC_14194.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/arm-linux-gnueabihf/4.9/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crtn.o
+make[1]: Leaving directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
 
 
 Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp]
+  ignore line: [Change Dir: /home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_33867/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_33867.dir/build.make CMakeFiles/cmTC_33867.dir/build]
-  ignore line: [make[1]: Entering directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp']
-  ignore line: [Building CXX object CMakeFiles/cmTC_33867.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/usr/bin/c++      -o CMakeFiles/cmTC_33867.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.6/Modules/CMakeCXXCompilerABI.cpp]
-  ignore line: [Linking CXX executable cmTC_33867]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_33867.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/c++       -v CMakeFiles/cmTC_33867.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_33867 -rdynamic  ]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_14194/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_14194.dir/build.make CMakeFiles/cmTC_14194.dir/build]
+  ignore line: [make[1]: Entering directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_14194.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/c++      -o CMakeFiles/cmTC_14194.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.6/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTC_14194]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_14194.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/c++       -v CMakeFiles/cmTC_14194.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_14194 -rdynamic  ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/c++]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-linux-gnueabihf/4.9/lto-wrapper]
@@ -263,13 +263,13 @@ Parsed CXX implicit link information from above output:
   ignore line: [gcc version 4.9.2 (Raspbian 4.9.2-10+deb8u1) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.9/:/usr/lib/gcc/arm-linux-gnueabihf/4.9/:/usr/lib/gcc/arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.9/:/usr/lib/gcc/arm-linux-gnueabihf/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/arm-linux-gnueabihf/4.9/:/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../:/lib/arm-linux-gnueabihf/:/lib/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_33867' '-rdynamic' '-shared-libgcc' '-march=armv6' '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu']
-  link line: [ /usr/lib/gcc/arm-linux-gnueabihf/4.9/collect2 -plugin /usr/lib/gcc/arm-linux-gnueabihf/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-linux-gnueabihf/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/cc1CjlGn.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu -m armelf_linux_eabi -o cmTC_33867 /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/crtbegin.o -L/usr/lib/gcc/arm-linux-gnueabihf/4.9 -L/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../.. -L/lib/arm-linux-gnueabihf -L/usr/lib/arm-linux-gnueabihf CMakeFiles/cmTC_33867.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/arm-linux-gnueabihf/4.9/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_14194' '-rdynamic' '-shared-libgcc' '-march=armv6' '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu']
+  link line: [ /usr/lib/gcc/arm-linux-gnueabihf/4.9/collect2 -plugin /usr/lib/gcc/arm-linux-gnueabihf/4.9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-linux-gnueabihf/4.9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccXVvPOQ.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu -m armelf_linux_eabi -o cmTC_14194 /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/crtbegin.o -L/usr/lib/gcc/arm-linux-gnueabihf/4.9 -L/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../.. -L/lib/arm-linux-gnueabihf -L/usr/lib/arm-linux-gnueabihf CMakeFiles/cmTC_14194.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/arm-linux-gnueabihf/4.9/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crtn.o]
     arg [/usr/lib/gcc/arm-linux-gnueabihf/4.9/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/arm-linux-gnueabihf/4.9/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/arm-linux-gnueabihf/4.9/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/cc1CjlGn.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccXVvPOQ.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -286,7 +286,7 @@ Parsed CXX implicit link information from above output:
     arg [-m] ==> ignore
     arg [armelf_linux_eabi] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_33867] ==> ignore
+    arg [cmTC_14194] ==> ignore
     arg [/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crt1.o] ==> ignore
     arg [/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../../arm-linux-gnueabihf/crti.o] ==> ignore
     arg [/usr/lib/gcc/arm-linux-gnueabihf/4.9/crtbegin.o] ==> ignore
@@ -295,7 +295,7 @@ Parsed CXX implicit link information from above output:
     arg [-L/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../..] ==> dir [/usr/lib/gcc/arm-linux-gnueabihf/4.9/../../..]
     arg [-L/lib/arm-linux-gnueabihf] ==> dir [/lib/arm-linux-gnueabihf]
     arg [-L/usr/lib/arm-linux-gnueabihf] ==> dir [/usr/lib/arm-linux-gnueabihf]
-    arg [CMakeFiles/cmTC_33867.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTC_14194.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -322,17 +322,17 @@ Parsed CXX implicit link information from above output:
 
 
 Detecting CXX [-std=c++14] compiler features compiled with the following output:
-Change Dir: /home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp
+Change Dir: /home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_42ed4/fast"
-/usr/bin/make -f CMakeFiles/cmTC_42ed4.dir/build.make CMakeFiles/cmTC_42ed4.dir/build
-make[1]: Entering directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_42ed4.dir/feature_tests.cxx.o
-/usr/bin/c++     -std=c++14 -o CMakeFiles/cmTC_42ed4.dir/feature_tests.cxx.o -c /home/pi/projects/raytracer/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_42ed4
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_42ed4.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTC_42ed4.dir/feature_tests.cxx.o  -o cmTC_42ed4 -rdynamic 
-make[1]: Leaving directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_7f2a8/fast"
+/usr/bin/make -f CMakeFiles/cmTC_7f2a8.dir/build.make CMakeFiles/cmTC_7f2a8.dir/build
+make[1]: Entering directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_7f2a8.dir/feature_tests.cxx.o
+/usr/bin/c++     -std=c++14 -o CMakeFiles/cmTC_7f2a8.dir/feature_tests.cxx.o -c /home/pi/projects/raytracer_SDL2/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_7f2a8
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7f2a8.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTC_7f2a8.dir/feature_tests.cxx.o  -o cmTC_7f2a8 -rdynamic 
+make[1]: Leaving directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
 
 
     Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
@@ -395,17 +395,17 @@ make[1]: Leaving directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTm
 
 
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
-Change Dir: /home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp
+Change Dir: /home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_fc680/fast"
-/usr/bin/make -f CMakeFiles/cmTC_fc680.dir/build.make CMakeFiles/cmTC_fc680.dir/build
-make[1]: Entering directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_fc680.dir/feature_tests.cxx.o
-/usr/bin/c++     -std=c++11 -o CMakeFiles/cmTC_fc680.dir/feature_tests.cxx.o -c /home/pi/projects/raytracer/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_fc680
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fc680.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTC_fc680.dir/feature_tests.cxx.o  -o cmTC_fc680 -rdynamic 
-make[1]: Leaving directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_8ff19/fast"
+/usr/bin/make -f CMakeFiles/cmTC_8ff19.dir/build.make CMakeFiles/cmTC_8ff19.dir/build
+make[1]: Entering directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_8ff19.dir/feature_tests.cxx.o
+/usr/bin/c++     -std=c++11 -o CMakeFiles/cmTC_8ff19.dir/feature_tests.cxx.o -c /home/pi/projects/raytracer_SDL2/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_8ff19
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8ff19.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTC_8ff19.dir/feature_tests.cxx.o  -o cmTC_8ff19 -rdynamic 
+make[1]: Leaving directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
 
 
     Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
@@ -468,17 +468,17 @@ make[1]: Leaving directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTm
 
 
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
-Change Dir: /home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp
+Change Dir: /home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_19055/fast"
-/usr/bin/make -f CMakeFiles/cmTC_19055.dir/build.make CMakeFiles/cmTC_19055.dir/build
-make[1]: Entering directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_19055.dir/feature_tests.cxx.o
-/usr/bin/c++     -std=c++98 -o CMakeFiles/cmTC_19055.dir/feature_tests.cxx.o -c /home/pi/projects/raytracer/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_19055
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_19055.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTC_19055.dir/feature_tests.cxx.o  -o cmTC_19055 -rdynamic 
-make[1]: Leaving directory '/home/pi/projects/raytracer/build/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_ea8f7/fast"
+/usr/bin/make -f CMakeFiles/cmTC_ea8f7.dir/build.make CMakeFiles/cmTC_ea8f7.dir/build
+make[1]: Entering directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_ea8f7.dir/feature_tests.cxx.o
+/usr/bin/c++     -std=c++98 -o CMakeFiles/cmTC_ea8f7.dir/feature_tests.cxx.o -c /home/pi/projects/raytracer_SDL2/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_ea8f7
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ea8f7.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTC_ea8f7.dir/feature_tests.cxx.o  -o cmTC_ea8f7 -rdynamic 
+make[1]: Leaving directory '/home/pi/projects/raytracer_SDL2/build/CMakeFiles/CMakeTmp'
 
 
     Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers

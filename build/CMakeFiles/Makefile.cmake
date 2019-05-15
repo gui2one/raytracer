@@ -41,6 +41,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/raytracer.dir/DependInfo.cmake"
+  "CMakeFiles/raytracer_SDL2.dir/DependInfo.cmake"
   "CMakeFiles/PCHLib.dir/DependInfo.cmake"
   )

@@ -22,6 +22,7 @@ struct Point
 	
 	glm::vec3 position;
 	glm::vec3 normal;
+	glm::vec2 t_coords = glm::vec2(0.0f, 0.0f);
 };
 
 struct Vertex
@@ -42,6 +43,7 @@ struct Vertex
 	
 	unsigned int point_id;
 	glm::vec3 normal;
+	glm::vec2 t_coords = glm::vec2(0.0f, 0.0f);
 };
 
 class Face
@@ -84,6 +86,10 @@ class Mesh
 		std::vector<Face> faces;
 		
 		RTMaterial material;
+		
+		glm::vec3 translate;
+		glm::vec3 rotate;
+		glm::vec3 scale;
 		
 		
 		

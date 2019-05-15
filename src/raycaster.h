@@ -7,12 +7,7 @@
 #include "mesh.h"
 #include "kdnode.h"
 #include "ray.h"
-//~ struct Ray
-//~ {	
-	//~ glm::vec3 origin;
-	//~ glm::vec3 direction;
-		//~ 
-//~ };
+
 
 struct HitData
 {
@@ -42,7 +37,7 @@ class Raycaster
 	public:
 		Raycaster();
 		Ray castRay(ClickData click_data, Camera& camera);
-		//~ glm::vec2 toScreenSpace(ClickData click_data);
+		
 		glm::vec3 screenToWorld(ClickData click_data, Camera& camera);
 		glm::vec3 cartesian_to_barycentric(glm::vec3& p, glm::vec3& a, glm::vec3& b, glm::vec3& c);
 		bool ray_triangle_intersect(Ray& ray, glm::vec3& vtx_a, glm::vec3& vtx_b, glm::vec3& vtx_c, glm::vec3& hit_pos, glm::vec3& bary_coords);
@@ -50,11 +45,7 @@ class Raycaster
 
 		bool intersectKDNode(Ray& ray, KDNode * kd_node, int mesh_id, std::vector<HitData>& hit_datas, bool bail_early = false);
 		bool intersectKDNodes(Ray& ray, std::vector<KDNode *> kd_nodes, std::vector<HitData>& hit_datas, bool bail_early = false);
-		
-		//~ bool intersectBoudingBox(ClickData _click_data, Camera& _camera, Mesh& _target_mesh, HitData& _hit_data);
-		
-		//~ bool intersectMesh(ClickData click_data, Camera& camera, Mesh& mesh, HitData& _hit_data);
-		//~ bool intersectMeshes(ClickData click_data, Camera& camera, std::vector<Mesh>& meshes, HitData& _hit_data);		
+	
 		
 			
 	private:

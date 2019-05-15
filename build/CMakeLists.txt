@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(raytracer)
+project(raytracer_SDL2)
 
 set(CMAKE_CXX_FLAGS -std=c++11)
 
@@ -20,8 +20,11 @@ include_directories(../src/include/google/gtest)
 #~ include_directories(../src/include/boost/threadpool)
 include_directories(~/Downloads/boost_1_50_0)
 link_directories(../src/libs/)
+link_directories(/usr/include/SDL2)
+
+
 #~ link_directories(../src/include/google/)
-add_executable(raytracer
+add_executable(raytracer_SDL2
 
 	../src/scene_file_loader.cpp
 	../src/kdnode.cpp
@@ -52,19 +55,20 @@ add_executable(raytracer
 	
 )
 
-target_link_libraries(raytracer -lassimp)
-target_link_libraries(raytracer PCHLib)
-target_link_libraries(raytracer -lGL)
-#~ target_link_libraries(raytracer -lboost_asio)
-target_link_libraries(raytracer -lboost_system)
-target_link_libraries(raytracer -lboost_thread)
-target_link_libraries(raytracer -lglog)
+target_link_libraries(raytracer_SDL2 -lassimp)
+target_link_libraries(raytracer_SDL2 PCHLib)
+target_link_libraries(raytracer_SDL2 -lGLEW)
+target_link_libraries(raytracer_SDL2 -lGL)
+#~ target_link_libraries(raytracer_SDL2 -lboost_asio)
+target_link_libraries(raytracer_SDL2 -lboost_system)
+target_link_libraries(raytracer_SDL2 -lboost_thread)
+target_link_libraries(raytracer_SDL2 -lglog)
 
-target_link_libraries(raytracer -pthread)
+target_link_libraries(raytracer_SDL2 -pthread)
 
 
-#~ target_link_libraries(raytracer -lglfw)
-target_link_libraries(raytracer  -L/usr/local/lib -lglfw3 -lrt -lm -ldl -lXrandr -lXinerama -lXxf86vm -lXext -lXcursor -lXrender -lXfixes -lX11 -lxcb -lXau -lXdmcp )
+target_link_libraries(raytracer_SDL2 -L/usr/lib/arm-linux-gnueabihf -lSDL2)
+#~ target_link_libraries(raytracer_SDL2  -L/usr/local/lib -lglfw3 -lrt -lm -ldl -lXrandr -lXinerama -lXxf86vm -lXext -lXcursor -lXrender -lXfixes -lX11 -lxcb -lXau -lXdmcp )
 
-target_link_libraries(raytracer -lGLEW)
+
 

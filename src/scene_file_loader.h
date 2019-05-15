@@ -95,7 +95,11 @@ struct JsonFileMesh
 		ObjLoader loader;
 		
 		Mesh mesh = loader.assimp_load(path);
-		printf("mesh points num : %d\n", mesh.points.size());
+		//~ printf("mesh points num : %d\n", mesh.points.size());
+		mesh.computeNormals();
+		mesh.translate.x = translate[0];
+		mesh.translate.y = translate[1];
+		mesh.translate.z = translate[2];		
 		return mesh;
 	}
 };

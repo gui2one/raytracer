@@ -54,45 +54,45 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pi/projects/raytracer/build
+CMAKE_SOURCE_DIR = /home/pi/projects/raytracer_SDL2/build
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pi/projects/raytracer/build
+CMAKE_BINARY_DIR = /home/pi/projects/raytracer_SDL2/build
 
 #=============================================================================
-# Target rules for target CMakeFiles/raytracer.dir
+# Target rules for target CMakeFiles/raytracer_SDL2.dir
 
 # All Build rule for target.
-CMakeFiles/raytracer.dir/all: CMakeFiles/PCHLib.dir/all
-	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/depend
-	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/pi/projects/raytracer/build/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21 "Built target raytracer"
-.PHONY : CMakeFiles/raytracer.dir/all
+CMakeFiles/raytracer_SDL2.dir/all: CMakeFiles/PCHLib.dir/all
+	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/depend
+	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21 "Built target raytracer_SDL2"
+.PHONY : CMakeFiles/raytracer_SDL2.dir/all
 
 # Include target in all.
-all: CMakeFiles/raytracer.dir/all
+all: CMakeFiles/raytracer_SDL2.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/raytracer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/projects/raytracer/build/CMakeFiles 21
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/raytracer.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/projects/raytracer/build/CMakeFiles 0
-.PHONY : CMakeFiles/raytracer.dir/rule
+CMakeFiles/raytracer_SDL2.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/projects/raytracer_SDL2/build/CMakeFiles 21
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/raytracer_SDL2.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/projects/raytracer_SDL2/build/CMakeFiles 0
+.PHONY : CMakeFiles/raytracer_SDL2.dir/rule
 
 # Convenience name for target.
-raytracer: CMakeFiles/raytracer.dir/rule
+raytracer_SDL2: CMakeFiles/raytracer_SDL2.dir/rule
 
-.PHONY : raytracer
-
-# clean rule for target.
-CMakeFiles/raytracer.dir/clean:
-	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/clean
-.PHONY : CMakeFiles/raytracer.dir/clean
+.PHONY : raytracer_SDL2
 
 # clean rule for target.
-clean: CMakeFiles/raytracer.dir/clean
+CMakeFiles/raytracer_SDL2.dir/clean:
+	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/clean
+.PHONY : CMakeFiles/raytracer_SDL2.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/raytracer_SDL2.dir/clean
 
 .PHONY : clean
 
@@ -103,7 +103,7 @@ clean: CMakeFiles/raytracer.dir/clean
 CMakeFiles/PCHLib.dir/all:
 	$(MAKE) -f CMakeFiles/PCHLib.dir/build.make CMakeFiles/PCHLib.dir/depend
 	$(MAKE) -f CMakeFiles/PCHLib.dir/build.make CMakeFiles/PCHLib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/pi/projects/raytracer/build/CMakeFiles --progress-num=1,2 "Built target PCHLib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=1,2 "Built target PCHLib"
 .PHONY : CMakeFiles/PCHLib.dir/all
 
 # Include target in all.
@@ -113,9 +113,9 @@ all: CMakeFiles/PCHLib.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/PCHLib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/projects/raytracer/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/projects/raytracer_SDL2/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/PCHLib.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/projects/raytracer/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/projects/raytracer_SDL2/build/CMakeFiles 0
 .PHONY : CMakeFiles/PCHLib.dir/rule
 
 # Convenience name for target.

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pi/projects/raytracer/build
+CMAKE_SOURCE_DIR = /home/pi/projects/raytracer_SDL2/build
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pi/projects/raytracer/build
+CMAKE_BINARY_DIR = /home/pi/projects/raytracer_SDL2/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/PCHLib.dir/depend.make
@@ -57,41 +57,41 @@ include CMakeFiles/PCHLib.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/PCHLib.dir/flags.make
 
-CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: CMakeFiles/PCHLib.dir/flags.make
-CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o: /home/pi/projects/raytracer/src/pch.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o -c /home/pi/projects/raytracer/src/pch.cpp
+CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o: CMakeFiles/PCHLib.dir/flags.make
+CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o: /home/pi/projects/raytracer_SDL2/src/pch.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o -c /home/pi/projects/raytracer_SDL2/src/pch.cpp
 
-CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/projects/raytracer/src/pch.cpp > CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.i
+CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/projects/raytracer_SDL2/src/pch.cpp > CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.i
 
-CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/projects/raytracer/src/pch.cpp -o CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.s
+CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/projects/raytracer_SDL2/src/pch.cpp -o CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.s
 
-CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o.requires:
+CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o.requires:
 
-.PHONY : CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o.requires
+.PHONY : CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o.requires
 
-CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o.provides: CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o.requires
-	$(MAKE) -f CMakeFiles/PCHLib.dir/build.make CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o.provides.build
-.PHONY : CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o.provides
+CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o.provides: CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o.requires
+	$(MAKE) -f CMakeFiles/PCHLib.dir/build.make CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o.provides.build
+.PHONY : CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o.provides
 
-CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o.provides.build: CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o
+CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o.provides.build: CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o
 
 
 # Object files for target PCHLib
 PCHLib_OBJECTS = \
-"CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o"
+"CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o"
 
 # External object files for target PCHLib
 PCHLib_EXTERNAL_OBJECTS =
 
-libPCHLib.a: CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o
+libPCHLib.a: CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o
 libPCHLib.a: CMakeFiles/PCHLib.dir/build.make
 libPCHLib.a: CMakeFiles/PCHLib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pi/projects/raytracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libPCHLib.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libPCHLib.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/PCHLib.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/PCHLib.dir/link.txt --verbose=$(VERBOSE)
 
@@ -100,7 +100,7 @@ CMakeFiles/PCHLib.dir/build: libPCHLib.a
 
 .PHONY : CMakeFiles/PCHLib.dir/build
 
-CMakeFiles/PCHLib.dir/requires: CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o.requires
+CMakeFiles/PCHLib.dir/requires: CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o.requires
 
 .PHONY : CMakeFiles/PCHLib.dir/requires
 
@@ -109,6 +109,6 @@ CMakeFiles/PCHLib.dir/clean:
 .PHONY : CMakeFiles/PCHLib.dir/clean
 
 CMakeFiles/PCHLib.dir/depend:
-	cd /home/pi/projects/raytracer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pi/projects/raytracer/build /home/pi/projects/raytracer/build /home/pi/projects/raytracer/build /home/pi/projects/raytracer/build /home/pi/projects/raytracer/build/CMakeFiles/PCHLib.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/pi/projects/raytracer_SDL2/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pi/projects/raytracer_SDL2/build /home/pi/projects/raytracer_SDL2/build /home/pi/projects/raytracer_SDL2/build /home/pi/projects/raytracer_SDL2/build /home/pi/projects/raytracer_SDL2/build/CMakeFiles/PCHLib.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/PCHLib.dir/depend
 
