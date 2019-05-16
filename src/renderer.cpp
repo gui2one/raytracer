@@ -207,15 +207,15 @@ int Renderer::init(std::string scene_file_ , RenderOptions options_)
 
 
 	Light light1;
-	light1.position = glm::vec3(2.0, 0.0, 1.5);
-	light1.color = Color(1.0, 1.0, 1.0, 1.0);
-	light1.intensity = 2.0;
+	light1.position = glm::vec3(4.0, 5.0, 4.0);
+	light1.color = Color(1.0, 0.9, 0.9, 1.0);
+	light1.intensity = 10.0;
 	lights.push_back(light1);
 
 	Light light2;
-	light2.position = glm::vec3(3.0, -3.0, 4.0);
-	light2.color = Color(1.0, 1.0, 1.0, 1.0);
-	light2.intensity = 5.0;
+	light2.position = glm::vec3(-5.0, -3.0, 3.5);
+	light2.color = Color(0.9, 0.9, 1.0, 1.0);
+	light2.intensity = 7.0;
 	lights.push_back(light2);
 //~ 
 	//~ // materials
@@ -237,7 +237,7 @@ int Renderer::init(std::string scene_file_ , RenderOptions options_)
 	//~ SceneFileLoader scene_loader;
 	//~ scene_loader.load(scene_file_, meshes, materials, lights);
 //~ 
-	buildRenderGeometry();
+	buildDisplayGeometry();
 	
 	initFBO(render_width,render_height);
 	
@@ -873,7 +873,7 @@ void Renderer::drawFBO(int r_width, int r_height)
 	GLCall(glBindTexture(GL_TEXTURE_2D, 0));
 }
 
-void Renderer::buildRenderGeometry()
+void Renderer::buildDisplayGeometry()
 {
 	vbos.clear();
 	ibos.clear();
@@ -1039,7 +1039,7 @@ void Renderer::displayScene()
 	//~ displayKDTree();
 
 
-	//~ GLCall(glUseProgram(0));
+	GLCall(glUseProgram(0));
 
 	if( show_fbo )
 	{
@@ -1049,12 +1049,12 @@ void Renderer::displayScene()
 		fbo_shader.useProgram();
 		drawFBO(render_width,render_height);
 
-		//~ GLCall(glUseProgram(0));
+		GLCall(glUseProgram(0));
 	}
 
 
 	SDL_GL_SwapWindow(Window);
-	
+	SDL_Delay(1000/60);
 
 }
 

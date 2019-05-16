@@ -77,7 +77,7 @@ class Renderer
 		void initFBO(int width, int height);
 		void drawFBO(int r_width, int r_height);
 		void setCamPosFromPolar(float u, float v, float _radius, glm::vec3 center = glm::vec3(0.0,0.0,0.0));
-		void buildRenderGeometry();
+		void buildDisplayGeometry();
 		void displayScene();
 		bool shouldClose();
 		
@@ -147,7 +147,7 @@ class Renderer
 		float mouse_old_y = 0.0;
 		float mouse_delta_x, mouse_delta_y;
 		
-		Texture fbo;
+		//~ Texture default_texture;
 		unsigned int fbo_vbo, fbo_texture_id;
 		bool show_fbo = false;
 		

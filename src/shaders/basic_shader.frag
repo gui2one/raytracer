@@ -24,7 +24,7 @@ void main()
 	
 	color = diff * f_color;
 	//~ color = vec4(norm,1.0);
-	//~ color = f_color * texture2D(u_tex,f_t_coords);
+	//~ color = diff * f_color * texture2D(u_tex,f_t_coords);
 	//~ color = texture2D(u_tex,f_t_coords);
 }
 

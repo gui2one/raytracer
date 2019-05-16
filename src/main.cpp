@@ -78,7 +78,7 @@ void createMeshes()
 	
 	renderer.meshes = meshes;
 	
-	renderer.buildRenderGeometry();	
+	renderer.buildDisplayGeometry();	
 }
 
 
@@ -186,6 +186,7 @@ int main(int argc, char ** argv){
 	while(renderer.running){
 			
 		renderer.displayScene();
+		
 
 	}		
 
