@@ -13,8 +13,8 @@ struct Point
 		position.y = y;
 		position.z = z;
 	}
-	Point( glm::vec3 _position) { position = _position; }
-	Point(const Point& other) : position(other.position), normal(other.normal)
+	Point(glm::vec3 _position) { position = _position; }
+	Point(const Point& other) : position(other.position), normal(other.normal), t_coords(other.t_coords)
 	{
 		//~ printf("copy Point !!\n");
 	}
@@ -22,7 +22,7 @@ struct Point
 	
 	glm::vec3 position;
 	glm::vec3 normal;
-	glm::vec2 t_coords = glm::vec2(0.0f, 0.0f);
+	glm::vec2 t_coords;
 };
 
 struct Vertex
@@ -43,7 +43,7 @@ struct Vertex
 	
 	unsigned int point_id;
 	glm::vec3 normal;
-	glm::vec2 t_coords = glm::vec2(0.0f, 0.0f);
+	glm::vec2 t_coords;
 };
 
 class Face

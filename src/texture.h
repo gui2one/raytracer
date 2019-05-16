@@ -24,6 +24,7 @@ class Texture
 		void bind();
 		void unbind();
 		
+		std::vector<unsigned char> data;
 	private:
 		unsigned int id;
 		//~ unsigned char* buffer;

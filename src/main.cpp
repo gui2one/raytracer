@@ -50,6 +50,11 @@ void createMeshes()
 		{
 			Mesh m = loader.assimp_load(loaded_mesh_datas[i].path);
 
+			//~ for (int pt_id = 0; pt_id < m.points.size(); pt_id++)
+			//~ {
+				//~ printf("t coords before : %.3f %.3f \n", m.points[pt_id].t_coords.x, m.points[pt_id].t_coords.);
+			//~ }
+			
 			
 			Color clr;
 			m.material.color = clr;
@@ -61,7 +66,7 @@ void createMeshes()
 			mesh_utils.scale(m, glm::vec3(scale, scale, scale));
 			mesh_utils.rotate(m, glm::vec3(rotate.x * PI /180.0, rotate.y * PI /180.0, rotate.z * PI /180.0));
 			mesh_utils.translate(m, glm::vec3(translate.x, translate.y, translate.z));
-			
+			//~ 
 			//~ m.triangulate();
 			//~ m = mesh_utils.uniquePoints(m);
 			m.computeNormals();
@@ -78,7 +83,7 @@ void createMeshes()
 	
 	renderer.meshes = meshes;
 	
-	renderer.buildDisplayGeometry();	
+	
 }
 
 
@@ -172,15 +177,17 @@ int main(int argc, char ** argv){
 	options.render_width = 320;
 	options.render_height = 240;	
 	
-	renderer.init(scene_file, options);
-	
+		
 	createMeshes();
+	renderer.init(scene_file, options);
+	renderer.buildDisplayGeometry();	
+	
 
 	//~ printf("num points = %d\n", tri_mesh.points.size());
 	//~ printf("num faces = %d\n", tri_mesh.faces.size());	
 	
-	Camera camera;
-	camera.position.y = 5.0;
+	//~ Camera camera;
+	//~ camera.position.y = 5.0;
 		
 
 	while(renderer.running){

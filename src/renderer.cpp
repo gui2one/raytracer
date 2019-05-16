@@ -206,6 +206,8 @@ int Renderer::init(std::string scene_file_ , RenderOptions options_)
 	fbo_shader.createShader();
 
 
+	default_texture.load("../src/res/textures/Basketball.png");
+
 	Light light1;
 	light1.position = glm::vec3(4.0, 5.0, 4.0);
 	light1.color = Color(1.0, 0.9, 0.9, 1.0);
@@ -237,7 +239,7 @@ int Renderer::init(std::string scene_file_ , RenderOptions options_)
 	//~ SceneFileLoader scene_loader;
 	//~ scene_loader.load(scene_file_, meshes, materials, lights);
 //~ 
-	buildDisplayGeometry();
+	//~ buildDisplayGeometry();
 	
 	initFBO(render_width,render_height);
 	
@@ -853,6 +855,7 @@ void Renderer::drawFBO(int r_width, int r_height)
 {
 	//~ int r_width = 320;
 	//~ int r_height = 240;
+	GLCall(glActiveTexture(GL_TEXTURE0));
 	GLCall(glBindTexture(GL_TEXTURE_2D, fbo_texture_id));
 	GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, r_width, r_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, render_buffer_data.data()));
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, fbo_vbo));
@@ -885,7 +888,7 @@ void Renderer::buildDisplayGeometry()
 		OGL_geometry_data geo_data;
 		for(int pt_id = 0; pt_id < meshes[i].points.size(); pt_id++)
 		{
-			//~ printf("t_coords --> %.3f %.3f \n",meshes[i].points[pt_id].t_coords.x, meshes[i].points[pt_id].t_coords.y );
+			printf("t_coords --> %.3f %.3f \n",meshes[i].points[pt_id].t_coords.x, meshes[i].points[pt_id].t_coords.y );
 			glm::vec3 point_pos = meshes[i].points[pt_id].position;
 			glm::vec3 point_normal = meshes[i].points[pt_id].normal;
 			glm::vec2 t_coords = meshes[i].points[pt_id].t_coords;
@@ -1003,8 +1006,10 @@ void Renderer::displayScene()
 	for (int i = 0; i < meshes.size(); i++)
 	{
 		//~ printf("drawing meshe %d\n", i);
-		//~ glUniform1i(glGetUniformLocation(default_shader.m_id,"u_tex"), 0);
+		GLCall(glUniform1i(glGetUniformLocation(default_shader.m_id,"u_tex"), 0));
+		default_texture.bind();
 		
+		//~ GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, default_texture.getWidth(), default_texture.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, default_texture.data.data()));
 		
 		GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"),
 			meshes[i].material.color.r,
@@ -1013,6 +1018,7 @@ void Renderer::displayScene()
 			1.0
 		));
 
+		
 		GLCall(glBindBuffer(GL_ARRAY_BUFFER, vbos[i]));
 		GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibos[i]));
 		GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, 0));
@@ -1030,6 +1036,9 @@ void Renderer::displayScene()
 		GLCall(glDisableVertexAttribArray(2));
 		GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 		GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
+		
+		
+		default_texture.unbind();
 	
 	}
 //~ 

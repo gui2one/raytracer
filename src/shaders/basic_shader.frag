@@ -22,10 +22,10 @@ void main()
 	
 	mediump float diff = max(dot(norm, lightDir), 0.0);
 	
-	color = diff * f_color;
+	//~ color = diff * f_color;
 	//~ color = vec4(norm,1.0);
 	//~ color = diff * f_color * texture2D(u_tex,f_t_coords);
-	//~ color = texture2D(u_tex,f_t_coords);
+	color = texture2D(u_tex,f_t_coords);
 }
 
 

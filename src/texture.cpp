@@ -23,7 +23,7 @@ void Texture::load(std::string path){
 	
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
 
-	
+	data = std::vector<unsigned char>(buffer, buffer + width * height);
 //~ 
 	
 	glBindTexture(GL_TEXTURE_2D, 0);

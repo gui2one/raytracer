@@ -147,7 +147,7 @@ class Renderer
 		float mouse_old_y = 0.0;
 		float mouse_delta_x, mouse_delta_y;
 		
-		//~ Texture default_texture;
+		Texture default_texture;
 		unsigned int fbo_vbo, fbo_texture_id;
 		bool show_fbo = false;
 		

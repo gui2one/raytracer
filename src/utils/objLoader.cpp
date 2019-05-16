@@ -33,12 +33,16 @@ Mesh ObjLoader::assimp_load(std::string file_path){
 			
 			if(scene->mMeshes[0]->HasTextureCoords(0)){
 				
-				//~ printf("getting t_coords from the model\n");
+				
 				point.t_coords.x = scene->mMeshes[0]->mTextureCoords[0][i].x;
 				point.t_coords.y = scene->mMeshes[0]->mTextureCoords[0][i].y;
+				
+				printf("getting t_coords from the model\n");
+				printf("\tu : %.3f\n", point.t_coords.x);
+				printf("\tv : %.3f\n", point.t_coords.y);
 			}else{
-				point.t_coords.x = 0.0;
-				point.t_coords.y = 0.0;
+				point.t_coords.x = point.position.x;
+				point.t_coords.y = point.position.z;
 			}
 			points.push_back(point);
 			//~ std::cout<< "Vertex " <<  "\n";
