@@ -37,9 +37,9 @@ Mesh ObjLoader::assimp_load(std::string file_path){
 				point.t_coords.x = scene->mMeshes[0]->mTextureCoords[0][i].x;
 				point.t_coords.y = scene->mMeshes[0]->mTextureCoords[0][i].y;
 				
-				printf("getting t_coords from the model\n");
-				printf("\tu : %.3f\n", point.t_coords.x);
-				printf("\tv : %.3f\n", point.t_coords.y);
+				//~ printf("getting t_coords from the model\n");
+				//~ printf("\tu : %.3f\n", point.t_coords.x);
+				//~ printf("\tv : %.3f\n", point.t_coords.y);
 			}else{
 				point.t_coords.x = point.position.x;
 				point.t_coords.y = point.position.z;

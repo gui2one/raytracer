@@ -32,9 +32,9 @@ static void stbi_save(std::string path, int w, int h, unsigned char* data)
 	//~ int saved = stbi_write_jpg("stbi_test.jpg", w, h, 3, data,100);
 	int saved = stbi_write_png( path.c_str() , w, h, 3, data, w * 3 * sizeof(unsigned char));
 	if(saved){
-		printf("saved !!! \n");
+		printf("saved %s \n", path.c_str());
 	}else{
-		printf("NOT saved !!! \n");
+		printf("Problem saving PNG file\n");
 	}
 }
 
@@ -182,13 +182,6 @@ int Renderer::init(std::string scene_file_ , RenderOptions options_)
 	//~ std::cout << "raytracer PROJECT" << std::endl;
 
 
-
-
-
-
-
-
-	
 	camera.target_position = glm::vec3(0.0, 0.0, 0.0);
 	camera.up_vector = glm::vec3(0.0, 0.0, 1.0);
 //~ 
@@ -206,40 +199,41 @@ int Renderer::init(std::string scene_file_ , RenderOptions options_)
 	fbo_shader.createShader();
 
 
-	default_texture.load("../src/res/textures/Basketball.png");
-
+	default_texture.load("../src/res/textures/uvgrid.jpg");
+	
+	printf("texture Bytes per pixel : %d\n", default_texture.getBPP());
 	Light light1;
 	light1.position = glm::vec3(4.0, 5.0, 4.0);
 	light1.color = Color(1.0, 0.9, 0.9, 1.0);
-	light1.intensity = 10.0;
+	light1.intensity = 20.0;
 	lights.push_back(light1);
 
 	Light light2;
 	light2.position = glm::vec3(-5.0, -3.0, 3.5);
 	light2.color = Color(0.9, 0.9, 1.0, 1.0);
-	light2.intensity = 7.0;
+	light2.intensity = 15.0;
 	lights.push_back(light2);
 //~ 
 	//~ // materials
-	RTMaterial material1;
-	material1.color = Color(0.9, 0.0, 0.0, 1.0);
-	material1.refl_amount = 0.9;
-	materials.push_back(material1);
-
-	RTMaterial material2;
-	material2.color = Color(1.0,1.0,1.0,1.0);
-	material2.refl_amount = 0.3;
-	materials.push_back(material2);
-
-	RTMaterial material3;
-	material3.color = Color(1.0, 1.0, 1.0, 1.0);
-	material3.refl_amount = 0.9;
-	materials.push_back(material3);
-
-	//~ SceneFileLoader scene_loader;
-	//~ scene_loader.load(scene_file_, meshes, materials, lights);
+	//~ RTMaterial material1;
+	//~ material1.color = Color(0.9, 0.0, 0.0, 1.0);
+	//~ material1.refl_amount = 0.9;
+	//~ materials.push_back(material1);
 //~ 
-	//~ buildDisplayGeometry();
+	//~ RTMaterial material2;
+	//~ material2.color = Color(1.0,1.0,1.0,1.0);
+	//~ material2.refl_amount = 0.3;
+	//~ materials.push_back(material2);
+//~ 
+	//~ RTMaterial material3;
+	//~ material3.color = Color(1.0, 1.0, 1.0, 1.0);
+	//~ material3.refl_amount = 0.9;
+	//~ materials.push_back(material3);
+
+	SceneFileLoader scene_loader;
+	scene_loader.load(scene_file_, meshes, materials, lights);
+
+	buildDisplayGeometry();
 	
 	initFBO(render_width,render_height);
 	
@@ -282,7 +276,21 @@ void Renderer::manageEvents()
 
 
 				setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);		
-			} 
+			}else{
+				int x, y;
+				SDL_GetMouseState(&x, &y);
+				printf("left click : %d %d\n",x, y);
+				ClickData cd;
+				cd.width = 640;
+				cd.height = 480;
+				cd.x = (double)x;
+				cd.y = (double)y;
+				Raycaster caster;
+				glm::vec3 test_screen = caster.screenToWorld_2(cd, camera);
+				printf("screen position : %.3f %.3f %.3f\n", test_screen.x, test_screen.y, test_screen.z);
+				
+				
+			}
 		}else if( (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_RIGHT))){
 			if( Event.type == SDL_MOUSEMOTION)
 			{
@@ -314,18 +322,17 @@ void Renderer::manageEvents()
 			
 			camera_orbit_radius += (float)Event.wheel.y * -0.1;
 			setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);			
-		}else if(Event.type == SDL_KEYDOWN)
-		{
+		}else if(Event.type == SDL_KEYDOWN){
 			switch(Event.key.keysym.scancode){
 				case SDL_SCANCODE_R:{
-					printf("RRRRRRRR\n");
+					//~ printf("RRRRRRRR\n");
 					
-					printf("Starting Rendering... \n");
+					printf("--- Starting Rendering... \n");
 			
 					std::vector<RenderBucket> buckets;
 					buckets = createBuckets(32, render_width, render_height);
 					renderBuckets( buckets, camera);
-					printf("DONE... \n");					
+					//~ printf("--- Finished Rendering... \n");					
 					break;
 				}
 				case SDL_SCANCODE_S : {
@@ -339,7 +346,7 @@ void Renderer::manageEvents()
 					break;
 
 			}
-			printf("keyboard event\n");
+			//~ printf("keyboard event\n");
 		}
 	}		
 }
@@ -373,8 +380,11 @@ void Renderer::buildKDTree()
 		KDNode * kd_node = new KDNode(kd_polygon_limit);
 		kd_node = kd_node->build(tris, 0);
 		kd_nodes.push_back(kd_node);
-		printf("created KDNode !!!!!\n");
+		
 	}
+	
+	if(meshes.size() > 0)
+		printf("Created  %d KD Tree(s)\n", (int)meshes.size());
 }
 
 void Renderer::collectKDBoungingBoxes(KDNode* node_ptr)
@@ -468,11 +478,11 @@ void Renderer::displayKDTree()
 
 }
 
-Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_data, int depth/* = 0*/)
+Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial* material, HitData& hit_data, int depth/* = 0*/)
 {
 	Raycaster raycaster;
 
-	Color clr(0.0,0.0,0.0,1.0); //= material.color;
+	Color clr(0.0,0.0,0.0,1.0); //= material->color;
 	
 	// interpolate normal from barycentric coordinates
 
@@ -486,6 +496,17 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 	normal = (normalA * bary.x) + (normalB * bary.y) + (normalC * bary.z);
 	
 	
+
+	
+	glm::vec2 uvA = mesh.points[face.getVertex(0).point_id].t_coords;
+	glm::vec2 uvB = mesh.points[face.getVertex(1).point_id].t_coords;
+	glm::vec2 uvC = mesh.points[face.getVertex(2).point_id].t_coords;
+	
+	
+	glm::vec2 uv = (uvA * bary.x) + (uvB * bary.y) + (uvC * bary.z);	
+	Color diff_texture_color = sampleTexture( material->diff_texture, uv);
+	
+	//~ printf("shading uv : %.3f %.3f \n", uv.x, uv.y);
 	
 	glm::vec3 view_dir = glm::normalize( (hit_data.position - hit_data.ray_origin) );
 	//~ glm::vec3 view_dir = hit_data.position - hit_data.ray_origin ;
@@ -506,6 +527,8 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 		//~ dot *= 10.0;
 
 
+
+		
 		// shadow second attempt 
 		float shadow_amount = 0.0;
 		
@@ -539,12 +562,12 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 		
 		float dot2 = clampf(glm::dot(glm::normalize(normal) , view_dir),-1.0, 0.0);
 
-		clr.r += clampf(diff_amount * mesh.material.color.r *  lights[i].color.r  * (1.0-shadow_amount) * (-dot2), 0.0,1.0);
-		clr.g += clampf(diff_amount * mesh.material.color.g *  lights[i].color.g  * (1.0-shadow_amount) * (-dot2), 0.0,1.0);
-		clr.b += clampf(diff_amount * mesh.material.color.b *  lights[i].color.b  * (1.0-shadow_amount) * (-dot2), 0.0,1.0);
+		clr.r += clampf(diff_amount * mesh.material->color.r *  lights[i].color.r  * (1.0-shadow_amount) * (-dot2), 0.0,1.0);
+		clr.g += clampf(diff_amount * mesh.material->color.g *  lights[i].color.g  * (1.0-shadow_amount) * (-dot2), 0.0,1.0);
+		clr.b += clampf(diff_amount * mesh.material->color.b *  lights[i].color.b  * (1.0-shadow_amount) * (-dot2), 0.0,1.0);
 	}
 
-	if(material.refl_amount > 0.0 && depth < 2)
+	if(material->refl_amount > 0.0 && depth < 2)
 	{
 		// reflection ray
 		Ray refl_ray;
@@ -568,20 +591,44 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_
 				refl_hit_datas[0],
 				depth);
 
-			clr.r += refl_clr.r * material.refl_amount * (1.0-(-dot2));
-			clr.g += refl_clr.g * material.refl_amount * (1.0-(-dot2));
-			clr.b += refl_clr.b * material.refl_amount * (1.0-(-dot2));
+			clr.r += refl_clr.r * material->refl_amount * (1.0-(-dot2));
+			clr.g += refl_clr.g * material->refl_amount * (1.0-(-dot2));
+			clr.b += refl_clr.b * material->refl_amount * (1.0-(-dot2));
 		}
 	}
 	
 	
 	//clamp final color
-	clr.r = clampf(clr.r, 0.0, 1.0);
-	clr.g = clampf(clr.g, 0.0, 1.0);
-	clr.b= clampf(clr.b, 0.0, 1.0);
+	clr.r = clampf(clr.r * diff_texture_color.r, 0.0, 1.0);
+	clr.g = clampf(clr.g * diff_texture_color.g, 0.0, 1.0);
+	clr.b= clampf(clr.b * diff_texture_color.b, 0.0, 1.0);
 	clr.a = 1.0;
 	
 	return  clr;
+}
+
+Color Renderer::sampleTexture(Texture& texture, glm::vec2 t_coords)
+{
+	Color clr;
+	//~ printf("texture sampling %d\n", texture.getBPP());
+	int t_bpp = texture.getBPP();
+	int t_width = texture.getWidth();
+	int t_height = texture.getHeight();
+	
+	
+	t_coords.x = t_coords.x - floor(t_coords.x);
+	t_coords.y = t_coords.y - floor(t_coords.y);
+	
+	
+	
+	int pix_x = (int)(t_coords.x * (t_width));
+	int pix_y = (int)(t_coords.y * (t_height));
+	
+	clr.r = (double)texture.data[(pix_y * t_width + pix_x) * 4 ] / 256.0;
+	clr.g = (double)texture.data[(pix_y * t_width + pix_x) * 4 + 1] / 256.0;
+	clr.b = (double)texture.data[(pix_y * t_width + pix_x) * 4 + 2] / 256.0;
+	clr.a = 1.0;
+	return clr;
 }
 
 void Renderer::renderBucket(RenderBucket& bucket, Camera& camera)
@@ -601,12 +648,14 @@ void Renderer::renderBucket(RenderBucket& bucket, Camera& camera)
 	// cast all rays
 	for (int y = bucket.y; y < bucket.y+bucket.height; y++)
 	{
-		click_data.y = ((float)click_data.height / (float)bucket.render_height * (float)(y));
-
+		// -1.0 is important !!!! in x and y
+		//~ click_data.y = (((float)click_data.height) / (float)(bucket.render_height) * ((float)(y) + 0.0)); // + 0.5 to be in the middle of the pixel
+		click_data.y = ((float)y) + 0.5 ; 
+		
 		for (int x = bucket.x; x < bucket.x+bucket.width; x++)
 		{
-			click_data.x = ((float)click_data.width / (float)bucket.render_width * (float)(x));
-
+			//~ click_data.x = (((float)click_data.width) / (float)(bucket.render_width) * ((float)(x) + 0.0)); // + 0.5 to be in the middle of the pixel
+			click_data.x = ((float)x) + 0.5;
 			bool hit_tri = false;
 			//~ HitData hit_data;
 			//~ hit_tri = raycaster.intersectMeshes(click_data, camera, meshes, hit_data);
@@ -706,8 +755,14 @@ void Renderer::renderBuckets(std::vector<RenderBucket>& buckets, Camera& camera)
 	}
 
 	std::cout << "\n";
-    duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
-    printf("duration %f\n", duration / 4.0);
+    duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC / 4.0;
+    
+    int hours = (int)duration / (60 * 60);
+    int minutes = (int)(duration - hours * 60 * 60) / (60);
+    int seconds = ((int)duration % (60*60)) % 60;
+    
+    printf("Frame duration : %.3f\n", duration);
+    printf("Frame Rendering Time : %d hrs %d mns %d secs\n", hours , minutes, seconds);
 
 
 	
@@ -884,11 +939,11 @@ void Renderer::buildDisplayGeometry()
 
 	for (int i = 0; i < meshes.size(); i++)
 	{
-		meshes[i].material = materials[i];
+		meshes[i].material = &materials[i];
 		OGL_geometry_data geo_data;
 		for(int pt_id = 0; pt_id < meshes[i].points.size(); pt_id++)
 		{
-			printf("t_coords --> %.3f %.3f \n",meshes[i].points[pt_id].t_coords.x, meshes[i].points[pt_id].t_coords.y );
+			//~ printf("t_coords --> %.3f %.3f \n",meshes[i].points[pt_id].t_coords.x, meshes[i].points[pt_id].t_coords.y );
 			glm::vec3 point_pos = meshes[i].points[pt_id].position;
 			glm::vec3 point_normal = meshes[i].points[pt_id].normal;
 			glm::vec2 t_coords = meshes[i].points[pt_id].t_coords;
@@ -1007,14 +1062,14 @@ void Renderer::displayScene()
 	{
 		//~ printf("drawing meshe %d\n", i);
 		GLCall(glUniform1i(glGetUniformLocation(default_shader.m_id,"u_tex"), 0));
-		default_texture.bind();
+		meshes[i].material->diff_texture.bind();
 		
 		//~ GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, default_texture.getWidth(), default_texture.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, default_texture.data.data()));
 		
 		GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"),
-			meshes[i].material.color.r,
-			meshes[i].material.color.g,
-			meshes[i].material.color.b,
+			meshes[i].material->color.r,
+			meshes[i].material->color.g,
+			meshes[i].material->color.b,
 			1.0
 		));
 
@@ -1038,7 +1093,7 @@ void Renderer::displayScene()
 		GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 		
 		
-		default_texture.unbind();
+		meshes[i].material->diff_texture.unbind();
 	
 	}
 //~ 

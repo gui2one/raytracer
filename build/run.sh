@@ -15,4 +15,5 @@
 -limit 10 \
 -rw 160 \
 -rh 120 \
+--scene-file "test_scene.json"
 

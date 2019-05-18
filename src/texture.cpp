@@ -7,6 +7,16 @@ Texture::Texture():id(0),width(0), height(0), bpp(0)
 	//~ std::cout << "creating texture object... " << "\n";	
 }
 
+Texture::Texture(const Texture& other):
+	id(other.id),
+	width(other.width), 
+	height(other.height),
+	bpp(other.bpp),
+	data(other.data)
+{
+	printf("copy texture ...\n");
+}
+
 void Texture::load(std::string path){
 	
 	glGenTextures(1, &id);
@@ -23,7 +33,7 @@ void Texture::load(std::string path){
 	
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
 
-	data = std::vector<unsigned char>(buffer, buffer + width * height);
+	data = std::vector<unsigned char>(buffer, buffer + width * height * 4);
 //~ 
 	
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -67,7 +77,7 @@ void Texture::unbind(){
 
 Texture::~Texture()
 {
-	std::cout << "deleting texture -- ID : " << id << "\n";
+	//~ std::cout << "deleting texture -- ID : " << id << "\n";
 	glDeleteTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	

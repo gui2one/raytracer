@@ -2158,6 +2158,7 @@ CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o: /h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o: /home/pi/projects/raytracer_SDL2/src/mesh.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o: /home/pi/projects/raytracer_SDL2/src/pch.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o: /home/pi/projects/raytracer_SDL2/src/rtmaterial.h
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o: /home/pi/projects/raytracer_SDL2/src/texture.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o: /home/pi/projects/raytracer_SDL2/src/vector3.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o: /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.hpp
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o: /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.inl
@@ -2390,6 +2391,7 @@ CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o: /home/pi/projects/raytracer_SDL2/src/raycaster.cpp
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o: /home/pi/projects/raytracer_SDL2/src/raycaster.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o: /home/pi/projects/raytracer_SDL2/src/rtmaterial.h
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o: /home/pi/projects/raytracer_SDL2/src/texture.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o: /home/pi/projects/raytracer_SDL2/src/vector3.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o: /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.hpp
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o: /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.inl
@@ -3625,6 +3627,7 @@ CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o: /home/pi/projects/raytracer_SDL2/src/scene_file_loader.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o: /home/pi/projects/raytracer_SDL2/src/shader.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o: /home/pi/projects/raytracer_SDL2/src/texture.h
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o: /home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o: /home/pi/projects/raytracer_SDL2/src/utils/objLoader.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o: /home/pi/projects/raytracer_SDL2/src/utils/system_utils.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o: /home/pi/projects/raytracer_SDL2/src/vector3.h
@@ -3853,6 +3856,7 @@ CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o: /home/pi/projects/raytracer_SDL2/src/pch.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o: /home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o: /home/pi/projects/raytracer_SDL2/src/rtmaterial.h
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o: /home/pi/projects/raytracer_SDL2/src/texture.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o: /home/pi/projects/raytracer_SDL2/src/vector3.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o: /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.hpp
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o: /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.inl
@@ -4101,7 +4105,6 @@ CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loa
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer_SDL2/src/include/assimp/metadata.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer_SDL2/src/include/assimp/postprocess.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer_SDL2/src/include/assimp/scene.h
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer_SDL2/src/include/assimp/texture.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer_SDL2/src/include/assimp/types.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer_SDL2/src/light.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer_SDL2/src/mesh.h
@@ -4109,6 +4112,8 @@ CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loa
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer_SDL2/src/rtmaterial.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer_SDL2/src/scene_file_loader.h
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer_SDL2/src/texture.h
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer_SDL2/src/utils/objLoader.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer_SDL2/src/vector3.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o: /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.hpp
@@ -4786,6 +4791,7 @@ CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_uti
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.o: /home/pi/projects/raytracer_SDL2/src/mesh.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.o: /home/pi/projects/raytracer_SDL2/src/pch.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.o: /home/pi/projects/raytracer_SDL2/src/rtmaterial.h
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.o: /home/pi/projects/raytracer_SDL2/src/texture.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.o: /home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.o: /home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.h
 CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.o: /home/pi/projects/raytracer_SDL2/src/vector3.h

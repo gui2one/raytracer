@@ -85,7 +85,8 @@ class Renderer
 		
 		//~ void renderMaterials(int w, int h, Camera& camera, std::vector<Mesh>& meshes);
 		
-		Color shade(Mesh& mesh, Face& face, RTMaterial material, HitData& hit_data, int depth = 0);
+		Color shade(Mesh& mesh, Face& face, RTMaterial* material, HitData& hit_data, int depth = 0);
+		Color sampleTexture(Texture& texture, glm::vec2 t_coords);
 		
 		std::vector<RenderBucket> createBuckets(int size, int r_width, int r_height);
 		

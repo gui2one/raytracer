@@ -74,6 +74,7 @@ class Mesh
 {
 	public:
 		Mesh();
+		//~ Mesh(const Mesh& other);
 		virtual ~Mesh();
 		
 		void triangulate();
@@ -85,7 +86,7 @@ class Mesh
 		std::vector<Point> points;
 		std::vector<Face> faces;
 		
-		RTMaterial material;
+		RTMaterial* material;
 		
 		glm::vec3 translate;
 		glm::vec3 rotate;

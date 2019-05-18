@@ -23,25 +23,32 @@ void SceneFileLoader::load(std::string path, std::vector<Mesh> & meshes, std::ve
 	
 
 	try{
-		//~ JsonScene json_scene = JSON::consumer<JsonScene>::convert(full_json_string);
-		
-		//~ for (int i = 0; i < json_scene.materials.size(); i++)
-		//~ {
-			
-			//~ RTMaterial mat = json_scene.materials[i].create();
-			//~ materials.push_back(mat);
-			//~ 
-		//~ }
+		JsonScene json_scene = JSON::consumer<JsonScene>::convert(full_json_string);
 		//~ 
-		//~ printf("File Meshes : \n");
-		//~ for (int i = 0; i < json_scene.file_meshes.size(); i++)		
-		//~ {
-			//~ printf("\t%d -- path : %s\n", i, json_scene.file_meshes[i].path.c_str());
-			//~ Mesh mesh = json_scene.file_meshes[i].create();
-//~ 
-			//~ meshes.push_back(mesh);
+		for (int i = 0; i < json_scene.materials.size(); i++)
+		{
 			//~ 
-		//~ }
+			try{
+				
+				RTMaterial mat = json_scene.materials[i].create();
+				materials.push_back(mat);
+			}catch(JSON::json_exception e){
+				printf("\tproblem with JSON Material \n");
+			}
+		}
+		
+		printf("File Meshes : \n");
+		for (int i = 0; i < json_scene.file_meshes.size(); i++)		
+		{
+			printf("\t%d -- path : %s\n", i, json_scene.file_meshes[i].path.c_str());
+			Mesh mesh = json_scene.file_meshes[i].create();
+
+			mesh.computeNormals();
+			mesh.material = &materials[i];
+			mesh.material->loadDiffTexture();
+			meshes.push_back(mesh);
+			
+		}
 		
 		
 		

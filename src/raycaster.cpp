@@ -105,19 +105,27 @@ bool Raycaster::ray_triangle_intersect(Ray& ray, glm::vec3& vtx_a, glm::vec3& vt
 Ray Raycaster::castRay(ClickData click_data, Camera& camera)
 {
 
-	glm::vec3 screen_world_pos = screenToWorld( click_data, camera);
-	glm::vec3 direction = screen_world_pos;
+	
+	glm::vec3 direction = screenToWorld_2(click_data, camera);
 	
 	Ray ray;
-	ray.origin = glm::vec3(0.0,0.0,0.0);
+	//~ ray.origin = glm::vec3(0.0,0.0,0.0);
 	
 	glm::mat4 view_matrix = glm::lookAt(camera.position, camera.target_position, camera.up_vector);
 	
 
 	ray.origin = camera.position;
-	ray.direction = direction;
 	
-	vec_mult_by_matrix(ray.direction, view_matrix, true);
+	//~ ray.direction = direction;
+	//~ vec_mult_by_matrix(ray.direction, view_matrix, true);
+	
+	// custom vec_mult_by matrix 
+	glm::vec4 temp_vec4 = glm::vec4(direction.x, direction.y, direction.z, 0.0f);
+
+
+
+	ray.direction = glm::inverse(view_matrix) * temp_vec4 ;
+	
 	
 
 	return ray;
@@ -132,12 +140,14 @@ glm::vec3 Raycaster::screenToWorld(ClickData click_data, Camera& camera)
 	
 	// do I need to offset by half a pixel size ? 
 	
-
+	float x_offset = 0.0;
+	float y_offset = 0.0;
+	
 	
 	/////
 	
-	float x_pos = (float)click_data.x - (float)(click_data.width) / 2.0;
-	float y_pos =  (float)(click_data.height) / 2.0 - (float)click_data.y;
+	float x_pos = (click_data.x - (float)(click_data.width) / 2.0);
+	float y_pos = ((float)(click_data.height) / 2.0 - click_data.y);
 	float z_pos = -( (float)(click_data.height) / 2.0) / tan( camera.fov*0.5 );
 	
 	glm::vec3 world_pos = glm::vec3(x_pos, y_pos, z_pos) ;
@@ -146,7 +156,32 @@ glm::vec3 Raycaster::screenToWorld(ClickData click_data, Camera& camera)
 	
 }
 
+glm::vec3 Raycaster::screenToWorld_2(ClickData click_data, Camera& camera)
+{
+	glm::vec3 screen_pos;
+	
+	// 1 -- RASTER SPACE ( between 0.0 and 1.0 )
+	
+	// 2 -- NDC SPACE
+	double x = (click_data.x + 0.5) / (double)(click_data.width-1);
+	double y = (click_data.y + 0.5) / (double)(click_data.height-1);
+	
+	
 
+	// 3 -- SCREEN SPACE
+	
+	double ratio = (double)click_data.width / (double)click_data.height;
+	x = (x * 2.0 - 1.0) * ratio * tan( camera.fov * 0.5);
+	y = (1.0 - 2.0 * y) * tan( camera.fov * 0.5);
+	
+	screen_pos.x = (float)x;
+	screen_pos.y = (float)y;
+	screen_pos.z = -1.0f;
+	
+	screen_pos = screen_pos * 100.0f;
+		
+	return screen_pos;
+}
 
 bool Raycaster::intersectKDNode(Ray& ray, KDNode * kd_node, int mesh_id, std::vector<HitData>& hit_datas, bool bail_early)
 {

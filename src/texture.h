@@ -12,6 +12,7 @@ class Texture
 	public:
 		
 		Texture();
+		Texture(const Texture& other);
 		
 		virtual ~Texture();
 		void load(std::string path);

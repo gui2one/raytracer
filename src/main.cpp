@@ -56,8 +56,8 @@ void createMeshes()
 			//~ }
 			
 			
-			Color clr;
-			m.material.color = clr;
+			//~ Color clr;
+			//~ m.material.color = clr;
 			
 			float scale = loaded_mesh_datas[i].scale;
 			glm::vec3 rotate = loaded_mesh_datas[i].rotate;
@@ -174,13 +174,13 @@ int main(int argc, char ** argv){
 	
 	
 	options.kd_polygon_limit = 10;
-	options.render_width = 320;
-	options.render_height = 240;	
+	options.render_width = 640;
+	options.render_height = 480;	
 	
 		
-	createMeshes();
+	//~ createMeshes();
 	renderer.init(scene_file, options);
-	renderer.buildDisplayGeometry();	
+	//~ renderer.buildDisplayGeometry();	
 	
 
 	//~ printf("num points = %d\n", tri_mesh.points.size());

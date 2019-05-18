@@ -11903,6 +11903,8 @@ pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
 color.h
 /home/pi/projects/raytracer_SDL2/src/color.h
+texture.h
+/home/pi/projects/raytracer_SDL2/src/texture.h
 
 /home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp
 scene_file_loader.h
@@ -11919,6 +11921,8 @@ light.h
 /home/pi/projects/raytracer_SDL2/src/light.h
 rtmaterial.h
 /home/pi/projects/raytracer_SDL2/src/rtmaterial.h
+utils/mesh_utils.h
+/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.h
 utils/objLoader.h
 /home/pi/projects/raytracer_SDL2/src/utils/objLoader.h
 
