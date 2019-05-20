@@ -5,7 +5,6 @@ Raycaster::Raycaster()
 	
 }
 
-
 static float distance_squared(glm::vec3 pt1, glm::vec3 pt2){
 	return (pt2.x - pt1.x)*(pt2.x - pt1.x) + (pt2.y - pt1.y)*(pt2.y - pt1.y) + (pt2.z - pt1.z)*(pt2.z - pt1.z);
 }
@@ -101,7 +100,6 @@ bool Raycaster::ray_triangle_intersect(Ray& ray, glm::vec3& vtx_a, glm::vec3& vt
 		return false;	
 }
 
-
 Ray Raycaster::castRay(ClickData click_data, Camera& camera)
 {
 
@@ -130,7 +128,6 @@ Ray Raycaster::castRay(ClickData click_data, Camera& camera)
 
 	return ray;
 }
-
 
 glm::vec3 Raycaster::screenToWorld(ClickData click_data, Camera& camera)
 {
@@ -163,8 +160,8 @@ glm::vec3 Raycaster::screenToWorld_2(ClickData click_data, Camera& camera)
 	// 1 -- RASTER SPACE ( between 0.0 and 1.0 )
 	
 	// 2 -- NDC SPACE
-	double x = (click_data.x + 0.5) / (double)(click_data.width-1);
-	double y = (click_data.y + 0.5) / (double)(click_data.height-1);
+	double x = (click_data.x + 0.5) / (double)(click_data.width);
+	double y = (click_data.y + 0.5) / (double)(click_data.height);
 	
 	
 

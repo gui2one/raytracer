@@ -160,9 +160,12 @@ Renderer::Renderer()
 
 }
 
-int Renderer::init(std::string scene_file_ , RenderOptions options_)
+int Renderer::init(std::string scene_file_ , std::string options_file_)
 {
+	scene_file_path_save = scene_file_;
+	options_file_path_save = options_file_;
 
+	
 	window_width = 640;
 	window_height = 480;
 	if( SDL_Init(SDL_INIT_EVERYTHING) == 0){
@@ -175,9 +178,9 @@ int Renderer::init(std::string scene_file_ , RenderOptions options_)
 	SDL_GLContext Context = SDL_GL_CreateContext(Window);
 
 	glewInit();
-	render_width = options_.render_width;
-	render_height = options_.render_height;
-	kd_polygon_limit = options_.kd_polygon_limit;
+	
+	initScene();
+
 
 	//~ std::cout << "raytracer PROJECT" << std::endl;
 
@@ -230,12 +233,15 @@ int Renderer::init(std::string scene_file_ , RenderOptions options_)
 	//~ material3.refl_amount = 0.9;
 	//~ materials.push_back(material3);
 
-	SceneFileLoader scene_loader;
-	scene_loader.load(scene_file_, meshes, materials, lights);
 
-	buildDisplayGeometry();
 	
-	initFBO(render_width,render_height);
+
+
+	
+	//~ printf("render options width --> %d\n", render_options.render_width);
+	
+	
+	
 	
 }
 
@@ -324,16 +330,21 @@ void Renderer::manageEvents()
 			setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);			
 		}else if(Event.type == SDL_KEYDOWN){
 			switch(Event.key.keysym.scancode){
-				case SDL_SCANCODE_R:{
+				case SDL_SCANCODE_F9:{
 					//~ printf("RRRRRRRR\n");
 					
 					printf("--- Starting Rendering... \n");
 			
 					std::vector<RenderBucket> buckets;
+					buckets.clear();
 					buckets = createBuckets(32, render_width, render_height);
 					renderBuckets( buckets, camera);
 					//~ printf("--- Finished Rendering... \n");					
 					break;
+				}
+				case SDL_SCANCODE_R : {
+					printf("--- Reloading ? \n");
+					initScene();
 				}
 				case SDL_SCANCODE_S : {
 					show_fbo = !show_fbo;
@@ -351,6 +362,26 @@ void Renderer::manageEvents()
 	}		
 }
 
+
+void Renderer::initScene()
+{
+	kd_nodes.clear();
+	meshes.clear();
+	materials.clear();
+	
+	SceneFileLoader scene_loader;
+	render_options = scene_loader.loadOptionsFile(options_file_path_save);	
+	scene_loader.loadSceneFile(scene_file_path_save, meshes, materials, lights);	
+	
+	render_width = render_options.render_width;
+	render_height = render_options.render_height;
+	
+	initFBO(render_width,render_height);
+	
+	kd_polygon_limit = render_options.kd_polygon_limit;	
+	
+	buildDisplayGeometry();
+}
 void Renderer::buildKDTree()
 {
 
@@ -513,6 +544,12 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial* material, HitData& hit
 
 	float diff_amount = 1.0;
 	
+	
+//~ 
+	//~ clr.r = diff_texture_color.r;
+	//~ clr.g = diff_texture_color.g;
+	//~ clr.b = diff_texture_color.b;
+	
 	for (int i = 0; i < lights.size(); i++)
 	{
 
@@ -562,12 +599,13 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial* material, HitData& hit
 		
 		float dot2 = clampf(glm::dot(glm::normalize(normal) , view_dir),-1.0, 0.0);
 
-		clr.r += clampf(diff_amount * mesh.material->color.r *  lights[i].color.r  * (1.0-shadow_amount) * (-dot2), 0.0,1.0);
-		clr.g += clampf(diff_amount * mesh.material->color.g *  lights[i].color.g  * (1.0-shadow_amount) * (-dot2), 0.0,1.0);
-		clr.b += clampf(diff_amount * mesh.material->color.b *  lights[i].color.b  * (1.0-shadow_amount) * (-dot2), 0.0,1.0);
+		clr.r += clampf(diff_texture_color.r * diff_amount * mesh.material->color.r *  lights[i].color.r  * (1.0-shadow_amount), 0.0,1.0); //  * (-dot2)
+		clr.g += clampf(diff_texture_color.g * diff_amount * mesh.material->color.g *  lights[i].color.g  * (1.0-shadow_amount) , 0.0,1.0);
+		clr.b += clampf(diff_texture_color.b * diff_amount * mesh.material->color.b *  lights[i].color.b  * (1.0-shadow_amount) , 0.0,1.0);
 	}
 
-	if(material->refl_amount > 0.0 && depth < 2)
+
+	if(material->refl_amount > 0.0 && depth < render_options.reflection_limit)
 	{
 		// reflection ray
 		Ray refl_ray;
@@ -580,10 +618,11 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial* material, HitData& hit
 		std::vector<HitData> refl_hit_datas;
 		depth++;
 		bool refl_hit = raycaster.intersectKDNodes(refl_ray, kd_nodes, refl_hit_datas);
-
+		float dot2 = clampf(glm::dot(glm::normalize(normal) * -1.0f , view_dir),0.0, 1.0);
+		dot2 = pow(dot2, 2.0);
 		if(refl_hit_datas.size() > 0)
 		{
-			float dot2 = clampf(glm::dot(glm::normalize(normal) , view_dir),-1.0, 0.0);
+			
 			Color refl_clr = shade(
 				meshes[refl_hit_datas[0].mesh_id],
 				meshes[refl_hit_datas[0].mesh_id].faces[refl_hit_datas[0].face_id],
@@ -591,17 +630,22 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial* material, HitData& hit
 				refl_hit_datas[0],
 				depth);
 
-			clr.r += refl_clr.r * material->refl_amount * (1.0-(-dot2));
-			clr.g += refl_clr.g * material->refl_amount * (1.0-(-dot2));
-			clr.b += refl_clr.b * material->refl_amount * (1.0-(-dot2));
+			clr.r += refl_clr.r * material->refl_amount * (1.0-(dot2));
+			clr.g += refl_clr.g * material->refl_amount * (1.0-(dot2));
+			clr.b += refl_clr.b * material->refl_amount * (1.0-(dot2));
+		}else{
+			//~ printf("set background color\n");
+			clr.r += render_options.background_color.r * material->refl_amount * (1.0-(dot2));
+			clr.g += render_options.background_color.g * material->refl_amount * (1.0-(dot2));
+			clr.b += render_options.background_color.b * material->refl_amount * (1.0-(dot2));
 		}
 	}
 	
 	
 	//clamp final color
-	clr.r = clampf(clr.r * diff_texture_color.r, 0.0, 1.0);
-	clr.g = clampf(clr.g * diff_texture_color.g, 0.0, 1.0);
-	clr.b= clampf(clr.b * diff_texture_color.b, 0.0, 1.0);
+	clr.r = clampf(clr.r, 0.0, 1.0);
+	clr.g = clampf(clr.g, 0.0, 1.0);
+	clr.b = clampf(clr.b, 0.0, 1.0);
 	clr.a = 1.0;
 	
 	return  clr;
@@ -609,25 +653,34 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial* material, HitData& hit
 
 Color Renderer::sampleTexture(Texture& texture, glm::vec2 t_coords)
 {
+	
 	Color clr;
-	//~ printf("texture sampling %d\n", texture.getBPP());
-	int t_bpp = texture.getBPP();
-	int t_width = texture.getWidth();
-	int t_height = texture.getHeight();
 	
-	
-	t_coords.x = t_coords.x - floor(t_coords.x);
-	t_coords.y = t_coords.y - floor(t_coords.y);
-	
-	
-	
-	int pix_x = (int)(t_coords.x * (t_width));
-	int pix_y = (int)(t_coords.y * (t_height));
-	
-	clr.r = (double)texture.data[(pix_y * t_width + pix_x) * 4 ] / 256.0;
-	clr.g = (double)texture.data[(pix_y * t_width + pix_x) * 4 + 1] / 256.0;
-	clr.b = (double)texture.data[(pix_y * t_width + pix_x) * 4 + 2] / 256.0;
-	clr.a = 1.0;
+	if(texture.is_valid)
+	{
+		int t_bpp = texture.getBPP();
+		int t_width = texture.getWidth();
+		int t_height = texture.getHeight();
+		
+		
+		t_coords.x = t_coords.x - floor(t_coords.x);
+		t_coords.y = t_coords.y - floor(t_coords.y);
+		
+		
+		
+		int pix_x = (int)(t_coords.x * (t_width));
+		int pix_y = (int)(t_coords.y * (t_height));
+		
+		clr.r = (double)texture.data[(pix_y * t_width + pix_x) * 4 ] / 256.0;
+		clr.g = (double)texture.data[(pix_y * t_width + pix_x) * 4 + 1] / 256.0;
+		clr.b = (double)texture.data[(pix_y * t_width + pix_x) * 4 + 2] / 256.0;
+		clr.a = 1.0;
+	}else{
+		clr.r = 1.0;
+		clr.g = 1.0;
+		clr.b = 1.0;
+		clr.a = 1.0;
+	}
 	return clr;
 }
 
@@ -649,13 +702,13 @@ void Renderer::renderBucket(RenderBucket& bucket, Camera& camera)
 	for (int y = bucket.y; y < bucket.y+bucket.height; y++)
 	{
 		// -1.0 is important !!!! in x and y
-		//~ click_data.y = (((float)click_data.height) / (float)(bucket.render_height) * ((float)(y) + 0.0)); // + 0.5 to be in the middle of the pixel
-		click_data.y = ((float)y) + 0.5 ; 
+		click_data.y = (((float)click_data.height) / (float)(bucket.render_height) * ((float)(y) + 0.0)); // + 0.5 to be in the middle of the pixel
+		//~ click_data.y = ((float)y) + 0.5 ; 
 		
 		for (int x = bucket.x; x < bucket.x+bucket.width; x++)
 		{
-			//~ click_data.x = (((float)click_data.width) / (float)(bucket.render_width) * ((float)(x) + 0.0)); // + 0.5 to be in the middle of the pixel
-			click_data.x = ((float)x) + 0.5;
+			click_data.x = (((float)click_data.width) / (float)(bucket.render_width) * ((float)(x) + 0.0)); // + 0.5 to be in the middle of the pixel
+			//~ click_data.x = ((float)x) + 0.5;
 			bool hit_tri = false;
 			//~ HitData hit_data;
 			//~ hit_tri = raycaster.intersectMeshes(click_data, camera, meshes, hit_data);
@@ -761,7 +814,7 @@ void Renderer::renderBuckets(std::vector<RenderBucket>& buckets, Camera& camera)
     int minutes = (int)(duration - hours * 60 * 60) / (60);
     int seconds = ((int)duration % (60*60)) % 60;
     
-    printf("Frame duration : %.3f\n", duration);
+    //~ printf("Frame duration : %.3f\n", duration);
     printf("Frame Rendering Time : %d hrs %d mns %d secs\n", hours , minutes, seconds);
 
 
@@ -901,7 +954,7 @@ void Renderer::initFBO(int width, int height)
 	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER));
 
 	//~ GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 320, 240, 0, GL_RGBA, GL_UNSIGNED_BYTE, fbo_data));
-	GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, r_width, r_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, render_buffer_data.data()));
+	GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, r_width, r_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr));
 
 	GLCall(glBindTexture(GL_TEXTURE_2D, 0));
 }

@@ -25,6 +25,7 @@ class Texture
 		void bind();
 		void unbind();
 		
+		bool is_valid = false;
 		std::vector<unsigned char> data;
 	private:
 		unsigned int id;

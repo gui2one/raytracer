@@ -1,0 +1,10 @@
+{"render_options":
+	{
+		"kd_polygon_limit": 10,
+		"render_width": 640,
+		"render_height": 480,
+		"background_color":{"r":1.0,"g":1.0,"b":1.0,"a":1.0},
+		"reflection_limit":2
+	}
+
+}

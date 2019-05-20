@@ -17,7 +17,8 @@ Texture::Texture(const Texture& other):
 	printf("copy texture ...\n");
 }
 
-void Texture::load(std::string path){
+void Texture::load(std::string path)
+{
 	
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id);
@@ -34,7 +35,7 @@ void Texture::load(std::string path){
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
 
 	data = std::vector<unsigned char>(buffer, buffer + width * height * 4);
-//~ 
+
 	
 	glBindTexture(GL_TEXTURE_2D, 0);
 	
@@ -43,10 +44,14 @@ void Texture::load(std::string path){
 		std::cout << stbi_failure_reason() << "\n";
 	}
 	if(buffer)
+	{
 		stbi_image_free(buffer);	
+		is_valid = true;
+	}
 }
 
-void Texture::setData(int _width, int _height, unsigned char* buffer){
+void Texture::setData(int _width, int _height, unsigned char* buffer)
+{
 	
 	glDeleteTextures(1, &id);
 	glGenTextures(1, &id);

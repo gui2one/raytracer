@@ -1,3 +1,4 @@
 src/libs/*
 src/res/*
 build/render/*
+buid/CMakeFiles/*

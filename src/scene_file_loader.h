@@ -83,13 +83,15 @@ struct JsonMaterial : public RTMaterial
 struct JsonFileMesh : public Mesh
 {
 	std::string path = "hello";
-	std::vector<double> translate;// = {3.0, 0.0, 0.0};
-	std::vector<double> rotate;// = {0.0, 0.0, 0.0};
+	std::vector<double> translate;
+	std::vector<double> rotate;
+	std::vector<double> scale;
 	
 	JsonFileMesh()
 	{
 		translate.reserve(3);
 		rotate.reserve(3);
+		scale.reserve(3);
 	};
 	
 
@@ -104,7 +106,8 @@ struct JsonFileMesh : public Mesh
 		JSON::Class root(adapter, "json_file_mesh");
 		JSON_E(adapter, path);		
 		JSON_E(adapter, translate);
-		JSON_T(adapter, rotate);
+		JSON_E(adapter, rotate);
+		JSON_T(adapter, scale);
 	
 	}
 	
@@ -127,6 +130,8 @@ struct JsonFileMesh : public Mesh
 		float ry = (float)rotate[1] / 180 * PI;
 		float rz = (float)rotate[2] / 180 * PI;
 		
+		
+		mesh_utils.scale(mesh, glm::vec3( scale[0], scale[1], scale[2] ));
 		mesh_utils.rotate(mesh, glm::vec3( rx, ry, rz ));
 		mesh_utils.translate(mesh, glm::vec3( (float)translate[0], (float)translate[1], (float)translate[2] ));
 		return mesh;
@@ -150,17 +155,40 @@ struct JsonScene
 
 };
 
+struct RenderOptions
+{
+	int kd_polygon_limit; // = 100;
+	int render_width; // = 320;
+	int render_height; // = 240;
+	Color background_color;
+	int reflection_limit;
+	
+	void serialize(JSON::Adapter& adapter)
+	{
+		JSON::Class root(adapter, "render_options");
+		JSON_E(adapter, kd_polygon_limit);
+		JSON_E(adapter, render_width);
+		JSON_E(adapter, render_height);
+		JSON_E(adapter, background_color);
+		JSON_T(adapter, reflection_limit);
+	}
+	
+	
+};
+
 class SceneFileLoader
 {
 	public:
 		SceneFileLoader();
 		
-		void load(
+		void loadSceneFile(
 			std::string path, 
 			std::vector<Mesh> & meshes,
 			std::vector<RTMaterial> & materials, 
 			std::vector<Light> & lights
 		);
+		
+		RenderOptions loadOptionsFile(std::string path);
 	private:
 		/* add your private declarations */
 };

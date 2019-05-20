@@ -30,6 +30,7 @@ int kd_polygon_limit = 10;
 int render_width = 320;
 int render_height = 240;
 std::string scene_file = "";
+std::string options_file = "";
 
 
 
@@ -160,6 +161,10 @@ int main(int argc, char ** argv){
 
 				scene_file = arg;
 				//~ printf("loading scene file : %s\n", arg.c_str());				
+			}else if(cmd == "-of" || cmd == "--options-file"){
+
+				options_file = arg;
+				//~ printf("loading Options file : %s\n", arg.c_str());				
 			}
 			
 			//~ printf("-----------------------\n");
@@ -179,7 +184,7 @@ int main(int argc, char ** argv){
 	
 		
 	//~ createMeshes();
-	renderer.init(scene_file, options);
+	renderer.init(scene_file, options_file);
 	//~ renderer.buildDisplayGeometry();	
 	
 

@@ -3,26 +3,26 @@
 	"materials":[
 		{"json_material" : 
 			{
-				"refl_amount":0,
+				"refl_amount":1.0,
 				"shininess":0.3,
-				"Color":{"r":1.0,"g":0.8,"b":0.8,"a":1.0},
-				"diff_texture_path" : "../src/res/textures/Basketball.png"
+				"Color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},
+				"diff_texture_path" : ""
 			}
 		},
 		{"json_material":
 			{
-				"refl_amount":0,
+				"refl_amount":0.1,
 				"shininess":0.5,
-				"Color":{"r":0.8,"g":1.0,"b":0.8,"a":1.0},
-				"diff_texture_path" : "../src/res/textures/Basketball.png"
+				"Color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},				
+				"diff_texture_path" : "../src/res/textures/uvgrid.jpg"
 			}
 		},		
 		{"json_material":
 			{
-				"refl_amount":0,
+				"refl_amount":0.33,
 				"shininess":0.5,
-				"Color":{"r":0.8,"g":0.8,"b":1.0,"a":1.0},
-				"diff_texture_path" : "../src/res/textures/uvgrid.jpg"
+				"Color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},
+				"diff_texture_path" : ""
 			}
 		}
 	]
@@ -32,15 +32,17 @@
 		{"json_file_mesh":
 			{
 				"path": "../src/res/obj/monkey.obj",
-				"translate" : [3.0, 3.14,2.2],
-				"rotate" : [90.0,0.0,0.0]
+				"translate" : [5.0,4.0,0.0],
+				"rotate" : [90.0,0.0,0.0],
+				"scale" : [1.0,1.0,1.0]
 			}
 		},
 		{"json_file_mesh":
 			{
 				"path" : "../src/res/obj/cow.obj",
-				"translate" : [5.0, 0.0, 0.0],
-				"rotate" : [90.0,0.0,0.0]
+				"translate" : [5.0, 0.0, 1.5],
+				"rotate" : [90.0,0.0,0.0],
+				"scale" : [1.0,1.0,1.0]
 			}
 		
 		},
@@ -48,7 +50,8 @@
 			{
 				"path" : "../src/res/obj/plane_normals.obj",
 				"translate" : [0.0, 0.0, 0.0],				
-				"rotate" : [90.0,0.0,0.0]
+				"rotate" : [90.0,0.0,0.0],
+				"scale" : [100.0,100.0,100.0]
 			}
 		
 		}

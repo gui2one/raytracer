@@ -6,7 +6,7 @@ SceneFileLoader::SceneFileLoader()
 	
 }
 
-void SceneFileLoader::load(std::string path, std::vector<Mesh> & meshes, std::vector<RTMaterial> & materials, std::vector<Light> & lights)
+void SceneFileLoader::loadSceneFile(std::string path, std::vector<Mesh> & meshes, std::vector<RTMaterial> & materials, std::vector<Light> & lights)
 {
 	std::ifstream infile;
 	infile.open(path.c_str() , std::ifstream::in);
@@ -55,7 +55,7 @@ void SceneFileLoader::load(std::string path, std::vector<Mesh> & meshes, std::ve
 		
 		//~ printf("result color : %.3f %.3f %.3f %.3f\n", json_material.color.r, json_material.color.g, json_material.color.b, json_material.color.a);
 	}catch(JSON::json_exception e){
-		printf("problem with JSON \n");
+		printf("problem with Scene JSON \n");
 	}
 	
 	
@@ -63,3 +63,30 @@ void SceneFileLoader::load(std::string path, std::vector<Mesh> & meshes, std::ve
 }
 
 
+RenderOptions SceneFileLoader::loadOptionsFile(std::string path)
+{
+	RenderOptions render_options;
+	std::ifstream infile;
+	infile.open(path.c_str() , std::ifstream::in);
+	std::string full_json_string;
+	std::string line;
+	while( std::getline(infile, line)){
+		full_json_string += line;
+		//~ printf("line --> %s\n", line.c_str());
+	}
+	
+	infile.close();	
+	
+	try{
+		render_options = JSON::consumer<RenderOptions>::convert(full_json_string);
+		
+		printf("render option kd limit --> %d\n", render_options.kd_polygon_limit);
+		
+	}catch(JSON::json_exception e){
+		printf("problem with Render Options JSON \n");
+	}	
+	
+	printf("scene options path : %s\n", path.c_str());
+	
+	return render_options;
+}
