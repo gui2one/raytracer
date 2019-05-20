@@ -42,14 +42,18 @@ void SceneFileLoader::loadSceneFile(std::string path, std::vector<Mesh> & meshes
 		{
 			printf("\t%d -- path : %s\n", i, json_scene.file_meshes[i].path.c_str());
 			Mesh mesh = json_scene.file_meshes[i].create();
-
+			
 			mesh.computeNormals();
-			mesh.material = &materials[i];
+			mesh.material = &materials[json_scene.file_meshes[i].material_id];
 			mesh.material->loadDiffTexture();
 			meshes.push_back(mesh);
 			
 		}
-		
+		for (int i = 0; i < json_scene.lights.size(); i++)		
+		{		
+			Light light = json_scene.lights[i].create();
+			lights.push_back(light);
+		}
 		
 		
 		

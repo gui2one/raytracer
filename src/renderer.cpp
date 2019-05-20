@@ -205,17 +205,17 @@ int Renderer::init(std::string scene_file_ , std::string options_file_)
 	default_texture.load("../src/res/textures/uvgrid.jpg");
 	
 	printf("texture Bytes per pixel : %d\n", default_texture.getBPP());
-	Light light1;
-	light1.position = glm::vec3(4.0, 5.0, 4.0);
-	light1.color = Color(1.0, 0.9, 0.9, 1.0);
-	light1.intensity = 20.0;
-	lights.push_back(light1);
-
-	Light light2;
-	light2.position = glm::vec3(-5.0, -3.0, 3.5);
-	light2.color = Color(0.9, 0.9, 1.0, 1.0);
-	light2.intensity = 15.0;
-	lights.push_back(light2);
+	//~ Light light1;
+	//~ light1.position = glm::vec3(4.0, 5.0, 4.0);
+	//~ light1.color = Color(1.0, 0.9, 0.9, 1.0);
+	//~ light1.intensity = 20.0;
+	//~ lights.push_back(light1);
+//~ 
+	//~ Light light2;
+	//~ light2.position = glm::vec3(-5.0, -3.0, 3.5);
+	//~ light2.color = Color(0.9, 0.9, 1.0, 1.0);
+	//~ light2.intensity = 15.0;
+	//~ lights.push_back(light2);
 //~ 
 	//~ // materials
 	//~ RTMaterial material1;
@@ -992,7 +992,7 @@ void Renderer::buildDisplayGeometry()
 
 	for (int i = 0; i < meshes.size(); i++)
 	{
-		meshes[i].material = &materials[i];
+		//~ meshes[i].material = &materials[i];
 		OGL_geometry_data geo_data;
 		for(int pt_id = 0; pt_id < meshes[i].points.size(); pt_id++)
 		{

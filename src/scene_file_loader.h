@@ -83,9 +83,11 @@ struct JsonMaterial : public RTMaterial
 struct JsonFileMesh : public Mesh
 {
 	std::string path = "hello";
+	int material_id;
 	std::vector<double> translate;
 	std::vector<double> rotate;
 	std::vector<double> scale;
+	
 	
 	JsonFileMesh()
 	{
@@ -105,6 +107,7 @@ struct JsonFileMesh : public Mesh
 	
 		JSON::Class root(adapter, "json_file_mesh");
 		JSON_E(adapter, path);		
+		JSON_E(adapter, material_id);		
 		JSON_E(adapter, translate);
 		JSON_E(adapter, rotate);
 		JSON_T(adapter, scale);
@@ -123,7 +126,7 @@ struct JsonFileMesh : public Mesh
 		//~ mesh.translate.y = translate[1];
 		//~ mesh.translate.z = translate[2];	
 		
-		printf("translate ----> %.3f %.3f %.3f\n", translate[0], translate[1], translate[2]);
+		
 		
 		
 		float rx = (float)rotate[0] / 180 * PI;
@@ -134,8 +137,36 @@ struct JsonFileMesh : public Mesh
 		mesh_utils.scale(mesh, glm::vec3( scale[0], scale[1], scale[2] ));
 		mesh_utils.rotate(mesh, glm::vec3( rx, ry, rz ));
 		mesh_utils.translate(mesh, glm::vec3( (float)translate[0], (float)translate[1], (float)translate[2] ));
+		printf("translate ----> %.3f %.3f %.3f\n", translate[0], translate[1], translate[2]);
 		return mesh;
 	}
+};
+
+
+struct JsonLight : public Light
+{
+	
+	std::vector<double> position;
+	
+	JsonLight(){
+		position.reserve(3);
+	}
+	
+	Light create(){
+		Light light;
+		light.position = glm::vec3(position[0], position[1], position[2]);
+		light.color = color;
+		return light;
+	}
+	void serialize(JSON::Adapter& adapter){
+	
+		JSON::Class root(adapter, "json_light");
+		
+		JSON_E(adapter, color);
+		JSON_T(adapter, position);
+		
+	
+	}	
 };
 
 struct JsonScene
@@ -143,12 +174,14 @@ struct JsonScene
 	public:
 		std::vector<JsonMaterial> materials;
 		std::vector<JsonFileMesh> file_meshes;
+		std::vector<JsonLight> lights;
 		
 		void serialize(JSON::Adapter& adapter){
 			JSON::Class root(adapter, "json_scene");
 			
 			JSON_E(adapter, materials);
-			JSON_T(adapter, file_meshes);
+			JSON_E(adapter, file_meshes);
+			JSON_T(adapter, lights);
 		}	
 		
 

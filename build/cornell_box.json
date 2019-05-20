@@ -1,0 +1,51 @@
+{"json_scene":
+	{
+	"materials":[
+		{"json_material" : 
+			{
+				"refl_amount":0.0,
+				"shininess":0.3,
+				"Color":{"r":1.0,"g":1.0,"b":1.0,"a":1.0},
+				"diff_texture_path" : ""
+			}
+		},
+		{"json_material":
+			
+			{
+				"refl_amount":0.0,
+				"shininess":0.3,
+				"Color":{"r":1.0,"g":0.0,"b":0.0,"a":1.0},
+				"diff_texture_path" : ""
+			}
+		}
+	],
+	"file_meshes":[ 
+		{"json_file_mesh":
+			{
+				"path": "../src/res/obj/plane_normals.obj",
+				"material_id":0,
+				"translate" : [0.0,0.0,0.0],
+				"rotate" : [90.0,0.0,0.0],
+				"scale" : [1.0,1.0,1.0]
+			}
+		},
+		{"json_file_mesh":
+			{
+				"path": "../src/res/obj/plane_normals.obj",
+				"material_id":1,
+				"translate" : [0.0,0.5,0.5],
+				"rotate" : [0.0,0.0,0.0],
+				"scale" : [1.0,1.0,1.0]
+			}
+	 	}			
+	],
+	"lights":[
+		{"json_light":
+			{
+				"color":{"r":1.0,"g":0.5,"b":1.0,"a":1.0},
+				"position":[1.5,1.5,3.0]
+			}
+		}
+	]
+}
+}
