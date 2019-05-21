@@ -21,7 +21,7 @@ void main()
 	for(int i=0; i< 2; i++){
 		mediump float light_dist = distance(f_pos, u_light_positions[i]);
 		lightDir = normalize(u_light_positions[i] - f_pos);   
-		diff += (max(dot(norm, lightDir), 0.0)  / (light_dist * light_dist)) * 10.0;
+		diff += (max(dot(norm, lightDir), 0.0)  / (light_dist * light_dist)) * 1.0;
 	}
 	
 	//~ color = vec4(0.0,0.8,0.5,1.0);  
