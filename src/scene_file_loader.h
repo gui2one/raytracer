@@ -147,7 +147,7 @@ struct JsonLight : public Light
 {
 	
 	std::vector<double> position;
-	
+	double intensity;
 	JsonLight(){
 		position.reserve(3);
 	}
@@ -156,6 +156,7 @@ struct JsonLight : public Light
 		Light light;
 		light.position = glm::vec3(position[0], position[1], position[2]);
 		light.color = color;
+		light.intensity = intensity;
 		return light;
 	}
 	void serialize(JSON::Adapter& adapter){
@@ -163,7 +164,8 @@ struct JsonLight : public Light
 		JSON::Class root(adapter, "json_light");
 		
 		JSON_E(adapter, color);
-		JSON_T(adapter, position);
+		JSON_E(adapter, position);
+		JSON_T(adapter, intensity);
 		
 	
 	}	

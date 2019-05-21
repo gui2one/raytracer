@@ -368,6 +368,7 @@ void Renderer::initScene()
 	kd_nodes.clear();
 	meshes.clear();
 	materials.clear();
+	lights.clear();
 	
 	SceneFileLoader scene_loader;
 	render_options = scene_loader.loadOptionsFile(options_file_path_save);	
@@ -514,7 +515,7 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial* material, HitData& hit
 	Raycaster raycaster;
 
 	Color clr(0.0,0.0,0.0,1.0); //= material->color;
-	
+	glm::vec3 view_dir = glm::normalize( (hit_data.position - hit_data.ray_origin) );
 	// interpolate normal from barycentric coordinates
 
 	glm::vec3 normal;
@@ -527,7 +528,10 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial* material, HitData& hit
 	normal = (normalA * bary.x) + (normalB * bary.y) + (normalC * bary.z);
 	
 	
-
+	if(dot(normal, view_dir) > 0.0)
+	{
+		 normal = normal * -1.0f; // if ray comes from behind, reverse normal
+	}
 	
 	glm::vec2 uvA = mesh.points[face.getVertex(0).point_id].t_coords;
 	glm::vec2 uvB = mesh.points[face.getVertex(1).point_id].t_coords;
@@ -539,7 +543,7 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial* material, HitData& hit
 	
 	//~ printf("shading uv : %.3f %.3f \n", uv.x, uv.y);
 	
-	glm::vec3 view_dir = glm::normalize( (hit_data.position - hit_data.ray_origin) );
+	
 	//~ glm::vec3 view_dir = hit_data.position - hit_data.ray_origin ;
 
 	float diff_amount = 1.0;

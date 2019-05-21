@@ -20,7 +20,7 @@ void main()
 	gl_Position =  projection * view * model *vec4(position, 1.0) ;
 	//~ gl_Position =  vec4(position, 1.0) ;
 	
-	//~ f_pos = vec3(model * vec4(position,1.0));
+	f_pos = position;
 	f_normal = normal;
 	//~ f_normal = mat3(transpose(inverse(model))) * normal;
 	f_t_coords = t_coords;

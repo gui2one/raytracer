@@ -6,7 +6,7 @@
 				"refl_amount":0.0,
 				"shininess":0.3,
 				"Color":{"r":1.0,"g":1.0,"b":1.0,"a":1.0},
-				"diff_texture_path" : ""
+				"diff_texture_path" : "../src/res/textures/uvgrid.jpg"
 			}
 		},
 		{"json_material":
@@ -43,7 +43,15 @@
 		{"json_light":
 			{
 				"color":{"r":1.0,"g":0.5,"b":1.0,"a":1.0},
-				"position":[1.5,1.5,3.0]
+				"position":[1.5,1.5,8.0],
+				"intensity": 3.0
+			}
+		},
+		{"json_light":
+			{
+				"color":{"r":0.5,"g":1.0,"b":1.0,"a":1.0},
+				"position":[-1.5,-1.5,5.0],
+				"intensity": 3.0
 			}
 		}
 	]
