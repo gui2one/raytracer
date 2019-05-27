@@ -13,13 +13,19 @@ class UIText
 		void init();
 		void draw();
 		inline void setText( std::string text){ m_text = text; }
-
+		void convertSDLSurface(SDL_Surface* surf, SDL_Texture * texture);
 		
-		unsigned int m_vbo, m_ibo;
+		unsigned int m_vbo, m_ibo, m_texture_id;
+		
+		int texture_width, texture_height;
+		std::vector<unsigned char> texture_data;
 		
 		
 		std::vector<float> vertices;
 		std::vector<unsigned int> indices;
+		
+		
+		SDL_Renderer * m_renderer;
 		
 		Shader* m_shader;
 		TTF_Font* m_font;

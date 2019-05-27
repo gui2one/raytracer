@@ -36,11 +36,11 @@ void Editor::init()
 	assert(window);
 	SDL_GLContext Context = SDL_GL_CreateContext(window);
 
-	//~ w_renderer = SDL_CreateRenderer(window, -1, 0); // SDL_RENDERER_SOFTWARE);
+	w_renderer = SDL_CreateRenderer(window, -1, 0); // SDL_RENDERER_SOFTWARE);
 	
 	TTF_Init();
 	
-	font = TTF_OpenFont("../src/res/fonts/ProggyTiny.ttf", 30); //this opens a font style and sets a size
+	font = TTF_OpenFont("../src/res/fonts/DroidSans.ttf", 20); //this opens a font style and sets a size
     if( font == NULL )
     {
         printf( "Failed to load font! SDL_ttf Error: %s\n", TTF_GetError() );
@@ -80,6 +80,7 @@ void Editor::init()
 	camera.up_vector = glm::vec3(0.0, 0.0 , 1.0);
 	
 	UIText text1;
+	text1.m_renderer = w_renderer;
 	text1.m_font = font;
 	text1.m_shader = &font_shader;
 

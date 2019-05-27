@@ -1,49 +1,50 @@
 #include "ui_text.h"
 
-static void convertSDLSurface(SDL_Surface* surf)
+void UIText::convertSDLSurface(SDL_Surface* surface, SDL_Texture * texture)
 {
-	printf("surface width : %d\n", surf->w);
-	printf("\tPixel Format : %#08x\n", surf->format->format);
-	if(surf->format->format == SDL_PIXELFORMAT_UNKNOWN){
+	printf("surface width : %d\n", surface->w);
+	printf("\tPixel Format : %#08x\n", surface->format->format);
+	if(surface->format->format == SDL_PIXELFORMAT_UNKNOWN){
 		printf("SDL_PIXELFORMAT_UNKNOWN\n");
-	}else if(surf->format->format == SDL_PIXELFORMAT_INDEX1LSB){
+	}else if(surface->format->format == SDL_PIXELFORMAT_INDEX1LSB){
 		printf("SDL_PIXELFORMAT_INDEX1LSB\n");
-	}else if(surf->format->format == SDL_PIXELFORMAT_INDEX1MSB){
+	}else if(surface->format->format == SDL_PIXELFORMAT_INDEX1MSB){
 		printf("SDL_PIXELFORMAT_INDEX1MSB\n");
-	}else if(surf->format->format == SDL_PIXELFORMAT_INDEX4LSB){
+	}else if(surface->format->format == SDL_PIXELFORMAT_INDEX4LSB){
 		printf("SDL_PIXELFORMAT_INDEX4LSB\n");
-	}else if(surf->format->format == SDL_PIXELFORMAT_INDEX4MSB){
+	}else if(surface->format->format == SDL_PIXELFORMAT_INDEX4MSB){
 		printf("SDL_PIXELFORMAT_INDEX4MSB\n");
-	}else if(surf->format->format == SDL_PIXELFORMAT_INDEX8){
+	}else if(surface->format->format == SDL_PIXELFORMAT_INDEX8){
 		printf("SDL_PIXELFORMAT_INDEX8\n");
-	}else if(surf->format->format == SDL_PIXELFORMAT_RGB332){
+	}else if(surface->format->format == SDL_PIXELFORMAT_RGB332){
 		printf("SDL_PIXELFORMAT_RGB332\n");
-	}else if(surf->format->format == SDL_PIXELFORMAT_RGB444){
+	}else if(surface->format->format == SDL_PIXELFORMAT_RGB444){
 		printf("SDL_PIXELFORMAT_RGB444\n");
-	}else if(surf->format->format == SDL_PIXELFORMAT_RGB555){
+	}else if(surface->format->format == SDL_PIXELFORMAT_RGB555){
 		printf("SDL_PIXELFORMAT_RGB555\n");
-	}else if(surf->format->format == SDL_PIXELFORMAT_BGR555){
+	}else if(surface->format->format == SDL_PIXELFORMAT_BGR555){
 		printf("SDL_PIXELFORMAT_BGR555\n");
 	}
 	
-
-	unsigned char * pixes = (unsigned char*)surf->pixels;
+	
+	SDL_LockSurface(surface);
+	unsigned char* pixels = (unsigned char*)surface -> pixels; 
 	
 	
-	for (int i = 0; i < surf->w * surf->h; i+= surf->w)
+	
+	
+	for (int i = 0; i < surface->w * surface->h; i+=surface->w)
 	{
-		for (int j = 0; j < surf->w; j++)
+		for(int j = 0; j < surface->w; j++)
 		{
-			
-			Uint8 r, g, b;			
-			SDL_GetRGB(pixes[i+j], surf->format, &r, &g, &b);
-			
-			//~ printf("%d", pixes[i+j]);
-			printf("%d", (r > 128) ? 0:1);
+			printf("%d", pixels[i+j]);
 		}
 		
 		printf("\n");
 	}
+	
+	SDL_UnlockSurface(surface);
+	//~ pixels[4 * (y * surface -> w + x) + c] = 255;
 	
 	
 	
@@ -53,7 +54,7 @@ static void convertSDLSurface(SDL_Surface* surf)
 
 UIText::UIText()
 {
-	m_text = " vvv!!!";
+	m_text = "Test ";
 }
 UIText::UIText(Shader& _shader, TTF_Font* font):m_shader(&_shader), m_font(font)
 {
@@ -70,16 +71,22 @@ void UIText::init()
 		
 		SDL_Surface* surfaceMessage = TTF_RenderText_Solid(m_font, m_text.c_str(), White); // as TTF_RenderText_Solid could only be used on SDL_Surface then you have to create the surface first
 
-		//~ SDL_Texture* Message = SDL_CreateTextureFromSurface(w_renderer, surfaceMessage); //now you can convert it into a texture
 
+		
+		SDL_Texture* Message = SDL_CreateTextureFromSurface(m_renderer, surfaceMessage); //now you can convert it into a texture
+
+		
 		SDL_Rect rect;
 		rect.x = 0;
 		rect.y = 0;
 		rect.w = surfaceMessage->w;
 		rect.h = surfaceMessage->h;
 		
+		texture_width = surfaceMessage->w;
+		texture_height = surfaceMessage->h;
+		
 		//~ SDL_SetClipRect(surfaceMessage, &rect);
-		convertSDLSurface(surfaceMessage);
+		convertSDLSurface(surfaceMessage, Message);
 		//~ SDL_Rect Message_rect; //create a rect
 		//~ Message_rect.x = 20;  //controls the rect's x coordinate 
 		//~ Message_rect.y = 20; // controls the rect's y coordinte
@@ -88,15 +95,18 @@ void UIText::init()
 
 
 
-		SDL_FreeSurface(surfaceMessage);
+		
 		//~ SDL_RenderCopy(w_renderer, Message, NULL, &Message_rect); //you put the renderer's name first, the Message, the crop size(you can ignore this if you don't want to dabble with cropping), and the rect which is the size and coordinate of your texture
 
-		//~ SDL_DestroyTexture(Message);
+		SDL_DestroyTexture(Message);
 		//Don't forget too free your surface and texture
 
 		//~ SDL_RenderPresent(w_renderer);
 
 		//~ SDL_SetRenderTarget(w_renderer, NULL);
+		
+		SDL_FreeSurface(surfaceMessage);
+		
 		
 		
 		vertices.clear();
@@ -129,10 +139,35 @@ void UIText::init()
 		GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), indices.data(), GL_STATIC_DRAW));
 		GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));		
 	
+	
+	GLCall(glDeleteTextures(1, &m_texture_id));
+	GLCall(glGenTextures(1, &m_texture_id));
+	GLCall(glBindTexture(GL_TEXTURE_2D, m_texture_id));
+
+	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER));
+	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER));
+
+//~ 
+	GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture_width, texture_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture_data.data()));
+
+	GLCall(glBindTexture(GL_TEXTURE_2D, 0));	
+	
+	
+	
+	
+	
+	
 }
 
 void UIText::draw()
 {
+	GLCall(glActiveTexture(GL_TEXTURE0));
+	GLCall(glBindTexture(GL_TEXTURE_2D, m_texture_id));
+	
+	
+	
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_vbo));
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo));
 	GLCall(glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, 0));
@@ -151,6 +186,9 @@ void UIText::draw()
 	
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));	
+	
+	GLCall(glBindTexture(GL_TEXTURE_2D, 0));
+	
 }
 
 
