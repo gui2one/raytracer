@@ -26,21 +26,6 @@
 	//~ }
 //~ }
 
-class JSONExample
-{
-public:
-    // to be JSON'ised
-    std::string text;
-public:
-    // each class requires a public serialize function
-    void serialize(JSON::Adapter& adapter)
-    {
-        // this pattern is required 
-        JSON::Class root(adapter,"JSONExample");
-        // this is the last member variable we serialize so use the _T variant
-        JSON_T(adapter,text);
-    }
-};
 
 struct JsonMaterial : public RTMaterial
 {
@@ -51,16 +36,10 @@ struct JsonMaterial : public RTMaterial
 		//~ Color color;	
 	
 		JsonMaterial(){
-			//~ refl_amount = 0.5;
-			//~ color = Color(0.1,0.5,0.8,1.0);
+
 		}
 	
-		//~ JsonMaterial(RTMaterial& material){
-			//~ color = material.color;
-			//~ shininess = material.shininess;			
-			//~ refl_amount = material.refl_amount;			
-			//~ diff_texture_path = material.diff_texture_path;
-		//~ }	
+
 		void serialize(JSON::Adapter& adapter){
 			JSON::Class root(adapter, "json_material");
 			JSON_E(adapter, refl_amount);
@@ -174,6 +153,13 @@ struct JsonLight : public Light
 struct JsonScene
 {
 	public:
+	
+		//~ JsonScene(
+			//~ std::vector<JsonMaterial> _materials,
+			//~ std::vector<JsonFileMesh> _file_meshes,
+			//~ std::vector<JsonLight> _lights
+		//~ ):materials(_materials), file_meshes(_file_meshes), lights(_lights){};
+		
 		std::vector<JsonMaterial> materials;
 		std::vector<JsonFileMesh> file_meshes;
 		std::vector<JsonLight> lights;

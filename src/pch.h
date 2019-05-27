@@ -7,6 +7,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
+#include <SDL2/SDL_ttf.h>
 //~ #include <GLFW/glfw3.h>
 
 #include "vendor/stb_image.h"

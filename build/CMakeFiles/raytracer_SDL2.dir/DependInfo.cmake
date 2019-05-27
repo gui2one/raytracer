@@ -4,24 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/pi/projects/raytracer_SDL2/src/camera.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o"
-  "/home/pi/projects/raytracer_SDL2/src/color.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/color.cpp.o"
-  "/home/pi/projects/raytracer_SDL2/src/kdnode.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o"
-  "/home/pi/projects/raytracer_SDL2/src/light.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/light.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/main.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.o"
-  "/home/pi/projects/raytracer_SDL2/src/mesh.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o"
-  "/home/pi/projects/raytracer_SDL2/src/raycaster.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/renderer.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o"
-  "/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o"
-  "/home/pi/projects/raytracer_SDL2/src/shader.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/shader.cpp.o"
-  "/home/pi/projects/raytracer_SDL2/src/texture.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/texture.cpp.o"
-  "/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.o"
-  "/home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.o"
-  "/home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp.o"
-  "/home/pi/projects/raytracer_SDL2/src/vector3.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/vector3.cpp.o"
-  "/home/pi/projects/raytracer_SDL2/src/vendor/stb_image.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/vendor/stb_image.cpp.o"
-  "/home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -39,6 +24,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
   "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/PCHLib.dir/DependInfo.cmake"
+  "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/coreLib.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

@@ -60,12 +60,6 @@ cmath
 defs.h
 ../src/include/assimp/defs.h
 
-../src/include/assimp/quaternion.inl
-quaternion.h
-../src/include/assimp/quaternion.h
-cmath
--
-
 ../src/include/assimp/types.h
 sys/types.h
 -
@@ -11570,17 +11564,9 @@ boost/config.hpp
 boost/smart_ptr/weak_ptr.hpp
 -
 
-/home/pi/projects/raytracer_SDL2/src/camera.cpp
-camera.h
-/home/pi/projects/raytracer_SDL2/src/camera.h
-
 /home/pi/projects/raytracer_SDL2/src/camera.h
 pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
-
-/home/pi/projects/raytracer_SDL2/src/color.cpp
-color.h
-/home/pi/projects/raytracer_SDL2/src/color.h
 
 /home/pi/projects/raytracer_SDL2/src/color.h
 pch.h
@@ -11628,10 +11614,6 @@ importerdesc.h
 
 /home/pi/projects/raytracer_SDL2/src/include/assimp/importerdesc.h
 
-/home/pi/projects/raytracer_SDL2/src/include/assimp/light.h
-types.h
-/home/pi/projects/raytracer_SDL2/src/include/assimp/types.h
-
 /home/pi/projects/raytracer_SDL2/src/include/assimp/material.h
 types.h
 /home/pi/projects/raytracer_SDL2/src/include/assimp/types.h
@@ -11643,10 +11625,6 @@ material.inl
 /home/pi/projects/raytracer_SDL2/src/include/assimp/material.inl
 
 /home/pi/projects/raytracer_SDL2/src/include/assimp/material.inl
-
-/home/pi/projects/raytracer_SDL2/src/include/assimp/mesh.h
-types.h
-/home/pi/projects/raytracer_SDL2/src/include/assimp/types.h
 
 /home/pi/projects/raytracer_SDL2/src/include/assimp/metadata.h
 Compiler/pstdint.h
@@ -11677,14 +11655,6 @@ anim.h
 /home/pi/projects/raytracer_SDL2/src/include/assimp/anim.h
 metadata.h
 /home/pi/projects/raytracer_SDL2/src/include/assimp/metadata.h
-
-/home/pi/projects/raytracer_SDL2/src/include/assimp/texture.h
-types.h
-/home/pi/projects/raytracer_SDL2/src/include/assimp/types.h
-./Compiler/pushpack1.h
-/home/pi/projects/raytracer_SDL2/src/include/assimp/./Compiler/pushpack1.h
-./Compiler/poppack1.h
-/home/pi/projects/raytracer_SDL2/src/include/assimp/./Compiler/poppack1.h
 
 /home/pi/projects/raytracer_SDL2/src/include/assimp/types.h
 sys/types.h
@@ -11748,19 +11718,11 @@ boost/foreach.hpp
 boost/utility/result_of.hpp
 /home/pi/projects/raytracer_SDL2/src/include/boost/utility/result_of.hpp
 
-/home/pi/projects/raytracer_SDL2/src/kdnode.cpp
-kdnode.h
-/home/pi/projects/raytracer_SDL2/src/kdnode.h
-
 /home/pi/projects/raytracer_SDL2/src/kdnode.h
 pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
 ray.h
 /home/pi/projects/raytracer_SDL2/src/ray.h
-
-/home/pi/projects/raytracer_SDL2/src/light.cpp
-light.h
-/home/pi/projects/raytracer_SDL2/src/light.h
 
 /home/pi/projects/raytracer_SDL2/src/light.h
 pch.h
@@ -11786,10 +11748,6 @@ utils/objLoader.h
 renderer.h
 /home/pi/projects/raytracer_SDL2/src/renderer.h
 
-/home/pi/projects/raytracer_SDL2/src/mesh.cpp
-mesh.h
-/home/pi/projects/raytracer_SDL2/src/mesh.h
-
 /home/pi/projects/raytracer_SDL2/src/mesh.h
 pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
@@ -11806,6 +11764,8 @@ GL/glew.h
 SDL2/SDL.h
 -
 SDL2/SDL_opengl.h
+-
+SDL2/SDL_ttf.h
 -
 vendor/stb_image.h
 /home/pi/projects/raytracer_SDL2/src/vendor/stb_image.h
@@ -11841,10 +11801,6 @@ csignal
 /home/pi/projects/raytracer_SDL2/src/ray.h
 pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
-
-/home/pi/projects/raytracer_SDL2/src/raycaster.cpp
-raycaster.h
-/home/pi/projects/raytracer_SDL2/src/raycaster.h
 
 /home/pi/projects/raytracer_SDL2/src/raycaster.h
 pch.h
@@ -11894,10 +11850,6 @@ scene_file_loader.h
 include/taskqueue.hpp
 /home/pi/projects/raytracer_SDL2/src/include/taskqueue.hpp
 
-/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp
-rtmaterial.h
-/home/pi/projects/raytracer_SDL2/src/rtmaterial.h
-
 /home/pi/projects/raytracer_SDL2/src/rtmaterial.h
 pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
@@ -11926,10 +11878,6 @@ utils/mesh_utils.h
 utils/objLoader.h
 /home/pi/projects/raytracer_SDL2/src/utils/objLoader.h
 
-/home/pi/projects/raytracer_SDL2/src/shader.cpp
-shader.h
-/home/pi/projects/raytracer_SDL2/src/shader.h
-
 /home/pi/projects/raytracer_SDL2/src/shader.h
 GL/glew.h
 -
@@ -11940,19 +11888,11 @@ string
 pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
 
-/home/pi/projects/raytracer_SDL2/src/texture.cpp
-texture.h
-/home/pi/projects/raytracer_SDL2/src/texture.h
-
 /home/pi/projects/raytracer_SDL2/src/texture.h
 pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
 iostream
 -
-
-/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp
-mesh_utils.h
-/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.h
 
 /home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.h
 ../pch.h
@@ -11961,10 +11901,6 @@ mesh_utils.h
 /home/pi/projects/raytracer_SDL2/src/mesh.h
 ../vector3.h
 /home/pi/projects/raytracer_SDL2/src/vector3.h
-
-/home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp
-objLoader.h
-/home/pi/projects/raytracer_SDL2/src/utils/objLoader.h
 
 /home/pi/projects/raytracer_SDL2/src/utils/objLoader.h
 string
@@ -11986,10 +11922,6 @@ stdio.h
 ../include/assimp/postprocess.h
 /home/pi/projects/raytracer_SDL2/src/include/assimp/postprocess.h
 
-/home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp
-system_utils.h
-/home/pi/projects/raytracer_SDL2/src/utils/system_utils.h
-
 /home/pi/projects/raytracer_SDL2/src/utils/system_utils.h
 ../pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
@@ -12001,10 +11933,6 @@ dirent.h
 /home/pi/projects/raytracer_SDL2/src/utils/dirent.h
 sys/stat.h
 /home/pi/projects/raytracer_SDL2/src/utils/sys/stat.h
-
-/home/pi/projects/raytracer_SDL2/src/vector3.cpp
-vector3.h
-/home/pi/projects/raytracer_SDL2/src/vector3.h
 
 /home/pi/projects/raytracer_SDL2/src/vector3.h
 pch.h
@@ -13438,10 +13366,6 @@ detail/setup.hpp
 detail/func_vector_relational.inl
 /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/func_vector_relational.inl
 
-/home/pi/projects/raytracer_SDL2/src/vendor/stb_image.cpp
-stb_image.h
-/home/pi/projects/raytracer_SDL2/src/vendor/stb_image.h
-
 /home/pi/projects/raytracer_SDL2/src/vendor/stb_image.h
 stb_image.h
 /home/pi/projects/raytracer_SDL2/src/vendor/stb_image.h
@@ -13471,12 +13395,6 @@ intrin.h
 -
 arm_neon.h
 -
-
-/home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp
-stb_image.h
-/home/pi/projects/raytracer_SDL2/src/vendor/stb_image.h
-stb_image_write.h
-/home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.h
 
 /home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.h
 stdlib.h

@@ -11,7 +11,7 @@ class MeshUtils
 		MeshUtils();
 		
 		Mesh makeQuad();
-		Mesh makeSimpleBox(float w, float h);
+		Mesh makeSimpleBox(float w = 1.0, float h = 1.0);
 		
 		Mesh uniquePoints(Mesh input_mesh);
 		

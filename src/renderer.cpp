@@ -383,6 +383,7 @@ void Renderer::initScene()
 	
 	buildDisplayGeometry();
 }
+
 void Renderer::buildKDTree()
 {
 

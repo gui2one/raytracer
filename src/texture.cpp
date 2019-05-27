@@ -50,7 +50,7 @@ void Texture::load(std::string path)
 	}
 }
 
-void Texture::setData(int _width, int _height, unsigned char* buffer)
+void Texture::setData(int _width, int _height, unsigned char* buffer, int _bpp)
 {
 	
 	glDeleteTextures(1, &id);
@@ -67,7 +67,8 @@ void Texture::setData(int _width, int _height, unsigned char* buffer)
 	glBindTexture(GL_TEXTURE_2D, 0);	
 	
 	
-	
+	is_valid = true;
+	setBPP(_bpp);
 	//~ std::cout << "__ setting texture data : " << _width << "/" << _height  << "\n";
 }
 

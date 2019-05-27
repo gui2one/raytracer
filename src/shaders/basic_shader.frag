@@ -17,22 +17,19 @@ void main()
 {          
 	
 	norm = normalize(f_normal);
+	
 	mediump float diff = 0.0;
+	
 	for(int i=0; i< 2; i++){
 		mediump float light_dist = distance(f_pos, u_light_positions[i]);
 		lightDir = normalize(u_light_positions[i] - f_pos);   
 		diff += (max(dot(norm, lightDir), 0.0)  / (light_dist * light_dist)) * 1.0;
 	}
 	
-	//~ color = vec4(0.0,0.8,0.5,1.0);  
-	
-	
-	
-	//~ color = diff * f_color;
-	//~ color = vec4(norm,1.0);
+	//~ color = diff * f_color;	
 	color = diff * f_color * texture2D(u_tex,f_t_coords);
-	//~ color = texture2D(u_tex,f_t_coords);
-	//~ color = vec4(1.0,0.5,0.4,1.0);
+
+	
 }
 
 

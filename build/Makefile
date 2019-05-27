@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named editor
+
+# Build rule for target.
+editor: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 editor
+.PHONY : editor
+
+# fast build rule for target.
+editor/fast:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/build
+.PHONY : editor/fast
+
+#=============================================================================
 # Target rules for targets named raytracer_SDL2
 
 # Build rule for target.
@@ -122,6 +135,19 @@ raytracer_SDL2: cmake_check_build_system
 raytracer_SDL2/fast:
 	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/build
 .PHONY : raytracer_SDL2/fast
+
+#=============================================================================
+# Target rules for targets named coreLib
+
+# Build rule for target.
+coreLib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 coreLib
+.PHONY : coreLib
+
+# fast build rule for target.
+coreLib/fast:
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/build
+.PHONY : coreLib/fast
 
 #=============================================================================
 # Target rules for targets named PCHLib
@@ -142,7 +168,7 @@ home/pi/projects/raytracer_SDL2/src/camera.o: home/pi/projects/raytracer_SDL2/sr
 
 # target to build an object file
 home/pi/projects/raytracer_SDL2/src/camera.cpp.o:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o
 .PHONY : home/pi/projects/raytracer_SDL2/src/camera.cpp.o
 
 home/pi/projects/raytracer_SDL2/src/camera.i: home/pi/projects/raytracer_SDL2/src/camera.cpp.i
@@ -151,7 +177,7 @@ home/pi/projects/raytracer_SDL2/src/camera.i: home/pi/projects/raytracer_SDL2/sr
 
 # target to preprocess a source file
 home/pi/projects/raytracer_SDL2/src/camera.cpp.i:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.i
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.i
 .PHONY : home/pi/projects/raytracer_SDL2/src/camera.cpp.i
 
 home/pi/projects/raytracer_SDL2/src/camera.s: home/pi/projects/raytracer_SDL2/src/camera.cpp.s
@@ -160,7 +186,7 @@ home/pi/projects/raytracer_SDL2/src/camera.s: home/pi/projects/raytracer_SDL2/sr
 
 # target to generate assembly for a file
 home/pi/projects/raytracer_SDL2/src/camera.cpp.s:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.s
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/camera.cpp.s
 
 home/pi/projects/raytracer_SDL2/src/color.o: home/pi/projects/raytracer_SDL2/src/color.cpp.o
@@ -169,7 +195,7 @@ home/pi/projects/raytracer_SDL2/src/color.o: home/pi/projects/raytracer_SDL2/src
 
 # target to build an object file
 home/pi/projects/raytracer_SDL2/src/color.cpp.o:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/color.cpp.o
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/color.cpp.o
 .PHONY : home/pi/projects/raytracer_SDL2/src/color.cpp.o
 
 home/pi/projects/raytracer_SDL2/src/color.i: home/pi/projects/raytracer_SDL2/src/color.cpp.i
@@ -178,7 +204,7 @@ home/pi/projects/raytracer_SDL2/src/color.i: home/pi/projects/raytracer_SDL2/src
 
 # target to preprocess a source file
 home/pi/projects/raytracer_SDL2/src/color.cpp.i:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/color.cpp.i
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/color.cpp.i
 .PHONY : home/pi/projects/raytracer_SDL2/src/color.cpp.i
 
 home/pi/projects/raytracer_SDL2/src/color.s: home/pi/projects/raytracer_SDL2/src/color.cpp.s
@@ -187,8 +213,116 @@ home/pi/projects/raytracer_SDL2/src/color.s: home/pi/projects/raytracer_SDL2/src
 
 # target to generate assembly for a file
 home/pi/projects/raytracer_SDL2/src/color.cpp.s:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/color.cpp.s
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/color.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/color.cpp.s
+
+home/pi/projects/raytracer_SDL2/src/editor/editor.o: home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.o
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/editor.o
+
+# target to build an object file
+home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.o:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.o
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.o
+
+home/pi/projects/raytracer_SDL2/src/editor/editor.i: home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.i
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/editor.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.i:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.i
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.i
+
+home/pi/projects/raytracer_SDL2/src/editor/editor.s: home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.s
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/editor.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.s:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.s
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.s
+
+home/pi/projects/raytracer_SDL2/src/editor/entity3d.o: home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.o
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/entity3d.o
+
+# target to build an object file
+home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.o:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.o
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.o
+
+home/pi/projects/raytracer_SDL2/src/editor/entity3d.i: home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.i
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/entity3d.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.i:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.i
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.i
+
+home/pi/projects/raytracer_SDL2/src/editor/entity3d.s: home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.s
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/entity3d.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.s:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.s
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.s
+
+home/pi/projects/raytracer_SDL2/src/editor/main.o: home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/main.o
+
+# target to build an object file
+home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o
+
+home/pi/projects/raytracer_SDL2/src/editor/main.i: home/pi/projects/raytracer_SDL2/src/editor/main.cpp.i
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/main.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer_SDL2/src/editor/main.cpp.i:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.i
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/main.cpp.i
+
+home/pi/projects/raytracer_SDL2/src/editor/main.s: home/pi/projects/raytracer_SDL2/src/editor/main.cpp.s
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/main.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer_SDL2/src/editor/main.cpp.s:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.s
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/main.cpp.s
+
+home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.o: home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.cpp.o
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.o
+
+# target to build an object file
+home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.cpp.o:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.cpp.o
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.cpp.o
+
+home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.i: home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.cpp.i
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.cpp.i:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.cpp.i
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.cpp.i
+
+home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.s: home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.cpp.s
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.cpp.s:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.cpp.s
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.cpp.s
 
 home/pi/projects/raytracer_SDL2/src/kdnode.o: home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o
 
@@ -196,7 +330,7 @@ home/pi/projects/raytracer_SDL2/src/kdnode.o: home/pi/projects/raytracer_SDL2/sr
 
 # target to build an object file
 home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o
 .PHONY : home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o
 
 home/pi/projects/raytracer_SDL2/src/kdnode.i: home/pi/projects/raytracer_SDL2/src/kdnode.cpp.i
@@ -205,7 +339,7 @@ home/pi/projects/raytracer_SDL2/src/kdnode.i: home/pi/projects/raytracer_SDL2/sr
 
 # target to preprocess a source file
 home/pi/projects/raytracer_SDL2/src/kdnode.cpp.i:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.i
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.i
 .PHONY : home/pi/projects/raytracer_SDL2/src/kdnode.cpp.i
 
 home/pi/projects/raytracer_SDL2/src/kdnode.s: home/pi/projects/raytracer_SDL2/src/kdnode.cpp.s
@@ -214,7 +348,7 @@ home/pi/projects/raytracer_SDL2/src/kdnode.s: home/pi/projects/raytracer_SDL2/sr
 
 # target to generate assembly for a file
 home/pi/projects/raytracer_SDL2/src/kdnode.cpp.s:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.s
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/kdnode.cpp.s
 
 home/pi/projects/raytracer_SDL2/src/light.o: home/pi/projects/raytracer_SDL2/src/light.cpp.o
@@ -223,7 +357,7 @@ home/pi/projects/raytracer_SDL2/src/light.o: home/pi/projects/raytracer_SDL2/src
 
 # target to build an object file
 home/pi/projects/raytracer_SDL2/src/light.cpp.o:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/light.cpp.o
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/light.cpp.o
 .PHONY : home/pi/projects/raytracer_SDL2/src/light.cpp.o
 
 home/pi/projects/raytracer_SDL2/src/light.i: home/pi/projects/raytracer_SDL2/src/light.cpp.i
@@ -232,7 +366,7 @@ home/pi/projects/raytracer_SDL2/src/light.i: home/pi/projects/raytracer_SDL2/src
 
 # target to preprocess a source file
 home/pi/projects/raytracer_SDL2/src/light.cpp.i:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/light.cpp.i
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/light.cpp.i
 .PHONY : home/pi/projects/raytracer_SDL2/src/light.cpp.i
 
 home/pi/projects/raytracer_SDL2/src/light.s: home/pi/projects/raytracer_SDL2/src/light.cpp.s
@@ -241,7 +375,7 @@ home/pi/projects/raytracer_SDL2/src/light.s: home/pi/projects/raytracer_SDL2/src
 
 # target to generate assembly for a file
 home/pi/projects/raytracer_SDL2/src/light.cpp.s:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/light.cpp.s
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/light.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/light.cpp.s
 
 home/pi/projects/raytracer_SDL2/src/main.o: home/pi/projects/raytracer_SDL2/src/main.cpp.o
@@ -277,7 +411,7 @@ home/pi/projects/raytracer_SDL2/src/mesh.o: home/pi/projects/raytracer_SDL2/src/
 
 # target to build an object file
 home/pi/projects/raytracer_SDL2/src/mesh.cpp.o:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o
 .PHONY : home/pi/projects/raytracer_SDL2/src/mesh.cpp.o
 
 home/pi/projects/raytracer_SDL2/src/mesh.i: home/pi/projects/raytracer_SDL2/src/mesh.cpp.i
@@ -286,7 +420,7 @@ home/pi/projects/raytracer_SDL2/src/mesh.i: home/pi/projects/raytracer_SDL2/src/
 
 # target to preprocess a source file
 home/pi/projects/raytracer_SDL2/src/mesh.cpp.i:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.i
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.i
 .PHONY : home/pi/projects/raytracer_SDL2/src/mesh.cpp.i
 
 home/pi/projects/raytracer_SDL2/src/mesh.s: home/pi/projects/raytracer_SDL2/src/mesh.cpp.s
@@ -295,7 +429,7 @@ home/pi/projects/raytracer_SDL2/src/mesh.s: home/pi/projects/raytracer_SDL2/src/
 
 # target to generate assembly for a file
 home/pi/projects/raytracer_SDL2/src/mesh.cpp.s:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.s
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/mesh.cpp.s
 
 home/pi/projects/raytracer_SDL2/src/pch.o: home/pi/projects/raytracer_SDL2/src/pch.cpp.o
@@ -331,7 +465,7 @@ home/pi/projects/raytracer_SDL2/src/raycaster.o: home/pi/projects/raytracer_SDL2
 
 # target to build an object file
 home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o
 .PHONY : home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o
 
 home/pi/projects/raytracer_SDL2/src/raycaster.i: home/pi/projects/raytracer_SDL2/src/raycaster.cpp.i
@@ -340,7 +474,7 @@ home/pi/projects/raytracer_SDL2/src/raycaster.i: home/pi/projects/raytracer_SDL2
 
 # target to preprocess a source file
 home/pi/projects/raytracer_SDL2/src/raycaster.cpp.i:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.i
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.i
 .PHONY : home/pi/projects/raytracer_SDL2/src/raycaster.cpp.i
 
 home/pi/projects/raytracer_SDL2/src/raycaster.s: home/pi/projects/raytracer_SDL2/src/raycaster.cpp.s
@@ -349,7 +483,7 @@ home/pi/projects/raytracer_SDL2/src/raycaster.s: home/pi/projects/raytracer_SDL2
 
 # target to generate assembly for a file
 home/pi/projects/raytracer_SDL2/src/raycaster.cpp.s:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.s
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/raycaster.cpp.s
 
 home/pi/projects/raytracer_SDL2/src/renderer.o: home/pi/projects/raytracer_SDL2/src/renderer.cpp.o
@@ -385,7 +519,7 @@ home/pi/projects/raytracer_SDL2/src/rtmaterial.o: home/pi/projects/raytracer_SDL
 
 # target to build an object file
 home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o
 .PHONY : home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o
 
 home/pi/projects/raytracer_SDL2/src/rtmaterial.i: home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.i
@@ -394,7 +528,7 @@ home/pi/projects/raytracer_SDL2/src/rtmaterial.i: home/pi/projects/raytracer_SDL
 
 # target to preprocess a source file
 home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.i:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.i
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.i
 .PHONY : home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.i
 
 home/pi/projects/raytracer_SDL2/src/rtmaterial.s: home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.s
@@ -403,7 +537,7 @@ home/pi/projects/raytracer_SDL2/src/rtmaterial.s: home/pi/projects/raytracer_SDL
 
 # target to generate assembly for a file
 home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.s:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.s
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.s
 
 home/pi/projects/raytracer_SDL2/src/scene_file_loader.o: home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o
@@ -412,6 +546,7 @@ home/pi/projects/raytracer_SDL2/src/scene_file_loader.o: home/pi/projects/raytra
 
 # target to build an object file
 home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o
 	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o
 .PHONY : home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o
 
@@ -421,6 +556,7 @@ home/pi/projects/raytracer_SDL2/src/scene_file_loader.i: home/pi/projects/raytra
 
 # target to preprocess a source file
 home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.i:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.i
 	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.i
 .PHONY : home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.i
 
@@ -430,6 +566,7 @@ home/pi/projects/raytracer_SDL2/src/scene_file_loader.s: home/pi/projects/raytra
 
 # target to generate assembly for a file
 home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.s:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.s
 	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.s
 
@@ -439,7 +576,7 @@ home/pi/projects/raytracer_SDL2/src/shader.o: home/pi/projects/raytracer_SDL2/sr
 
 # target to build an object file
 home/pi/projects/raytracer_SDL2/src/shader.cpp.o:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/shader.cpp.o
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/shader.cpp.o
 .PHONY : home/pi/projects/raytracer_SDL2/src/shader.cpp.o
 
 home/pi/projects/raytracer_SDL2/src/shader.i: home/pi/projects/raytracer_SDL2/src/shader.cpp.i
@@ -448,7 +585,7 @@ home/pi/projects/raytracer_SDL2/src/shader.i: home/pi/projects/raytracer_SDL2/sr
 
 # target to preprocess a source file
 home/pi/projects/raytracer_SDL2/src/shader.cpp.i:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/shader.cpp.i
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/shader.cpp.i
 .PHONY : home/pi/projects/raytracer_SDL2/src/shader.cpp.i
 
 home/pi/projects/raytracer_SDL2/src/shader.s: home/pi/projects/raytracer_SDL2/src/shader.cpp.s
@@ -457,7 +594,7 @@ home/pi/projects/raytracer_SDL2/src/shader.s: home/pi/projects/raytracer_SDL2/sr
 
 # target to generate assembly for a file
 home/pi/projects/raytracer_SDL2/src/shader.cpp.s:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/shader.cpp.s
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/shader.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/shader.cpp.s
 
 home/pi/projects/raytracer_SDL2/src/texture.o: home/pi/projects/raytracer_SDL2/src/texture.cpp.o
@@ -466,7 +603,7 @@ home/pi/projects/raytracer_SDL2/src/texture.o: home/pi/projects/raytracer_SDL2/s
 
 # target to build an object file
 home/pi/projects/raytracer_SDL2/src/texture.cpp.o:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/texture.cpp.o
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/texture.cpp.o
 .PHONY : home/pi/projects/raytracer_SDL2/src/texture.cpp.o
 
 home/pi/projects/raytracer_SDL2/src/texture.i: home/pi/projects/raytracer_SDL2/src/texture.cpp.i
@@ -475,7 +612,7 @@ home/pi/projects/raytracer_SDL2/src/texture.i: home/pi/projects/raytracer_SDL2/s
 
 # target to preprocess a source file
 home/pi/projects/raytracer_SDL2/src/texture.cpp.i:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/texture.cpp.i
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/texture.cpp.i
 .PHONY : home/pi/projects/raytracer_SDL2/src/texture.cpp.i
 
 home/pi/projects/raytracer_SDL2/src/texture.s: home/pi/projects/raytracer_SDL2/src/texture.cpp.s
@@ -484,7 +621,7 @@ home/pi/projects/raytracer_SDL2/src/texture.s: home/pi/projects/raytracer_SDL2/s
 
 # target to generate assembly for a file
 home/pi/projects/raytracer_SDL2/src/texture.cpp.s:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/texture.cpp.s
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/texture.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/texture.cpp.s
 
 home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.o: home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.o
@@ -493,7 +630,7 @@ home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.o: home/pi/projects/raytrac
 
 # target to build an object file
 home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.o:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.o
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.o
 .PHONY : home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.o
 
 home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.i: home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.i
@@ -502,7 +639,7 @@ home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.i: home/pi/projects/raytrac
 
 # target to preprocess a source file
 home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.i:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.i
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.i
 .PHONY : home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.i
 
 home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.s: home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.s
@@ -511,7 +648,7 @@ home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.s: home/pi/projects/raytrac
 
 # target to generate assembly for a file
 home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.s:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.s
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.s
 
 home/pi/projects/raytracer_SDL2/src/utils/objLoader.o: home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.o
@@ -520,7 +657,7 @@ home/pi/projects/raytracer_SDL2/src/utils/objLoader.o: home/pi/projects/raytrace
 
 # target to build an object file
 home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.o:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.o
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.o
 .PHONY : home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.o
 
 home/pi/projects/raytracer_SDL2/src/utils/objLoader.i: home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.i
@@ -529,7 +666,7 @@ home/pi/projects/raytracer_SDL2/src/utils/objLoader.i: home/pi/projects/raytrace
 
 # target to preprocess a source file
 home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.i:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.i
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.i
 .PHONY : home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.i
 
 home/pi/projects/raytracer_SDL2/src/utils/objLoader.s: home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.s
@@ -538,7 +675,7 @@ home/pi/projects/raytracer_SDL2/src/utils/objLoader.s: home/pi/projects/raytrace
 
 # target to generate assembly for a file
 home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.s:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.s
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.s
 
 home/pi/projects/raytracer_SDL2/src/utils/system_utils.o: home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp.o
@@ -547,7 +684,7 @@ home/pi/projects/raytracer_SDL2/src/utils/system_utils.o: home/pi/projects/raytr
 
 # target to build an object file
 home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp.o:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp.o
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp.o
 .PHONY : home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp.o
 
 home/pi/projects/raytracer_SDL2/src/utils/system_utils.i: home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp.i
@@ -556,7 +693,7 @@ home/pi/projects/raytracer_SDL2/src/utils/system_utils.i: home/pi/projects/raytr
 
 # target to preprocess a source file
 home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp.i:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp.i
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp.i
 .PHONY : home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp.i
 
 home/pi/projects/raytracer_SDL2/src/utils/system_utils.s: home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp.s
@@ -565,35 +702,8 @@ home/pi/projects/raytracer_SDL2/src/utils/system_utils.s: home/pi/projects/raytr
 
 # target to generate assembly for a file
 home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp.s:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp.s
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp.s
-
-home/pi/projects/raytracer_SDL2/src/vector3.o: home/pi/projects/raytracer_SDL2/src/vector3.cpp.o
-
-.PHONY : home/pi/projects/raytracer_SDL2/src/vector3.o
-
-# target to build an object file
-home/pi/projects/raytracer_SDL2/src/vector3.cpp.o:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/vector3.cpp.o
-.PHONY : home/pi/projects/raytracer_SDL2/src/vector3.cpp.o
-
-home/pi/projects/raytracer_SDL2/src/vector3.i: home/pi/projects/raytracer_SDL2/src/vector3.cpp.i
-
-.PHONY : home/pi/projects/raytracer_SDL2/src/vector3.i
-
-# target to preprocess a source file
-home/pi/projects/raytracer_SDL2/src/vector3.cpp.i:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/vector3.cpp.i
-.PHONY : home/pi/projects/raytracer_SDL2/src/vector3.cpp.i
-
-home/pi/projects/raytracer_SDL2/src/vector3.s: home/pi/projects/raytracer_SDL2/src/vector3.cpp.s
-
-.PHONY : home/pi/projects/raytracer_SDL2/src/vector3.s
-
-# target to generate assembly for a file
-home/pi/projects/raytracer_SDL2/src/vector3.cpp.s:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/vector3.cpp.s
-.PHONY : home/pi/projects/raytracer_SDL2/src/vector3.cpp.s
 
 home/pi/projects/raytracer_SDL2/src/vendor/stb_image.o: home/pi/projects/raytracer_SDL2/src/vendor/stb_image.cpp.o
 
@@ -601,7 +711,7 @@ home/pi/projects/raytracer_SDL2/src/vendor/stb_image.o: home/pi/projects/raytrac
 
 # target to build an object file
 home/pi/projects/raytracer_SDL2/src/vendor/stb_image.cpp.o:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/vendor/stb_image.cpp.o
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/vendor/stb_image.cpp.o
 .PHONY : home/pi/projects/raytracer_SDL2/src/vendor/stb_image.cpp.o
 
 home/pi/projects/raytracer_SDL2/src/vendor/stb_image.i: home/pi/projects/raytracer_SDL2/src/vendor/stb_image.cpp.i
@@ -610,7 +720,7 @@ home/pi/projects/raytracer_SDL2/src/vendor/stb_image.i: home/pi/projects/raytrac
 
 # target to preprocess a source file
 home/pi/projects/raytracer_SDL2/src/vendor/stb_image.cpp.i:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/vendor/stb_image.cpp.i
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/vendor/stb_image.cpp.i
 .PHONY : home/pi/projects/raytracer_SDL2/src/vendor/stb_image.cpp.i
 
 home/pi/projects/raytracer_SDL2/src/vendor/stb_image.s: home/pi/projects/raytracer_SDL2/src/vendor/stb_image.cpp.s
@@ -619,7 +729,7 @@ home/pi/projects/raytracer_SDL2/src/vendor/stb_image.s: home/pi/projects/raytrac
 
 # target to generate assembly for a file
 home/pi/projects/raytracer_SDL2/src/vendor/stb_image.cpp.s:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/vendor/stb_image.cpp.s
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/vendor/stb_image.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/vendor/stb_image.cpp.s
 
 home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.o: home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp.o
@@ -628,7 +738,7 @@ home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.o: home/pi/projects/r
 
 # target to build an object file
 home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp.o:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp.o
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp.o
 .PHONY : home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp.o
 
 home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.i: home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp.i
@@ -637,7 +747,7 @@ home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.i: home/pi/projects/r
 
 # target to preprocess a source file
 home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp.i:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp.i
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp.i
 .PHONY : home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp.i
 
 home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.s: home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp.s
@@ -646,7 +756,7 @@ home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.s: home/pi/projects/r
 
 # target to generate assembly for a file
 home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp.s:
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp.s
+	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp.s
 
 # Help Target
@@ -657,7 +767,9 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... editor"
 	@echo "... raytracer_SDL2"
+	@echo "... coreLib"
 	@echo "... PCHLib"
 	@echo "... home/pi/projects/raytracer_SDL2/src/camera.o"
 	@echo "... home/pi/projects/raytracer_SDL2/src/camera.i"
@@ -665,6 +777,18 @@ help:
 	@echo "... home/pi/projects/raytracer_SDL2/src/color.o"
 	@echo "... home/pi/projects/raytracer_SDL2/src/color.i"
 	@echo "... home/pi/projects/raytracer_SDL2/src/color.s"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/editor.o"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/editor.i"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/editor.s"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/entity3d.o"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/entity3d.i"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/entity3d.s"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/main.o"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/main.i"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/main.s"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.o"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.i"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/ui/ui_text.s"
 	@echo "... home/pi/projects/raytracer_SDL2/src/kdnode.o"
 	@echo "... home/pi/projects/raytracer_SDL2/src/kdnode.i"
 	@echo "... home/pi/projects/raytracer_SDL2/src/kdnode.s"
@@ -707,9 +831,6 @@ help:
 	@echo "... home/pi/projects/raytracer_SDL2/src/utils/system_utils.o"
 	@echo "... home/pi/projects/raytracer_SDL2/src/utils/system_utils.i"
 	@echo "... home/pi/projects/raytracer_SDL2/src/utils/system_utils.s"
-	@echo "... home/pi/projects/raytracer_SDL2/src/vector3.o"
-	@echo "... home/pi/projects/raytracer_SDL2/src/vector3.i"
-	@echo "... home/pi/projects/raytracer_SDL2/src/vector3.s"
 	@echo "... home/pi/projects/raytracer_SDL2/src/vendor/stb_image.o"
 	@echo "... home/pi/projects/raytracer_SDL2/src/vendor/stb_image.i"
 	@echo "... home/pi/projects/raytracer_SDL2/src/vendor/stb_image.s"

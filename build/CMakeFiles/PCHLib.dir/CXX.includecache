@@ -121,6 +121,8 @@ SDL2/SDL.h
 -
 SDL2/SDL_opengl.h
 -
+SDL2/SDL_ttf.h
+-
 vendor/stb_image.h
 /home/pi/projects/raytracer_SDL2/src/vendor/stb_image.h
 vendor/stb_image_write.h
