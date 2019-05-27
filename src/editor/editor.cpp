@@ -30,7 +30,7 @@ void Editor::init()
 	}     
  
 	SDL_Init(SDL_INIT_VIDEO);
-	uint32_t WindowFlags = SDL_WINDOW_OPENGL;
+	uint32_t WindowFlags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
 	//~ SDL_SetVideoMode(w_width, w_height, 32, SDL_GL_DOUBLEBUF);
 	window = SDL_CreateWindow("Editor", 0, 0, w_width, w_height, WindowFlags);
 	assert(window);

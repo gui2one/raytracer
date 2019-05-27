@@ -172,7 +172,7 @@ int Renderer::init(std::string scene_file_ , std::string options_file_)
 		printf("SDL OK !!!!\n");
 	}	
 	
-	uint32_t WindowFlags = SDL_WINDOW_OPENGL;
+	uint32_t WindowFlags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
 	Window = SDL_CreateWindow("Raytracer SDL2", 0, 0, window_width, window_height, WindowFlags);
 	assert(Window);
 	SDL_GLContext Context = SDL_GL_CreateContext(Window);
@@ -345,6 +345,7 @@ void Renderer::manageEvents()
 				case SDL_SCANCODE_R : {
 					printf("--- Reloading ? \n");
 					initScene();
+					break;
 				}
 				case SDL_SCANCODE_S : {
 					show_fbo = !show_fbo;
@@ -358,7 +359,20 @@ void Renderer::manageEvents()
 
 			}
 			//~ printf("keyboard event\n");
+		}else if(Event.type == SDL_WINDOWEVENT){
+			
+
+
+			if (Event.window.event == SDL_WINDOWEVENT_RESIZED) {
+				printf("MESSAGE:Resizing window... %d %d\n", Event.window.data1, Event.window.data2);
+				
+				window_width = Event.window.data1;
+				window_height = Event.window.data2;
+				
+			}			
 		}
+	
+	
 	}		
 }
 
