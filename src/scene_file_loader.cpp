@@ -46,6 +46,11 @@ void SceneFileLoader::loadSceneFile(std::string path, std::vector<Mesh> & meshes
 			mesh.computeNormals();
 			mesh.material = &materials[json_scene.file_meshes[i].material_id];
 			mesh.material->loadDiffTexture();
+			if(mesh.material->diff_texture.is_valid == false)
+			{
+				printf("Creating Fallback Texture\n");
+				mesh.material->createFallbackTexture();
+			}
 			meshes.push_back(mesh);
 			
 		}

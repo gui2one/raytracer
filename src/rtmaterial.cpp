@@ -48,4 +48,22 @@ void RTMaterial::loadDiffTexture()
 	printf("Texture loaded. %d bytes per pixel \n", diff_texture.getBPP());
 }
 
+void RTMaterial::createFallbackTexture()
+{
+	int w = 32;
+	int h = 32;
+	int bpp = 4;
+	
+	unsigned char data[w*h*bpp];
+	for (int i = 0; i < w*h*4; i++)
+	{
+		data[i] = (unsigned char)255;
+		//~ data[(i*4) + 0] = 255;
+		//~ data[(i*4) + 1] = 0;
+		//~ data[(i*4) + 2] = 255;
+		//~ data[(i*4) + 3] = 255;
+	}
+	
+	diff_texture.setData(w, h, data, bpp);
+}
 

@@ -183,6 +183,7 @@ struct RenderOptions
 	int render_height; // = 240;
 	Color background_color;
 	int reflection_limit;
+	int num_threads;
 	
 	void serialize(JSON::Adapter& adapter)
 	{
@@ -191,7 +192,8 @@ struct RenderOptions
 		JSON_E(adapter, render_width);
 		JSON_E(adapter, render_height);
 		JSON_E(adapter, background_color);
-		JSON_T(adapter, reflection_limit);
+		JSON_E(adapter, reflection_limit);
+		JSON_T(adapter, num_threads);
 	}
 	
 	

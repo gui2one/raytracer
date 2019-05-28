@@ -790,7 +790,7 @@ void Renderer::renderBuckets(std::vector<RenderBucket>& buckets, Camera& camera)
 
 	start = std::clock();
 
-	TaskQueue<RenderTask> queue(4);
+	TaskQueue<RenderTask> queue(render_options.num_threads);
 
 	for (int i = 0; i < buckets.size(); i++)
 	{
@@ -827,7 +827,7 @@ void Renderer::renderBuckets(std::vector<RenderBucket>& buckets, Camera& camera)
 	}
 
 	std::cout << "\n";
-    duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC / 4.0;
+    duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC / (float)render_options.num_threads;
     
     int hours = (int)duration / (60 * 60);
     int minutes = (int)(duration - hours * 60 * 60) / (60);

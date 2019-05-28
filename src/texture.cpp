@@ -34,17 +34,21 @@ void Texture::load(std::string path)
 	
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
 
-	data = std::vector<unsigned char>(buffer, buffer + width * height * 4);
+	
 
 	
 	glBindTexture(GL_TEXTURE_2D, 0);
 	
-	if( buffer == nullptr){
+	if( buffer == nullptr)
+	{
 		std::cout << "stbi_failure_reason()\n";
 		std::cout << stbi_failure_reason() << "\n";
+		is_valid = false;
 	}
+	
 	if(buffer)
 	{
+		data = std::vector<unsigned char>(buffer, buffer + width * height * 4);
 		stbi_image_free(buffer);	
 		is_valid = true;
 	}
@@ -53,7 +57,7 @@ void Texture::load(std::string path)
 void Texture::setData(int _width, int _height, unsigned char* buffer, int _bpp)
 {
 	
-	glDeleteTextures(1, &id);
+	//~ glDeleteTextures(1, &id);
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id);
 		
@@ -66,6 +70,8 @@ void Texture::setData(int _width, int _height, unsigned char* buffer, int _bpp)
 
 	glBindTexture(GL_TEXTURE_2D, 0);	
 	
+	data.clear();
+	data = std::vector<unsigned char>(buffer, buffer + _width * _height * _bpp);
 	
 	is_valid = true;
 	setBPP(_bpp);

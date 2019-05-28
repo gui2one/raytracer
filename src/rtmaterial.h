@@ -17,7 +17,8 @@ class RTMaterial
 		double refl_amount;
 		std::string diff_texture_path;
 		
-		void loadDiffTexture();		
+		void loadDiffTexture();	
+		void createFallbackTexture();	
 		Texture diff_texture;
 	private:
 		/* add your private declarations */
