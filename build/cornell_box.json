@@ -22,29 +22,29 @@
 	"file_meshes":[ 
 		{"json_file_mesh":
 			{
-				"path": "../src/res/obj/plane_normals.obj",
+				"path": "../src/res/obj/cow.obj",
 				"material_id":0,
 				"translate" : [0.0,-1.0,-1.0],
 				"rotate" : [90.0,0.0,0.0],
-				"scale" : [1.0,1.0,1.0]
+				"scale" : [0.1,0.1,0.1]
 			}
 		},
 		{"json_file_mesh":
 			{
-				"path": "../src/res/obj/plane_normals_uvs.obj",
+				"path": "../src/res/obj/dragon_vrip_res3.ply",
 				"material_id":0,
 				"translate" : [-1.0,-3.0,0.0],
 				"rotate" : [0.0,0.0,20.0],
-				"scale" : [1.0,1.0,1.0]
+				"scale" : [1,1,1]
 			}
 	 	},			
 		{"json_file_mesh":
 			{
-				"path": "../src/res/obj/plane_normals.obj",
+				"path": "../src/res/obj/cow.obj",
 				"material_id":1,
 				"translate" : [0.0,0.0,0.0],
 				"rotate" : [0.0,0.0,0.0],
-				"scale" : [1.0,1.0,1.0]
+				"scale" : [0.1,0.1,0.1]
 			}
 	 	}			
 	],

@@ -13,14 +13,16 @@
 #include "vendor/stb_image.h"
 #include "vendor/stb_image_write.h"
 
-#include "esj/json_reader.h"
-#include "esj/json_writer.h"
+#include <vector>
+
 
 #include <string>
 #include <iostream>
 #include <fstream>
 //~ #include <stdio>
-#include <vector>
+
+#include "esj/json_reader.h"
+#include "esj/json_writer.h"
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include "vendor/glm/glm.hpp"

@@ -1,11 +1,11 @@
 {"render_options":
 	{
 		"kd_polygon_limit": 10,
-		"render_width": 640,
-		"render_height": 480,
+		"render_width": 1280,
+		"render_height": 960,
 		"background_color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},
 		"reflection_limit":2,
-		"num_threads":4
+		"num_threads":16
 	}
 
 }
