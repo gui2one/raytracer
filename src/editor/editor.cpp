@@ -23,6 +23,14 @@ void Editor::init()
 {
 	MeshUtils mesh_utils;
 	
+	
+
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+	
+	
 	w_width = 640; 
 	w_height = 480; 
 	if( SDL_Init(SDL_INIT_EVERYTHING) == 0){
@@ -34,7 +42,7 @@ void Editor::init()
 	//~ SDL_SetVideoMode(w_width, w_height, 32, SDL_GL_DOUBLEBUF);
 	window = SDL_CreateWindow("Editor", 0, 0, w_width, w_height, WindowFlags);
 	assert(window);
-	SDL_GLContext Context = SDL_GL_CreateContext(window);
+	gl_context = SDL_GL_CreateContext(window);
 
 	w_renderer = SDL_CreateRenderer(window, -1, 0); // SDL_RENDERER_SOFTWARE);
 	
@@ -49,6 +57,15 @@ void Editor::init()
 	glewInit();
 	
 	//~ glewExperimental = GL_TRUE;
+	
+	
+	//~ ui.init(window, gl_context, this);
+
+	
+	
+	
+	
+	
 	
 	
 	//~ Entity3D item1;
@@ -79,14 +96,14 @@ void Editor::init()
 	camera.target_position = glm::vec3(0.0, 0.0 , 0.0);
 	camera.up_vector = glm::vec3(0.0, 0.0 , 1.0);
 	
-	UIText text1;
-	text1.m_renderer = w_renderer;
-	text1.m_font = font;
-	text1.m_shader = &font_shader;
+	//~ UIText text1;
+	//~ text1.m_renderer = w_renderer;
+	//~ text1.m_font = font;
+	//~ text1.m_shader = &font_shader;
 
 	
-	text1.init();
-	ui_texts.push_back(text1);
+	//~ text1.init();
+	//~ ui_texts.push_back(text1);
 }
 
 void Editor::manageEvents()
@@ -104,7 +121,12 @@ void Editor::manageEvents()
 void Editor::update()
 {
 	
+	
+	
 	manageEvents();
+
+
+
 
 	//~ GLCall(glDisable(GL_CULL_FACE));
 	GLCall(glEnable(GL_DEPTH_TEST));
@@ -115,9 +137,6 @@ void Editor::update()
 
 	GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 	GLCall(glClearColor(0.2,0.5,0.2,1.0));
-
-
-	//~ 
 
 
 	camera.setProjection(45.0f * (float)PI / 180.0f, (float)w_width / (float)w_height, 0.01f, 100.0f);
@@ -163,27 +182,10 @@ void Editor::update()
 	}
 	
 	GLCall(glUseProgram(0));
-		
-		
-
-	
-	
-		GLCall(glDisable(GL_DEPTH_TEST));
-		
-		font_shader.useProgram();
-		for (int i = 0; i < ui_texts.size(); i++)
-		{
-			ui_texts[i].draw();
-		}
-		
-		glUseProgram(0);
-	
-		
 
 
-	SDL_GL_SwapWindow(window);
-	SDL_Delay(1000/60);
-	
+	//~ ui.draw();
+
 	//~ update_inc++;
 	
 }
@@ -199,6 +201,12 @@ void Editor::saveScene()
 	
 	printf("%s\n", json.c_str());
 	
+}
+
+
+void Editor::addMeshObject()
+{
+	printf("addMeshObject function fired !!! \n");
 }
 
 Editor::~Editor()

@@ -8,7 +8,8 @@
 #include "entity3d.h"
 #include "../utils/mesh_utils.h"
 
-#include "ui/ui_text.h"
+
+//~ #include "ui/ui.h"
 
 
 
@@ -29,6 +30,10 @@ public :
 	void buildDisplayGeoData();
 	void saveScene();
 	void update();
+	
+	
+	void addMeshObject();
+	
 	~Editor();
 	
 	Shader default_shader, font_shader;
@@ -44,6 +49,7 @@ public :
 	
 	int update_inc = 0;
 	
-	std::vector<UIText> ui_texts;
+	SDL_GLContext gl_context;
+	//~ UI ui;
 };
 #endif /* EDITOR_H */

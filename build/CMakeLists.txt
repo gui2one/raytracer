@@ -20,6 +20,10 @@ set(CMAKE_BUILD_TYPE "Debug")
 
 
 include_directories(../src/include/)
+
+include_directories(/usr/local/include)
+include_directories(../src/vendor/imgui)
+
 include_directories(../src/include/google)
 include_directories(../src/include/google/base)
 include_directories(../src/include/google/gflags)
@@ -103,8 +107,17 @@ add_executable(editor
 	../src/scene_file_loader.cpp
 	../src/editor/editor.cpp
 	../src/editor/main.cpp
-	../src/editor/ui/ui_text.cpp
+	
 	../src/editor/entity3d.cpp
+	
+	../src/editor/ui/ui.cpp	
+	../src/vendor/imgui/imgui_impl_opengl3.cpp
+	../src/vendor/imgui/imgui_impl_sdl.cpp
+	
+	../src/vendor/imgui/imgui.cpp
+	../src/vendor/imgui/imgui_demo.cpp
+	../src/vendor/imgui/imgui_draw.cpp
+	../src/vendor/imgui/imgui_widgets.cpp	
 )
 
 target_link_libraries(editor coreLib)

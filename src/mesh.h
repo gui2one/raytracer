@@ -3,7 +3,7 @@
 
 #include "pch.h"
 #include "rtmaterial.h"
-#include "vector3.h"
+
 
 struct Point
 {
