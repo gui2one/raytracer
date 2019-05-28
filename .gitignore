@@ -1,4 +1,5 @@
 src/libs/*
-src/res/*
+src/res/obj/*
+src/res/textures/*
 build/render/*
 buid/CMakeFiles/*
