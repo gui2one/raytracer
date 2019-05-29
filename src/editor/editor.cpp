@@ -1,23 +1,43 @@
 #include "editor.h"
 
+static double degToRad(double degrees)
+{
+	
+	return degrees / 180.0 * PI;
+}
+
+static void vec_mult_by_matrix( glm::vec3 & _vec, glm::mat4 & _mat, bool invert = false)
+{
+
+        glm::vec4 temp_vec4 = glm::vec4(_vec.x, _vec.y, _vec.z,1.0f);
+
+
+        if( invert){
+                _vec = glm::inverse(_mat) * temp_vec4 ;
+        } else{
+                _vec = _mat * temp_vec4;
+                //~ printf("__VEC X : %.3f\n", _vec.x);
+        }
+
+}
+
 
 Editor::Editor()
 {
 	//~ printf("--- CONSTRUCT Editor\n");
 }
 
-//~ void Editor::buildDisplayGeoData()
-//~ {
-	//~ for (int i = 0; i < mesh_objects.size(); i++)
-	//~ {
-		//~ Mesh mesh_copy = mesh_objects[i].mesh;
-		//~ mesh_copy.triangulate();
-		//~ 
-		//~ OGL_geometry_data geo_data;
-		//~ 
-	//~ }
-	//~ 
-//~ }
+void Editor::setCamPosFromPolar(float u, float v, float _radius, glm::vec3 center)
+{
+        camera.position.x = (sin(u)* sin(v) * _radius) + center.x;
+        camera.position.y = (cos(u)* sin(v) * _radius) + center.y;
+        camera.position.z = (cos(v) * _radius) + center.z;
+
+        camera.target_position = center;
+
+        camera.up_vector = glm::vec3(0.0, 0.0, 1.0);
+}
+
 
 void Editor::init()
 {
@@ -44,11 +64,11 @@ void Editor::init()
 	assert(window);
 	gl_context = SDL_GL_CreateContext(window);
 
-	w_renderer = SDL_CreateRenderer(window, -1, 0); // SDL_RENDERER_SOFTWARE);
-	
-	TTF_Init();
-	
-	font = TTF_OpenFont("../src/res/fonts/DroidSans.ttf", 20); //this opens a font style and sets a size
+	//~ w_renderer = SDL_CreateRenderer(window, -1, 0); // SDL_RENDERER_SOFTWARE);
+	//~ 
+	//~ TTF_Init();
+	//~ 
+	//~ font = TTF_OpenFont("../src/res/fonts/DroidSans.ttf", 20); //this opens a font style and sets a size
     if( font == NULL )
     {
         printf( "Failed to load font! SDL_ttf Error: %s\n", TTF_GetError() );
@@ -68,19 +88,29 @@ void Editor::init()
 	
 	
 	
-	//~ Entity3D item1;
-	MeshObject item1;
-	item1.name = "item 1";
 	
-	item1.mesh = mesh_utils.makeSimpleBox();
-	//~ item1.mesh.triangulate();
-	//~ item1.mesh.computeNormals();
-	item1.buildVBO();
+	MeshObject* item1 = new MeshObject();
+	item1->name = "item 1";
+	
+	item1->mesh = mesh_utils.makeSimpleBox();
+	//~ item1->mesh.triangulate();
+	//~ item1->mesh.computeNormals();
+	item1->buildVBO();
 	mesh_objects.push_back(item1);
 	
+	MeshObject* ground = new MeshObject();
+	ground->name = "ground";
+	Mesh mesh = mesh_utils.makeQuad();
+	//~ mesh_utils.rotate(mesh, glm::vec3(degToRad(90.0), 0.0, 0.0));
+	mesh_utils.scale(mesh, glm::vec3(5.0, 5.0, 5.0));
+	mesh_utils.translate(mesh, glm::vec3(-2.5, -2.5, -3.0));
 	
-	//~ buildDisplayGeoData();
+	ground->mesh = mesh;
+	ground->buildVBO();
+	mesh_objects.push_back(ground);
 	
+	
+
 	
 	default_shader.loadVertexShaderSource("../src/editor/shaders/basic_shader.vert");
 	default_shader.loadFragmentShaderSource("../src/editor/shaders/basic_shader.frag");
@@ -94,16 +124,8 @@ void Editor::init()
 	
 	camera.position = glm::vec3(5.0, 2.0 , 3.0);
 	camera.target_position = glm::vec3(0.0, 0.0 , 0.0);
-	camera.up_vector = glm::vec3(0.0, 0.0 , 1.0);
-	
-	//~ UIText text1;
-	//~ text1.m_renderer = w_renderer;
-	//~ text1.m_font = font;
-	//~ text1.m_shader = &font_shader;
+	camera.up_vector = glm::vec3(0.0, 0.0 , 1.0);	
 
-	
-	//~ text1.init();
-	//~ ui_texts.push_back(text1);
 }
 
 void Editor::manageEvents()
@@ -114,6 +136,81 @@ void Editor::manageEvents()
 		if (Event.type == SDL_QUIT)
 		{
 				is_running = false;
+		}else if(( SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT))){
+			
+			if( Event.type == SDL_MOUSEMOTION)
+			{
+				//~ printf("mouse motion :\n");
+				//~ printf("\tXREL -> %d\n", Event.motion.xrel);
+				//~ printf("\tYREL -> %d\n", Event.motion.yrel);
+			 
+			 
+			 
+				double rot_speed = 0.01;
+
+				camera_u_pos += (float)Event.motion.xrel * rot_speed;
+
+
+
+				camera_v_pos -= (float)Event.motion.yrel * rot_speed;
+
+				if(camera_v_pos < 0.2)
+						camera_v_pos = 0.2;
+				else if(camera_v_pos > PI-0.2)
+						camera_v_pos = PI-0.2;
+
+				//~ printf("delta : %.2f %.2f\n", (float)Event.motion.xrel, (float)Event.motion.yrel);
+				//~ printf("upos : %.2f -- vpos %.2f\n", camera_u_pos, camera_v_pos);
+				//~ printf("--------------------------------\n");
+
+
+				setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);		
+			}else{
+				//~ int x, y;
+				//~ SDL_GetMouseState(&x, &y);
+				//~ printf("left click : %d %d\n",x, y);
+				//~ ClickData cd;
+				//~ cd.width = 640;
+				//~ cd.height = 480;
+				//~ cd.x = (double)x;
+				//~ cd.y = (double)y;
+				//~ Raycaster caster;
+				//~ glm::vec3 test_screen = caster.screenToWorld_2(cd, camera);
+				//~ printf("screen position : %.3f %.3f %.3f\n", test_screen.x, test_screen.y, test_screen.z);
+				
+				
+			}
+		}else if( (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_RIGHT))){
+			if( Event.type == SDL_MOUSEMOTION)
+			{
+				mouse_delta_x = -(float)Event.motion.xrel;
+				//~ mouse_old_x = xpos;
+				mouse_delta_y = -(float)Event.motion.yrel;
+				//~ mouse_old_y = ypos;
+		
+				glm::mat4 view = glm::lookAt(
+					camera.position,
+					camera.target_position,
+					camera.up_vector
+					);
+		
+				glm::vec3 pan_dir = glm::vec3(mouse_delta_x, -mouse_delta_y, 0.0);
+		
+				vec_mult_by_matrix(pan_dir, view, true);
+				pan_dir = pan_dir - camera.position;
+				camera_view_center.x += pan_dir.x * 0.02;
+				camera_view_center.y += pan_dir.y * 0.02;
+				camera_view_center.z += pan_dir.z * 0.02;
+		
+				setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);				
+			}
+		}else if(Event.type == SDL_MOUSEWHEEL){
+			//~ printf("wheel event\n");
+			//~ printf("\twheel x : %d\n", Event.wheel.x);
+			//~ printf("\twheel y : %d\n", Event.wheel.y);
+			
+			camera_orbit_radius += (float)Event.wheel.y * -0.1;
+			setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);			
 		}
 	}
 }
@@ -163,19 +260,20 @@ void Editor::update()
 	
 	
 	float light_positions[6] = { 
-		3.0, 3.0 ,3.0,
-		1.0, -2.5, 2.0
+		0.0, 0.0 ,1.5,
+		2.0, 3.0 ,3.0
+		
 	};
 	
 	GLCall(
-		glUniform3fv(glGetUniformLocation(default_shader.m_id, "u_light_positions"), 1, light_positions)
+		glUniform3fv(glGetUniformLocation(default_shader.m_id, "u_light_positions"), 2, light_positions)
 	);
 
 	for (int i = 0; i < mesh_objects.size(); i++)
 	{
 			
 		GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 1.0, 0.3, 0.3, 1.0 ));
-		mesh_objects[i].draw();		
+		mesh_objects[i]->draw();		
 			
 			
 
@@ -207,6 +305,19 @@ void Editor::saveScene()
 void Editor::addMeshObject()
 {
 	printf("addMeshObject function fired !!! \n");
+	
+	MeshUtils mesh_utils;
+	MeshObject* obj2 = new MeshObject();
+	obj2->name = "object 2";
+	Mesh mesh = mesh_utils.makeSimpleBox();
+	mesh_utils.translate( mesh, glm::vec3(0.0,-1.5,0.0));
+	mesh = mesh_utils.uniquePoints(mesh);
+	//~ mesh.triangulate();
+	//~ mesh.computeNormals();
+	
+	obj2->mesh = mesh;
+	obj2->buildVBO();
+	mesh_objects.push_back(obj2);
 }
 
 Editor::~Editor()

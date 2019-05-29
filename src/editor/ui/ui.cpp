@@ -44,7 +44,7 @@ void UI::draw()
 		if (ImGui::Button("Close Me"))
 		{
 			m_editor->addMeshObject();
-			show_another_window = false;
+			//~ show_another_window = false;
 		}
 		ImGui::End();
 	}

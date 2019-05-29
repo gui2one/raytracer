@@ -83,19 +83,19 @@ void MeshObject::draw()
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo));
 	GLCall(glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, 0));
 	GLCall(glVertexAttribPointer(1,3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(sizeof(float) * 3)));
-	GLCall(glVertexAttribPointer(2,2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(sizeof(float) * 6)));
+	//~ GLCall(glVertexAttribPointer(2,2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(sizeof(float) * 6)));
 	
 	
 	GLCall(glEnableVertexAttribArray(0));
 	GLCall(glEnableVertexAttribArray(1));
-	GLCall(glEnableVertexAttribArray(2));
+	//~ GLCall(glEnableVertexAttribArray(2));
 	
 	//~ GLCall(glDrawArrays(GL_TRIANGLES, 0, mesh.points.size()));
 	GLCall(glDrawElements(GL_TRIANGLES, OGL_geo_data.indices.size() , GL_UNSIGNED_INT, nullptr ));
 
 	GLCall(glDisableVertexAttribArray(0));
 	GLCall(glDisableVertexAttribArray(1));
-	GLCall(glDisableVertexAttribArray(2));
+	//~ GLCall(glDisableVertexAttribArray(2));
 	
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
