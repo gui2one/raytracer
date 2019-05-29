@@ -31,7 +31,7 @@
 		},
 		{"json_file_mesh":
 			{
-				"path": "../src/res/obj/dragon_vrip_res2.ply",
+				"path": "../src/res/obj/happy_vrip.ply",
 				"material_id":1,
 				"translate" : [-1.0,-3.0,0.0],
 				"rotate" : [90.0,0.0,20.0],

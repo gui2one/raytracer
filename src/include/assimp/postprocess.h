@@ -637,6 +637,8 @@ enum aiPostProcessSteps
     aiProcess_OptimizeMeshes                 |  \
     0 )
 
+#define gui2one_aiProcessPreset_TargetRealtime_MaxQuality ( aiProcessPreset_TargetRealtime_Fast |  aiProcess_FindInvalidData | 0 )    
+
 
 #ifdef __cplusplus
 } // end of extern "C"

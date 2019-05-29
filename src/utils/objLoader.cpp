@@ -12,7 +12,9 @@ ObjLoader::~ObjLoader(){
 
 Mesh ObjLoader::assimp_load(std::string file_path){
 	const struct aiScene* scene = NULL;
-	scene = aiImportFile(file_path.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
+	scene = aiImportFile(file_path.c_str(), gui2one_aiProcessPreset_TargetRealtime_MaxQuality);
+
+	// scene = Importer
 	
 	if(scene){
 		
@@ -21,7 +23,10 @@ Mesh ObjLoader::assimp_load(std::string file_path){
 		
 		
 		std::vector<Point> points;
-		for (int i = 0; i < scene->mMeshes[0]->mNumVertices; i++){
+
+		printf("num verts :::: %d\n", scene->mMeshes[0]->mNumVertices);
+
+		for (size_t i = 0; i < scene->mMeshes[0]->mNumVertices; i++){
 			Point point;
 			point.position.x = scene->mMeshes[0]->mVertices[i].x;
 			point.position.y = scene->mMeshes[0]->mVertices[i].y;
@@ -51,7 +56,7 @@ Mesh ObjLoader::assimp_load(std::string file_path){
 		}
 		
 		std::vector<Face> faces;
-		for (int i = 0; i < scene->mMeshes[0]->mNumFaces; i++)
+		for (size_t i = 0; i < scene->mMeshes[0]->mNumFaces; i++)
 		{
 			//~ std::cout << "Face : "<< i << "\n";
 			std::vector<Vertex> vertices;
