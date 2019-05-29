@@ -9,11 +9,11 @@
 #include "../utils/mesh_utils.h"
 
 
-//~ #include "ui/ui.h"
+#include <opensubdiv/far/topologyDescriptor.h>
+#include <opensubdiv/far/stencilTableFactory.h>
+#include <opensubdiv/osd/cpuEvaluator.h>
+#include <opensubdiv/osd/cpuVertexBuffer.h>
 
-
-
-//~ #include "vendor/undo.h"
 
 
 class Editor
@@ -24,8 +24,7 @@ public :
 	
 	void init();
 	
-	SDL_Window * window;
-	SDL_Renderer * w_renderer;
+
 	void manageEvents();
 	void buildDisplayGeoData();
 	void saveScene();
@@ -54,6 +53,8 @@ public :
 	float mouse_old_x = 0.0;
 	float mouse_old_y = 0.0;
 	float mouse_delta_x, mouse_delta_y;	
+
+	bool mouse_over_ui = false;
 	
 	std::vector<MeshObject*> mesh_objects;
 	std::vector<OGL_geometry_data> OGL_geometry_datas;
@@ -61,12 +62,16 @@ public :
 	// window params
 	int w_width, w_height;
 	
-	TTF_Font* font;
+	// TTF_Font* font;
 	bool is_running = true;
 	
 	int update_inc = 0;
 	
+	SDL_Window * window;
+	SDL_Renderer * w_renderer;	
 	SDL_GLContext gl_context;
+
+	
 	//~ UI ui;
 };
 #endif /* EDITOR_H */

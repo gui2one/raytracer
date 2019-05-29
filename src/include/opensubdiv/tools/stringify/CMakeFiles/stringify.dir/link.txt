@@ -1,0 +1,1 @@
+/usr/bin/c++     -fopenmp -rdynamic CMakeFiles/stringify.dir/main.cpp.o  -o ../../../bin/stringify -Wl,-rpath,:::::::::::::: 

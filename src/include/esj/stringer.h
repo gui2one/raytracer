@@ -140,10 +140,10 @@ namespace Chordia
 		return toString((int64_t)value,base);
 	}
     
-    inline std::string toString(long value, int base = 10)
-    {
-        return toString((int64_t)value,base);
-    }
+    // inline std::string toString(long value, int base = 10)
+    // {
+    //     return toString((int64_t)value,base);
+    // }
     
 
 #ifdef _MSC_VER

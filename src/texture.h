@@ -3,9 +3,6 @@
 
 #include "pch.h"
 
-
-//~ #include <string>
-//~ #include <GLFW/glfw3.h>
 #include <iostream>
 class Texture
 {
@@ -30,7 +27,7 @@ class Texture
 		std::vector<unsigned char> data;
 	private:
 		unsigned int id;
-		//~ unsigned char* buffer;
+
 		int width, height, bpp;	
 	
 		/* add your private declarations */

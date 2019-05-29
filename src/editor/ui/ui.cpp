@@ -37,6 +37,8 @@ void UI::draw()
 	ImGui::NewFrame();
 	static bool show_another_window = true;
 	
+	ImGuiIO& io = ImGui::GetIO();
+	m_editor->mouse_over_ui = io.WantCaptureMouse;
 	if(show_another_window)
 	{
 		ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)

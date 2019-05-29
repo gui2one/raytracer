@@ -64,16 +64,8 @@ void Editor::init()
 	assert(window);
 	gl_context = SDL_GL_CreateContext(window);
 
-	//~ w_renderer = SDL_CreateRenderer(window, -1, 0); // SDL_RENDERER_SOFTWARE);
-	//~ 
-	//~ TTF_Init();
-	//~ 
-	//~ font = TTF_OpenFont("../src/res/fonts/DroidSans.ttf", 20); //this opens a font style and sets a size
-    if( font == NULL )
-    {
-        printf( "Failed to load font! SDL_ttf Error: %s\n", TTF_GetError() );
-        //~ success = false;
-    }	
+	
+
 	glewInit();
 	
 	//~ glewExperimental = GL_TRUE;
@@ -103,7 +95,7 @@ void Editor::init()
 	Mesh mesh = mesh_utils.makeQuad();
 	//~ mesh_utils.rotate(mesh, glm::vec3(degToRad(90.0), 0.0, 0.0));
 	mesh_utils.scale(mesh, glm::vec3(5.0, 5.0, 5.0));
-	mesh_utils.translate(mesh, glm::vec3(-2.5, -2.5, -3.0));
+	mesh_utils.translate(mesh, glm::vec3(-2.5, -2.5, 0.0));
 	
 	ground->mesh = mesh;
 	ground->buildVBO();
@@ -138,79 +130,95 @@ void Editor::manageEvents()
 				is_running = false;
 		}else if(( SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT))){
 			
-			if( Event.type == SDL_MOUSEMOTION)
+			if(!mouse_over_ui)
 			{
-				//~ printf("mouse motion :\n");
-				//~ printf("\tXREL -> %d\n", Event.motion.xrel);
-				//~ printf("\tYREL -> %d\n", Event.motion.yrel);
-			 
-			 
-			 
-				double rot_speed = 0.01;
+				if( Event.type == SDL_MOUSEMOTION)
+				{
 
-				camera_u_pos += (float)Event.motion.xrel * rot_speed;
-
-
-
-				camera_v_pos -= (float)Event.motion.yrel * rot_speed;
-
-				if(camera_v_pos < 0.2)
-						camera_v_pos = 0.2;
-				else if(camera_v_pos > PI-0.2)
-						camera_v_pos = PI-0.2;
-
-				//~ printf("delta : %.2f %.2f\n", (float)Event.motion.xrel, (float)Event.motion.yrel);
-				//~ printf("upos : %.2f -- vpos %.2f\n", camera_u_pos, camera_v_pos);
-				//~ printf("--------------------------------\n");
-
-
-				setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);		
-			}else{
-				//~ int x, y;
-				//~ SDL_GetMouseState(&x, &y);
-				//~ printf("left click : %d %d\n",x, y);
-				//~ ClickData cd;
-				//~ cd.width = 640;
-				//~ cd.height = 480;
-				//~ cd.x = (double)x;
-				//~ cd.y = (double)y;
-				//~ Raycaster caster;
-				//~ glm::vec3 test_screen = caster.screenToWorld_2(cd, camera);
-				//~ printf("screen position : %.3f %.3f %.3f\n", test_screen.x, test_screen.y, test_screen.z);
 				
-				
+					double rot_speed = 0.01;
+
+					camera_u_pos += (float)Event.motion.xrel * rot_speed;
+
+
+
+					camera_v_pos -= (float)Event.motion.yrel * rot_speed;
+
+					if(camera_v_pos < 0.2)
+							camera_v_pos = 0.2;
+					else if(camera_v_pos > PI-0.2)
+							camera_v_pos = PI-0.2;
+
+
+
+					setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);		
+				}else{
+					//~ int x, y;
+					//~ SDL_GetMouseState(&x, &y);
+					//~ printf("left click : %d %d\n",x, y);
+					//~ ClickData cd;
+					//~ cd.width = 640;
+					//~ cd.height = 480;
+					//~ cd.x = (double)x;
+					//~ cd.y = (double)y;
+					//~ Raycaster caster;
+					//~ glm::vec3 test_screen = caster.screenToWorld_2(cd, camera);
+					//~ printf("screen position : %.3f %.3f %.3f\n", test_screen.x, test_screen.y, test_screen.z);
+					
+					
+				}
 			}
+
 		}else if( (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_RIGHT))){
-			if( Event.type == SDL_MOUSEMOTION)
+
+			if(!mouse_over_ui)
 			{
-				mouse_delta_x = -(float)Event.motion.xrel;
-				//~ mouse_old_x = xpos;
-				mouse_delta_y = -(float)Event.motion.yrel;
-				//~ mouse_old_y = ypos;
-		
-				glm::mat4 view = glm::lookAt(
-					camera.position,
-					camera.target_position,
-					camera.up_vector
-					);
-		
-				glm::vec3 pan_dir = glm::vec3(mouse_delta_x, -mouse_delta_y, 0.0);
-		
-				vec_mult_by_matrix(pan_dir, view, true);
-				pan_dir = pan_dir - camera.position;
-				camera_view_center.x += pan_dir.x * 0.02;
-				camera_view_center.y += pan_dir.y * 0.02;
-				camera_view_center.z += pan_dir.z * 0.02;
-		
-				setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);				
+				if( Event.type == SDL_MOUSEMOTION)
+				{
+					mouse_delta_x = -(float)Event.motion.xrel;
+					//~ mouse_old_x = xpos;
+					mouse_delta_y = -(float)Event.motion.yrel;
+					//~ mouse_old_y = ypos;
+			
+					glm::mat4 view = glm::lookAt(
+						camera.position,
+						camera.target_position,
+						camera.up_vector
+						);
+			
+					glm::vec3 pan_dir = glm::vec3(mouse_delta_x, -mouse_delta_y, 0.0);
+			
+					vec_mult_by_matrix(pan_dir, view, true);
+					pan_dir = pan_dir - camera.position;
+					camera_view_center.x += pan_dir.x * 0.02;
+					camera_view_center.y += pan_dir.y * 0.02;
+					camera_view_center.z += pan_dir.z * 0.02;
+			
+					setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);				
+				}
 			}
 		}else if(Event.type == SDL_MOUSEWHEEL){
-			//~ printf("wheel event\n");
-			//~ printf("\twheel x : %d\n", Event.wheel.x);
-			//~ printf("\twheel y : %d\n", Event.wheel.y);
+
+			if(!mouse_over_ui)
+			{			
+				//~ printf("wheel event\n");
+				//~ printf("\twheel x : %d\n", Event.wheel.x);
+				//~ printf("\twheel y : %d\n", Event.wheel.y);
+				
+				camera_orbit_radius += (float)Event.wheel.y * -0.1;
+				setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);	
+			}	
+		}else if(Event.type == SDL_WINDOWEVENT){
 			
-			camera_orbit_radius += (float)Event.wheel.y * -0.1;
-			setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);			
+
+
+			if (Event.window.event == SDL_WINDOWEVENT_RESIZED) {
+				printf("MESSAGE:Resizing window... %d %d\n", Event.window.data1, Event.window.data2);
+				
+				w_width = Event.window.data1;
+				w_height = Event.window.data2;
+				
+			}			
 		}
 	}
 }
@@ -233,7 +241,7 @@ void Editor::update()
 	GLCall(glViewport(0,0,w_width, w_height));
 
 	GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
-	GLCall(glClearColor(0.2,0.5,0.2,1.0));
+	GLCall(glClearColor(0.2,0.2,0.2,1.0));
 
 
 	camera.setProjection(45.0f * (float)PI / 180.0f, (float)w_width / (float)w_height, 0.01f, 100.0f);

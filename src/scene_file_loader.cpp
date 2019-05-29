@@ -25,6 +25,8 @@ void SceneFileLoader::loadSceneFile(std::string path, std::vector<Mesh> & meshes
 	try{
 		JsonScene json_scene = JSON::consumer<JsonScene>::convert(full_json_string);
 		//~ 
+
+		MeshUtils mesh_utils;
 		for (int i = 0; i < json_scene.materials.size(); i++)
 		{
 			//~ 
@@ -42,8 +44,9 @@ void SceneFileLoader::loadSceneFile(std::string path, std::vector<Mesh> & meshes
 		{
 			printf("\t%d -- path : %s\n", i, json_scene.file_meshes[i].path.c_str());
 			Mesh mesh = json_scene.file_meshes[i].create();
-			
+			// mesh = mesh_utils.uniquePoints(mesh);
 			mesh.computeNormals();
+			
 			mesh.material = &materials[json_scene.file_meshes[i].material_id];
 			mesh.material->loadDiffTexture();
 			if(mesh.material->diff_texture.is_valid == false)

@@ -24,6 +24,7 @@ include_directories(../src/include/)
 include_directories(/usr/local/include)
 include_directories(../src/vendor/imgui)
 
+
 include_directories(../src/include/google)
 include_directories(../src/include/google/base)
 include_directories(../src/include/google/gflags)
@@ -32,6 +33,7 @@ include_directories(../src/include/google/gtest)
 include_directories(~/Downloads/boost_1_50_0)
 
 link_directories(../src/libs/)
+link_directories(../src/libs/opensubdiv)
 link_directories(/usr/include/SDL2)
 
 
@@ -121,6 +123,7 @@ add_executable(editor
 )
 
 target_link_libraries(editor coreLib)
+target_link_libraries(editor -losdCPU)
 target_link_libraries(editor -lassimp)
 target_link_libraries(editor PCHLib)
 target_link_libraries(editor -lGLEW)

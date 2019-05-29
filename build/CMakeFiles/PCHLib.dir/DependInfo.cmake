@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/pi/projects/raytracer_SDL2/src/pch.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o"
+  "/media/gui2one/Work/code_playground/ubuntu/raytracer/src/pch.cpp" "/media/gui2one/Work/code_playground/ubuntu/raytracer/build/CMakeFiles/PCHLib.dir/media/gui2one/Work/code_playground/ubuntu/raytracer/src/pch.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -18,7 +18,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../src/include/google/gflags"
   "../src/include/google/glog"
   "../src/include/google/gtest"
-  "/home/pi/Downloads/boost_1_50_0"
+  "/home/gui2one/Downloads/boost_1_50_0"
   )
 
 # Targets to which this target links.

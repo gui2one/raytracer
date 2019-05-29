@@ -22,20 +22,20 @@
 	"file_meshes":[ 
 		{"json_file_mesh":
 			{
-				"path": "../src/res/obj/cow.obj",
+				"path": "../src/res/obj/icosphere.fbx",
 				"material_id":0,
 				"translate" : [0.0,-1.0,-1.0],
 				"rotate" : [90.0,0.0,0.0],
-				"scale" : [0.1,0.1,0.1]
+				"scale" : [1.0,1.0,1.0]
 			}
 		},
 		{"json_file_mesh":
 			{
-				"path": "../src/res/obj/dragon_vrip_res3.ply",
-				"material_id":0,
+				"path": "../src/res/obj/dragon_vrip_res2.ply",
+				"material_id":1,
 				"translate" : [-1.0,-3.0,0.0],
-				"rotate" : [0.0,0.0,20.0],
-				"scale" : [1,1,1]
+				"rotate" : [90.0,0.0,20.0],
+				"scale" : [10,10,10]
 			}
 	 	},			
 		{"json_file_mesh":
@@ -59,7 +59,7 @@
 		{"json_light":
 			{
 				"color":{"r":1.0,"g":1.0,"b":1.0,"a":1.0},
-				"position":[0.0,0.2,0.4],
+				"position":[-6.0,-5,3.0],
 				"intensity": 0.0
 			}
 		}

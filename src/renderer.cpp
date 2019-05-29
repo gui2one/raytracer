@@ -600,25 +600,25 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial* material, HitData& hit
 		std::vector<HitData> shadow_hit_datas;
 		bool shadow_hit = raycaster.intersectKDNodes(shadow_ray, kd_nodes, shadow_hit_datas, true);
 		
-		if(shadow_hit){
-			if(shadow_hit_datas.size() > 0){
-				for (int hit_id = 0; hit_id < shadow_hit_datas.size(); hit_id++)
-				{
-					float hit_dist = glm::distance(hit_data.position, shadow_hit_datas[hit_id].position);
+		// if(shadow_hit){
+		// 	if(shadow_hit_datas.size() > 0){
+		// 		for (int hit_id = 0; hit_id < shadow_hit_datas.size(); hit_id++)
+		// 		{
+		// 			float hit_dist = glm::distance(hit_data.position, shadow_hit_datas[hit_id].position);
 					
-					if( hit_dist < light_dist ) 
-					{
-						shadow_amount = 1.0;
-						break;
-					}
-				}
-				//~ shadow_amount = 0.0;
-			}
-		}
+		// 			if( hit_dist < light_dist ) 
+		// 			{
+		// 				shadow_amount = 1.0;
+		// 				break;
+		// 			}
+		// 		}
+		// 		//~ shadow_amount = 0.0;
+		// 	}
+		// }
 		
 		float dot2 = clampf(glm::dot(glm::normalize(normal) , view_dir),-1.0, 0.0);
 
-		clr.r += clampf(diff_texture_color.r * diff_amount * mesh.material->color.r *  lights[i].color.r  * (1.0-shadow_amount), 0.0,1.0); //  * (-dot2)
+		clr.r += clampf(diff_texture_color.r * diff_amount * mesh.material->color.r *  lights[i].color.r  * (1.0-shadow_amount) , 0.0,1.0); //  * (-dot2)
 		clr.g += clampf(diff_texture_color.g * diff_amount * mesh.material->color.g *  lights[i].color.g  * (1.0-shadow_amount) , 0.0,1.0);
 		clr.b += clampf(diff_texture_color.b * diff_amount * mesh.material->color.b *  lights[i].color.b  * (1.0-shadow_amount) , 0.0,1.0);
 	}
@@ -632,13 +632,13 @@ Color Renderer::shade(Mesh& mesh, Face& face, RTMaterial* material, HitData& hit
 
 		refl_ray.direction = glm::reflect( view_dir , normal * 1.0f);
 
-		refl_ray = offset_ray(refl_ray, 0.0001);
+		refl_ray = offset_ray(refl_ray, 0.1);
 
 		std::vector<HitData> refl_hit_datas;
 		depth++;
 		bool refl_hit = raycaster.intersectKDNodes(refl_ray, kd_nodes, refl_hit_datas);
 		float dot2 = clampf(glm::dot(glm::normalize(normal) * -1.0f , view_dir),0.0, 1.0);
-		dot2 = pow(dot2, 2.0);
+		dot2 = pow(dot2, 1.0);
 		if(refl_hit_datas.size() > 0)
 		{
 			
@@ -708,8 +708,8 @@ void Renderer::renderBucket(RenderBucket& bucket, Camera& camera)
 	Raycaster raycaster;
 
 	ClickData click_data;
-	click_data.width = 640;
-	click_data.height = 480;
+	click_data.width = render_options.render_width;
+	click_data.height = render_options.render_height;
 
 
 	std::vector<Ray> rays;
@@ -1094,7 +1094,7 @@ void Renderer::displayScene()
 	GLCall(glViewport(0,0,window_width, window_height));
 	
 	GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
-	GLCall(glClearColor(0.2,0.5,0.2,1.0));		
+	GLCall(glClearColor(0.2,0.2,0.2,1.0));		
 	
 	//~ printf("drawing %d\n", temp_inc_test++);
 	camera.setProjection(45.0f * (float)PI / 180.0f, (float)window_width / (float)window_height, 0.01f, 100.0f);
