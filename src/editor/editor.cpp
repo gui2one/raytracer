@@ -80,19 +80,19 @@ void Editor::init()
 	item1->mesh = mesh_utils.makeSimpleBox();
 	//~ item1->mesh.triangulate();
 	//~ item1->mesh.computeNormals();
-	mesh_utils.rotate(item1->mesh, glm::vec3(0.0, 0.0, degToRad(33.0)));
+	//~ mesh_utils.rotate(item1->mesh, glm::vec3(0.0, 0.0, degToRad(33.0)));
 	item1->buildVBO();
 	mesh_objects.push_back(item1);
 	
 	MeshObject* ground = new MeshObject();
 	ground->name = "ground";
 	Mesh mesh = mesh_utils.makeQuad();
-	mesh_utils.rotate(mesh, glm::vec3(degToRad(180.0), 0.0, 0.0));
-	mesh_utils.scale(mesh, glm::vec3(5.0, 5.0, 5.0));
-	mesh_utils.translate(mesh, glm::vec3(-2.5, -2.5, 0.0));
-	mesh.triangulate();
-	mesh.computeNormals();
+
 	ground->mesh = mesh;
+	ground->scale = glm::vec3(5.0,5.0,5.0);
+	ground->rotation = glm::vec3(180.0,0.0,0.0);
+	
+	
 	ground->buildVBO();
 	mesh_objects.push_back(ground);
 	
@@ -276,7 +276,7 @@ void Editor::update()
 
 	default_shader.useProgram();
 	
-	GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
+	
 	GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(camera.projection)));
 	GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "view"), 1, GL_FALSE, glm::value_ptr(view)));
 
@@ -286,7 +286,9 @@ void Editor::update()
 
 	for (int i = 0; i < mesh_objects.size(); i++)
 	{
-			
+		mesh_objects[i]->applyTransforms();
+		model = mesh_objects[i]->transforms;
+		GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
 		GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 1.0, 0.3, 0.3, 1.0 ));
 		mesh_objects[i]->draw();		
 			
@@ -296,6 +298,8 @@ void Editor::update()
 	
 	GLCall(glUseProgram(0));
 
+	model = glm::mat4(1.0f);
+	
 	line_shader.useProgram();
 	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
 	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(camera.projection)));

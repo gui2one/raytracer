@@ -1,6 +1,9 @@
 #include "entity3d.h"
 
-Entity3D::Entity3D()
+Entity3D::Entity3D():
+	position(glm::vec3(0.0,0.0,0.0)),
+	rotation(glm::vec3(0.0,0.0,0.0)),
+	scale(glm::vec3(1.0,1.0,1.0))
 {
 	
 }
@@ -8,6 +11,20 @@ Entity3D::Entity3D()
 void Entity3D::draw()
 {
 	printf("--- Drawing Entity3D  -----\n");
+}
+
+void Entity3D::applyTransforms()
+{
+	glm::mat4 temp = glm::mat4(1.0f);
+	
+	
+	temp = glm::rotate(temp, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+	temp = glm::rotate(temp, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+	temp = glm::rotate(temp, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+	temp = glm::translate(temp, position);
+	temp = glm::scale(temp , scale);
+	
+	transforms = temp;	
 }
 
 Entity3D::~Entity3D()

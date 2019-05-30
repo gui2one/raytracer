@@ -24,10 +24,12 @@ public:
 	virtual void draw();
 	virtual ~Entity3D();
 	
-	
-	
+	void applyTransforms();
+	glm::mat4 transforms;	
 	glm::vec3 position;
-	glm::mat4 transform;	
+	glm::vec3 rotation;
+	glm::vec3 scale;
+	
 	
 	std::string name = "default_name";
 	OGL_geometry_data OGL_geo_data;

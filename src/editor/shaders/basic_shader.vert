@@ -21,8 +21,8 @@ void main()
 	//~ gl_Position =  vec4(position, 1.0) ;
 	
 	f_pos = position;
-	f_normal = normal;
-	//~ f_normal = mat3(transpose(inverse(model))) * normal;
+	//~ f_normal = normal;
+	f_normal = mat3(transpose(inverse(model))) * normal;
 	f_t_coords = t_coords;
 	f_color = u_color;
 	//~ 
