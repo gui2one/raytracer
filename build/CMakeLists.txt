@@ -14,12 +14,15 @@ ENDIF()
 
 ###
 
-set(CMAKE_CXX_FLAGS -std=c++11)
+set(CMAKE_CXX_FLAGS -std=c++14)
 set(CMAKE_BUILD_TYPE "Debug")
 
 
 
 include_directories(../src/include/)
+include_directories(../src/include/opensubdiv)
+include_directories(../src/include/opensubdiv/far)
+include_directories(../src/include/opensubdiv/osd)
 
 include_directories(/usr/local/include)
 include_directories(../src/vendor/imgui)
@@ -112,6 +115,8 @@ add_executable(editor
 	
 	../src/editor/entity3d.cpp
 	
+	../src/editor/construction_grid.cpp
+	
 	../src/editor/ui/ui.cpp	
 	../src/vendor/imgui/imgui_impl_opengl3.cpp
 	../src/vendor/imgui/imgui_impl_sdl.cpp
@@ -123,7 +128,7 @@ add_executable(editor
 )
 
 target_link_libraries(editor coreLib)
-target_link_libraries(editor -losdCPU)
+target_link_libraries(editor -losdCPU -lgomp)
 target_link_libraries(editor -lassimp)
 target_link_libraries(editor PCHLib)
 target_link_libraries(editor -lGLEW)

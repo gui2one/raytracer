@@ -28,6 +28,18 @@ void UI::init(Editor* editor)
     //~ editor->addMeshObject();
 }
 
+void UI::optionsDialog()
+{
+	ImGui::Begin("Options");
+	static bool show_grid = m_editor->show_construction_grid;
+	if(ImGui::CheckboxFlags("show grid", (unsigned int*)&show_grid, 1))
+	{
+		m_editor->toggleConstructionGrid();		
+	}
+	
+	ImGui::End();
+}
+
 void UI::draw()
 {
 
@@ -37,8 +49,12 @@ void UI::draw()
 	ImGui::NewFrame();
 	static bool show_another_window = true;
 	
+	
+	
 	ImGuiIO& io = ImGui::GetIO();
 	m_editor->mouse_over_ui = io.WantCaptureMouse;
+	
+	optionsDialog();
 	if(show_another_window)
 	{
 		ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)

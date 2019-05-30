@@ -47,7 +47,7 @@ public :
 	
 	void buildVBO();
 	void draw() override;
-	unsigned int m_vbo, m_ibo;
+	unsigned int m_vbo=0, m_ibo=0;
 	
 	Mesh mesh;
 	

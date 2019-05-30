@@ -6,13 +6,12 @@
 #include "../shader.h"
 #include "../camera.h"
 #include "entity3d.h"
+#include "construction_grid.h"
 #include "../utils/mesh_utils.h"
 
+#include "../raycaster.h"
+#include "../kdnode.h"
 
-#include <opensubdiv/far/topologyDescriptor.h>
-#include <opensubdiv/far/stencilTableFactory.h>
-#include <opensubdiv/osd/cpuEvaluator.h>
-#include <opensubdiv/osd/cpuVertexBuffer.h>
 
 
 
@@ -36,7 +35,7 @@ public :
 	
 	~Editor();
 	
-	Shader default_shader, font_shader;
+	Shader default_shader, line_shader;
 	
 	Camera camera;
 	float camera_u_pos = 0.5;
@@ -70,7 +69,30 @@ public :
 	SDL_Window * window;
 	SDL_Renderer * w_renderer;	
 	SDL_GLContext gl_context;
+	
+	
+	
+	// KD Nodes and raycasting stuff
+	void buildKDTree(int _limit = 5);
+	void displayKDTree();
+	void collectKDBoungingBoxes(KDNode* node_ptr);
+	void buildKDTreeBBoxes(std::vector<KDBoundingBox> bboxes);	
+	int kd_polygon_limit;
+	
+	std::vector<KDNode *> kd_nodes;
+	
+	
+	
+	std::vector<KDBoundingBox> kd_bboxes;
+	GLenum kdtree_vbo = 0, kdtree_ibo = 0;
+	
+	std::vector<float> kdtree_vertices;
+	std::vector<unsigned int> kdtree_indices;	
 
+
+	ConstructionGrid c_grid;
+	bool show_construction_grid = true;
+	void toggleConstructionGrid();
 	
 	//~ UI ui;
 };

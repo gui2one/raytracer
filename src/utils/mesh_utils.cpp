@@ -96,6 +96,9 @@ Mesh MeshUtils::uniquePoints(Mesh input_mesh)
 	
 }
 
+
+
+
 void MeshUtils::translate(Mesh& _mesh, glm::vec3 _vec)
 {
 	for (int i = 0; i < _mesh.points.size(); i++)

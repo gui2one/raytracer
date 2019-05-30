@@ -50,8 +50,8 @@ void MeshObject::buildVBO()
 			OGL_geo_data.indices.insert(
 				OGL_geo_data.indices.end(), {
 					tri_copy.faces[i].getVertex(0).point_id,
-					tri_copy.faces[i].getVertex(1).point_id,
-					tri_copy.faces[i].getVertex(2).point_id
+					tri_copy.faces[i].getVertex(2).point_id,
+					tri_copy.faces[i].getVertex(1).point_id
 				}
 			
 			);
@@ -60,13 +60,29 @@ void MeshObject::buildVBO()
 	
 		
 	
-	GLCall(glDeleteBuffers(1, &m_vbo));
-	GLCall(glGenBuffers(1, &m_vbo));
+	
+	if(m_vbo == 0){
+		
+		GLCall(glGenBuffers(1, &m_vbo));
+		printf("m_vbo from mesh object --> %d\n", m_vbo);
+	}else{
+		GLCall(glDeleteBuffers(1, &m_vbo));
+		GLCall(glGenBuffers(1, &m_vbo));
+	}
+	
+	
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_vbo));
 	GLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(float)* OGL_geo_data.vertices.size(), OGL_geo_data.vertices.data(), GL_DYNAMIC_DRAW));
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));	
 	
-	GLCall(glDeleteBuffers(1, &m_ibo));
+	if(m_ibo == 0)
+	{
+		GLCall(glGenBuffers(1, &m_ibo));
+	}else{		
+		GLCall(glDeleteBuffers(1, &m_ibo));
+		GLCall(glGenBuffers(1, &m_ibo));
+	}
+	
 	GLCall(glGenBuffers(1, &m_ibo));
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo));
 	GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int)* OGL_geo_data.indices.size(), OGL_geo_data.indices.data(), GL_DYNAMIC_DRAW));

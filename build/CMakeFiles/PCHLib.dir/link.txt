@@ -1,2 +1,2 @@
-/usr/bin/ar qc libPCHLib.a  CMakeFiles/PCHLib.dir/media/gui2one/Work/code_playground/ubuntu/raytracer/src/pch.cpp.o
+/usr/bin/ar qc libPCHLib.a  CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o
 /usr/bin/ranlib libPCHLib.a

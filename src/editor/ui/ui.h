@@ -16,7 +16,7 @@ public:
 	
 	void init(Editor* editor);
 	
-	
+	void optionsDialog();
 	void draw();
 		
 private:

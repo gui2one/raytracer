@@ -74,29 +74,24 @@ void Editor::init()
 	//~ ui.init(window, gl_context, this);
 
 	
-	
-	
-	
-	
-	
-	
-	
 	MeshObject* item1 = new MeshObject();
 	item1->name = "item 1";
 	
 	item1->mesh = mesh_utils.makeSimpleBox();
 	//~ item1->mesh.triangulate();
 	//~ item1->mesh.computeNormals();
+	mesh_utils.rotate(item1->mesh, glm::vec3(0.0, 0.0, degToRad(33.0)));
 	item1->buildVBO();
 	mesh_objects.push_back(item1);
 	
 	MeshObject* ground = new MeshObject();
 	ground->name = "ground";
 	Mesh mesh = mesh_utils.makeQuad();
-	//~ mesh_utils.rotate(mesh, glm::vec3(degToRad(90.0), 0.0, 0.0));
+	mesh_utils.rotate(mesh, glm::vec3(degToRad(180.0), 0.0, 0.0));
 	mesh_utils.scale(mesh, glm::vec3(5.0, 5.0, 5.0));
 	mesh_utils.translate(mesh, glm::vec3(-2.5, -2.5, 0.0));
-	
+	mesh.triangulate();
+	mesh.computeNormals();
 	ground->mesh = mesh;
 	ground->buildVBO();
 	mesh_objects.push_back(ground);
@@ -109,14 +104,33 @@ void Editor::init()
 
 	default_shader.createShader();	
 	
-	font_shader.loadVertexShaderSource("../src/editor/shaders/font_shader.vert");
-	font_shader.loadFragmentShaderSource("../src/editor/shaders/font_shader.frag");
+	line_shader.loadVertexShaderSource("../src/editor/shaders/line_shader.vert");
+	line_shader.loadFragmentShaderSource("../src/editor/shaders/line_shader.frag");
 
-	font_shader.createShader();		
+	line_shader.createShader();		
 	
 	camera.position = glm::vec3(5.0, 2.0 , 3.0);
 	camera.target_position = glm::vec3(0.0, 0.0 , 0.0);
 	camera.up_vector = glm::vec3(0.0, 0.0 , 1.0);	
+	
+	
+	if(mesh_objects.size() > 0)
+	{
+		buildKDTree();
+		//~ printf("KDnodes num : %d\n", kd_nodes.size());
+		
+		for(auto node : kd_nodes)
+		{
+			collectKDBoungingBoxes(node);
+		}
+		
+		printf("BBoxes vector size is %d\n", kd_bboxes.size());
+		buildKDTreeBBoxes(kd_bboxes);		
+	}
+	
+	
+	
+	c_grid.init();
 
 }
 
@@ -230,7 +244,8 @@ void Editor::update()
 	
 	manageEvents();
 
-
+	camera_u_pos += 0.001;
+	setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);
 
 
 	//~ GLCall(glDisable(GL_CULL_FACE));
@@ -267,15 +282,7 @@ void Editor::update()
 
 	
 	
-	float light_positions[6] = { 
-		0.0, 0.0 ,1.5,
-		2.0, 3.0 ,3.0
-		
-	};
-	
-	GLCall(
-		glUniform3fv(glGetUniformLocation(default_shader.m_id, "u_light_positions"), 2, light_positions)
-	);
+
 
 	for (int i = 0; i < mesh_objects.size(); i++)
 	{
@@ -289,12 +296,31 @@ void Editor::update()
 	
 	GLCall(glUseProgram(0));
 
+	line_shader.useProgram();
+	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
+	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(camera.projection)));
+	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "view"), 1, GL_FALSE, glm::value_ptr(view)));	
+	
+	GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 0.3, 1.0, 0.3, 1.0 ));
+	displayKDTree();
 
+
+
+	
+	if(show_construction_grid)
+	{
+		GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 0.5, 0.5, 0.5, 1.0 ));
+		c_grid.draw();
+	}
+	
+	GLCall(glUseProgram(0));
+	
 	//~ ui.draw();
 
 	//~ update_inc++;
 	
 }
+
 void Editor::saveScene()
 {
 	std::vector<JsonMaterial> materials;
@@ -327,6 +353,156 @@ void Editor::addMeshObject()
 	obj2->buildVBO();
 	mesh_objects.push_back(obj2);
 }
+
+
+void Editor::toggleConstructionGrid()
+{
+	show_construction_grid = !show_construction_grid;
+}
+
+void Editor::buildKDTree(int _limit)
+{
+
+
+	for(int mesh_id = 0; mesh_id < mesh_objects.size(); mesh_id++)
+	{
+		std::vector<Triangle*> tris;
+		tris.reserve(mesh_objects[mesh_id]->mesh.faces.size());
+
+		for (int i = 0; i < mesh_objects[mesh_id]->mesh.faces.size(); i++)
+		{
+			glm::vec3 A, B, C;
+			A = B = C = glm::vec3(0.0, 0.0, 0.0);
+
+			A = mesh_objects[mesh_id]->mesh.points[ mesh_objects[mesh_id]->mesh.faces[i].getVertex(0).point_id ].position;
+			B = mesh_objects[mesh_id]->mesh.points[ mesh_objects[mesh_id]->mesh.faces[i].getVertex(1).point_id ].position;
+			C = mesh_objects[mesh_id]->mesh.points[ mesh_objects[mesh_id]->mesh.faces[i].getVertex(2).point_id ].position;
+
+			//~ printf("vec3 value -> %.3f %.3f %.3f\n", A.x, A.y, A.z);
+
+			Triangle* tri_ptr = new Triangle(A, B, C);
+			tri_ptr->id = i;
+			tris.emplace_back(tri_ptr);
+
+		}
+
+		KDNode * kd_node = new KDNode(_limit);
+		kd_node = kd_node->build(tris, 0);
+		kd_nodes.push_back(kd_node);
+		
+	}
+	
+	if(mesh_objects.size() > 0)
+		printf("Created  %d KD Tree(s)\n", (int)mesh_objects.size());
+}
+
+void Editor::collectKDBoungingBoxes(KDNode* node_ptr)
+{
+	//~ printf("collecting bboxes ???? \n\n");
+	kd_bboxes.push_back(node_ptr->bbox);
+	if( node_ptr->left->triangles.size() > 0)
+	{
+		collectKDBoungingBoxes(node_ptr->left);
+	}
+	if( node_ptr->right->triangles.size() > 0)
+	{
+		collectKDBoungingBoxes(node_ptr->right);
+	}
+
+	//~ printf("collected bboxes \n\n");
+}
+
+void Editor::buildKDTreeBBoxes(std::vector<KDBoundingBox> bboxes)
+{
+	kdtree_vertices.clear();
+	kdtree_indices.clear();
+
+	for (int box_id = 0; box_id < bboxes.size(); box_id++)
+	{
+
+		// bottom 4 points
+		kdtree_vertices.insert( kdtree_vertices.end(), { bboxes[box_id].min.x, bboxes[box_id].min.y, bboxes[box_id].min.z});
+		kdtree_vertices.insert( kdtree_vertices.end(), { bboxes[box_id].max.x, bboxes[box_id].min.y, bboxes[box_id].min.z});
+		kdtree_vertices.insert( kdtree_vertices.end(), { bboxes[box_id].max.x, bboxes[box_id].max.y, bboxes[box_id].min.z});
+		kdtree_vertices.insert( kdtree_vertices.end(), { bboxes[box_id].min.x, bboxes[box_id].max.y, bboxes[box_id].min.z});
+
+		// top 4 points
+		kdtree_vertices.insert( kdtree_vertices.end(), { bboxes[box_id].min.x, bboxes[box_id].min.y, bboxes[box_id].max.z});
+		kdtree_vertices.insert( kdtree_vertices.end(), { bboxes[box_id].max.x, bboxes[box_id].min.y, bboxes[box_id].max.z});
+		kdtree_vertices.insert( kdtree_vertices.end(), { bboxes[box_id].max.x, bboxes[box_id].max.y, bboxes[box_id].max.z});
+		kdtree_vertices.insert( kdtree_vertices.end(), { bboxes[box_id].min.x, bboxes[box_id].max.y, bboxes[box_id].max.z});
+
+
+
+		std::vector<unsigned int> indices = {
+
+			0,1,1,2,2,3,3,0,
+			4,5,5,6,6,7,7,4,
+			0,4,1,5,2,6,3,7
+		};
+
+		for (int i = 0; i < indices.size(); i++)
+		{
+			indices[i] += box_id * 8;
+		}
+
+		kdtree_indices.insert(kdtree_indices.end(), indices.begin(), indices.end());
+
+
+	}
+
+
+	//~ GLCall(glDeleteBuffers(1, &kdtree_vbo));
+	if(kdtree_vbo == 0)
+	{
+		GLCall(glGenBuffers(1, &kdtree_vbo));
+		printf("m_vbo from KDBBox --> %d\n", kdtree_vbo);
+	}else{		
+		GLCall(glDeleteBuffers(1, &kdtree_vbo));
+		GLCall(glGenBuffers(1, &kdtree_vbo));
+	}	
+	GLCall(glGenBuffers(1,&kdtree_vbo));
+	
+
+	GLCall(glBindBuffer(GL_ARRAY_BUFFER, kdtree_vbo));
+	GLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(float)* kdtree_vertices.size(), kdtree_vertices.data(), GL_STATIC_DRAW));
+	GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
+
+	if(kdtree_ibo == 0)
+	{
+		GLCall(glGenBuffers(1, &kdtree_ibo));
+	}else{		
+		GLCall(glDeleteBuffers(1, &kdtree_ibo));
+		GLCall(glGenBuffers(1, &kdtree_ibo));
+	}
+	
+	GLCall(glGenBuffers(1,&kdtree_ibo));
+
+	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, kdtree_ibo));
+	GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int)* kdtree_indices.size(), kdtree_indices.data(), GL_STATIC_DRAW));
+	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
+
+}
+
+void Editor::displayKDTree()
+{
+
+	GLCall(glBindBuffer(GL_ARRAY_BUFFER, kdtree_vbo));
+	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, kdtree_ibo));
+	GLCall(glEnableVertexAttribArray(0));
+
+	GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0));
+
+
+	GLCall(glDrawElements(GL_LINES, kdtree_indices.size() , GL_UNSIGNED_INT, nullptr ));
+
+	GLCall(glDisableVertexAttribArray(0));
+	GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
+	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
+
+}
+
+
 
 Editor::~Editor()
 {
