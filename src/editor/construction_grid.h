@@ -3,14 +3,14 @@
 
 
 #include "../pch.h"
-
+#include "../shader.h"
 class ConstructionGrid
 {
 	public:
 		ConstructionGrid();
 		
 		void init();
-		void draw();
+		void draw(Shader& shader);
 			
 		inline void setMajorSpace(float value)
 		{

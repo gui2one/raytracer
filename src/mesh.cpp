@@ -6,10 +6,13 @@ Mesh::Mesh() : translate(glm::vec3(0.0, 0.0, 0.0)),rotate(glm::vec3(0.0, 0.0, 0.
 	
 }
 
-//~ Mesh::Mesh(const Mesh& other):translate(other.translate), rotate(other.rotate),	scale(other.scale)
-//~ {
-	//~ 
-//~ }
+Mesh::Mesh(const Mesh& other):translate(other.translate), rotate(other.rotate),	scale(other.scale)
+{
+	points = other.points;
+	faces = other.faces;
+	
+	printf("just copied Mesh \n");
+}
 
 
 Mesh::~Mesh()

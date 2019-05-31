@@ -34,6 +34,8 @@ public:
 	std::string name = "default_name";
 	OGL_geometry_data OGL_geo_data;
 	
+	bool is_selected = false;
+	
 private:
 
 

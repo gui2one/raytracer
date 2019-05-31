@@ -54,7 +54,7 @@ Mesh MeshUtils::makeSimpleBox(float w, float h)
 	
 	
 	
-	mesh.faces.reserve(6);
+	//~ mesh.faces.reserve(6);
 	mesh.faces.insert( mesh.faces.end(), {
 		Face( { Vertex(0), Vertex(1), Vertex(2), Vertex(3) }),
 		Face( { Vertex(4), Vertex(5), Vertex(6), Vertex(7) }),
@@ -73,11 +73,11 @@ Mesh MeshUtils::makeSimpleBox(float w, float h)
 Mesh MeshUtils::uniquePoints(Mesh input_mesh)
 {
 	Mesh mesh;
-	for (int i = 0; i < input_mesh.faces.size(); i++)
+	for (size_t i = 0; i < input_mesh.faces.size(); i++)
 	{
 		std::vector<Vertex> new_vertices;
 		
-		for (int vert_id = 0; vert_id < input_mesh.faces[i].getNumVertices(); vert_id++)
+		for (size_t vert_id = 0; vert_id < input_mesh.faces[i].getNumVertices(); vert_id++)
 		{
 			
 			mesh.points.push_back( Point( input_mesh.points[input_mesh.faces[i].getVertex(vert_id).point_id].position));
@@ -101,7 +101,7 @@ Mesh MeshUtils::uniquePoints(Mesh input_mesh)
 
 void MeshUtils::translate(Mesh& _mesh, glm::vec3 _vec)
 {
-	for (int i = 0; i < _mesh.points.size(); i++)
+	for (size_t i = 0; i < _mesh.points.size(); i++)
 	{
 		_mesh.points[i].position = _mesh.points[i].position + _vec;
 	}
@@ -110,7 +110,7 @@ void MeshUtils::translate(Mesh& _mesh, glm::vec3 _vec)
 
 void MeshUtils::scale(Mesh& _mesh, glm::vec3 _scale)
 {
-	for (int i = 0; i < _mesh.points.size(); i++)
+	for (size_t i = 0; i < _mesh.points.size(); i++)
 	{
 		_mesh.points[i].position = _mesh.points[i].position * _scale;
 	}	
@@ -118,7 +118,7 @@ void MeshUtils::scale(Mesh& _mesh, glm::vec3 _scale)
 
 void MeshUtils::rotate(Mesh& _mesh, glm::vec3 _rot)
 {
-	for (int i = 0; i < _mesh.points.size(); i++)
+	for (size_t i = 0; i < _mesh.points.size(); i++)
 	{
 		_mesh.points[i].position = glm::rotateX(_mesh.points[i].position, _rot.x);
 		_mesh.points[i].position = glm::rotateY(_mesh.points[i].position, _rot.y);

@@ -78,24 +78,26 @@ void Editor::init()
 	item1->name = "item 1";
 	
 	item1->mesh = mesh_utils.makeSimpleBox();
-	//~ item1->mesh.triangulate();
-	//~ item1->mesh.computeNormals();
+	
+	
 	//~ mesh_utils.rotate(item1->mesh, glm::vec3(0.0, 0.0, degToRad(33.0)));
+	
 	item1->buildVBO();
 	item1->rotation = glm::vec3(0.0, 0.0, 45.0);
-	mesh_objects.push_back(item1);
+	entities.push_back(item1);
 	
 	MeshObject* ground = new MeshObject();
 	ground->name = "ground";
 	Mesh mesh = mesh_utils.makeQuad();
-
+	
 	ground->mesh = mesh;
+	
 	ground->scale = glm::vec3(5.0,5.0,5.0);
 	ground->rotation = glm::vec3(180.0,0.0,0.0);
 	
 	
 	ground->buildVBO();
-	mesh_objects.push_back(ground);
+	entities.push_back(ground);
 	
 	
 
@@ -115,7 +117,7 @@ void Editor::init()
 	camera.up_vector = glm::vec3(0.0, 0.0 , 1.0);	
 	
 	
-	if(mesh_objects.size() > 0)
+	if(entities.size() > 0)
 	{
 		buildKDTree();
 		//~ printf("KDnodes num : %d\n", kd_nodes.size());
@@ -125,7 +127,7 @@ void Editor::init()
 			collectKDBoungingBoxes(node);
 		}
 		
-		printf("BBoxes vector size is %d\n", kd_bboxes.size());
+		//~ printf("BBoxes vector size is %d\n", kd_bboxes.size());
 		buildKDTreeBBoxes(kd_bboxes);		
 	}
 	
@@ -143,11 +145,11 @@ void Editor::manageEvents()
 		if (Event.type == SDL_QUIT)
 		{
 				is_running = false;
-		}else if(( SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT))){
+		}else if(( SDL_BUTTON(SDL_BUTTON_LEFT))){
 			
 			if(!mouse_over_ui)
 			{
-				if( Event.type == SDL_MOUSEMOTION)
+				if( Event.type == SDL_MOUSEMOTION && SDL_GetMouseState(NULL, NULL))
 				{
 
 				
@@ -167,26 +169,47 @@ void Editor::manageEvents()
 
 
 					setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);		
-				}else{
+				}else if(Event.type == SDL_MOUSEBUTTONUP){
+					// normal click
+					printf("mouse button UP \n");
+					const Uint8 *state = SDL_GetKeyboardState(NULL);
+
 					int x, y;
 					SDL_GetMouseState(&x, &y);
-					printf("left click : %d %d\n",x, y);
+					//~ printf("left click : %d %d\n",x, y);
 					ClickData cd;
 					cd.width = 640;
 					cd.height = 480;
 					cd.x = (double)x;
 					cd.y = (double)y;
 					Raycaster caster;
-					glm::vec3 test_screen = caster.screenToWorld_2(cd, camera);
-					printf("screen position : %.3f %.3f %.3f\n", test_screen.x, test_screen.y, test_screen.z);
+					//~ glm::vec3 test_screen = caster.screenToWorld_2(cd, camera);
+					//~ printf("screen position : %.3f %.3f %.3f\n", test_screen.x, test_screen.y, test_screen.z);
 					Ray ray = caster.castRay(cd, camera);
 					
 					std::vector<HitData> hit_datas;
 					bool hit = caster.intersectKDNodes(ray, kd_nodes, hit_datas, false);
-					if(hit)
+					
+					if(hit_datas.size() > 0 && hit)
 					{
-						printf("hit !!!!!!\n");
+						//~ printf("hit Polygon : \n\tmesh ID -> %d\n\tFace ID -> %d \n!!!!!!\n", hit_datas[0].mesh_id, hit_datas[0].face_id);
+
+						if(state[SDL_SCANCODE_LSHIFT])
+						{
+							printf("--- Adding to selection : id %d\n", hit_datas[0].mesh_id);
+							
+							entities[hit_datas[0].mesh_id]->is_selected = true;
+						}else{
+							unselectAll();
+							entities[hit_datas[0].mesh_id]->is_selected = true;
+							
+						}
+					}else{
+						unselectAll();
 					}
+					
+					
+
 					
 					
 				}
@@ -293,13 +316,22 @@ void Editor::update()
 	
 
 
-	for (int i = 0; i < mesh_objects.size(); i++)
+	for (size_t i = 0; i < entities.size(); i++)
 	{
-		mesh_objects[i]->applyTransforms();
-		model = mesh_objects[i]->transforms;
+		//~ std::find(selected_entities.begin(), selected_entities.end(), (unsigned int)i);
+		
+		entities[i]->applyTransforms();
+		model = entities[i]->transforms;
 		GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
-		GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 1.0, 0.3, 0.3, 1.0 ));
-		mesh_objects[i]->draw();		
+		
+		if( entities[i]->is_selected)
+		{
+			GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 1.0, 1.0, 0.3, 1.0 ));
+		}else{
+			GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 1.0, 1.0, 1.0, 1.0 ));
+		}
+		
+		entities[i]->draw();		
 			
 			
 
@@ -322,8 +354,8 @@ void Editor::update()
 	
 	if(show_construction_grid)
 	{
-		GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 0.5, 0.5, 0.5, 1.0 ));
-		c_grid.draw();
+		//~ GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 0.5, 0.5, 0.5, 1.0 ));
+		c_grid.draw(line_shader);
 	}
 	
 	GLCall(glUseProgram(0));
@@ -348,6 +380,13 @@ void Editor::saveScene()
 	
 }
 
+void Editor::unselectAll()
+{
+	for(Entity3D* entity: entities)
+	{
+		entity->is_selected = false;
+	}
+}
 
 void Editor::addMeshObject()
 {
@@ -364,7 +403,7 @@ void Editor::addMeshObject()
 	
 	obj2->mesh = mesh;
 	obj2->buildVBO();
-	mesh_objects.push_back(obj2);
+	entities.push_back(obj2);
 }
 
 
@@ -376,49 +415,60 @@ void Editor::toggleConstructionGrid()
 void Editor::buildKDTree(int _limit)
 {
 
-
-	for(int mesh_id = 0; mesh_id < mesh_objects.size(); mesh_id++)
-	{
-		std::vector<Triangle*> tris;
-		tris.reserve(mesh_objects[mesh_id]->mesh.faces.size());
-
-		for (int i = 0; i < mesh_objects[mesh_id]->mesh.faces.size(); i++)
-		{
-			glm::vec3 A, B, C;
-			A = B = C = glm::vec3(0.0, 0.0, 0.0);
-
 	
-			mesh_objects[mesh_id]->applyTransforms();
-			// apply transforms matrix
-			glm::vec3 tempA = mesh_objects[mesh_id]->mesh.points[ mesh_objects[mesh_id]->mesh.faces[i].getVertex(0).point_id ].position;
-			vec_mult_by_matrix(tempA, mesh_objects[mesh_id]->transforms, false);
+	for (size_t mesh_id = 0; mesh_id < entities.size(); mesh_id++)
+	{
+		Entity3D  * p      = entities[mesh_id];
+		MeshObject* mesh_p = nullptr;
+		if( (mesh_p = dynamic_cast<MeshObject *>(p)))
+		{
+			std::vector<Triangle*> tris;
+			//~ tris.reserve(entities[mesh_id]->mesh.faces.size());
 
-			glm::vec3 tempB = mesh_objects[mesh_id]->mesh.points[ mesh_objects[mesh_id]->mesh.faces[i].getVertex(1).point_id ].position;
-			vec_mult_by_matrix(tempB, mesh_objects[mesh_id]->transforms, false);				
+			for (size_t i = 0; i < mesh_p->mesh.faces.size(); i++)
+			{
+				// triangulate face if needed ... 
+				for (size_t j = 0; j < mesh_p->mesh.faces[i].getNumVertices()-2; j++)
+				{
+					
+					glm::vec3 A, B, C;
+					A = B = C = glm::vec3(0.0, 0.0, 0.0);
 
-			glm::vec3 tempC = mesh_objects[mesh_id]->mesh.points[ mesh_objects[mesh_id]->mesh.faces[i].getVertex(2).point_id ].position;
-			vec_mult_by_matrix(tempC, mesh_objects[mesh_id]->transforms, false);							
 			
-			A = tempA;
-			B = tempB;
-			C = tempC;
+					mesh_p->applyTransforms();
+					// apply transforms matrix
+					glm::vec3 tempA = mesh_p->mesh.points[ mesh_p->mesh.faces[i].getVertex(0).point_id ].position;
+					vec_mult_by_matrix(tempA, mesh_p->transforms, false);
 
-			//~ printf("vec3 value -> %.3f %.3f %.3f\n", A.x, A.y, A.z);
+					glm::vec3 tempB = mesh_p->mesh.points[ mesh_p->mesh.faces[i].getVertex(1+j).point_id ].position;
+					vec_mult_by_matrix(tempB, mesh_p->transforms, false);				
 
-			Triangle* tri_ptr = new Triangle(A, B, C);
-			tri_ptr->id = i;
-			tris.emplace_back(tri_ptr);
+					glm::vec3 tempC = mesh_p->mesh.points[ mesh_p->mesh.faces[i].getVertex(2+j).point_id ].position;
+					vec_mult_by_matrix(tempC, mesh_p->transforms, false);							
+					
+					A = tempA;
+					B = tempB;
+					C = tempC;
 
+					//~ printf("vec3 value -> %.3f %.3f %.3f\n", A.x, A.y, A.z);
+
+					Triangle* tri_ptr = new Triangle(A, B, C);
+					tri_ptr->id = i;
+					//~ tris.emplace_back(tri_ptr);
+					tris.push_back(tri_ptr);
+					
+				}
+
+			}
+
+			KDNode * kd_node = new KDNode(_limit);
+			kd_node = kd_node->build(tris, 0);
+			kd_nodes.push_back(kd_node);
 		}
-
-		KDNode * kd_node = new KDNode(_limit);
-		kd_node = kd_node->build(tris, 0);
-		kd_nodes.push_back(kd_node);
-		
 	}
 	
-	if(mesh_objects.size() > 0)
-		printf("Created  %d KD Tree(s)\n", (int)mesh_objects.size());
+	if(entities.size() > 0)
+		printf("Created  %d KD Tree(s)\n", (int)entities.size());
 }
 
 void Editor::collectKDBoungingBoxes(KDNode* node_ptr)
@@ -442,7 +492,7 @@ void Editor::buildKDTreeBBoxes(std::vector<KDBoundingBox> bboxes)
 	kdtree_vertices.clear();
 	kdtree_indices.clear();
 
-	for (int box_id = 0; box_id < bboxes.size(); box_id++)
+	for (size_t box_id = 0; box_id < bboxes.size(); box_id++)
 	{
 
 		// bottom 4 points
@@ -466,7 +516,7 @@ void Editor::buildKDTreeBBoxes(std::vector<KDBoundingBox> bboxes)
 			0,4,1,5,2,6,3,7
 		};
 
-		for (int i = 0; i < indices.size(); i++)
+		for (size_t i = 0; i < indices.size(); i++)
 		{
 			indices[i] += box_id * 8;
 		}

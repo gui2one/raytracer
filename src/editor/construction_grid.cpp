@@ -334,16 +334,19 @@ void ConstructionGrid::init()
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));	
 }
 
-void ConstructionGrid::draw()
+void ConstructionGrid::draw(Shader& shader)
 {	
+	
+	
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, main_vbo));
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, main_ibo));
 	GLCall(glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0));
 	
 	GLCall(glEnableVertexAttribArray(0));
 
-	GLCall(glLineWidth(3));
+	GLCall(glLineWidth(2));
 	
+	GLCall(glUniform4f(glGetUniformLocation(shader.m_id, "u_color"), 0.6, 0.6, 0.6, 1.0 ));
 	GLCall(glDrawElements(GL_LINES, main_indices.size(), GL_UNSIGNED_INT, nullptr));
 	
 	GLCall(glDisableVertexAttribArray(0));
@@ -359,7 +362,7 @@ void ConstructionGrid::draw()
 	GLCall(glEnableVertexAttribArray(0));
 
 	GLCall(glLineWidth(2));
-	
+	GLCall(glUniform4f(glGetUniformLocation(shader.m_id, "u_color"), 0.4, 0.4, 0.4, 1.0 ));
 	GLCall(glDrawElements(GL_LINES, major_indices.size(), GL_UNSIGNED_INT, nullptr));
 	
 	GLCall(glDisableVertexAttribArray(0));
@@ -377,7 +380,7 @@ void ConstructionGrid::draw()
 
 	
 	GLCall(glLineWidth(1));
-	
+	GLCall(glUniform4f(glGetUniformLocation(shader.m_id, "u_color"), 0.4, 0.4, 0.4, 1.0 ));
 	GLCall(glDrawElements(GL_LINES, minor_indices.size(), GL_UNSIGNED_INT, nullptr));
 	
 	GLCall(glDisableVertexAttribArray(0));

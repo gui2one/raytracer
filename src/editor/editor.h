@@ -30,7 +30,7 @@ public :
 	void setCamPosFromPolar(float u, float v, float _radius, glm::vec3 center);
 	void update();
 	
-	
+	void unselectAll();
 	void addMeshObject();
 	
 	~Editor();
@@ -55,7 +55,9 @@ public :
 
 	bool mouse_over_ui = false;
 	
-	std::vector<MeshObject*> mesh_objects;
+	//~ std::vector<unsigned int> selected_entities;
+	
+	std::vector<Entity3D*> entities;
 	std::vector<OGL_geometry_data> OGL_geometry_datas;
 	
 	// window params

@@ -477,6 +477,8 @@ construction_grid.h
 /home/pi/projects/raytracer_SDL2/src/editor/construction_grid.h
 ../pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
+../shader.h
+/home/pi/projects/raytracer_SDL2/src/shader.h
 
 /home/pi/projects/raytracer_SDL2/src/editor/editor.cpp
 editor.h

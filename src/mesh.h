@@ -74,7 +74,7 @@ class Mesh
 {
 	public:
 		Mesh();
-		//~ Mesh(const Mesh& other);
+		Mesh(const Mesh& other);
 		virtual ~Mesh();
 		
 		void triangulate();
