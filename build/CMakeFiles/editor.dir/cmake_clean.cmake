@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o"
   "CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.o"
   "CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o"
   "CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.o"
@@ -11,6 +10,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_demo.cpp.o"
   "CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_draw.cpp.o"
   "CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_widgets.cpp.o"
+  "CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/kdnode2.cpp.o"
+  "CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/raycaster2.cpp.o"
   "editor.pdb"
   "editor"
 )

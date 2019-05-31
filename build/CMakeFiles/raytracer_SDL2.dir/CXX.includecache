@@ -11812,10 +11812,6 @@ assimp/types.h
 assimp/quaternion.h
 -
 
-/home/pi/projects/raytracer_SDL2/src/include/assimp/camera.h
-types.h
-/home/pi/projects/raytracer_SDL2/src/include/assimp/types.h
-
 /home/pi/projects/raytracer_SDL2/src/include/assimp/cimport.h
 assimp/types.h
 -
@@ -11928,6 +11924,10 @@ boost/foreach.hpp
 boost/utility/result_of.hpp
 /home/pi/projects/raytracer_SDL2/src/include/boost/utility/result_of.hpp
 
+/home/pi/projects/raytracer_SDL2/src/kdnode.cpp
+kdnode.h
+/home/pi/projects/raytracer_SDL2/src/kdnode.h
+
 /home/pi/projects/raytracer_SDL2/src/kdnode.h
 pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
@@ -12008,6 +12008,10 @@ csignal
 pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
 
+/home/pi/projects/raytracer_SDL2/src/raycaster.cpp
+raycaster.h
+/home/pi/projects/raytracer_SDL2/src/raycaster.h
+
 /home/pi/projects/raytracer_SDL2/src/raycaster.h
 pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
@@ -12063,10 +12067,6 @@ color.h
 /home/pi/projects/raytracer_SDL2/src/color.h
 texture.h
 /home/pi/projects/raytracer_SDL2/src/texture.h
-
-/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp
-scene_file_loader.h
-/home/pi/projects/raytracer_SDL2/src/scene_file_loader.h
 
 /home/pi/projects/raytracer_SDL2/src/scene_file_loader.h
 pch.h

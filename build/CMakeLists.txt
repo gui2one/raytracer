@@ -15,6 +15,8 @@ ENDIF()
 ###
 
 set(CMAKE_CXX_FLAGS -std=c++14)
+add_definitions(-Wall -Wno-unused-function)
+#~ set(CMAKE_CXX_FLAGS -Wall)
 set(CMAKE_BUILD_TYPE "Debug")
 
 
@@ -61,10 +63,8 @@ add_library(coreLib
 	../src/vendor/stb_image_write.cpp	
 	../src/utils/system_utils.cpp	
 	../src/utils/objLoader.cpp		
-	
-	../src/kdnode.cpp
+	../src/scene_file_loader.cpp
 
-	../src/raycaster.cpp	
 		
 )
 
@@ -74,9 +74,11 @@ add_executable(raytracer_SDL2
 	../src/main.cpp
 	../src/renderer.cpp
 		
-	../src/scene_file_loader.cpp
 
 
+	../src/kdnode.cpp
+
+	../src/raycaster.cpp	
 	
 	
 
@@ -109,7 +111,7 @@ target_link_libraries(raytracer_SDL2 -L/usr/lib/arm-linux-gnueabihf -lSDL2)
 
 
 add_executable(editor
-	../src/scene_file_loader.cpp
+
 	../src/editor/editor.cpp
 	../src/editor/main.cpp
 	
@@ -125,6 +127,11 @@ add_executable(editor
 	../src/vendor/imgui/imgui_demo.cpp
 	../src/vendor/imgui/imgui_draw.cpp
 	../src/vendor/imgui/imgui_widgets.cpp	
+	
+	
+	../src/editor/kdnode2.cpp
+
+	../src/editor/raycaster2.cpp	
 )
 
 target_link_libraries(editor coreLib)

@@ -6,11 +6,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/pi/projects/raytracer_SDL2/src/camera.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/color.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/color.cpp.o"
-  "/home/pi/projects/raytracer_SDL2/src/kdnode.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/light.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/light.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/mesh.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o"
-  "/home/pi/projects/raytracer_SDL2/src/raycaster.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o"
+  "/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/shader.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/shader.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/texture.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/texture.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.o"

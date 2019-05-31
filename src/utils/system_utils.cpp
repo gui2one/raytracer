@@ -53,7 +53,7 @@ bool SystemUtils::check_dir_exists( std::string dir_path, std::string dir_name){
 	
 	DIR_CONTENT dir_content = read_directory(dir_path);
 	
-	for (int i = 0; i < dir_content.dir_names.size(); i++)
+	for (size_t i = 0; i < dir_content.dir_names.size(); i++)
 	{
 		if( strcmp(dir_content.dir_names[i].c_str(), dir_name.c_str()) == 0){
 			//~ printf("there is a match !!! \n");
@@ -69,7 +69,7 @@ bool SystemUtils::check_file_exists( std::string dir_path, std::string file_name
 	
 	DIR_CONTENT dir_content = read_directory(dir_path);
 	
-	for (int i = 0; i < dir_content.file_names.size(); i++)
+	for (size_t i = 0; i < dir_content.file_names.size(); i++)
 	{
 		if( strcmp(dir_content.file_names[i].c_str(), file_name.c_str()) == 0){
 			//~ printf("there is a match !!! \n");

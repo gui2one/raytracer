@@ -11,8 +11,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.cpp.o"
   "CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp.o"
   "CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.o"
-  "CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o"
-  "CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o"
+  "CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp.o"
   "libcoreLib.pdb"
   "libcoreLib.a"
 )

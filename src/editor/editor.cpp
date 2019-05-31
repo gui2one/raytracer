@@ -82,6 +82,7 @@ void Editor::init()
 	//~ item1->mesh.computeNormals();
 	//~ mesh_utils.rotate(item1->mesh, glm::vec3(0.0, 0.0, degToRad(33.0)));
 	item1->buildVBO();
+	item1->rotation = glm::vec3(0.0, 0.0, 45.0);
 	mesh_objects.push_back(item1);
 	
 	MeshObject* ground = new MeshObject();
@@ -167,17 +168,25 @@ void Editor::manageEvents()
 
 					setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);		
 				}else{
-					//~ int x, y;
-					//~ SDL_GetMouseState(&x, &y);
-					//~ printf("left click : %d %d\n",x, y);
-					//~ ClickData cd;
-					//~ cd.width = 640;
-					//~ cd.height = 480;
-					//~ cd.x = (double)x;
-					//~ cd.y = (double)y;
-					//~ Raycaster caster;
-					//~ glm::vec3 test_screen = caster.screenToWorld_2(cd, camera);
-					//~ printf("screen position : %.3f %.3f %.3f\n", test_screen.x, test_screen.y, test_screen.z);
+					int x, y;
+					SDL_GetMouseState(&x, &y);
+					printf("left click : %d %d\n",x, y);
+					ClickData cd;
+					cd.width = 640;
+					cd.height = 480;
+					cd.x = (double)x;
+					cd.y = (double)y;
+					Raycaster caster;
+					glm::vec3 test_screen = caster.screenToWorld_2(cd, camera);
+					printf("screen position : %.3f %.3f %.3f\n", test_screen.x, test_screen.y, test_screen.z);
+					Ray ray = caster.castRay(cd, camera);
+					
+					std::vector<HitData> hit_datas;
+					bool hit = caster.intersectKDNodes(ray, kd_nodes, hit_datas, false);
+					if(hit)
+					{
+						printf("hit !!!!!!\n");
+					}
 					
 					
 				}
@@ -244,7 +253,7 @@ void Editor::update()
 	
 	manageEvents();
 
-	camera_u_pos += 0.001;
+	//~ camera_u_pos += 0.01;
 	setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);
 
 
@@ -378,9 +387,21 @@ void Editor::buildKDTree(int _limit)
 			glm::vec3 A, B, C;
 			A = B = C = glm::vec3(0.0, 0.0, 0.0);
 
-			A = mesh_objects[mesh_id]->mesh.points[ mesh_objects[mesh_id]->mesh.faces[i].getVertex(0).point_id ].position;
-			B = mesh_objects[mesh_id]->mesh.points[ mesh_objects[mesh_id]->mesh.faces[i].getVertex(1).point_id ].position;
-			C = mesh_objects[mesh_id]->mesh.points[ mesh_objects[mesh_id]->mesh.faces[i].getVertex(2).point_id ].position;
+	
+			mesh_objects[mesh_id]->applyTransforms();
+			// apply transforms matrix
+			glm::vec3 tempA = mesh_objects[mesh_id]->mesh.points[ mesh_objects[mesh_id]->mesh.faces[i].getVertex(0).point_id ].position;
+			vec_mult_by_matrix(tempA, mesh_objects[mesh_id]->transforms, false);
+
+			glm::vec3 tempB = mesh_objects[mesh_id]->mesh.points[ mesh_objects[mesh_id]->mesh.faces[i].getVertex(1).point_id ].position;
+			vec_mult_by_matrix(tempB, mesh_objects[mesh_id]->transforms, false);				
+
+			glm::vec3 tempC = mesh_objects[mesh_id]->mesh.points[ mesh_objects[mesh_id]->mesh.faces[i].getVertex(2).point_id ].position;
+			vec_mult_by_matrix(tempC, mesh_objects[mesh_id]->transforms, false);							
+			
+			A = tempA;
+			B = tempB;
+			C = tempC;
 
 			//~ printf("vec3 value -> %.3f %.3f %.3f\n", A.x, A.y, A.z);
 

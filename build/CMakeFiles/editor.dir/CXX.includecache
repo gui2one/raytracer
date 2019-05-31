@@ -497,10 +497,10 @@ construction_grid.h
 /home/pi/projects/raytracer_SDL2/src/editor/construction_grid.h
 ../utils/mesh_utils.h
 /home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.h
-../raycaster.h
-/home/pi/projects/raytracer_SDL2/src/raycaster.h
-../kdnode.h
-/home/pi/projects/raytracer_SDL2/src/kdnode.h
+raycaster2.h
+/home/pi/projects/raytracer_SDL2/src/editor/raycaster2.h
+kdnode2.h
+/home/pi/projects/raytracer_SDL2/src/editor/kdnode2.h
 
 /home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp
 entity3d.h
@@ -512,6 +512,16 @@ entity3d.h
 ../mesh.h
 /home/pi/projects/raytracer_SDL2/src/mesh.h
 
+/home/pi/projects/raytracer_SDL2/src/editor/kdnode2.cpp
+kdnode2.h
+/home/pi/projects/raytracer_SDL2/src/editor/kdnode2.h
+
+/home/pi/projects/raytracer_SDL2/src/editor/kdnode2.h
+../pch.h
+/home/pi/projects/raytracer_SDL2/src/pch.h
+../ray.h
+/home/pi/projects/raytracer_SDL2/src/ray.h
+
 /home/pi/projects/raytracer_SDL2/src/editor/main.cpp
 stdio.h
 -
@@ -519,6 +529,24 @@ editor.h
 /home/pi/projects/raytracer_SDL2/src/editor/editor.h
 ui/ui.h
 /home/pi/projects/raytracer_SDL2/src/editor/ui/ui.h
+
+/home/pi/projects/raytracer_SDL2/src/editor/raycaster2.cpp
+raycaster2.h
+/home/pi/projects/raytracer_SDL2/src/editor/raycaster2.h
+
+/home/pi/projects/raytracer_SDL2/src/editor/raycaster2.h
+../pch.h
+/home/pi/projects/raytracer_SDL2/src/pch.h
+../camera.h
+/home/pi/projects/raytracer_SDL2/src/camera.h
+../light.h
+/home/pi/projects/raytracer_SDL2/src/light.h
+../mesh.h
+/home/pi/projects/raytracer_SDL2/src/mesh.h
+kdnode2.h
+/home/pi/projects/raytracer_SDL2/src/editor/kdnode2.h
+../ray.h
+/home/pi/projects/raytracer_SDL2/src/ray.h
 
 /home/pi/projects/raytracer_SDL2/src/editor/ui/ui.cpp
 ui.h
@@ -662,12 +690,6 @@ matrix3x3.inl
 matrix4x4.inl
 /home/pi/projects/raytracer_SDL2/src/include/assimp/matrix4x4.inl
 
-/home/pi/projects/raytracer_SDL2/src/kdnode.h
-pch.h
-/home/pi/projects/raytracer_SDL2/src/pch.h
-ray.h
-/home/pi/projects/raytracer_SDL2/src/ray.h
-
 /home/pi/projects/raytracer_SDL2/src/light.h
 pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
@@ -724,20 +746,6 @@ csignal
 pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
 
-/home/pi/projects/raytracer_SDL2/src/raycaster.h
-pch.h
-/home/pi/projects/raytracer_SDL2/src/pch.h
-camera.h
-/home/pi/projects/raytracer_SDL2/src/camera.h
-light.h
-/home/pi/projects/raytracer_SDL2/src/light.h
-mesh.h
-/home/pi/projects/raytracer_SDL2/src/mesh.h
-kdnode.h
-/home/pi/projects/raytracer_SDL2/src/kdnode.h
-ray.h
-/home/pi/projects/raytracer_SDL2/src/ray.h
-
 /home/pi/projects/raytracer_SDL2/src/rtmaterial.h
 pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
@@ -745,10 +753,6 @@ color.h
 /home/pi/projects/raytracer_SDL2/src/color.h
 texture.h
 /home/pi/projects/raytracer_SDL2/src/texture.h
-
-/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp
-scene_file_loader.h
-/home/pi/projects/raytracer_SDL2/src/scene_file_loader.h
 
 /home/pi/projects/raytracer_SDL2/src/scene_file_loader.h
 pch.h

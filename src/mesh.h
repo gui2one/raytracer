@@ -57,7 +57,7 @@ class Face
 			//~ printf("copy Face !!!!\n");
 		}
 		
-		inline int getNumVertices(){ return vertices.size(); }
+		inline size_t getNumVertices(){ return vertices.size(); }
 		inline Vertex getVertex(int _id) const { return vertices[_id];}
 		inline void setVertices( std::vector<Vertex> _vertices){ vertices = _vertices; }
 	private :

@@ -61,7 +61,7 @@ Mesh ObjLoader::assimp_load(std::string file_path){
 			//~ std::cout << "Face : "<< i << "\n";
 			std::vector<Vertex> vertices;
 			
-			for (int j = 0; j < scene->mMeshes[0]->mFaces[i].mNumIndices; j++)
+			for (size_t j = 0; j < scene->mMeshes[0]->mFaces[i].mNumIndices; j++)
 			{
 				
 				unsigned int index = scene->mMeshes[0]->mFaces[i].mIndices[j];

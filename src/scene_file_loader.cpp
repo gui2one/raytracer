@@ -27,7 +27,7 @@ void SceneFileLoader::loadSceneFile(std::string path, std::vector<Mesh> & meshes
 		//~ 
 
 		MeshUtils mesh_utils;
-		for (int i = 0; i < json_scene.materials.size(); i++)
+		for (size_t i = 0; i < json_scene.materials.size(); i++)
 		{
 			//~ 
 			try{
@@ -40,7 +40,7 @@ void SceneFileLoader::loadSceneFile(std::string path, std::vector<Mesh> & meshes
 		}
 		
 		printf("File Meshes : \n");
-		for (int i = 0; i < json_scene.file_meshes.size(); i++)		
+		for (size_t i = 0; i < json_scene.file_meshes.size(); i++)		
 		{
 			printf("\t%d -- path : %s\n", i, json_scene.file_meshes[i].path.c_str());
 			Mesh mesh = json_scene.file_meshes[i].create();
@@ -57,7 +57,7 @@ void SceneFileLoader::loadSceneFile(std::string path, std::vector<Mesh> & meshes
 			meshes.push_back(mesh);
 			
 		}
-		for (int i = 0; i < json_scene.lights.size(); i++)		
+		for (size_t i = 0; i < json_scene.lights.size(); i++)		
 		{		
 			Light light = json_scene.lights[i].create();
 			lights.push_back(light);
