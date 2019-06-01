@@ -462,10 +462,6 @@ imgui_user.h
 
 ../src/vendor/imgui/imgui_impl_sdl.h
 
-/home/pi/projects/raytracer_SDL2/src/camera.h
-pch.h
-/home/pi/projects/raytracer_SDL2/src/pch.h
-
 /home/pi/projects/raytracer_SDL2/src/color.h
 pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
@@ -491,8 +487,8 @@ editor.h
 /home/pi/projects/raytracer_SDL2/src/scene_file_loader.h
 ../shader.h
 /home/pi/projects/raytracer_SDL2/src/shader.h
-../camera.h
-/home/pi/projects/raytracer_SDL2/src/camera.h
+editor_camera.h
+/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.h
 entity3d.h
 /home/pi/projects/raytracer_SDL2/src/editor/entity3d.h
 construction_grid.h
@@ -503,6 +499,16 @@ raycaster2.h
 /home/pi/projects/raytracer_SDL2/src/editor/raycaster2.h
 kdnode2.h
 /home/pi/projects/raytracer_SDL2/src/editor/kdnode2.h
+
+/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp
+editor_camera.h
+/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.h
+
+/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.h
+../pch.h
+/home/pi/projects/raytracer_SDL2/src/pch.h
+entity3d.h
+/home/pi/projects/raytracer_SDL2/src/editor/entity3d.h
 
 /home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp
 entity3d.h
@@ -539,8 +545,8 @@ raycaster2.h
 /home/pi/projects/raytracer_SDL2/src/editor/raycaster2.h
 ../pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
-../camera.h
-/home/pi/projects/raytracer_SDL2/src/camera.h
+editor_camera.h
+/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.h
 ../light.h
 /home/pi/projects/raytracer_SDL2/src/light.h
 ../mesh.h

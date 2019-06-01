@@ -2,7 +2,7 @@
 #define RAYCASTER2_H
 
 #include "../pch.h"
-#include "../camera.h"
+#include "editor_camera.h"
 #include "../light.h"
 #include "../mesh.h"
 #include "kdnode2.h"
@@ -36,10 +36,9 @@ class Raycaster
 {
 	public:
 		Raycaster();
-		Ray castRay(ClickData click_data, Camera& camera);
+		Ray castRay(ClickData click_data, const Camera& camera);
 		
-		glm::vec3 screenToWorld(ClickData click_data, Camera& camera);
-		glm::vec3 screenToWorld_2(ClickData click_data, Camera& camera);
+		glm::vec3 screenToWorld_2(ClickData click_data, const Camera& camera);
 		glm::vec3 cartesian_to_barycentric(glm::vec3& p, glm::vec3& a, glm::vec3& b, glm::vec3& c);
 		bool ray_triangle_intersect(Ray& ray, glm::vec3& vtx_a, glm::vec3& vtx_b, glm::vec3& vtx_c, glm::vec3& hit_pos, glm::vec3& bary_coords);
 		

@@ -211,7 +211,7 @@ KDNode * KDNode::build(std::vector<Triangle*>& tris, int _depth) const
 	// get bounding box of all triangles
 	node->bbox = tris[0]->getBoundingBox();
 	
-	for (int i = 1; i < tris.size(); i++)
+	for (size_t i = 1; i < tris.size(); i++)
 	{
 		node->bbox.expand(tris[i]->getBoundingBox());
 	}
@@ -222,7 +222,7 @@ KDNode * KDNode::build(std::vector<Triangle*>& tris, int _depth) const
 	//find mid point of all triangles
 	glm::vec3 mid_point = glm::vec3(0.0, 0.0, 0.0);
 	
-	for (int i = 0; i < tris.size(); i++)
+	for (size_t i = 0; i < tris.size(); i++)
 	{
 		mid_point = mid_point + tris[i]->getMidPoint();
 	}
@@ -235,9 +235,8 @@ KDNode * KDNode::build(std::vector<Triangle*>& tris, int _depth) const
 	std::vector<Triangle*> right_tris;
 	int axis = node->bbox.getLongestAxis();
 	
-	
-	//~ printf("Longest Axis is : %d\n", axis);
-	for (int i = 0; i < tris.size(); i++)
+
+	for (size_t i = 0; i < tris.size(); i++)
 	{
 		switch(axis){
 			case 0:
@@ -251,35 +250,9 @@ KDNode * KDNode::build(std::vector<Triangle*>& tris, int _depth) const
 				break;
 			
 		}
-	}
-	
-	//~ if(left_tris.size() == 0 && right_tris.size() > 0) 
-		//~ left_tris = right_tris;
-	//~ if(right_tris.size() == 0 && left_tris.size() > 0)
-		//~ right_tris = left_tris;
-		
-		
-	// if 50% of triangles match, don't subdivide anymore
-	//~ int matches = 0;
-	//~ 
-	//~ printf("--------------------\n");
-	//~ printf("Left Size  %d\n",  left_tris.size() );
-	//~ printf("Right Size  %d\n",  right_tris.size() );
-	//~ for (int i = 0; i < left_tris.size(); i++)
-	//~ {
-		//~ for (int j = 0; j < right_tris.size(); j++)
-		//~ {
-			//~ if( left_tris[i] == right_tris[j])
-			//~ {
-				//~ printf("matches  %d\n",  matches );
-				//~ matches++;
-			//~ }
-		//~ }
-		//~ 
-	//~ }
-	//~ printf("-------------left tris size is %d\n", left_tris.size());
-	//~ int limit = 50;
-	if(left_tris.size() > polygons_limit && right_tris.size() > polygons_limit)
+	}	
+
+	if((int)left_tris.size() > polygons_limit && (int)right_tris.size() > polygons_limit)
 	{
 		// recurse left and right sides
 		node->left = build(left_tris, _depth + 1);

@@ -29,15 +29,26 @@ Editor::Editor()
 
 void Editor::setCamPosFromPolar(float u, float v, float _radius, glm::vec3 center)
 {
-        camera.position.x = (sin(u)* sin(v) * _radius) + center.x;
-        camera.position.y = (cos(u)* sin(v) * _radius) + center.y;
-        camera.position.z = (cos(v) * _radius) + center.z;
+        cameras[cur_cam_id]->position.x = (sin(u)* sin(v) * _radius) + center.x;
+        cameras[cur_cam_id]->position.y = (cos(u)* sin(v) * _radius) + center.y;
+        cameras[cur_cam_id]->position.z = (cos(v) * _radius) + center.z;
 
-        camera.target_position = center;
+        cameras[cur_cam_id]->target_position = center;
 
-        camera.up_vector = glm::vec3(0.0, 0.0, 1.0);
+        cameras[cur_cam_id]->up_vector = glm::vec3(0.0, 0.0, 1.0);
 }
 
+void Editor::cycleCameras()
+{
+	if(cur_cam_id < (int)cameras.size()-1)
+	{
+		cur_cam_id++;
+		
+	}else{
+		cur_cam_id = 0;
+		
+	}
+}
 
 void Editor::init()
 {
@@ -71,31 +82,24 @@ void Editor::init()
 	//~ glewExperimental = GL_TRUE;
 	
 	
-	//~ ui.init(window, gl_context, this);
+	
 
 	
 	MeshObject* item1 = new MeshObject();
-	item1->name = "item 1";
-	
+	item1->name = "item 1";	
 	item1->mesh = mesh_utils.makeSimpleBox();
-	
-	
-	//~ mesh_utils.rotate(item1->mesh, glm::vec3(0.0, 0.0, degToRad(33.0)));
-	
 	item1->buildVBO();
+	item1->position = glm::vec3(0.0, 0.0, 1.0);
 	item1->rotation = glm::vec3(0.0, 0.0, 45.0);
 	entities.push_back(item1);
 	
 	MeshObject* ground = new MeshObject();
 	ground->name = "ground";
-	Mesh mesh = mesh_utils.makeQuad();
-	
-	ground->mesh = mesh;
-	
+	Mesh mesh = mesh_utils.makeQuad();	
+	ground->mesh = mesh;	
+	ground->position = glm::vec3(5.0,5.0,0.0);
 	ground->scale = glm::vec3(5.0,5.0,5.0);
-	ground->rotation = glm::vec3(180.0,0.0,0.0);
-	
-	
+	ground->rotation = glm::vec3(180.0,0.0,0.0);	
 	ground->buildVBO();
 	entities.push_back(ground);
 	
@@ -112,14 +116,31 @@ void Editor::init()
 
 	line_shader.createShader();		
 	
-	camera.position = glm::vec3(5.0, 2.0 , 3.0);
-	camera.target_position = glm::vec3(0.0, 0.0 , 0.0);
-	camera.up_vector = glm::vec3(0.0, 0.0 , 1.0);	
+	Camera* camera = new Camera();
+	camera->position = glm::vec3(5.0, 2.0 , 3.0);
+	camera->target_position = glm::vec3(0.0, 0.0 , 0.0);
+	camera->up_vector = glm::vec3(0.0, 0.0 , 1.0);	
+	camera->setProjection(45.0f * (float)PI / 180.0f, (float)w_width / (float)w_height, 0.01f, 100.0f);
+	camera->name = uniqueEntityName(camera->name);
+	cameras.push_back(camera);
 	
 	
+	cur_cam_id = 0;
+	//~ printf("camera FOV --> %3f \n", cameras[cur_cam_id]->fov);
+	
+	Camera * camera2 = new Camera();
+	camera2->position = glm::vec3(5.0, 2.0 , 3.0);
+	camera2->target_position = glm::vec3(0.0, 0.0 , 0.0);
+	camera2->up_vector = glm::vec3(0.0, 0.0 , 1.0);	
+	camera2->setProjection(45.0f * (float)PI / 180.0f, (float)w_width / (float)w_height, 0.01f, 100.0f);
+	camera2->name = uniqueEntityName(camera2->name);
+	cameras.push_back(camera2);	
 	if(entities.size() > 0)
 	{
-		buildKDTree();
+		for(auto entity : entities)
+		{
+			buildKDTree(entity);
+		}
 		//~ printf("KDnodes num : %d\n", kd_nodes.size());
 		
 		for(auto node : kd_nodes)
@@ -140,65 +161,121 @@ void Editor::init()
 void Editor::manageEvents()
 {
     SDL_Event Event;
+    
+    const Uint8 *keyboard_state = SDL_GetKeyboardState(NULL);
+    
     while (SDL_PollEvent(&Event))
     {
 		if (Event.type == SDL_QUIT)
 		{
 				is_running = false;
-		}else if(( SDL_BUTTON(SDL_BUTTON_LEFT))){
+				
+		}else if(!mouse_over_ui){
 			
-			if(!mouse_over_ui)
+			if( Event.type == (SDL_MOUSEMOTION))
 			{
-				if( Event.type == SDL_MOUSEMOTION && SDL_GetMouseState(NULL, NULL))
+				if(Event.motion.state == SDL_BUTTON_LMASK )
 				{
+					left_mouse_dragging = true;
+					
+					if(keyboard_state[SDL_SCANCODE_LCTRL])
+					{
+						double rot_speed = 0.01;
+
+						cameras[cur_cam_id]->orbit_u += (float)Event.motion.xrel * rot_speed;
+
+
+
+						cameras[cur_cam_id]->orbit_v -= (float)Event.motion.yrel * rot_speed;
+
+						if(cameras[cur_cam_id]->orbit_v < 0.2)
+								cameras[cur_cam_id]->orbit_v = 0.2;
+						else if(cameras[cur_cam_id]->orbit_v > PI-0.2)
+								cameras[cur_cam_id]->orbit_v = PI-0.2;
+
+
+
+						setCamPosFromPolar(cameras[cur_cam_id]->orbit_u, cameras[cur_cam_id]->orbit_v, cameras[cur_cam_id]->orbit_radius, cameras[cur_cam_id]->orbit_center);	
+					}						
+				}else if(Event.motion.state == SDL_BUTTON_RMASK){
+					
+					right_mouse_dragging = true;
+					
+					if(keyboard_state[SDL_SCANCODE_LCTRL])
+					{
+						mouse_delta_x = -(float)Event.motion.xrel;
+						//~ mouse_old_x = xpos;
+						mouse_delta_y = -(float)Event.motion.yrel;
+						//~ mouse_old_y = ypos;
+				
+						glm::mat4 view = glm::lookAt(
+							cameras[cur_cam_id]->position,
+							cameras[cur_cam_id]->target_position,
+							cameras[cur_cam_id]->up_vector
+							);
+				
+						glm::vec3 pan_dir = glm::vec3(mouse_delta_x, -mouse_delta_y, 0.0);
+				
+						vec_mult_by_matrix(pan_dir, view, true);
+						pan_dir = pan_dir - cameras[cur_cam_id]->position;
+						cameras[cur_cam_id]->orbit_center.x += pan_dir.x * 0.02;
+						cameras[cur_cam_id]->orbit_center.y += pan_dir.y * 0.02;
+						cameras[cur_cam_id]->orbit_center.z += pan_dir.z * 0.02;
+				
+						setCamPosFromPolar(
+							cameras[cur_cam_id]->orbit_u, 
+							cameras[cur_cam_id]->orbit_v, 
+							cameras[cur_cam_id]->orbit_radius, 
+							cameras[cur_cam_id]->orbit_center);
+					}							
+				}
+
+			
+
+			}else if(Event.type == SDL_KEYUP){
+				if(Event.key.keysym.scancode == SDL_SCANCODE_C)
+				{
+					//~ printf("C key released\n");
+					cycleCameras();
+				}
+			}else if(Event.type == SDL_MOUSEBUTTONUP){
+				
+				
+				
+				
 
 				
-					double rot_speed = 0.01;
-
-					camera_u_pos += (float)Event.motion.xrel * rot_speed;
-
-
-
-					camera_v_pos -= (float)Event.motion.yrel * rot_speed;
-
-					if(camera_v_pos < 0.2)
-							camera_v_pos = 0.2;
-					else if(camera_v_pos > PI-0.2)
-							camera_v_pos = PI-0.2;
-
-
-
-					setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);		
-				}else if(Event.type == SDL_MOUSEBUTTONUP){
+				if(Event.button.button == SDL_BUTTON_LEFT && !left_mouse_dragging)
+				{
 					// normal click
-					printf("mouse button UP \n");
-					const Uint8 *state = SDL_GetKeyboardState(NULL);
-
+					
+					
 					int x, y;
 					SDL_GetMouseState(&x, &y);
-					//~ printf("left click : %d %d\n",x, y);
+
+
+					//~ printf("LEFT mouse button UP : %d , %d \n", x, y);
 					ClickData cd;
-					cd.width = 640;
-					cd.height = 480;
+					cd.width = w_width;
+					cd.height = w_height;
 					cd.x = (double)x;
 					cd.y = (double)y;
 					Raycaster caster;
-					//~ glm::vec3 test_screen = caster.screenToWorld_2(cd, camera);
-					//~ printf("screen position : %.3f %.3f %.3f\n", test_screen.x, test_screen.y, test_screen.z);
-					Ray ray = caster.castRay(cd, camera);
+					//~ printf("FOV ??? %.3f\n", cameras[cur_cam_id]->fov);
+					Ray ray = caster.castRay(cd, *(cameras[cur_cam_id]));
 					
 					std::vector<HitData> hit_datas;
-					bool hit = caster.intersectKDNodes(ray, kd_nodes, hit_datas, false);
+					caster.intersectKDNodes(ray, kd_nodes, hit_datas, false);
 					
-					if(hit_datas.size() > 0 && hit)
+					if(hit_datas.size() > 0 )
 					{
 						//~ printf("hit Polygon : \n\tmesh ID -> %d\n\tFace ID -> %d \n!!!!!!\n", hit_datas[0].mesh_id, hit_datas[0].face_id);
 
-						if(state[SDL_SCANCODE_LSHIFT])
+						if(keyboard_state[SDL_SCANCODE_LSHIFT])
 						{
-							printf("--- Adding to selection : id %d\n", hit_datas[0].mesh_id);
+							//~ printf("--- Adding to selection : id %d\n", hit_datas[0].mesh_id);
 							
-							entities[hit_datas[0].mesh_id]->is_selected = true;
+							entities[hit_datas[0].mesh_id]->is_selected = !entities[hit_datas[0].mesh_id]->is_selected;
 						}else{
 							unselectAll();
 							entities[hit_datas[0].mesh_id]->is_selected = true;
@@ -206,65 +283,35 @@ void Editor::manageEvents()
 						}
 					}else{
 						unselectAll();
-					}
-					
-					
-
-					
-					
+					}									
 				}
-			}
+				
+				left_mouse_dragging = false;
 
-		}else if( (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_RIGHT))){
+				
+			}else if(Event.type == SDL_MOUSEWHEEL){
 
-			if(!mouse_over_ui)
-			{
-				if( Event.type == SDL_MOUSEMOTION)
-				{
-					mouse_delta_x = -(float)Event.motion.xrel;
-					//~ mouse_old_x = xpos;
-					mouse_delta_y = -(float)Event.motion.yrel;
-					//~ mouse_old_y = ypos;
-			
-					glm::mat4 view = glm::lookAt(
-						camera.position,
-						camera.target_position,
-						camera.up_vector
-						);
-			
-					glm::vec3 pan_dir = glm::vec3(mouse_delta_x, -mouse_delta_y, 0.0);
-			
-					vec_mult_by_matrix(pan_dir, view, true);
-					pan_dir = pan_dir - camera.position;
-					camera_view_center.x += pan_dir.x * 0.02;
-					camera_view_center.y += pan_dir.y * 0.02;
-					camera_view_center.z += pan_dir.z * 0.02;
-			
-					setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);				
-				}
-			}
-		}else if(Event.type == SDL_MOUSEWHEEL){
-
-			if(!mouse_over_ui)
-			{			
+						
 				//~ printf("wheel event\n");
 				//~ printf("\twheel x : %d\n", Event.wheel.x);
 				//~ printf("\twheel y : %d\n", Event.wheel.y);
 				
-				camera_orbit_radius += (float)Event.wheel.y * -0.1;
-				setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);	
-			}	
-		}else if(Event.type == SDL_WINDOWEVENT){
-			
+				float norm_dist = glm::distance(cameras[cur_cam_id]->position, cameras[cur_cam_id]->orbit_center) / 5.0;
+				cameras[cur_cam_id]->orbit_radius += (float)Event.wheel.y * -0.15 * norm_dist;
+				setCamPosFromPolar(cameras[cur_cam_id]->orbit_u, cameras[cur_cam_id]->orbit_v, cameras[cur_cam_id]->orbit_radius, cameras[cur_cam_id]->orbit_center);	
+					
+			}else if(Event.type == SDL_WINDOWEVENT){
+		
 
 
-			if (Event.window.event == SDL_WINDOWEVENT_RESIZED) {
-				printf("MESSAGE:Resizing window... %d %d\n", Event.window.data1, Event.window.data2);
-				
-				w_width = Event.window.data1;
-				w_height = Event.window.data2;
-				
-			}			
+				if (Event.window.event == SDL_WINDOWEVENT_RESIZED) {
+					//~ printf("MESSAGE:Resizing window... %d %d\n", Event.window.data1, Event.window.data2);
+					
+					w_width = Event.window.data1;
+					w_height = Event.window.data2;
+					
+				}			
+			}
 		}
 	}
 }
@@ -277,8 +324,8 @@ void Editor::update()
 	manageEvents();
 
 	//~ camera_u_pos += 0.01;
-	setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);
-
+	//~ setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);
+	//~ printf("FOV %.3f\n",cameras[cur_cam_id]->fov);
 
 	//~ GLCall(glDisable(GL_CULL_FACE));
 	GLCall(glEnable(GL_DEPTH_TEST));
@@ -291,7 +338,7 @@ void Editor::update()
 	GLCall(glClearColor(0.2,0.2,0.2,1.0));
 
 
-	camera.setProjection(45.0f * (float)PI / 180.0f, (float)w_width / (float)w_height, 0.01f, 100.0f);
+	//~ cameras[cur_cam_id]->setProjection(45.0f * (float)PI / 180.0f, (float)w_width / (float)w_height, 0.01f, 100.0f);
 
 
 
@@ -301,15 +348,15 @@ void Editor::update()
 
 
 	view *= glm::lookAt(
-		camera.position, //glm::vec3(0.0,  0.0, 3.0),
-		camera.target_position, //glm::vec3(0.0,  0.0, 0.0),
-		camera.up_vector //glm::vec3(0.0,  1.0, 0.0)
+		cameras[cur_cam_id]->position, //glm::vec3(0.0,  0.0, 3.0),
+		cameras[cur_cam_id]->target_position, //glm::vec3(0.0,  0.0, 0.0),
+		cameras[cur_cam_id]->up_vector //glm::vec3(0.0,  1.0, 0.0)
 	);
 
 	default_shader.useProgram();
 	
 	
-	GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(camera.projection)));
+	GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(cameras[cur_cam_id]->projection)));
 	GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "view"), 1, GL_FALSE, glm::value_ptr(view)));
 
 	
@@ -327,7 +374,7 @@ void Editor::update()
 		if( entities[i]->is_selected)
 		{
 			GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 1.0, 1.0, 0.3, 1.0 ));
-		}else{
+		}else{	
 			GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 1.0, 1.0, 1.0, 1.0 ));
 		}
 		
@@ -337,16 +384,37 @@ void Editor::update()
 
 	}
 	
+	
+	GLCall(glUseProgram(0));
+	
+	line_shader.useProgram();
+	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
+	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(cameras[cur_cam_id]->projection)));
+	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "view"), 1, GL_FALSE, glm::value_ptr(view)));		
+	for (Camera* cam : cameras)
+	{
+		
+		if(cam != cameras[cur_cam_id])
+		{
+			model = glm::mat4(1.0f);		
+			cam->applyTransforms();
+			model *= cam->transforms;		
+			
+			GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
+			GLCall(glUniform4f(glGetUniformLocation(line_shader.m_id, "u_color"), 0.0, 0.0, 1.0, 1.0 ));
+			cam->draw();
+		}
+	}
+	
+	
 	GLCall(glUseProgram(0));
 
 	model = glm::mat4(1.0f);
 	
 	line_shader.useProgram();
 	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
-	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(camera.projection)));
-	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "view"), 1, GL_FALSE, glm::value_ptr(view)));	
 	
-	GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 0.3, 1.0, 0.3, 1.0 ));
+	GLCall(glUniform4f(glGetUniformLocation(line_shader.m_id, "u_color"), 0.3, 1.0, 0.3, 1.0 ));
 	displayKDTree();
 
 
@@ -354,6 +422,7 @@ void Editor::update()
 	
 	if(show_construction_grid)
 	{
+		
 		//~ GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 0.5, 0.5, 0.5, 1.0 ));
 		c_grid.draw(line_shader);
 	}
@@ -396,79 +465,109 @@ void Editor::addMeshObject()
 	MeshObject* obj2 = new MeshObject();
 	obj2->name = "object 2";
 	Mesh mesh = mesh_utils.makeSimpleBox();
-	mesh_utils.translate( mesh, glm::vec3(0.0,-1.5,0.0));
+	
 	mesh = mesh_utils.uniquePoints(mesh);
 	//~ mesh.triangulate();
 	//~ mesh.computeNormals();
 	
 	obj2->mesh = mesh;
 	obj2->buildVBO();
+	obj2->position = glm::vec3( (double)(entities.size()) * 0.5, 0.0, 0.0);
+	obj2->scale = glm::vec3(0.4,0.4,2.0);
 	entities.push_back(obj2);
+	
+	buildKDTree(entities[ entities.size() - 1]);
+	collectKDBoungingBoxes(kd_nodes[ kd_nodes.size() - 1]);
+	buildKDTreeBBoxes(kd_bboxes);
+	//~ collectKDBoungingBoxes(
 }
 
+std::string Editor::uniqueEntityName(std::string _str)
+{
+	for(Entity3D * entity : entities)
+	{
+		if(_str == entity->name)
+		{
+			printf("same name \n");
+			_str += "_";
+			_str = uniqueEntityName(_str);
+			break;
+		}
+	}
+	
+	for(Camera * cam : cameras)
+	{
+		if(_str == cam->name)
+		{
+			printf("same name \n");
+			_str += "_";
+			_str = uniqueEntityName(_str);
+			break;
+		}
+	}	
+	return _str;
+}
 
 void Editor::toggleConstructionGrid()
 {
 	show_construction_grid = !show_construction_grid;
 }
 
-void Editor::buildKDTree(int _limit)
+void Editor::buildKDTree(Entity3D * entity, int _limit)
 {
 
-	
-	for (size_t mesh_id = 0; mesh_id < entities.size(); mesh_id++)
+	Entity3D  * p = entity;
+	MeshObject * mesh_p = nullptr;
+	if( (mesh_p = dynamic_cast<MeshObject *>(p)))
 	{
-		Entity3D  * p      = entities[mesh_id];
-		MeshObject* mesh_p = nullptr;
-		if( (mesh_p = dynamic_cast<MeshObject *>(p)))
+		std::vector<Triangle*> tris;
+		//~ tris.reserve(entities[mesh_id]->mesh.faces.size());
+
+		for (size_t i = 0; i < mesh_p->mesh.faces.size(); i++)
 		{
-			std::vector<Triangle*> tris;
-			//~ tris.reserve(entities[mesh_id]->mesh.faces.size());
-
-			for (size_t i = 0; i < mesh_p->mesh.faces.size(); i++)
+			// triangulate face if needed ... 
+			for (size_t j = 0; j < mesh_p->mesh.faces[i].getNumVertices()-2; j++)
 			{
-				// triangulate face if needed ... 
-				for (size_t j = 0; j < mesh_p->mesh.faces[i].getNumVertices()-2; j++)
-				{
-					
-					glm::vec3 A, B, C;
-					A = B = C = glm::vec3(0.0, 0.0, 0.0);
+				
+				glm::vec3 A, B, C;
+				A = B = C = glm::vec3(0.0, 0.0, 0.0);
 
-			
-					mesh_p->applyTransforms();
-					// apply transforms matrix
-					glm::vec3 tempA = mesh_p->mesh.points[ mesh_p->mesh.faces[i].getVertex(0).point_id ].position;
-					vec_mult_by_matrix(tempA, mesh_p->transforms, false);
+		
+				mesh_p->applyTransforms();
+				// apply transforms matrix
+				glm::vec3 tempA = mesh_p->mesh.points[ mesh_p->mesh.faces[i].getVertex(0).point_id ].position;
+				vec_mult_by_matrix(tempA, mesh_p->transforms, false);
 
-					glm::vec3 tempB = mesh_p->mesh.points[ mesh_p->mesh.faces[i].getVertex(1+j).point_id ].position;
-					vec_mult_by_matrix(tempB, mesh_p->transforms, false);				
+				glm::vec3 tempB = mesh_p->mesh.points[ mesh_p->mesh.faces[i].getVertex(1+j).point_id ].position;
+				vec_mult_by_matrix(tempB, mesh_p->transforms, false);				
 
-					glm::vec3 tempC = mesh_p->mesh.points[ mesh_p->mesh.faces[i].getVertex(2+j).point_id ].position;
-					vec_mult_by_matrix(tempC, mesh_p->transforms, false);							
-					
-					A = tempA;
-					B = tempB;
-					C = tempC;
+				glm::vec3 tempC = mesh_p->mesh.points[ mesh_p->mesh.faces[i].getVertex(2+j).point_id ].position;
+				vec_mult_by_matrix(tempC, mesh_p->transforms, false);							
+				
+				A = tempA;
+				B = tempB;
+				C = tempC;
 
-					//~ printf("vec3 value -> %.3f %.3f %.3f\n", A.x, A.y, A.z);
+				//~ printf("vec3 value -> %.3f %.3f %.3f\n", A.x, A.y, A.z);
 
-					Triangle* tri_ptr = new Triangle(A, B, C);
-					tri_ptr->id = i;
-					//~ tris.emplace_back(tri_ptr);
-					tris.push_back(tri_ptr);
-					
-				}
-
+				Triangle* tri_ptr = new Triangle(A, B, C);
+				tri_ptr->id = i;
+				//~ tris.emplace_back(tri_ptr);
+				tris.push_back(tri_ptr);
+				
 			}
 
-			KDNode * kd_node = new KDNode(_limit);
-			kd_node = kd_node->build(tris, 0);
-			kd_nodes.push_back(kd_node);
 		}
+
+		KDNode * kd_node = new KDNode(_limit);
+		kd_node = kd_node->build(tris, 0);
+		kd_nodes.push_back(kd_node);
 	}
+
 	
-	if(entities.size() > 0)
+	if(entities.size() > 0){
 		printf("Created  %d KD Tree(s)\n", (int)entities.size());
+	}
 }
 
 void Editor::collectKDBoungingBoxes(KDNode* node_ptr)

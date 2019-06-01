@@ -11774,6 +11774,10 @@ boost/config.hpp
 boost/smart_ptr/weak_ptr.hpp
 -
 
+/home/pi/projects/raytracer_SDL2/src/camera.cpp
+camera.h
+/home/pi/projects/raytracer_SDL2/src/camera.h
+
 /home/pi/projects/raytracer_SDL2/src/camera.h
 pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h

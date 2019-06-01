@@ -444,14 +444,6 @@ vector
 vector
 -
 
-/home/pi/projects/raytracer_SDL2/src/camera.cpp
-camera.h
-/home/pi/projects/raytracer_SDL2/src/camera.h
-
-/home/pi/projects/raytracer_SDL2/src/camera.h
-pch.h
-/home/pi/projects/raytracer_SDL2/src/pch.h
-
 /home/pi/projects/raytracer_SDL2/src/color.cpp
 color.h
 /home/pi/projects/raytracer_SDL2/src/color.h

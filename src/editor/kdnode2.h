@@ -3,14 +3,7 @@
 
 #include "../pch.h"
 #include "../ray.h"
-//~ #include "raycaster2.h"
 
-//~ struct KDRay
-//~ {	
-	//~ glm::vec3 origin;
-	//~ glm::vec3 direction;
-		//~ 
-//~ };
 
 struct KDBoundingBox{
 	

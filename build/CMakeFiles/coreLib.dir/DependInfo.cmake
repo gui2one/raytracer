@@ -4,7 +4,6 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/pi/projects/raytracer_SDL2/src/camera.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/color.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/color.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/light.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/light.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/mesh.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o"

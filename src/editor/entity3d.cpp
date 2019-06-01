@@ -48,7 +48,7 @@ void MeshObject::buildVBO()
 	tri_copy.triangulate();
 	tri_copy.computeNormals();
 	//vertices
-	for (int i = 0; i < tri_copy.points.size(); i++)
+	for (size_t i = 0; i < tri_copy.points.size(); i++)
 	{	
 		OGL_geo_data.vertices.insert(
 			OGL_geo_data.vertices.end(), {
@@ -60,7 +60,7 @@ void MeshObject::buildVBO()
 	}
 	
 	// indices
-	for (int i = 0; i < tri_copy.faces.size(); i++)
+	for (size_t i = 0; i < tri_copy.faces.size(); i++)
 	{
 		if( tri_copy.faces[i].getNumVertices() == 3)
 		{
@@ -81,12 +81,11 @@ void MeshObject::buildVBO()
 	if(m_vbo == 0){
 		
 		GLCall(glGenBuffers(1, &m_vbo));
-		printf("m_vbo from mesh object --> %d\n", m_vbo);
+		//~ printf("m_vbo from mesh object --> %d\n", m_vbo);
 	}else{
 		GLCall(glDeleteBuffers(1, &m_vbo));
 		GLCall(glGenBuffers(1, &m_vbo));
 	}
-	
 	
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_vbo));
 	GLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(float)* OGL_geo_data.vertices.size(), OGL_geo_data.vertices.data(), GL_DYNAMIC_DRAW));
@@ -99,8 +98,7 @@ void MeshObject::buildVBO()
 		GLCall(glDeleteBuffers(1, &m_ibo));
 		GLCall(glGenBuffers(1, &m_ibo));
 	}
-	
-	GLCall(glGenBuffers(1, &m_ibo));
+
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo));
 	GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int)* OGL_geo_data.indices.size(), OGL_geo_data.indices.data(), GL_DYNAMIC_DRAW));
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));		

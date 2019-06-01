@@ -4,7 +4,7 @@
 #include "../pch.h"
 #include "../scene_file_loader.h"
 #include "../shader.h"
-#include "../camera.h"
+#include "editor_camera.h"
 #include "entity3d.h"
 #include "construction_grid.h"
 #include "../utils/mesh_utils.h"
@@ -28,20 +28,19 @@ public :
 	void buildDisplayGeoData();
 	void saveScene();
 	void setCamPosFromPolar(float u, float v, float _radius, glm::vec3 center);
+	void cycleCameras();
 	void update();
 	
 	void unselectAll();
 	void addMeshObject();
 	
+	std::string uniqueEntityName(std::string _str);
 	~Editor();
 	
 	Shader default_shader, line_shader;
 	
-	Camera camera;
-	float camera_u_pos = 0.5;
-	float camera_v_pos = PI / 4.0 ;
-	float camera_orbit_radius = 5.0;
-	glm::vec3 camera_view_center = glm::vec3(0.0, 0.0, 0.0);
+	std::vector<Camera*> cameras;	
+	int cur_cam_id = -1;	
 	
 	bool left_mouse_button_down = false;
 	bool left_mouse_dragging = false;
@@ -75,7 +74,7 @@ public :
 	
 	
 	// KD Nodes and raycasting stuff
-	void buildKDTree(int _limit = 5);
+	void buildKDTree(Entity3D * entity, int _limit = 5);
 	void displayKDTree();
 	void collectKDBoungingBoxes(KDNode* node_ptr);
 	void buildKDTreeBBoxes(std::vector<KDBoundingBox> bboxes);	

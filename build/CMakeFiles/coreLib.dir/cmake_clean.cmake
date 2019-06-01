@@ -1,7 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o"
   "CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.o"
-  "CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o"
   "CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/light.cpp.o"
   "CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/color.cpp.o"
   "CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o"

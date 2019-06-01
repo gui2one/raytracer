@@ -16,9 +16,17 @@ public:
 	
 	void init(Editor* editor);
 	
+	void menu();
 	void optionsDialog();
+	void camerasDialog();
+	
+	void showAllDialogs();
+	void hideAllDialogs();
 	void draw();
 		
+		
+	bool b_show_options_dialog = false;
+	bool b_show_cameras_dialog = false;
 private:
 	SDL_Window * m_window;
 	Editor * m_editor;

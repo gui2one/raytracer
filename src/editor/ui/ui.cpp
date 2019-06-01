@@ -28,9 +28,47 @@ void UI::init(Editor* editor)
     //~ editor->addMeshObject();
 }
 
+void UI::menu()
+{
+	//~ static bool test = false;
+    if (ImGui::BeginMainMenuBar())
+    {
+        
+        if (ImGui::BeginMenu("File"))
+        {
+			if(ImGui::MenuItem("Exit"))
+			{
+				m_editor->is_running = false;
+			}
+			
+			ImGui::EndMenu();
+		}
+		
+        if (ImGui::BeginMenu("Windows"))
+        {
+            ImGui::MenuItem("Options", NULL, &b_show_options_dialog);
+            ImGui::MenuItem("Cameras", NULL, &b_show_cameras_dialog);
+            ImGui::Separator();
+            if(ImGui::MenuItem("Show All"))
+            {
+				showAllDialogs();
+			}
+            if(ImGui::MenuItem("Hide All"))
+            {
+				hideAllDialogs();
+			}			
+            ImGui::EndMenu();
+        }
+        
+        ImGui::EndMainMenuBar();
+	}
+}
+
 void UI::optionsDialog()
 {
-	ImGui::Begin("Options");
+	//~ static bool b_show_options_dialog = false;
+	ImGui::Begin("Options", &b_show_options_dialog);
+	
 	static bool show_grid = m_editor->show_construction_grid;
 	if(ImGui::CheckboxFlags("show grid", (unsigned int*)&show_grid, 1))
 	{
@@ -40,6 +78,35 @@ void UI::optionsDialog()
 	ImGui::End();
 }
 
+
+
+void UI::camerasDialog()
+{
+	ImGui::Begin("Cameras", &b_show_cameras_dialog);
+	
+	if( ImGui::ListBoxHeader("cameras"))
+	{
+		for(Camera* cam : m_editor->cameras)
+		{
+			ImGui::Selectable(cam->name.c_str(), false);
+		}
+		ImGui::ListBoxFooter();
+	}
+	ImGui::End();
+}
+
+void UI::showAllDialogs()
+{
+	b_show_options_dialog = true;
+	b_show_cameras_dialog = true;
+}
+
+void UI::hideAllDialogs()
+{
+	b_show_options_dialog = false;
+	b_show_cameras_dialog = false;	
+}
+
 void UI::draw()
 {
 
@@ -47,25 +114,31 @@ void UI::draw()
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame(m_window);
 	ImGui::NewFrame();
-	static bool show_another_window = true;
+	//~ static bool show_another_window = true;
 	
 	
 	
 	ImGuiIO& io = ImGui::GetIO();
 	m_editor->mouse_over_ui = io.WantCaptureMouse;
 	
-	optionsDialog();
-	if(show_another_window)
-	{
-		ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-		ImGui::Text("Hello from another window!");
-		if (ImGui::Button("Close Me"))
-		{
-			m_editor->addMeshObject();
-			//~ show_another_window = false;
-		}
-		ImGui::End();
-	}
+	menu();
+	if(b_show_options_dialog)
+		optionsDialog();
+
+	if(b_show_cameras_dialog)
+		camerasDialog();
+	
+	//~ if(show_another_window)
+	//~ {
+		//~ ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
+		//~ ImGui::Text("Hello from another window!");
+		//~ if (ImGui::Button("Close Me"))
+		//~ {
+			//~ m_editor->addMeshObject();
+			
+		//~ }
+		//~ ImGui::End();
+	//~ }
 	ImGui::Render();	
 	
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

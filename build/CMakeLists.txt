@@ -51,7 +51,7 @@ add_library(PCHLib
 add_library(coreLib
 	../src/mesh.cpp
 	../src/utils/mesh_utils.cpp	
-	../src/camera.cpp
+
 	../src/light.cpp
 	../src/color.cpp
 	../src/rtmaterial.cpp	
@@ -74,7 +74,7 @@ add_executable(raytracer_SDL2
 	../src/main.cpp
 	../src/renderer.cpp
 		
-
+	../src/camera.cpp
 
 	../src/kdnode.cpp
 
@@ -115,6 +115,7 @@ add_executable(editor
 	../src/editor/editor.cpp
 	../src/editor/main.cpp
 	
+	../src/editor/editor_camera.cpp
 	../src/editor/entity3d.cpp
 	
 	../src/editor/construction_grid.cpp

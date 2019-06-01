@@ -168,7 +168,7 @@ home/pi/projects/raytracer_SDL2/src/camera.o: home/pi/projects/raytracer_SDL2/sr
 
 # target to build an object file
 home/pi/projects/raytracer_SDL2/src/camera.cpp.o:
-	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o
+	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o
 .PHONY : home/pi/projects/raytracer_SDL2/src/camera.cpp.o
 
 home/pi/projects/raytracer_SDL2/src/camera.i: home/pi/projects/raytracer_SDL2/src/camera.cpp.i
@@ -177,7 +177,7 @@ home/pi/projects/raytracer_SDL2/src/camera.i: home/pi/projects/raytracer_SDL2/sr
 
 # target to preprocess a source file
 home/pi/projects/raytracer_SDL2/src/camera.cpp.i:
-	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.i
+	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.i
 .PHONY : home/pi/projects/raytracer_SDL2/src/camera.cpp.i
 
 home/pi/projects/raytracer_SDL2/src/camera.s: home/pi/projects/raytracer_SDL2/src/camera.cpp.s
@@ -186,7 +186,7 @@ home/pi/projects/raytracer_SDL2/src/camera.s: home/pi/projects/raytracer_SDL2/sr
 
 # target to generate assembly for a file
 home/pi/projects/raytracer_SDL2/src/camera.cpp.s:
-	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.s
+	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/camera.cpp.s
 
 home/pi/projects/raytracer_SDL2/src/color.o: home/pi/projects/raytracer_SDL2/src/color.cpp.o
@@ -269,6 +269,33 @@ home/pi/projects/raytracer_SDL2/src/editor/editor.s: home/pi/projects/raytracer_
 home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.s:
 	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.s
+
+home/pi/projects/raytracer_SDL2/src/editor/editor_camera.o: home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.o
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/editor_camera.o
+
+# target to build an object file
+home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.o:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.o
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.o
+
+home/pi/projects/raytracer_SDL2/src/editor/editor_camera.i: home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.i
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/editor_camera.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.i:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.i
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.i
+
+home/pi/projects/raytracer_SDL2/src/editor/editor_camera.s: home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.s
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/editor_camera.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.s:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.s
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.s
 
 home/pi/projects/raytracer_SDL2/src/editor/entity3d.o: home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.o
 
@@ -1023,6 +1050,9 @@ help:
 	@echo "... home/pi/projects/raytracer_SDL2/src/editor/editor.o"
 	@echo "... home/pi/projects/raytracer_SDL2/src/editor/editor.i"
 	@echo "... home/pi/projects/raytracer_SDL2/src/editor/editor.s"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/editor_camera.o"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/editor_camera.i"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/editor_camera.s"
 	@echo "... home/pi/projects/raytracer_SDL2/src/editor/entity3d.o"
 	@echo "... home/pi/projects/raytracer_SDL2/src/editor/entity3d.i"
 	@echo "... home/pi/projects/raytracer_SDL2/src/editor/entity3d.s"

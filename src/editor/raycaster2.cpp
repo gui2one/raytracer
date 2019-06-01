@@ -100,10 +100,10 @@ bool Raycaster::ray_triangle_intersect(Ray& ray, glm::vec3& vtx_a, glm::vec3& vt
 		return false;	
 }
 
-Ray Raycaster::castRay(ClickData click_data, Camera& camera)
+Ray Raycaster::castRay(ClickData click_data, const Camera& camera)
 {
 
-	
+	printf("FOV ??? %.3f\n", camera.fov);
 	glm::vec3 direction = screenToWorld_2(click_data, camera);
 	
 	Ray ray;
@@ -129,25 +129,13 @@ Ray Raycaster::castRay(ClickData click_data, Camera& camera)
 	return ray;
 }
 
-glm::vec3 Raycaster::screenToWorld(ClickData click_data, Camera& camera)
-{
-	// there I build the image plane	
-	// dz = - ( height /2 ) / tan( fov * 0.5)
-	
-	float x_pos = (click_data.x - (float)(click_data.width) / 2.0);
-	float y_pos = ((float)(click_data.height) / 2.0 - click_data.y);
-	float z_pos = -( (float)(click_data.height) / 2.0) / tan( camera.fov*0.5 );
-	
-	glm::vec3 world_pos = glm::vec3(x_pos, y_pos, z_pos) ;
-	
-	return world_pos;
-	
-}
 
-glm::vec3 Raycaster::screenToWorld_2(ClickData click_data, Camera& camera)
+glm::vec3 Raycaster::screenToWorld_2(ClickData click_data, const Camera& camera)
 {
 	glm::vec3 screen_pos;
 	
+	printf("camera position : %.3f %.3f %.3f\n", camera.position.x, camera.position.y, camera.position.z);
+	printf("camera FOV : %.3f\n", camera.fov);
 	// 1 -- RASTER SPACE ( between 0.0 and 1.0 )
 	
 	// 2 -- NDC SPACE

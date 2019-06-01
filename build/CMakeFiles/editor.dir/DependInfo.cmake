@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/pi/projects/raytracer_SDL2/src/editor/construction_grid.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/construction_grid.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/editor/editor.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.o"
+  "/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/editor/kdnode2.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/kdnode2.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/editor/main.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o"
