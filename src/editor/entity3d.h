@@ -3,17 +3,17 @@
 
 #include "../pch.h"
 #include "../mesh.h"
-
-struct OGL_geometry_data
-{
-	std::vector<float> vertices;
-	std::vector<unsigned int> indices;
-	
-	glm::vec3 translate = glm::vec3(0.0, 0.0, 0.0);
-	glm::vec3 rotate = glm::vec3(0.0, 0.0, 0.0);
-	glm::vec3 scale = glm::vec3(1.0, 1.0, 1.0);
-	
-};
+#include "ogl_geometry_data.h"
+//~ struct OGL_geometry_data
+//~ {
+	//~ std::vector<float> vertices;
+	//~ std::vector<unsigned int> indices;
+	//~ 
+	//~ glm::vec3 translate = glm::vec3(0.0, 0.0, 0.0);
+	//~ glm::vec3 rotate = glm::vec3(0.0, 0.0, 0.0);
+	//~ glm::vec3 scale = glm::vec3(1.0, 1.0, 1.0);
+	//~ 
+//~ };
 
 class Entity3D
 {

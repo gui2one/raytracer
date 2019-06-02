@@ -499,6 +499,8 @@ raycaster2.h
 /home/pi/projects/raytracer_SDL2/src/editor/raycaster2.h
 kdnode2.h
 /home/pi/projects/raytracer_SDL2/src/editor/kdnode2.h
+regex
+-
 
 /home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp
 editor_camera.h
@@ -509,6 +511,8 @@ editor_camera.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
 entity3d.h
 /home/pi/projects/raytracer_SDL2/src/editor/entity3d.h
+utils/editor_gizmo_utils.h
+/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.h
 
 /home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp
 entity3d.h
@@ -519,6 +523,8 @@ entity3d.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
 ../mesh.h
 /home/pi/projects/raytracer_SDL2/src/mesh.h
+ogl_geometry_data.h
+/home/pi/projects/raytracer_SDL2/src/editor/ogl_geometry_data.h
 
 /home/pi/projects/raytracer_SDL2/src/editor/kdnode2.cpp
 kdnode2.h
@@ -537,6 +543,8 @@ editor.h
 /home/pi/projects/raytracer_SDL2/src/editor/editor.h
 ui/ui.h
 /home/pi/projects/raytracer_SDL2/src/editor/ui/ui.h
+
+/home/pi/projects/raytracer_SDL2/src/editor/ogl_geometry_data.h
 
 /home/pi/projects/raytracer_SDL2/src/editor/raycaster2.cpp
 raycaster2.h
@@ -571,6 +579,16 @@ ui.h
 /home/pi/projects/raytracer_SDL2/src/editor/vendor/imgui/imgui_impl_opengl3.h
 ../editor.h
 /home/pi/projects/raytracer_SDL2/src/editor/editor.h
+
+/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp
+editor_gizmo_utils.h
+/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.h
+
+/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.h
+../../pch.h
+/home/pi/projects/raytracer_SDL2/src/pch.h
+../ogl_geometry_data.h
+/home/pi/projects/raytracer_SDL2/src/editor/ogl_geometry_data.h
 
 /home/pi/projects/raytracer_SDL2/src/include/assimp/./Compiler/poppack1.h
 

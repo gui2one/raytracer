@@ -21,6 +21,27 @@ static void vec_mult_by_matrix( glm::vec3 & _vec, glm::mat4 & _mat, bool invert 
 
 }
 
+static std::string increment_name(std::string _name)
+{
+	std::string s = _name;
+	std::smatch m;
+	std::regex e("\\d+?$");
+	bool found = std::regex_search(_name, m, e);
+	if(found)
+	{
+		int num = std::stoi(m.str());
+		for(size_t i=0; i < std::strlen(m.str().c_str()); i++){
+			s.pop_back();
+		}
+		printf("found digit ! %d\n", num);
+		s += std::to_string(num+1);
+	}else{
+		s += "2";
+	}
+		
+	return s;
+}
+
 
 Editor::Editor()
 {
@@ -65,7 +86,7 @@ void Editor::init()
 	w_width = 640; 
 	w_height = 480; 
 	if( SDL_Init(SDL_INIT_EVERYTHING) == 0){
-			printf("SDL initialized correctly\n");
+			//~ printf("SDL initialized correctly\n");
 	}     
  
 	SDL_Init(SDL_INIT_VIDEO);
@@ -75,14 +96,9 @@ void Editor::init()
 	assert(window);
 	gl_context = SDL_GL_CreateContext(window);
 
-	
-
 	glewInit();
 	
-	//~ glewExperimental = GL_TRUE;
-	
-	
-	
+	glewExperimental = GL_TRUE;
 
 	
 	MeshObject* item1 = new MeshObject();
@@ -103,9 +119,6 @@ void Editor::init()
 	ground->buildVBO();
 	entities.push_back(ground);
 	
-	
-
-	
 	default_shader.loadVertexShaderSource("../src/editor/shaders/basic_shader.vert");
 	default_shader.loadFragmentShaderSource("../src/editor/shaders/basic_shader.frag");
 
@@ -124,9 +137,8 @@ void Editor::init()
 	camera->name = uniqueEntityName(camera->name);
 	cameras.push_back(camera);
 	
-	
 	cur_cam_id = 0;
-	//~ printf("camera FOV --> %3f \n", cameras[cur_cam_id]->fov);
+	
 	
 	Camera * camera2 = new Camera();
 	camera2->position = glm::vec3(5.0, 2.0 , 3.0);
@@ -141,18 +153,14 @@ void Editor::init()
 		{
 			buildKDTree(entity);
 		}
-		//~ printf("KDnodes num : %d\n", kd_nodes.size());
-		
+				
 		for(auto node : kd_nodes)
 		{
 			collectKDBoungingBoxes(node);
 		}
 		
-		//~ printf("BBoxes vector size is %d\n", kd_bboxes.size());
 		buildKDTreeBBoxes(kd_bboxes);		
 	}
-	
-	
 	
 	c_grid.init();
 
@@ -183,9 +191,6 @@ void Editor::manageEvents()
 						double rot_speed = 0.01;
 
 						cameras[cur_cam_id]->orbit_u += (float)Event.motion.xrel * rot_speed;
-
-
-
 						cameras[cur_cam_id]->orbit_v -= (float)Event.motion.yrel * rot_speed;
 
 						if(cameras[cur_cam_id]->orbit_v < 0.2)
@@ -195,7 +200,12 @@ void Editor::manageEvents()
 
 
 
-						setCamPosFromPolar(cameras[cur_cam_id]->orbit_u, cameras[cur_cam_id]->orbit_v, cameras[cur_cam_id]->orbit_radius, cameras[cur_cam_id]->orbit_center);	
+						setCamPosFromPolar(
+							cameras[cur_cam_id]->orbit_u, 
+							cameras[cur_cam_id]->orbit_v, 
+							cameras[cur_cam_id]->orbit_radius, 
+							cameras[cur_cam_id]->orbit_center
+						);	
 					}						
 				}else if(Event.motion.state == SDL_BUTTON_RMASK){
 					
@@ -203,11 +213,9 @@ void Editor::manageEvents()
 					
 					if(keyboard_state[SDL_SCANCODE_LCTRL])
 					{
-						mouse_delta_x = -(float)Event.motion.xrel;
-						//~ mouse_old_x = xpos;
+						mouse_delta_x = -(float)Event.motion.xrel;						
 						mouse_delta_y = -(float)Event.motion.yrel;
-						//~ mouse_old_y = ypos;
-				
+						
 						glm::mat4 view = glm::lookAt(
 							cameras[cur_cam_id]->position,
 							cameras[cur_cam_id]->target_position,
@@ -235,33 +243,26 @@ void Editor::manageEvents()
 			}else if(Event.type == SDL_KEYUP){
 				if(Event.key.keysym.scancode == SDL_SCANCODE_C)
 				{
-					//~ printf("C key released\n");
+					
 					cycleCameras();
 				}
 			}else if(Event.type == SDL_MOUSEBUTTONUP){
-				
-				
-				
-				
-
 				
 				if(Event.button.button == SDL_BUTTON_LEFT && !left_mouse_dragging)
 				{
 					// normal click
 					
-					
 					int x, y;
 					SDL_GetMouseState(&x, &y);
 
-
-					//~ printf("LEFT mouse button UP : %d , %d \n", x, y);
+					
 					ClickData cd;
 					cd.width = w_width;
 					cd.height = w_height;
 					cd.x = (double)x;
 					cd.y = (double)y;
 					Raycaster caster;
-					//~ printf("FOV ??? %.3f\n", cameras[cur_cam_id]->fov);
+					
 					Ray ray = caster.castRay(cd, *(cameras[cur_cam_id]));
 					
 					std::vector<HitData> hit_datas;
@@ -269,8 +270,7 @@ void Editor::manageEvents()
 					
 					if(hit_datas.size() > 0 )
 					{
-						//~ printf("hit Polygon : \n\tmesh ID -> %d\n\tFace ID -> %d \n!!!!!!\n", hit_datas[0].mesh_id, hit_datas[0].face_id);
-
+						
 						if(keyboard_state[SDL_SCANCODE_LSHIFT])
 						{
 							//~ printf("--- Adding to selection : id %d\n", hit_datas[0].mesh_id);
@@ -290,27 +290,31 @@ void Editor::manageEvents()
 
 				
 			}else if(Event.type == SDL_MOUSEWHEEL){
-
-						
-				//~ printf("wheel event\n");
-				//~ printf("\twheel x : %d\n", Event.wheel.x);
-				//~ printf("\twheel y : %d\n", Event.wheel.y);
 				
 				float norm_dist = glm::distance(cameras[cur_cam_id]->position, cameras[cur_cam_id]->orbit_center) / 5.0;
 				cameras[cur_cam_id]->orbit_radius += (float)Event.wheel.y * -0.15 * norm_dist;
-				setCamPosFromPolar(cameras[cur_cam_id]->orbit_u, cameras[cur_cam_id]->orbit_v, cameras[cur_cam_id]->orbit_radius, cameras[cur_cam_id]->orbit_center);	
+				
+				setCamPosFromPolar(
+					cameras[cur_cam_id]->orbit_u, 
+					cameras[cur_cam_id]->orbit_v, 
+					cameras[cur_cam_id]->orbit_radius, 
+					cameras[cur_cam_id]->orbit_center
+				);	
 					
-			}else if(Event.type == SDL_WINDOWEVENT){
+			}
+		}
 		
-
-
-				if (Event.window.event == SDL_WINDOWEVENT_RESIZED) {
-					//~ printf("MESSAGE:Resizing window... %d %d\n", Event.window.data1, Event.window.data2);
-					
-					w_width = Event.window.data1;
-					w_height = Event.window.data2;
-					
-				}			
+		if(Event.type == SDL_WINDOWEVENT){
+		
+			if (Event.window.event == SDL_WINDOWEVENT_RESIZED  || Event.window.event == SDL_WINDOWEVENT_MAXIMIZED) {
+				printf("MESSAGE:Resizing window... %d %d\n", Event.window.data1, Event.window.data2);
+				
+				w_width = Event.window.data1;
+				w_height = Event.window.data2;
+				
+			}
+			if(Event.window.event == SDL_WINDOWEVENT_MINIMIZED){
+				printf("MESSAGE:Minimizing window...\n" );
 			}
 		}
 	}
@@ -324,7 +328,13 @@ void Editor::update()
 	manageEvents();
 
 	//~ camera_u_pos += 0.01;
-	//~ setCamPosFromPolar(camera_u_pos, camera_v_pos, camera_orbit_radius, camera_view_center);
+	setCamPosFromPolar(
+		cameras[cur_cam_id]->orbit_u, 
+		cameras[cur_cam_id]->orbit_v, 
+		cameras[cur_cam_id]->orbit_radius, 
+		cameras[cur_cam_id]->orbit_center
+	);
+	
 	//~ printf("FOV %.3f\n",cameras[cur_cam_id]->fov);
 
 	//~ GLCall(glDisable(GL_CULL_FACE));
@@ -338,7 +348,7 @@ void Editor::update()
 	GLCall(glClearColor(0.2,0.2,0.2,1.0));
 
 
-	//~ cameras[cur_cam_id]->setProjection(45.0f * (float)PI / 180.0f, (float)w_width / (float)w_height, 0.01f, 100.0f);
+	cameras[cur_cam_id]->setProjection(45.0f * (float)PI / 180.0f, (float)w_width / (float)w_height, 0.01f, 100.0f);
 
 
 
@@ -482,14 +492,33 @@ void Editor::addMeshObject()
 	//~ collectKDBoungingBoxes(
 }
 
+void Editor::addCamera()
+{
+	Camera * cam = new Camera();
+	cam->name = uniqueEntityName(cam->name);
+	cameras.push_back(cam);
+}
+
+void Editor::deleteCamera(int id)
+{
+	delete cameras[id];
+	cameras.erase(cameras.begin() + id);
+	if(cur_cam_id > (int)cameras.size()-1)
+	{
+		cur_cam_id = cameras.size()-1;
+	}
+}
+
 std::string Editor::uniqueEntityName(std::string _str)
 {
+	
+
 	for(Entity3D * entity : entities)
 	{
 		if(_str == entity->name)
 		{
-			printf("same name \n");
-			_str += "_";
+			//~ printf("same name \n");
+			_str = increment_name(_str);
 			_str = uniqueEntityName(_str);
 			break;
 		}
@@ -499,8 +528,8 @@ std::string Editor::uniqueEntityName(std::string _str)
 	{
 		if(_str == cam->name)
 		{
-			printf("same name \n");
-			_str += "_";
+			//~ printf("same name \n");
+			_str = increment_name(_str);
 			_str = uniqueEntityName(_str);
 			break;
 		}
@@ -565,9 +594,9 @@ void Editor::buildKDTree(Entity3D * entity, int _limit)
 	}
 
 	
-	if(entities.size() > 0){
-		printf("Created  %d KD Tree(s)\n", (int)entities.size());
-	}
+	//~ if(entities.size() > 0){
+		//~ printf("Created  %d KD Tree(s)\n", (int)entities.size());
+	//~ }
 }
 
 void Editor::collectKDBoungingBoxes(KDNode* node_ptr)
@@ -630,7 +659,7 @@ void Editor::buildKDTreeBBoxes(std::vector<KDBoundingBox> bboxes)
 	if(kdtree_vbo == 0)
 	{
 		GLCall(glGenBuffers(1, &kdtree_vbo));
-		printf("m_vbo from KDBBox --> %d\n", kdtree_vbo);
+		//~ printf("m_vbo from KDBBox --> %d\n", kdtree_vbo);
 	}else{		
 		GLCall(glDeleteBuffers(1, &kdtree_vbo));
 		GLCall(glGenBuffers(1, &kdtree_vbo));

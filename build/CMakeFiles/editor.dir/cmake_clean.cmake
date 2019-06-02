@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.o"
+  "CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o"
   "CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o"
   "CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.o"
   "CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.o"

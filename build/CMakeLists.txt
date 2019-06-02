@@ -113,6 +113,7 @@ target_link_libraries(raytracer_SDL2 -L/usr/lib/arm-linux-gnueabihf -lSDL2)
 add_executable(editor
 
 	../src/editor/editor.cpp
+	../src/editor/utils/editor_gizmo_utils.cpp
 	../src/editor/main.cpp
 	
 	../src/editor/editor_camera.cpp

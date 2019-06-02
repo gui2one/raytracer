@@ -11,7 +11,7 @@ Mesh::Mesh(const Mesh& other):translate(other.translate), rotate(other.rotate),	
 	points = other.points;
 	faces = other.faces;
 	
-	printf("just copied Mesh \n");
+	//~ printf("just copied Mesh \n");
 }
 
 

@@ -11,7 +11,7 @@
 
 #include "raycaster2.h"
 #include "kdnode2.h"
-
+#include <regex>
 
 
 
@@ -33,6 +33,8 @@ public :
 	
 	void unselectAll();
 	void addMeshObject();
+	void addCamera();
+	void deleteCamera(int id);
 	
 	std::string uniqueEntityName(std::string _str);
 	~Editor();

@@ -432,6 +432,33 @@ home/pi/projects/raytracer_SDL2/src/editor/ui/ui.cpp.s:
 	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/ui/ui.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/editor/ui/ui.cpp.s
 
+home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.o: home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.o
+
+# target to build an object file
+home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o
+
+home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.i: home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.i
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.i:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.i
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.i
+
+home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.s: home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.s
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.s:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.s
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.s
+
 home/pi/projects/raytracer_SDL2/src/kdnode.o: home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o
 
 .PHONY : home/pi/projects/raytracer_SDL2/src/kdnode.o
@@ -1068,6 +1095,9 @@ help:
 	@echo "... home/pi/projects/raytracer_SDL2/src/editor/ui/ui.o"
 	@echo "... home/pi/projects/raytracer_SDL2/src/editor/ui/ui.i"
 	@echo "... home/pi/projects/raytracer_SDL2/src/editor/ui/ui.s"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.o"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.i"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.s"
 	@echo "... home/pi/projects/raytracer_SDL2/src/kdnode.o"
 	@echo "... home/pi/projects/raytracer_SDL2/src/kdnode.i"
 	@echo "... home/pi/projects/raytracer_SDL2/src/kdnode.s"

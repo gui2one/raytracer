@@ -86,12 +86,31 @@ void UI::camerasDialog()
 	
 	if( ImGui::ListBoxHeader("cameras"))
 	{
+		int inc =0;
 		for(Camera* cam : m_editor->cameras)
 		{
-			ImGui::Selectable(cam->name.c_str(), false);
+			if(ImGui::Selectable(cam->name.c_str(), inc == m_editor->cur_cam_id)){
+				m_editor->cur_cam_id = inc;
+			}
+			inc++;
 		}
 		ImGui::ListBoxFooter();
 	}
+	
+	if(ImGui::Button("Add Camera"))
+	{
+		m_editor->addCamera();
+	}
+	
+	if(ImGui::Button("Delete Camera"))
+	{
+		
+		if(m_editor->cameras.size() > 1)
+		{
+			printf("command delete camera : %d\n", m_editor->cur_cam_id);
+			m_editor->deleteCamera(m_editor->cur_cam_id);
+		}
+	}	
 	ImGui::End();
 }
 

@@ -103,22 +103,19 @@ bool Raycaster::ray_triangle_intersect(Ray& ray, glm::vec3& vtx_a, glm::vec3& vt
 Ray Raycaster::castRay(ClickData click_data, const Camera& camera)
 {
 
-	printf("FOV ??? %.3f\n", camera.fov);
+	
 	glm::vec3 direction = screenToWorld_2(click_data, camera);
 	
 	Ray ray;
-	//~ ray.origin = glm::vec3(0.0,0.0,0.0);
+	
 	
 	glm::mat4 view_matrix = glm::lookAt(camera.position, camera.target_position, camera.up_vector);
 	
 
 	ray.origin = camera.position;
 	
-	//~ ray.direction = direction;
-	//~ vec_mult_by_matrix(ray.direction, view_matrix, true);
-	
 	// custom vec_mult_by matrix 
-	glm::vec4 temp_vec4 = glm::vec4(direction.x, direction.y, direction.z, 0.0f);
+	glm::vec4 temp_vec4 = glm::vec4(direction.x, direction.y, direction.z, 0.0f); // 0.0f !!! important for w element
 
 
 
@@ -133,9 +130,7 @@ Ray Raycaster::castRay(ClickData click_data, const Camera& camera)
 glm::vec3 Raycaster::screenToWorld_2(ClickData click_data, const Camera& camera)
 {
 	glm::vec3 screen_pos;
-	
-	printf("camera position : %.3f %.3f %.3f\n", camera.position.x, camera.position.y, camera.position.z);
-	printf("camera FOV : %.3f\n", camera.fov);
+
 	// 1 -- RASTER SPACE ( between 0.0 and 1.0 )
 	
 	// 2 -- NDC SPACE

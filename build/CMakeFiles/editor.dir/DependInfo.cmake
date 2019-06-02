@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/pi/projects/raytracer_SDL2/src/editor/main.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/editor/raycaster2.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/raycaster2.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/editor/ui/ui.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/ui/ui.cpp.o"
+  "/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_demo.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_demo.cpp.o"
   "/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_draw.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_draw.cpp.o"

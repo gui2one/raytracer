@@ -81,9 +81,33 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.o.pr
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.o.provides.build: CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.o
 
 
+CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o: CMakeFiles/editor.dir/flags.make
+CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o: /home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o -c /home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp
+
+CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp > CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.i
+
+CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp -o CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.s
+
+CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o.requires:
+
+.PHONY : CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o.requires
+
+CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o.provides: CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o.requires
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o.provides.build
+.PHONY : CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o.provides
+
+CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o.provides.build: CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o
+
+
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o: CMakeFiles/editor.dir/flags.make
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o: /home/pi/projects/raytracer_SDL2/src/editor/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o -c /home/pi/projects/raytracer_SDL2/src/editor/main.cpp
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.i: cmake_force
@@ -107,7 +131,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o.prov
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.o: CMakeFiles/editor.dir/flags.make
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.o: /home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.o -c /home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.i: cmake_force
@@ -131,7 +155,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.c
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.o: CMakeFiles/editor.dir/flags.make
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.o -c /home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.i: cmake_force
@@ -155,7 +179,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.o.
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/construction_grid.cpp.o: CMakeFiles/editor.dir/flags.make
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/construction_grid.cpp.o: /home/pi/projects/raytracer_SDL2/src/editor/construction_grid.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/construction_grid.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/construction_grid.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/construction_grid.cpp.o -c /home/pi/projects/raytracer_SDL2/src/editor/construction_grid.cpp
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/construction_grid.cpp.i: cmake_force
@@ -179,7 +203,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/construction_gr
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/ui/ui.cpp.o: CMakeFiles/editor.dir/flags.make
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/ui/ui.cpp.o: /home/pi/projects/raytracer_SDL2/src/editor/ui/ui.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/ui/ui.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/ui/ui.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/ui/ui.cpp.o -c /home/pi/projects/raytracer_SDL2/src/editor/ui/ui.cpp
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/ui/ui.cpp.i: cmake_force
@@ -203,7 +227,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/ui/ui.cpp.o.pro
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_opengl3.cpp.o: CMakeFiles/editor.dir/flags.make
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_opengl3.cpp.o: /home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_opengl3.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_opengl3.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_opengl3.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_opengl3.cpp.o -c /home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_opengl3.cpp
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_opengl3.cpp.i: cmake_force
@@ -227,7 +251,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_imp
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_sdl.cpp.o: CMakeFiles/editor.dir/flags.make
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_sdl.cpp.o: /home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_sdl.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_sdl.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_sdl.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_sdl.cpp.o -c /home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_sdl.cpp
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_sdl.cpp.i: cmake_force
@@ -251,7 +275,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_imp
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui.cpp.o: CMakeFiles/editor.dir/flags.make
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui.cpp.o: /home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui.cpp.o -c /home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui.cpp
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui.cpp.i: cmake_force
@@ -275,7 +299,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui.cpp
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_demo.cpp.o: CMakeFiles/editor.dir/flags.make
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_demo.cpp.o: /home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_demo.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_demo.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_demo.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_demo.cpp.o -c /home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_demo.cpp
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_demo.cpp.i: cmake_force
@@ -299,7 +323,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_dem
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_draw.cpp.o: CMakeFiles/editor.dir/flags.make
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_draw.cpp.o: /home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_draw.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_draw.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_draw.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_draw.cpp.o -c /home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_draw.cpp
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_draw.cpp.i: cmake_force
@@ -323,7 +347,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_dra
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_widgets.cpp.o: CMakeFiles/editor.dir/flags.make
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_widgets.cpp.o: /home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_widgets.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_widgets.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_widgets.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_widgets.cpp.o -c /home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_widgets.cpp
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_widgets.cpp.i: cmake_force
@@ -347,7 +371,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_wid
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/kdnode2.cpp.o: CMakeFiles/editor.dir/flags.make
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/kdnode2.cpp.o: /home/pi/projects/raytracer_SDL2/src/editor/kdnode2.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/kdnode2.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/kdnode2.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/kdnode2.cpp.o -c /home/pi/projects/raytracer_SDL2/src/editor/kdnode2.cpp
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/kdnode2.cpp.i: cmake_force
@@ -371,7 +395,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/kdnode2.cpp.o.p
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/raycaster2.cpp.o: CMakeFiles/editor.dir/flags.make
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/raycaster2.cpp.o: /home/pi/projects/raytracer_SDL2/src/editor/raycaster2.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/raycaster2.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/raycaster2.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/raycaster2.cpp.o -c /home/pi/projects/raytracer_SDL2/src/editor/raycaster2.cpp
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/raycaster2.cpp.i: cmake_force
@@ -396,6 +420,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/raycaster2.cpp.
 # Object files for target editor
 editor_OBJECTS = \
 "CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.o" \
+"CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o" \
 "CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o" \
 "CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.o" \
 "CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.o" \
@@ -414,6 +439,7 @@ editor_OBJECTS = \
 editor_EXTERNAL_OBJECTS =
 
 editor: CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.o
+editor: CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o
 editor: CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o
 editor: CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.o
 editor: CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.o
@@ -431,7 +457,7 @@ editor: CMakeFiles/editor.dir/build.make
 editor: libcoreLib.a
 editor: libPCHLib.a
 editor: CMakeFiles/editor.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable editor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable editor"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/editor.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -440,6 +466,7 @@ CMakeFiles/editor.dir/build: editor
 .PHONY : CMakeFiles/editor.dir/build
 
 CMakeFiles/editor.dir/requires: CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.o.requires
+CMakeFiles/editor.dir/requires: CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.o.requires
 CMakeFiles/editor.dir/requires: CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o.requires
 CMakeFiles/editor.dir/requires: CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.o.requires
 CMakeFiles/editor.dir/requires: CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.o.requires

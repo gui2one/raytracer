@@ -3,6 +3,7 @@
 
 #include "../pch.h"
 #include "entity3d.h"
+#include "utils/editor_gizmo_utils.h"
 
 class Camera : public Entity3D
 {
@@ -11,9 +12,10 @@ class Camera : public Entity3D
 		Camera(const Camera& other);// copy constructor
 		Camera(Camera&& other); // move constructor
 		Camera& operator=(const Camera& other);
-		
+		~Camera();
 		void setProjection(float angle, float aspect, float near, float far);
 		
+		void applyTransforms() ; //override;
 		void buildDisplayData();
 		void draw(); // override;
 		float fov = 20.0;
@@ -37,7 +39,7 @@ class Camera : public Entity3D
 		glm::vec3 orbit_center = glm::vec3(0.0, 0.0, 0.0);
 			
 		
-			
+		
 	private:
 	
 		std::vector<float> main_vertices;

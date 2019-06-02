@@ -31,41 +31,54 @@ Camera& Camera::operator=(const Camera& other)
 	
 }
 
+Camera::~Camera()
+{
+	//~ printf("Camera DESTRUCTOR\n");
+	GLCall(glDeleteBuffers(1, &main_vbo));
+	GLCall(glDeleteBuffers(1, &main_ibo));
+	
+	
+}
 void Camera::setProjection(float angle, float aspect, float near, float far)
 { 
 	projection = glm::perspective(angle, aspect, near, far);
 	fov = angle;
 }
 
+void Camera::applyTransforms()
+{
+	//~ printf("camera apply transforms\n");
+	glm::mat4 temp = glm::mat4(1.0f);
+	
+	glm::mat4 view = glm::lookAt(position, target_position, up_vector);
+	//~ temp = glm::rotate(temp, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+	//~ temp = glm::rotate(temp, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+	//~ temp = glm::rotate(temp, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+	temp *= glm::inverse(view);
+	
+	//~ temp = glm::translate(temp, position);
+	temp = glm::scale(temp , scale);
+	
+	
+	
+	transforms = temp;		
+}
+
 void Camera::buildDisplayData()
 {
-	main_vertices.clear();
-	main_indices.clear();
+	//~ EditorGizmoUtils gizmo_utils;
+	OGL_geometry_data main_box_data = EditorGizmoUtils::makeWireBox();
+	EditorGizmoUtils::translate(main_box_data, glm::vec3(0.0,0.0,0.5));
 	
-	main_vertices.insert(
-		main_vertices.end(), {
-			-0.5, -0.5, -0.5,
-			 0.5, -0.5, -0.5,
-			 0.5,  0.5, -0.5,
-			-0.5,  0.5, -0.5, 
-			
-			-0.5, -0.5,  0.5,
-			 0.5, -0.5,  0.5,
-			 0.5,  0.5,  0.5,
-			-0.5,  0.5,  0.5 			
-		}
-	);
-
-	main_indices.insert(
-		main_indices.end(), {
-			0,1,1,2,2,3,3,0, // bottom square
-			4,5,5,6,6,7,7,4, // top square
-			0,4,
-			1,5,
-			2,6,
-			3,7
-		}
-	);
+	OGL_geometry_data prism = EditorGizmoUtils::makeWirePrism();
+	EditorGizmoUtils::rotate(prism, glm::vec3(180.0, 0.0, 0.0));
+	EditorGizmoUtils::translate(prism, glm::vec3(0.0, 0.0, -0.5));
+	EditorGizmoUtils::scale(prism, glm::vec3(0.6, 0.6, 0.6));
+	
+	
+	OGL_geometry_data main_geo_data = EditorGizmoUtils::merge(main_box_data, prism);
+	main_vertices = main_geo_data.vertices;
+	main_indices = main_geo_data.indices;	
 		
 	if(main_vbo == 0){
 		
