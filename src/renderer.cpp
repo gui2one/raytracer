@@ -179,7 +179,7 @@ int Renderer::init(std::string scene_file_ , std::string options_file_)
 
 	glewInit();
 	
-	initScene();
+
 
 
 	//~ std::cout << "raytracer PROJECT" << std::endl;
@@ -203,7 +203,6 @@ int Renderer::init(std::string scene_file_ , std::string options_file_)
 
 
 	default_texture.load("../src/res/textures/uvgrid.jpg");
-	
 	printf("texture Bytes per pixel : %d\n", default_texture.getBPP());
 	//~ Light light1;
 	//~ light1.position = glm::vec3(4.0, 5.0, 4.0);
@@ -240,7 +239,7 @@ int Renderer::init(std::string scene_file_ , std::string options_file_)
 	
 	//~ printf("render options width --> %d\n", render_options.render_width);
 	
-	
+	initScene();
 	
 	
 }
@@ -1048,7 +1047,7 @@ void Renderer::buildDisplayGeometry()
 		geo_data_array.push_back(geo_data);
 
 		vbos.push_back(0);
-		GLCall(glDeleteBuffers(1, &vbos[i]));
+		//~ GLCall(glDeleteBuffers(1, &vbos[i]));
 		GLCall(glGenBuffers(1, &vbos[i]));
 		GLCall(glBindBuffer(GL_ARRAY_BUFFER, vbos[i]));
 		GLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(float)* geo_data.vertices.size(), geo_data.vertices.data(), GL_STATIC_DRAW));
@@ -1057,7 +1056,7 @@ void Renderer::buildDisplayGeometry()
 
 
 		ibos.push_back(0);
-		GLCall(glDeleteBuffers(1, &ibos[i]));
+		//~ GLCall(glDeleteBuffers(1, &ibos[i]));
 		GLCall(glGenBuffers(1, &ibos[i]));
 		GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibos[i]));
 		GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int)* geo_data.indices.size(), geo_data.indices.data(), GL_STATIC_DRAW));
@@ -1083,7 +1082,7 @@ void Renderer::buildDisplayGeometry()
 void Renderer::displayScene()
 {
 	
-	manageEvents();
+	//~ manageEvents();
 	
 
 
@@ -1096,7 +1095,7 @@ void Renderer::displayScene()
 	GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 	GLCall(glClearColor(0.2,0.2,0.2,1.0));		
 	
-	//~ printf("drawing %d\n", temp_inc_test++);
+	
 	camera.setProjection(45.0f * (float)PI / 180.0f, (float)window_width / (float)window_height, 0.01f, 100.0f);
 
 
@@ -1113,6 +1112,7 @@ void Renderer::displayScene()
 	);
 
 	default_shader.useProgram();
+	
 	GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
 	GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(camera.projection)));
 	GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "view"), 1, GL_FALSE, glm::value_ptr(view)));
@@ -1130,13 +1130,14 @@ void Renderer::displayScene()
 		glUniform3fv(glGetUniformLocation(default_shader.m_id, "u_light_positions"), 1, light_positions)
 	);
 
-	for (int i = 0; i < meshes.size(); i++)
+	printf("Meshes num --> %d\n", meshes.size());
+	for (size_t i = 0; i < meshes.size(); i++)
 	{
-		//~ printf("drawing meshe %d\n", i);
+		
 		GLCall(glUniform1i(glGetUniformLocation(default_shader.m_id,"u_tex"), 0));
 		meshes[i].material->diff_texture.bind();
 		
-		//~ GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, default_texture.getWidth(), default_texture.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, default_texture.data.data()));
+		printf("BOUND texture\n");
 		
 		GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"),
 			meshes[i].material->color.r,
@@ -1148,9 +1149,11 @@ void Renderer::displayScene()
 		
 		GLCall(glBindBuffer(GL_ARRAY_BUFFER, vbos[i]));
 		GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibos[i]));
+		
 		GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, 0));
 		GLCall(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(sizeof(float)*3)));
 		GLCall(glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(sizeof(float)*6)));
+		
 		GLCall(glEnableVertexAttribArray(0));
 		GLCall(glEnableVertexAttribArray(1));
 		GLCall(glEnableVertexAttribArray(2));
@@ -1161,15 +1164,18 @@ void Renderer::displayScene()
 		GLCall(glDisableVertexAttribArray(0));
 		GLCall(glDisableVertexAttribArray(1));
 		GLCall(glDisableVertexAttribArray(2));
+		
 		GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 		GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 		
 		
-		meshes[i].material->diff_texture.unbind();
+		//~ meshes[i].material->diff_texture.unbind();
+		
+		printf("DRAWN mesh %d\n", i);
 	
 	}
 //~ 
-
+	
 
 
 	//~ displayKDTree();
@@ -1177,16 +1183,16 @@ void Renderer::displayScene()
 
 	GLCall(glUseProgram(0));
 
-	if( show_fbo )
-	{
-
-		GLCall(glDisable(GL_DEPTH_TEST));
-
-		fbo_shader.useProgram();
-		drawFBO(render_width,render_height);
-
-		GLCall(glUseProgram(0));
-	}
+	//~ if( show_fbo )
+	//~ {
+//~ 
+		//~ GLCall(glDisable(GL_DEPTH_TEST));
+//~ 
+		//~ fbo_shader.useProgram();
+		//~ drawFBO(render_width,render_height);
+//~ 
+		//~ GLCall(glUseProgram(0));
+	//~ }
 
 
 	SDL_GL_SwapWindow(Window);
@@ -1198,208 +1204,6 @@ bool Renderer::shouldClose()
 {
 	return false;
 }
-
-//~ void Renderer::cursor_pos_callback(GLFWwindow* window, double xpos, double ypos)
-//~ {
-//~ 
-	//~ Renderer* app = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
-//~ 
-	//~ if(app->left_mouse_button_down)
-	//~ {
-//~ 
-		//~ app->mouse_delta_x = app->mouse_old_x - xpos;
-		//~ app->mouse_old_x = xpos;
-		//~ app->mouse_delta_y = app->mouse_old_y - ypos;
-		//~ app->mouse_old_y = ypos;
-//~ 
-//~ 
-		//~ double rot_speed = 0.01;
-//~ 
-		//~ app->camera_u_pos -= app->mouse_delta_x * rot_speed;
-//~ 
-//~ 
-//~ 
-		//~ app->camera_v_pos += app->mouse_delta_y * rot_speed;
-//~ 
-		//~ if(app->camera_v_pos < 0.2)
-				//~ app->camera_v_pos = 0.2;
-		//~ else if(app->camera_v_pos > PI-0.2)
-				//~ app->camera_v_pos = PI-0.2;
-//~ 
-		//~ printf("delta : %.2f %.2f\n", app->mouse_delta_x, app->mouse_delta_y);
-		//~ printf("upos : %.2f -- vpos %.2f\n", app->camera_u_pos, app->camera_v_pos);
-		//~ printf("--------------------------------\n");
-//~ 
-//~ 
-		//~ app->setCamPosFromPolar(app->camera_u_pos, app->camera_v_pos, app->camera_orbit_radius, app->camera_view_center);
-//~ 
-	//~ }else if(app->right_mouse_button_down){
-//~ 
-		//~ app->mouse_delta_x = app->mouse_old_x - xpos;
-		//~ app->mouse_old_x = xpos;
-		//~ app->mouse_delta_y = app->mouse_old_y - ypos;
-		//~ app->mouse_old_y = ypos;
-//~ 
-		//~ glm::mat4 view = glm::lookAt(
-			//~ app->camera.position,
-			//~ app->camera.target_position,
-			//~ app->camera.up_vector
-			//~ );
-//~ 
-		//~ glm::vec3 pan_dir = glm::vec3(app->mouse_delta_x, -app->mouse_delta_y, 0.0);
-//~ 
-		//~ vec_mult_by_matrix(pan_dir, view, true);
-		//~ pan_dir = pan_dir - app->camera.position;
-		//~ app->camera_view_center.x += pan_dir.x * 0.02;
-		//~ app->camera_view_center.y += pan_dir.y * 0.02;
-		//~ app->camera_view_center.z += pan_dir.z * 0.02;
-//~ 
-		//~ app->setCamPosFromPolar(app->camera_u_pos, app->camera_v_pos, app->camera_orbit_radius, app->camera_view_center);
-	//~ }
-//~ 
-//~ }
-
-//~ void Renderer::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
-//~ {
-	//~ Renderer* app = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
-//~ 
-	//~ if(button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
-	//~ {
-		//~ app->left_mouse_button_down = true;
-//~ 
-		//~ double x_pos, y_pos;
-		//~ glfwGetCursorPos(window, &x_pos, &y_pos);
-		//~ app->mouse_old_x = x_pos;
-		//~ app->mouse_old_y = y_pos;
-//~ 
-		//~ int width, height;
-		//~ glfwGetFramebufferSize(window, &width, &height);
-//~ 
-//~ 
-//~ 
-		//~ // raycast test
-//~ 
-		//~ ClickData click_data;
-//~ 
-		//~ click_data.x = x_pos;
-		//~ click_data.y = y_pos;
-		//~ click_data.width = width;
-		//~ click_data.height = height;
-//~ 
-		//~ Raycaster raycaster;
-//~ 
-		//~ Ray ray = raycaster.castRay(click_data, app->camera);
-		//~ std::vector<HitData> hit_datas;
-		//~ bool hit2 = raycaster.intersectKDNodes(ray, app->kd_nodes,  hit_datas);
-		//~ if( hit2 ){
-			//~ printf("hit bbox !!!!!!!!!!\n");
-//~ 
-			//~ std::sort(hit_datas.begin(), hit_datas.end(), [app](HitData data1 , HitData data2){
-				//~ float dist1 = glm::distance(data1.position, app->camera.position);
-				//~ float dist2 = glm::distance(data2.position, app->camera.position);
-				//~ return dist1 < dist2;
-			//~ });
-			//~ if( hit_datas.size() > 0)
-			//~ {
-				//~ printf("polygon hit --> %d\n", hit_datas[0].face_id);
-				//~ 
-				//~ Face f = app->meshes[hit_datas[0].mesh_id].faces[hit_datas[0].face_id];
-				//~ glm::vec3 A = app->meshes[hit_datas[0].mesh_id].points[f.getVertex(0).point_id].position;
-				//~ glm::vec3 B = app->meshes[hit_datas[0].mesh_id].points[f.getVertex(1).point_id].position;
-				//~ glm::vec3 C = app->meshes[hit_datas[0].mesh_id].points[f.getVertex(2).point_id].position;
-				//~ 
-				//~ glm::vec3 bary = raycaster.cartesian_to_barycentric(hit_datas[0].position, A, B, C);
-				//~ 
-				//~ printf("barycentric coords : %.3f %.3f %.3f \n", bary.x, bary.y, bary.z);
-			//~ }
-		//~ }
-//~ 
-//~ 
-//~ 
-//~ 
-//~ 
-	//~ }else if(button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
-	//~ {
-		//~ app->left_mouse_button_down = false;
-	//~ }else if(button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
-	//~ {
-		//~ double x_pos, y_pos;
-		//~ glfwGetCursorPos(window, &x_pos, &y_pos);
-		//~ app->mouse_old_x = x_pos;
-		//~ app->mouse_old_y = y_pos;
-//~ 
-		//~ app->right_mouse_button_down = true;
-//~ 
-//~ 
-	//~ }else if(button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
-	//~ {
-//~ 
-		//~ app->right_mouse_button_down = false;
-	//~ }
-//~ }
-//~ 
-//~ void Renderer::char_mods_callback(GLFWwindow* window, unsigned int key, int action)
-//~ {
-	//~ Renderer* app = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
-//~ 
-	//~ if( (char)key == 'B' ) // B
-	//~ {
-		//~ // saveToBitmap2();
-	//~ }else if( (char)key == 'r' ){
-//~ 
-		//~ printf("Starting Rendering... \n");
-//~ 
-		//~ std::vector<RenderBucket> buckets;
-		//~ buckets = app->createBuckets(32, app->render_width, app->render_height);
-		//~ app->renderBuckets( buckets, app->camera);
-		//~ printf("DONE... \n");
-	//~ }else if( (char)key == 's' ){
-		//~ app->show_fbo = !app->show_fbo;
-	//~ }
-//~ 
-//~ }
-
-//~ void Renderer::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-//~ {
-	//~ Renderer* app = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
-    //~ printf("cur key is %d\n" ,scancode);
-    //~ if ((key == GLFW_KEY_LEFT  || key == GLFW_KEY_RIGHT ) && action == GLFW_PRESS){
-			//~ printf("GLFW_KEY_LEFT %d\n" ,scancode);
-//~ 
-			//~ glm::mat4 view = glm::lookAt(
-				//~ app->camera.position,
-				//~ app->camera.target_position,
-				//~ app->camera.up_vector
-				//~ );
-//~ 
-			//~ glm::vec3 x_template = glm::vec3(1.0, 0.0, 0.0);
-//~ 
-			//~ vec_mult_by_matrix(x_template, view, true);
-			//~ x_template = x_template - app->camera.position;
-			//~ app->camera_view_center.x += x_template.x * 0.1 * (key == GLFW_KEY_RIGHT ? 1.0 : -1.0) ;
-			//~ app->camera_view_center.y += x_template.y * 0.1 * (key == GLFW_KEY_RIGHT ? 1.0 : -1.0) ;
-			//~ app->camera_view_center.z += x_template.z * 0.1 * (key == GLFW_KEY_RIGHT ? 1.0 : -1.0) ;
-//~ 
-			//~ app->setCamPosFromPolar(app->camera_u_pos, app->camera_v_pos, app->camera_orbit_radius, app->camera_view_center);
-	//~ }if( key == GLFW_KEY_ESCAPE && action == GLFW_PRESS){
-		//~ printf("escape \n");
-		//~ app->b_cancel_render = true;
-	//~ }
-//~ 
-//~ }
-
-//~ void Renderer::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-//~ {
-	//~ Renderer* app = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
-	
-	//~ printf("--------------\n");
-	//~ printf("\tx offset : %.3f\n", xoffset);
-	//~ printf("\ty offset : %.3f\n", yoffset);
-	//~ 
-	//~ 
-	//~ app->camera_orbit_radius += yoffset * -0.1;
-	//~ app->setCamPosFromPolar(app->camera_u_pos, app->camera_v_pos, app->camera_orbit_radius, app->camera_view_center);
-//~ }
 
 
 

@@ -18,15 +18,19 @@ public:
 	
 	void menu();
 	void optionsDialog();
+	void entitiesDialog();
 	void camerasDialog();
 	
 	void showAllDialogs();
 	void hideAllDialogs();
 	void draw();
+	
+	void paramWidget(BaseParam * param);
 		
 		
 	bool b_show_options_dialog = false;
-	bool b_show_cameras_dialog = false;
+	bool b_show_entities_dialog = true;
+	bool b_show_cameras_dialog = true;
 private:
 	SDL_Window * m_window;
 	Editor * m_editor;

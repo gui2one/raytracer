@@ -378,6 +378,60 @@ home/pi/projects/raytracer_SDL2/src/editor/main.cpp.s:
 	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/editor/main.cpp.s
 
+home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.o: home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.cpp.o
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.o
+
+# target to build an object file
+home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.cpp.o:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.cpp.o
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.cpp.o
+
+home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.i: home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.cpp.i
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.cpp.i:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.cpp.i
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.cpp.i
+
+home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.s: home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.cpp.s
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.cpp.s:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.cpp.s
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.cpp.s
+
+home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.o: home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.cpp.o
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.o
+
+# target to build an object file
+home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.cpp.o:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.cpp.o
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.cpp.o
+
+home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.i: home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.cpp.i
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.cpp.i:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.cpp.i
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.cpp.i
+
+home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.s: home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.cpp.s
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.cpp.s:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.cpp.s
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.cpp.s
+
 home/pi/projects/raytracer_SDL2/src/editor/raycaster2.o: home/pi/projects/raytracer_SDL2/src/editor/raycaster2.cpp.o
 
 .PHONY : home/pi/projects/raytracer_SDL2/src/editor/raycaster2.o
@@ -458,6 +512,33 @@ home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.s: home/pi/p
 home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.s:
 	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.s
 .PHONY : home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp.s
+
+home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.o: home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.cpp.o
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.o
+
+# target to build an object file
+home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.cpp.o:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.cpp.o
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.cpp.o
+
+home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.i: home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.cpp.i
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.cpp.i:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.cpp.i
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.cpp.i
+
+home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.s: home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.cpp.s
+
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.cpp.s:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.cpp.s
+.PHONY : home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.cpp.s
 
 home/pi/projects/raytracer_SDL2/src/kdnode.o: home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o
 
@@ -1089,6 +1170,12 @@ help:
 	@echo "... home/pi/projects/raytracer_SDL2/src/editor/main.o"
 	@echo "... home/pi/projects/raytracer_SDL2/src/editor/main.i"
 	@echo "... home/pi/projects/raytracer_SDL2/src/editor/main.s"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.o"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.i"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.s"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.o"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.i"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.s"
 	@echo "... home/pi/projects/raytracer_SDL2/src/editor/raycaster2.o"
 	@echo "... home/pi/projects/raytracer_SDL2/src/editor/raycaster2.i"
 	@echo "... home/pi/projects/raytracer_SDL2/src/editor/raycaster2.s"
@@ -1098,6 +1185,9 @@ help:
 	@echo "... home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.o"
 	@echo "... home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.i"
 	@echo "... home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.s"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.o"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.i"
+	@echo "... home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.s"
 	@echo "... home/pi/projects/raytracer_SDL2/src/kdnode.o"
 	@echo "... home/pi/projects/raytracer_SDL2/src/kdnode.i"
 	@echo "... home/pi/projects/raytracer_SDL2/src/kdnode.s"

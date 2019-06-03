@@ -3,7 +3,8 @@
 Entity3D::Entity3D():
 	position(glm::vec3(0.0,0.0,0.0)),
 	rotation(glm::vec3(0.0,0.0,0.0)),
-	scale(glm::vec3(1.0,1.0,1.0))
+	scale(glm::vec3(1.0,1.0,1.0)),
+	name("entity3d")
 {
 	
 }
@@ -32,11 +33,23 @@ Entity3D::~Entity3D()
 	printf("--- Delete Entity3D\n");
 }
 
-MeshObject::MeshObject() : Entity3D()
+//// MeshObject implementation
+
+MeshObject::MeshObject() : Entity3D(), generator(nullptr)
 {
 	
 }
 
+void MeshObject::setMeshGenerator(MESH_GENERATOR_TYPE _type)
+{
+	switch(_type){
+		case PLANE_MESH_GENERATOR :
+			generator = new PlaneMeshGenerator();
+			
+			mesh = generator->generate();
+			break;
+	}
+}
 void MeshObject::buildVBO()
 {
 	
@@ -107,6 +120,8 @@ void MeshObject::buildVBO()
 	
 	
 }
+
+
 
 void MeshObject::draw()
 {

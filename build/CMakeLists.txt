@@ -14,12 +14,16 @@ ENDIF()
 
 ###
 
+
+
 set(CMAKE_CXX_FLAGS -std=c++14)
 add_definitions(-Wall -Wno-unused-function)
 #~ set(CMAKE_CXX_FLAGS -Wall)
 set(CMAKE_BUILD_TYPE "Debug")
 
 
+
+set(PROJECT_ROOT ~/projects/raytracer_SDL2/)
 
 include_directories(../src/include/)
 include_directories(../src/include/opensubdiv)
@@ -37,8 +41,8 @@ include_directories(../src/include/google/glog)
 include_directories(../src/include/google/gtest)
 include_directories(~/Downloads/boost_1_50_0)
 
-link_directories(../src/libs/)
-link_directories(../src/libs/opensubdiv)
+link_directories(${PROJECT_ROOT}/src/libs/)
+link_directories(${PROJECT_ROOT}/src/libs/opensubdiv)
 link_directories(/usr/include/SDL2)
 
 
@@ -134,6 +138,10 @@ add_executable(editor
 	../src/editor/kdnode2.cpp
 
 	../src/editor/raycaster2.cpp	
+	
+	../src/editor/utils/editor_mesh_utils.cpp
+	../src/editor/mesh_generators/mesh_generator.cpp
+	../src/editor/mesh_generators/plane_mesh_generator.cpp
 )
 
 target_link_libraries(editor coreLib)

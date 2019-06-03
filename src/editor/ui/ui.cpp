@@ -48,6 +48,7 @@ void UI::menu()
         {
             ImGui::MenuItem("Options", NULL, &b_show_options_dialog);
             ImGui::MenuItem("Cameras", NULL, &b_show_cameras_dialog);
+            ImGui::MenuItem("Entities", NULL, &b_show_entities_dialog);
             ImGui::Separator();
             if(ImGui::MenuItem("Show All"))
             {
@@ -78,13 +79,50 @@ void UI::optionsDialog()
 	ImGui::End();
 }
 
-
+void UI::entitiesDialog()
+{
+	static int cur = -1;
+	ImGui::Begin("Entities", &b_show_entities_dialog);
+	
+	ImGui::PushItemWidth(-1);
+	if( ImGui::ListBoxHeader("Entities"))
+	{
+		
+		int inc =0;
+		for(Entity3D* entity : m_editor->entities)
+		{
+			if(ImGui::Selectable(entity->name.c_str(), inc == cur)){
+				cur = inc;
+			}
+			inc++;
+		}
+		ImGui::ListBoxFooter();
+	}	
+	ImGui::End();
+	// display params
+	
+	ImGui::Begin("Params", &b_show_entities_dialog);
+	MeshObject * p_mesh = nullptr;
+	if( cur != -1)
+	{
+		if((p_mesh = dynamic_cast<MeshObject*>( m_editor->entities[cur])))
+		{
+			ImGui::Text("Mesh Object");
+			if(p_mesh->generator != nullptr)
+				paramWidget(p_mesh->generator->params[0]);
+		}
+	}	
+	ImGui::End();
+	
+	
+}
 
 void UI::camerasDialog()
 {
 	ImGui::Begin("Cameras", &b_show_cameras_dialog);
-	
-	if( ImGui::ListBoxHeader("cameras"))
+
+	ImGui::PushItemWidth(-1);
+	if( ImGui::ListBoxHeader(""))
 	{
 		int inc =0;
 		for(Camera* cam : m_editor->cameras)
@@ -97,33 +135,39 @@ void UI::camerasDialog()
 		ImGui::ListBoxFooter();
 	}
 	
+
+	ImGui::PushItemWidth(-1);
 	if(ImGui::Button("Add Camera"))
 	{
 		m_editor->addCamera();
 	}
-	
+	ImGui::SameLine();
+	ImGui::PushItemWidth(-1);
 	if(ImGui::Button("Delete Camera"))
-	{
-		
+	{		
 		if(m_editor->cameras.size() > 1)
 		{
 			printf("command delete camera : %d\n", m_editor->cur_cam_id);
 			m_editor->deleteCamera(m_editor->cur_cam_id);
 		}
 	}	
+	
+	ImGui::Columns(1);
 	ImGui::End();
 }
 
 void UI::showAllDialogs()
 {
-	b_show_options_dialog = true;
-	b_show_cameras_dialog = true;
+	b_show_options_dialog  = true;
+	b_show_cameras_dialog  = true;
+	b_show_entities_dialog = true;
 }
 
 void UI::hideAllDialogs()
 {
-	b_show_options_dialog = false;
-	b_show_cameras_dialog = false;	
+	b_show_options_dialog  = false;
+	b_show_cameras_dialog  = false;	
+	b_show_entities_dialog = false;
 }
 
 void UI::draw()
@@ -147,6 +191,8 @@ void UI::draw()
 	if(b_show_cameras_dialog)
 		camerasDialog();
 	
+	if(b_show_entities_dialog)
+		entitiesDialog();	
 	//~ if(show_another_window)
 	//~ {
 		//~ ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
@@ -163,3 +209,20 @@ void UI::draw()
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
+void UI::paramWidget(BaseParam * param)
+{
+	Param<int> * p_int = nullptr;
+	//~ Param<float> * p_float = nullptr;
+	//~ Param<std::string> * p_string = nullptr;
+	//~ Param<glm::vec3> * p_vec3 = nullptr;
+	
+	if( ( p_int = dynamic_cast<Param<int>*>( param )))
+	{
+		int _val = p_int->getValue();
+		if( ImGui::DragInt("##aaa", &_val))
+		{
+			printf("set int value\n");
+			p_int->setValue(_val);
+		}
+	}
+}

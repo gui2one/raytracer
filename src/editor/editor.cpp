@@ -83,8 +83,8 @@ void Editor::init()
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 	
 	
-	w_width = 640; 
-	w_height = 480; 
+	w_width = 700; 
+	w_height = 450; 
 	if( SDL_Init(SDL_INIT_EVERYTHING) == 0){
 			//~ printf("SDL initialized correctly\n");
 	}     
@@ -111,11 +111,25 @@ void Editor::init()
 	
 	MeshObject* ground = new MeshObject();
 	ground->name = "ground";
-	Mesh mesh = mesh_utils.makeQuad();	
-	ground->mesh = mesh;	
-	ground->position = glm::vec3(5.0,5.0,0.0);
+	//~ Mesh mesh = mesh_utils.makeQuad();	
+	//~ ground->mesh = mesh;	
+	ground->setMeshGenerator(PLANE_MESH_GENERATOR);
+	for (auto param : ground->generator->params)
+	{
+		Param<int>* p_int = nullptr;
+		Param<glm::vec3>* p_vec3 = nullptr;
+		if( (p_int = dynamic_cast<Param<int>*>(param)))
+		{
+			std::cout << p_int->getValue() << std::endl;
+		}else if((p_vec3 = dynamic_cast<Param<glm::vec3>*>(param))){
+			std::cout << glm::to_string(p_vec3->getValue())  << std::endl;
+		}
+		
+	}
+	
+	//~ ground->position = glm::vec3(5.0,5.0,0.0);
 	ground->scale = glm::vec3(5.0,5.0,5.0);
-	ground->rotation = glm::vec3(180.0,0.0,0.0);	
+	//~ ground->rotation = glm::vec3(180.0,0.0,0.0);	
 	ground->buildVBO();
 	entities.push_back(ground);
 	
@@ -704,8 +718,6 @@ void Editor::displayKDTree()
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 
 }
-
-
 
 Editor::~Editor()
 {

@@ -1,12 +1,15 @@
 #include "editor_camera.h"
 
 
-Camera::Camera() : Entity3D()
+Camera::Camera() : 
+	Entity3D()
+	
 {
 	//~ printf("initializing Camera\n");
 	up_vector = glm::vec3(0.0,1.0,0.0);
 	target_position = glm::vec3(0.0,0.0,5.0);
 	buildDisplayData();
+	name = "camera";
 }
 
 Camera::Camera(const Camera& other): Entity3D()

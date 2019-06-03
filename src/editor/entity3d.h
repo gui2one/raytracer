@@ -4,16 +4,8 @@
 #include "../pch.h"
 #include "../mesh.h"
 #include "ogl_geometry_data.h"
-//~ struct OGL_geometry_data
-//~ {
-	//~ std::vector<float> vertices;
-	//~ std::vector<unsigned int> indices;
-	//~ 
-	//~ glm::vec3 translate = glm::vec3(0.0, 0.0, 0.0);
-	//~ glm::vec3 rotate = glm::vec3(0.0, 0.0, 0.0);
-	//~ glm::vec3 scale = glm::vec3(1.0, 1.0, 1.0);
-	//~ 
-//~ };
+#include "mesh_generators/mesh_generator.h"
+#include "mesh_generators/plane_mesh_generator.h"
 
 class Entity3D
 {
@@ -49,14 +41,20 @@ public :
 	
 	~MeshObject();
 	
+	
+	
 	void buildVBO();
 	void draw() override;
+	
+	void setMeshGenerator(MESH_GENERATOR_TYPE _type);
 	unsigned int m_vbo=0, m_ibo=0;
 	
+	MeshGenerator * generator;
 	Mesh mesh;
 	
+	
 private:
-
+	
 };
 
 

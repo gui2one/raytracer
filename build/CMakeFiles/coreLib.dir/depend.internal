@@ -17,21 +17,6 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/color.cpp.o
  /home/pi/projects/raytracer_SDL2/src/color.cpp
  /home/pi/projects/raytracer_SDL2/src/color.h
  /home/pi/projects/raytracer_SDL2/src/pch.h
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_vec2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x3.hpp
@@ -127,8 +112,22 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/color.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_float.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4_simd.inl
@@ -167,6 +166,8 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/color.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/quaternion_trigonometric.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_int_sized.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_uint_sized.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_double1.hpp
@@ -191,13 +192,19 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/color.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion_simd.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/vec1.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/integer.hpp
@@ -242,21 +249,6 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/light.cpp.o
  /home/pi/projects/raytracer_SDL2/src/light.cpp
  /home/pi/projects/raytracer_SDL2/src/light.h
  /home/pi/projects/raytracer_SDL2/src/pch.h
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_vec2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x3.hpp
@@ -352,8 +344,22 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/light.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_float.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4_simd.inl
@@ -392,6 +398,8 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/light.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/quaternion_trigonometric.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_int_sized.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_uint_sized.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_double1.hpp
@@ -416,13 +424,19 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/light.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion_simd.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/vec1.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/integer.hpp
@@ -469,21 +483,6 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o
  /home/pi/projects/raytracer_SDL2/src/pch.h
  /home/pi/projects/raytracer_SDL2/src/rtmaterial.h
  /home/pi/projects/raytracer_SDL2/src/texture.h
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_vec2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x3.hpp
@@ -579,8 +578,22 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_float.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4_simd.inl
@@ -619,6 +632,8 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/quaternion_trigonometric.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_int_sized.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_uint_sized.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_double1.hpp
@@ -643,13 +658,19 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion_simd.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/vec1.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/integer.hpp
@@ -695,21 +716,6 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o
  /home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp
  /home/pi/projects/raytracer_SDL2/src/rtmaterial.h
  /home/pi/projects/raytracer_SDL2/src/texture.h
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_vec2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x3.hpp
@@ -805,8 +811,22 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_float.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4_simd.inl
@@ -845,6 +865,8 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/quaternion_trigonometric.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_int_sized.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_uint_sized.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_double1.hpp
@@ -869,13 +891,19 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion_simd.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/vec1.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/integer.hpp
@@ -976,21 +1004,6 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp
  /home/pi/projects/raytracer_SDL2/src/texture.h
  /home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.h
  /home/pi/projects/raytracer_SDL2/src/utils/objLoader.h
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_vec2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x3.hpp
@@ -1086,8 +1099,22 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_float.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4_simd.inl
@@ -1126,6 +1153,8 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/quaternion_trigonometric.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_int_sized.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_uint_sized.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_double1.hpp
@@ -1150,13 +1179,19 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion_simd.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/vec1.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/integer.hpp
@@ -1200,21 +1235,6 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/shader.cpp.o
  /home/pi/projects/raytracer_SDL2/src/pch.h
  /home/pi/projects/raytracer_SDL2/src/shader.cpp
  /home/pi/projects/raytracer_SDL2/src/shader.h
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_vec2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x3.hpp
@@ -1310,8 +1330,22 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/shader.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_float.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4_simd.inl
@@ -1350,6 +1384,8 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/shader.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/quaternion_trigonometric.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_int_sized.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_uint_sized.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_double1.hpp
@@ -1374,13 +1410,19 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/shader.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion_simd.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/vec1.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/integer.hpp
@@ -1424,21 +1466,6 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/texture.cpp.o
  /home/pi/projects/raytracer_SDL2/src/pch.h
  /home/pi/projects/raytracer_SDL2/src/texture.cpp
  /home/pi/projects/raytracer_SDL2/src/texture.h
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_vec2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x3.hpp
@@ -1534,8 +1561,22 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/texture.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_float.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4_simd.inl
@@ -1574,6 +1615,8 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/texture.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/quaternion_trigonometric.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_int_sized.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_uint_sized.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_double1.hpp
@@ -1598,13 +1641,19 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/texture.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion_simd.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/vec1.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/integer.hpp
@@ -1675,21 +1724,6 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.
  /home/pi/projects/raytracer_SDL2/src/texture.h
  /home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp
  /home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.h
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_vec2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x3.hpp
@@ -1785,8 +1819,22 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_float.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4_simd.inl
@@ -1825,6 +1873,8 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/quaternion_trigonometric.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_int_sized.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_uint_sized.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_double1.hpp
@@ -1849,13 +1899,19 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion_simd.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/vec1.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/integer.hpp
@@ -1933,21 +1989,6 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.o
  /home/pi/projects/raytracer_SDL2/src/rtmaterial.h
  /home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp
  /home/pi/projects/raytracer_SDL2/src/utils/objLoader.h
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_vec2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x3.hpp
@@ -2043,8 +2084,22 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_float.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4_simd.inl
@@ -2083,6 +2138,8 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/quaternion_trigonometric.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_int_sized.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_uint_sized.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_double1.hpp
@@ -2105,13 +2162,19 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/matrix_transform.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/matrix_transform.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/vec1.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/integer.hpp
@@ -2155,21 +2218,6 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/system_utils.cp
  /home/pi/projects/raytracer_SDL2/src/pch.h
  /home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp
  /home/pi/projects/raytracer_SDL2/src/utils/system_utils.h
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat2x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat3x4.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x2.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.hpp
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_mat4x3.inl
- /home/pi/projects/raytracer_SDL2/src/vendor/glm/./detail/type_vec2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x3.hpp
@@ -2265,8 +2313,22 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/system_utils.cp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_float.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_half.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat2x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x2.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x3.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat3x4.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x2.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x3.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/detail/type_mat4x4_simd.inl
@@ -2305,6 +2367,8 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/system_utils.cp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/quaternion_trigonometric.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_constants.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_int_sized.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/scalar_uint_sized.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_bool1_precision.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/ext/vector_double1.hpp
@@ -2329,13 +2393,19 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/system_utils.cp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/quaternion_simd.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_precision.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/vec1.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/dual_quaternion.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/matrix_decompose.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/rotate_vector.inl
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/string_cast.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtx/transform.inl
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/integer.hpp

@@ -74,6 +74,8 @@ void Texture::setData(int _width, int _height, unsigned char* buffer, int _bpp)
 	data = std::vector<unsigned char>(buffer, buffer + _width * _height * _bpp);
 	
 	is_valid = true;
+	width = _width;
+	height = _height;
 	setBPP(_bpp);
 	//~ std::cout << "__ setting texture data : " << _width << "/" << _height  << "\n";
 }
