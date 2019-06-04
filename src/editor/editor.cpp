@@ -188,11 +188,15 @@ void Editor::manageEvents()
     
     
     
-    const Uint8 *keyboard_state = SDL_GetKeyboardState(NULL);
+    
 	
 	while (SDL_PollEvent(&Event))
 	{
+		
+		// process ImGui Events !!!!
 		ImGui_ImplSDL2_ProcessEvent(&Event);
+		
+		const Uint8 *keyboard_state = SDL_GetKeyboardState(NULL);
 		
 		if (Event.type == SDL_QUIT)
 		{
