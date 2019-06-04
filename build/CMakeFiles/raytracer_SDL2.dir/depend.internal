@@ -14,6 +14,10 @@ CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/camera.cpp
  /home/pi/projects/raytracer_SDL2/src/camera.h
  /home/pi/projects/raytracer_SDL2/src/pch.h
@@ -245,6 +249,10 @@ CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/kdnode.cpp
  /home/pi/projects/raytracer_SDL2/src/kdnode.h
  /home/pi/projects/raytracer_SDL2/src/pch.h
@@ -521,6 +529,10 @@ CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.o
  ../src/include/opensubdiv/vtr/level.h
  ../src/include/opensubdiv/vtr/refinement.h
  ../src/include/opensubdiv/vtr/types.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/Downloads/boost_1_50_0/boost/../libs/system/src/error_code.cpp
  /home/pi/Downloads/boost_1_50_0/boost/../libs/system/src/local_free_on_destruction.hpp
  /home/pi/Downloads/boost_1_50_0/boost/algorithm/string/compare.hpp
@@ -1745,6 +1757,10 @@ CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/camera.h
  /home/pi/projects/raytracer_SDL2/src/color.h
  /home/pi/projects/raytracer_SDL2/src/kdnode.h
@@ -2028,6 +2044,10 @@ CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o
  ../src/include/opensubdiv/vtr/level.h
  ../src/include/opensubdiv/vtr/refinement.h
  ../src/include/opensubdiv/vtr/types.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/Downloads/boost_1_50_0/boost/../libs/system/src/error_code.cpp
  /home/pi/Downloads/boost_1_50_0/boost/../libs/system/src/local_free_on_destruction.hpp
  /home/pi/Downloads/boost_1_50_0/boost/algorithm/string/compare.hpp

@@ -8,7 +8,12 @@ class BaseParam
 		BaseParam(){};
 		
 		virtual ~BaseParam(){};
+		
+		inline void setName(std::string _name ){ name = _name;}		
+		inline std::string getName(){ return name; }
+		
 	private:
+		std::string name = "default_param_name";
 };
 
 template<typename T>

@@ -108,6 +108,30 @@ string
 
 ../src/include/esj/windows/json_ex.h
 
+../src/vendor/imgui/imconfig.h
+
+../src/vendor/imgui/imgui.h
+imconfig.h
+../src/vendor/imgui/imconfig.h
+float.h
+-
+stdarg.h
+-
+stddef.h
+-
+string.h
+-
+assert.h
+-
+stdint.h
+-
+imgui_user.h
+../src/vendor/imgui/imgui_user.h
+
+../src/vendor/imgui/imgui_impl_opengl3.h
+
+../src/vendor/imgui/imgui_impl_sdl.h
+
 /home/pi/projects/raytracer_SDL2/src/pch.cpp
 pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
@@ -151,6 +175,12 @@ vendor/glm/gtc/matrix_transform.hpp
 /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/matrix_transform.hpp
 vendor/glm/gtc/type_ptr.hpp
 /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.hpp
+../vendor/imgui/imgui.h
+/home/pi/projects/raytracer_SDL2/vendor/imgui/imgui.h
+../vendor/imgui/imgui_impl_sdl.h
+/home/pi/projects/raytracer_SDL2/vendor/imgui/imgui_impl_sdl.h
+../vendor/imgui/imgui_impl_opengl3.h
+/home/pi/projects/raytracer_SDL2/vendor/imgui/imgui_impl_opengl3.h
 csignal
 -
 

@@ -13,6 +13,9 @@
 #include "kdnode2.h"
 #include <regex>
 
+#include "../vendor/imgui/imgui_impl_sdl.h"
+
+
 
 
 
@@ -23,6 +26,7 @@ public :
 	
 	Editor();
 	
+
 	void init();
 	
 
@@ -57,6 +61,7 @@ public :
 	float mouse_delta_x, mouse_delta_y;	
 
 	bool mouse_over_ui = false;
+	bool keyboard_captured = false;
 	
 	//~ std::vector<unsigned int> selected_entities;
 	

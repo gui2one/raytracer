@@ -13,6 +13,10 @@ CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o: ../src/incl
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o: ../src/include/esj/stringer.h
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o: ../src/include/esj/windows/convert.h
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o: ../src/include/esj/windows/json_ex.h
+CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o: ../src/vendor/imgui/imconfig.h
+CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o: ../src/vendor/imgui/imgui.h
+CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o: ../src/vendor/imgui/imgui_impl_opengl3.h
+CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o: ../src/vendor/imgui/imgui_impl_sdl.h
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o: /home/pi/projects/raytracer_SDL2/src/pch.cpp
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o: /home/pi/projects/raytracer_SDL2/src/pch.h
 CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o: /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2.hpp

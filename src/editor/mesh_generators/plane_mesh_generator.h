@@ -10,6 +10,9 @@ class PlaneMeshGenerator: public MeshGenerator
 			
 		Mesh generate();
 	private:
+	
+		Param<float> * param_width;
+		Param<float> * param_length;
 		/* add your private declarations */
 };
 

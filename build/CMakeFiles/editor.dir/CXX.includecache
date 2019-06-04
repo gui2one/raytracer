@@ -501,6 +501,8 @@ kdnode2.h
 /home/pi/projects/raytracer_SDL2/src/editor/kdnode2.h
 regex
 -
+../vendor/imgui/imgui_impl_sdl.h
+/home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_sdl.h
 
 /home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp
 editor_camera.h
@@ -599,12 +601,6 @@ ui.h
 /home/pi/projects/raytracer_SDL2/src/editor/ui/ui.h
 ../../pch.h
 /home/pi/projects/raytracer_SDL2/src/pch.h
-../vendor/imgui/imgui.h
-/home/pi/projects/raytracer_SDL2/src/editor/vendor/imgui/imgui.h
-../vendor/imgui/imgui_impl_sdl.h
-/home/pi/projects/raytracer_SDL2/src/editor/vendor/imgui/imgui_impl_sdl.h
-../vendor/imgui/imgui_impl_opengl3.h
-/home/pi/projects/raytracer_SDL2/src/editor/vendor/imgui/imgui_impl_opengl3.h
 ../editor.h
 /home/pi/projects/raytracer_SDL2/src/editor/editor.h
 
@@ -805,6 +801,12 @@ vendor/glm/gtc/matrix_transform.hpp
 /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/matrix_transform.hpp
 vendor/glm/gtc/type_ptr.hpp
 /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.hpp
+../vendor/imgui/imgui.h
+/home/pi/projects/raytracer_SDL2/vendor/imgui/imgui.h
+../vendor/imgui/imgui_impl_sdl.h
+/home/pi/projects/raytracer_SDL2/vendor/imgui/imgui_impl_sdl.h
+../vendor/imgui/imgui_impl_opengl3.h
+/home/pi/projects/raytracer_SDL2/vendor/imgui/imgui_impl_opengl3.h
 csignal
 -
 

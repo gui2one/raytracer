@@ -4,20 +4,24 @@
 PlaneMeshGenerator::PlaneMeshGenerator()
 	: MeshGenerator()
 {
-	Param<int> * param_int = new Param<int>();
-	param_int->setValue(42);
-	params.push_back(param_int);
 	
-	Param<glm::vec3> * param_vec3 = new Param<glm::vec3>();
-	param_vec3->setValue(glm::vec3(0.0,1.0,2.0));
-	params.push_back(param_vec3);	
+	param_width = new Param<float>();
+	param_width->setName("Width");
+	param_width->setValue(1.0);
+	params.push_back(param_width);
+		
+	param_length = new Param<float>();
+	param_length->setName("Length");
+	param_length->setValue(1.0);
+	params.push_back(param_length);
+
 }
 
 Mesh PlaneMeshGenerator::generate()
 {
 	//~ std::cout << "PLANE Generator Generate function" << std::endl;
 	
-	Mesh mesh = EditorMeshUtils::makeQuad();
+	Mesh mesh = EditorMeshUtils::makeQuad(param_width->getValue(), param_length->getValue());
 	mesh.computeNormals();
 	
 	return mesh;

@@ -14,6 +14,10 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/color.cpp.o
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/color.cpp
  /home/pi/projects/raytracer_SDL2/src/color.h
  /home/pi/projects/raytracer_SDL2/src/pch.h
@@ -245,6 +249,10 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/light.cpp.o
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/color.h
  /home/pi/projects/raytracer_SDL2/src/light.cpp
  /home/pi/projects/raytracer_SDL2/src/light.h
@@ -477,6 +485,10 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/mesh.cpp.o
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/color.h
  /home/pi/projects/raytracer_SDL2/src/mesh.cpp
  /home/pi/projects/raytracer_SDL2/src/mesh.h
@@ -711,6 +723,10 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp.o
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/color.h
  /home/pi/projects/raytracer_SDL2/src/pch.h
  /home/pi/projects/raytracer_SDL2/src/rtmaterial.cpp
@@ -981,6 +997,10 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/scene_file_loader.cpp
  ../src/include/opensubdiv/vtr/level.h
  ../src/include/opensubdiv/vtr/refinement.h
  ../src/include/opensubdiv/vtr/types.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/color.h
  /home/pi/projects/raytracer_SDL2/src/include/assimp/./Compiler/poppack1.h
  /home/pi/projects/raytracer_SDL2/src/include/assimp/./Compiler/pushpack1.h
@@ -1232,6 +1252,10 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/shader.cpp.o
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/pch.h
  /home/pi/projects/raytracer_SDL2/src/shader.cpp
  /home/pi/projects/raytracer_SDL2/src/shader.h
@@ -1463,6 +1487,10 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/texture.cpp.o
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/pch.h
  /home/pi/projects/raytracer_SDL2/src/texture.cpp
  /home/pi/projects/raytracer_SDL2/src/texture.h
@@ -1717,6 +1745,10 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/mesh_utils.cpp.
  ../src/include/opensubdiv/vtr/level.h
  ../src/include/opensubdiv/vtr/refinement.h
  ../src/include/opensubdiv/vtr/types.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/color.h
  /home/pi/projects/raytracer_SDL2/src/mesh.h
  /home/pi/projects/raytracer_SDL2/src/pch.h
@@ -1967,6 +1999,10 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/objLoader.cpp.o
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/color.h
  /home/pi/projects/raytracer_SDL2/src/include/assimp/./Compiler/poppack1.h
  /home/pi/projects/raytracer_SDL2/src/include/assimp/./Compiler/pushpack1.h
@@ -2215,6 +2251,10 @@ CMakeFiles/coreLib.dir/home/pi/projects/raytracer_SDL2/src/utils/system_utils.cp
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/pch.h
  /home/pi/projects/raytracer_SDL2/src/utils/system_utils.cpp
  /home/pi/projects/raytracer_SDL2/src/utils/system_utils.h

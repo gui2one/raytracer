@@ -2,9 +2,7 @@
 #define UI_H
 
 #include "../../pch.h"
-#include "../vendor/imgui/imgui.h"
-#include "../vendor/imgui/imgui_impl_sdl.h"
-#include "../vendor/imgui/imgui_impl_opengl3.h"
+
 
 #include "../editor.h"
 //~ class Editor;
@@ -25,7 +23,7 @@ public:
 	void hideAllDialogs();
 	void draw();
 	
-	void paramWidget(BaseParam * param);
+	void paramWidget(BaseParam * param, std::function<void()> callback = [](){});
 		
 		
 	bool b_show_options_dialog = false;

@@ -14,6 +14,10 @@ CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/pch.cpp
  /home/pi/projects/raytracer_SDL2/src/pch.h
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/./ext/matrix_double2x2.hpp

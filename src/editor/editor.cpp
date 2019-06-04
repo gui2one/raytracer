@@ -114,18 +114,18 @@ void Editor::init()
 	//~ Mesh mesh = mesh_utils.makeQuad();	
 	//~ ground->mesh = mesh;	
 	ground->setMeshGenerator(PLANE_MESH_GENERATOR);
-	for (auto param : ground->generator->params)
-	{
-		Param<int>* p_int = nullptr;
-		Param<glm::vec3>* p_vec3 = nullptr;
-		if( (p_int = dynamic_cast<Param<int>*>(param)))
-		{
-			std::cout << p_int->getValue() << std::endl;
-		}else if((p_vec3 = dynamic_cast<Param<glm::vec3>*>(param))){
-			std::cout << glm::to_string(p_vec3->getValue())  << std::endl;
-		}
-		
-	}
+	//~ for (auto param : ground->generator->params)
+	//~ {
+		//~ Param<int>* p_int = nullptr;
+		//~ Param<glm::vec3>* p_vec3 = nullptr;
+		//~ if( (p_int = dynamic_cast<Param<int>*>(param)))
+		//~ {
+			//~ std::cout << p_int->getValue() << std::endl;
+		//~ }else if((p_vec3 = dynamic_cast<Param<glm::vec3>*>(param))){
+			//~ std::cout << glm::to_string(p_vec3->getValue())  << std::endl;
+		//~ }
+		//~ 
+	//~ }
 	
 	//~ ground->position = glm::vec3(5.0,5.0,0.0);
 	ground->scale = glm::vec3(5.0,5.0,5.0);
@@ -182,20 +182,26 @@ void Editor::init()
 
 void Editor::manageEvents()
 {
+	
+	
     SDL_Event Event;
     
-    const Uint8 *keyboard_state = SDL_GetKeyboardState(NULL);
     
-    while (SDL_PollEvent(&Event))
-    {
+    
+    const Uint8 *keyboard_state = SDL_GetKeyboardState(NULL);
+	
+	while (SDL_PollEvent(&Event))
+	{
+		ImGui_ImplSDL2_ProcessEvent(&Event);
+		
 		if (Event.type == SDL_QUIT)
 		{
 				is_running = false;
 				
-		}else if(!mouse_over_ui){
-			
-			if( Event.type == (SDL_MOUSEMOTION))
-			{
+		}
+		else if(!mouse_over_ui && !keyboard_captured){
+			if( Event.type == (SDL_MOUSEMOTION)){
+				
 				if(Event.motion.state == SDL_BUTTON_LMASK )
 				{
 					left_mouse_dragging = true;
@@ -251,84 +257,85 @@ void Editor::manageEvents()
 							cameras[cur_cam_id]->orbit_center);
 					}							
 				}
+			}
 
-			
-
-			}else if(Event.type == SDL_KEYUP){
-				if(Event.key.keysym.scancode == SDL_SCANCODE_C)
-				{
+				else if(Event.type == SDL_MOUSEBUTTONUP){
 					
-					cycleCameras();
-				}
-			}else if(Event.type == SDL_MOUSEBUTTONUP){
-				
-				if(Event.button.button == SDL_BUTTON_LEFT && !left_mouse_dragging)
-				{
-					// normal click
-					
-					int x, y;
-					SDL_GetMouseState(&x, &y);
-
-					
-					ClickData cd;
-					cd.width = w_width;
-					cd.height = w_height;
-					cd.x = (double)x;
-					cd.y = (double)y;
-					Raycaster caster;
-					
-					Ray ray = caster.castRay(cd, *(cameras[cur_cam_id]));
-					
-					std::vector<HitData> hit_datas;
-					caster.intersectKDNodes(ray, kd_nodes, hit_datas, false);
-					
-					if(hit_datas.size() > 0 )
+					if(Event.button.button == SDL_BUTTON_LEFT && !left_mouse_dragging)
 					{
+						// normal click
 						
-						if(keyboard_state[SDL_SCANCODE_LSHIFT])
+						int x, y;
+						SDL_GetMouseState(&x, &y);
+
+						
+						ClickData cd;
+						cd.width = w_width;
+						cd.height = w_height;
+						cd.x = (double)x;
+						cd.y = (double)y;
+						Raycaster caster;
+						
+						Ray ray = caster.castRay(cd, *(cameras[cur_cam_id]));
+						
+						std::vector<HitData> hit_datas;
+						caster.intersectKDNodes(ray, kd_nodes, hit_datas, false);
+						
+						if(hit_datas.size() > 0 )
 						{
-							//~ printf("--- Adding to selection : id %d\n", hit_datas[0].mesh_id);
 							
-							entities[hit_datas[0].mesh_id]->is_selected = !entities[hit_datas[0].mesh_id]->is_selected;
+							if(keyboard_state[SDL_SCANCODE_LSHIFT])
+							{
+								
+								
+								entities[hit_datas[0].mesh_id]->is_selected = !entities[hit_datas[0].mesh_id]->is_selected;
+							}else{
+								unselectAll();
+								entities[hit_datas[0].mesh_id]->is_selected = true;
+								
+							}
 						}else{
 							unselectAll();
-							entities[hit_datas[0].mesh_id]->is_selected = true;
-							
-						}
-					}else{
-						unselectAll();
-					}									
-				}
-				
-				left_mouse_dragging = false;
-
-				
-			}else if(Event.type == SDL_MOUSEWHEEL){
-				
-				float norm_dist = glm::distance(cameras[cur_cam_id]->position, cameras[cur_cam_id]->orbit_center) / 5.0;
-				cameras[cur_cam_id]->orbit_radius += (float)Event.wheel.y * -0.15 * norm_dist;
-				
-				setCamPosFromPolar(
-					cameras[cur_cam_id]->orbit_u, 
-					cameras[cur_cam_id]->orbit_v, 
-					cameras[cur_cam_id]->orbit_radius, 
-					cameras[cur_cam_id]->orbit_center
-				);	
+						}									
+					}
 					
-			}
-		}
-		
-		if(Event.type == SDL_WINDOWEVENT){
-		
-			if (Event.window.event == SDL_WINDOWEVENT_RESIZED  || Event.window.event == SDL_WINDOWEVENT_MAXIMIZED) {
-				printf("MESSAGE:Resizing window... %d %d\n", Event.window.data1, Event.window.data2);
-				
-				w_width = Event.window.data1;
-				w_height = Event.window.data2;
-				
-			}
-			if(Event.window.event == SDL_WINDOWEVENT_MINIMIZED){
-				printf("MESSAGE:Minimizing window...\n" );
+					left_mouse_dragging = false;
+
+					
+				}else if(Event.type == SDL_MOUSEWHEEL){
+					
+					float norm_dist = glm::distance(cameras[cur_cam_id]->position, cameras[cur_cam_id]->orbit_center) / 5.0;
+					cameras[cur_cam_id]->orbit_radius += (float)Event.wheel.y * -0.15 * norm_dist;
+					
+					setCamPosFromPolar(
+						cameras[cur_cam_id]->orbit_u, 
+						cameras[cur_cam_id]->orbit_v, 
+						cameras[cur_cam_id]->orbit_radius, 
+						cameras[cur_cam_id]->orbit_center
+					);	
+						
+				}
+			
+			
+			//~ else if(Event.type == SDL_KEYUP){
+				//~ if(Event.key.keysym.scancode == SDL_SCANCODE_C)
+				//~ {
+					//~ 
+					//~ cycleCameras();
+				//~ }
+			//~ }		
+			if(Event.type == SDL_WINDOWEVENT){
+			
+				if (Event.window.event == SDL_WINDOWEVENT_RESIZED  || Event.window.event == SDL_WINDOWEVENT_MAXIMIZED) {
+					printf("MESSAGE:Resizing window... %d %d\n", Event.window.data1, Event.window.data2);
+					
+					w_width = Event.window.data1;
+					w_height = Event.window.data2;
+					
+				}
+				if(Event.window.event == SDL_WINDOWEVENT_MINIMIZED){
+					printf("MESSAGE:Minimizing window...\n" );
+				}
 			}
 		}
 	}

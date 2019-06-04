@@ -47,6 +47,7 @@ public :
 	void draw() override;
 	
 	void setMeshGenerator(MESH_GENERATOR_TYPE _type);
+	void updateMeshGenerator();
 	unsigned int m_vbo=0, m_ibo=0;
 	
 	MeshGenerator * generator;

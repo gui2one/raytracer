@@ -33,7 +33,9 @@
 #include "vendor/glm/gtc/type_ptr.hpp"
 
 
-
+#include "../vendor/imgui/imgui.h"
+#include "../vendor/imgui/imgui_impl_sdl.h"
+#include "../vendor/imgui/imgui_impl_opengl3.h"
 
 
 #define PI 3.14159265359

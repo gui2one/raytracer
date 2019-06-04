@@ -14,6 +14,10 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/construction_gr
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/editor/construction_grid.cpp
  /home/pi/projects/raytracer_SDL2/src/editor/construction_grid.h
  /home/pi/projects/raytracer_SDL2/src/pch.h
@@ -283,6 +287,9 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.o
  ../src/include/opensubdiv/vtr/level.h
  ../src/include/opensubdiv/vtr/refinement.h
  ../src/include/opensubdiv/vtr/types.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
  /home/pi/projects/raytracer_SDL2/src/color.h
  /home/pi/projects/raytracer_SDL2/src/editor/construction_grid.h
  /home/pi/projects/raytracer_SDL2/src/editor/editor.cpp
@@ -533,6 +540,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/vec3.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/vec4.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/vector_relational.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/vendor/stb_image.h
  /home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp.o
@@ -548,6 +556,10 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/editor_camera.c
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/color.h
  /home/pi/projects/raytracer_SDL2/src/editor/editor_camera.cpp
  /home/pi/projects/raytracer_SDL2/src/editor/editor_camera.h
@@ -790,6 +802,10 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp.o
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/color.h
  /home/pi/projects/raytracer_SDL2/src/editor/entity3d.cpp
  /home/pi/projects/raytracer_SDL2/src/editor/entity3d.h
@@ -1030,6 +1046,10 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/kdnode2.cpp.o
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/editor/kdnode2.cpp
  /home/pi/projects/raytracer_SDL2/src/editor/kdnode2.h
  /home/pi/projects/raytracer_SDL2/src/pch.h
@@ -1302,7 +1322,6 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o
  ../src/vendor/imgui/imconfig.h
  ../src/vendor/imgui/imgui.h
  ../src/vendor/imgui/imgui_impl_opengl3.h
- ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/color.h
  /home/pi/projects/raytracer_SDL2/src/editor/construction_grid.h
  /home/pi/projects/raytracer_SDL2/src/editor/editor.h
@@ -1554,6 +1573,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/main.cpp.o
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/vec3.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/vec4.hpp
  /home/pi/projects/raytracer_SDL2/src/vendor/glm/vector_relational.hpp
+ /home/pi/projects/raytracer_SDL2/src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/vendor/stb_image.h
  /home/pi/projects/raytracer_SDL2/src/vendor/stb_image_write.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.cpp.o
@@ -1569,6 +1589,10 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/mesh_generators
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/color.h
  /home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.cpp
  /home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.h
@@ -1805,6 +1829,10 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/mesh_generators
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/color.h
  /home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/mesh_generator.h
  /home/pi/projects/raytracer_SDL2/src/editor/mesh_generators/plane_mesh_generator.cpp
@@ -2043,6 +2071,10 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/raycaster2.cpp.
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/color.h
  /home/pi/projects/raytracer_SDL2/src/editor/editor_camera.h
  /home/pi/projects/raytracer_SDL2/src/editor/entity3d.h
@@ -2596,6 +2628,10 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gi
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/editor/ogl_geometry_data.h
  /home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.cpp
  /home/pi/projects/raytracer_SDL2/src/editor/utils/editor_gizmo_utils.h
@@ -2828,6 +2864,10 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer_SDL2/src/editor/utils/editor_me
  ../src/include/esj/stringer.h
  ../src/include/esj/windows/convert.h
  ../src/include/esj/windows/json_ex.h
+ ../src/vendor/imgui/imconfig.h
+ ../src/vendor/imgui/imgui.h
+ ../src/vendor/imgui/imgui_impl_opengl3.h
+ ../src/vendor/imgui/imgui_impl_sdl.h
  /home/pi/projects/raytracer_SDL2/src/color.h
  /home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.cpp
  /home/pi/projects/raytracer_SDL2/src/editor/utils/editor_mesh_utils.h

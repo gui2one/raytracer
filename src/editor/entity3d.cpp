@@ -50,6 +50,17 @@ void MeshObject::setMeshGenerator(MESH_GENERATOR_TYPE _type)
 			break;
 	}
 }
+
+void MeshObject::updateMeshGenerator()
+{
+	if(generator != nullptr)
+	{
+		//~ printf("updateMesh Generator Function\n");
+		mesh = generator->generate();
+		buildVBO();
+		
+	}
+}
 void MeshObject::buildVBO()
 {
 	

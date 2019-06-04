@@ -16,7 +16,7 @@ void UI::init(Editor* editor)
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
-    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
 
     // Setup Platform/Renderer bindings
     ImGui_ImplSDL2_InitForOpenGL(m_window, editor->gl_context);
@@ -27,6 +27,7 @@ void UI::init(Editor* editor)
     
     //~ editor->addMeshObject();
 }
+
 
 void UI::menu()
 {
@@ -109,7 +110,16 @@ void UI::entitiesDialog()
 		{
 			ImGui::Text("Mesh Object");
 			if(p_mesh->generator != nullptr)
-				paramWidget(p_mesh->generator->params[0]);
+			{
+				for(auto param : p_mesh->generator->params)
+				{
+					paramWidget(param, [p_mesh](){
+						p_mesh->updateMeshGenerator();
+					});
+				}
+				
+				
+			}
 		}
 	}	
 	ImGui::End();
@@ -170,6 +180,8 @@ void UI::hideAllDialogs()
 	b_show_entities_dialog = false;
 }
 
+
+
 void UI::draw()
 {
 
@@ -183,6 +195,7 @@ void UI::draw()
 	
 	ImGuiIO& io = ImGui::GetIO();
 	m_editor->mouse_over_ui = io.WantCaptureMouse;
+	//~ m_editor->keyboard_captured = io.WantCaptureKeyboard;
 	
 	menu();
 	if(b_show_options_dialog)
@@ -193,36 +206,79 @@ void UI::draw()
 	
 	if(b_show_entities_dialog)
 		entitiesDialog();	
-	//~ if(show_another_window)
-	//~ {
-		//~ ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-		//~ ImGui::Text("Hello from another window!");
-		//~ if (ImGui::Button("Close Me"))
-		//~ {
-			//~ m_editor->addMeshObject();
-			
-		//~ }
-		//~ ImGui::End();
-	//~ }
+
 	ImGui::Render();	
 	
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void UI::paramWidget(BaseParam * param)
+void UI::paramWidget(BaseParam * param, std::function<void()> callback)
 {
 	Param<int> * p_int = nullptr;
-	//~ Param<float> * p_float = nullptr;
+	Param<float> * p_float = nullptr;
 	//~ Param<std::string> * p_string = nullptr;
-	//~ Param<glm::vec3> * p_vec3 = nullptr;
+	Param<glm::vec3> * p_vec3 = nullptr;
 	
 	if( ( p_int = dynamic_cast<Param<int>*>( param )))
 	{
 		int _val = p_int->getValue();
-		if( ImGui::DragInt("##aaa", &_val))
+		if( ImGui::DragInt(p_int->getName().c_str(), &_val))
 		{
-			printf("set int value\n");
+			//~ printf("set int value\n");
 			p_int->setValue(_val);
 		}
+	}else if(( p_float = dynamic_cast<Param<float>*>( param )))
+	{
+		float _val = p_float->getValue();
+		if( ImGui::DragFloat(p_float->getName().c_str(), &_val, 0.05f))
+		{
+			//~ printf("set int value\n");
+			p_float->setValue(_val);
+			callback();
+		}
+				
+	}else if( ( p_vec3 = dynamic_cast<Param<glm::vec3>*>( param )))
+	{
+		glm::vec3 _val = p_vec3->getValue();
+		
+		ImGui::Columns(3);
+		if(ImGui::DragFloat("X", &_val.x, 0.05f))
+		{
+			p_vec3->setValue(
+				glm::vec3(
+					_val.x,
+					p_vec3->getValue().y,
+					p_vec3->getValue().z
+				)
+			);
+			
+			
+			
+			
+		}
+		ImGui::NextColumn();
+		if(ImGui::DragFloat("Y", &_val.y, 0.05f))
+		{
+			p_vec3->setValue(
+				glm::vec3(
+					p_vec3->getValue().x,
+					_val.y,
+					p_vec3->getValue().z
+				)
+			);
+		}
+		ImGui::NextColumn();	
+		if(ImGui::DragFloat("Z", &_val.z, 0.05f))
+		{
+			p_vec3->setValue(
+				glm::vec3(
+					p_vec3->getValue().x,
+					p_vec3->getValue().y,
+					_val.z
+				)
+			);
+		}
+		
+		
 	}
 }

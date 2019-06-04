@@ -6,7 +6,7 @@
 namespace EditorMeshUtils{
 	
 	
-	Mesh makeQuad();
+	Mesh makeQuad(float width, float length);
 	Mesh makeSimpleBox();
 };
 

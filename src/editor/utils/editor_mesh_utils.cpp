@@ -2,7 +2,7 @@
 
 namespace EditorMeshUtils{
 	
-	Mesh makeQuad()
+	Mesh makeQuad(float width, float length)
 	{
 		Mesh mesh;
 		
@@ -11,9 +11,9 @@ namespace EditorMeshUtils{
 		std::vector<Point> points;
 		//~ Vertex vert1(glm::vec3(0.0,1.0,2.0));
 		points.push_back(Point(0.0, 0.0, 0.0));
-		points.push_back(Point(0.0, 1.0, 0.0));
-		points.push_back(Point(1.0, 1.0, 0.0));
-		points.push_back(Point(1.0, 0.0, 0.0));
+		points.push_back(Point(0.0,   length, 0.0));
+		points.push_back(Point(width, length, 0.0));
+		points.push_back(Point(width, 0.0, 0.0));
 		
 		
 		mesh.points = points;

@@ -502,6 +502,30 @@ vector
 vector
 -
 
+../src/vendor/imgui/imconfig.h
+
+../src/vendor/imgui/imgui.h
+imconfig.h
+../src/vendor/imgui/imconfig.h
+float.h
+-
+stdarg.h
+-
+stddef.h
+-
+string.h
+-
+assert.h
+-
+stdint.h
+-
+imgui_user.h
+../src/vendor/imgui/imgui_user.h
+
+../src/vendor/imgui/imgui_impl_opengl3.h
+
+../src/vendor/imgui/imgui_impl_sdl.h
+
 /home/pi/Downloads/boost_1_50_0/boost/../libs/system/src/error_code.cpp
 boost/config/warning_disable.hpp
 -
@@ -12007,6 +12031,12 @@ vendor/glm/gtc/matrix_transform.hpp
 /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/matrix_transform.hpp
 vendor/glm/gtc/type_ptr.hpp
 /home/pi/projects/raytracer_SDL2/src/vendor/glm/gtc/type_ptr.hpp
+../vendor/imgui/imgui.h
+/home/pi/projects/raytracer_SDL2/vendor/imgui/imgui.h
+../vendor/imgui/imgui_impl_sdl.h
+/home/pi/projects/raytracer_SDL2/vendor/imgui/imgui_impl_sdl.h
+../vendor/imgui/imgui_impl_opengl3.h
+/home/pi/projects/raytracer_SDL2/vendor/imgui/imgui_impl_opengl3.h
 csignal
 -
 
