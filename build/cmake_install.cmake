@@ -1,4 +1,4 @@
-# Install script for directory: /home/pi/projects/raytracer_SDL2/build
+# Install script for directory: /home/pi/projects/raytracer/build
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/pi/projects/raytracer_SDL2/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/pi/projects/raytracer/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

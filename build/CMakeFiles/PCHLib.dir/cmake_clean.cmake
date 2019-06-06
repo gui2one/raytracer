@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o"
+  "CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o"
   "libPCHLib.pdb"
   "libPCHLib.a"
 )

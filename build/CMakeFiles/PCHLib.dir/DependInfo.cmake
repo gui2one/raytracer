@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/pi/projects/raytracer_SDL2/src/pch.cpp" "/home/pi/projects/raytracer_SDL2/build/CMakeFiles/PCHLib.dir/home/pi/projects/raytracer_SDL2/src/pch.cpp.o"
+  "/home/pi/projects/raytracer/src/pch.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/PCHLib.dir/home/pi/projects/raytracer/src/pch.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

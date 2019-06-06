@@ -105,8 +105,8 @@ void Editor::init()
 	item1->name = "item 1";	
 	item1->mesh = mesh_utils.makeSimpleBox();
 	item1->buildVBO();
-	item1->position = glm::vec3(0.0, 0.0, 1.0);
-	item1->rotation = glm::vec3(0.0, 0.0, 45.0);
+	item1->position = glm::vec3(2.0, 0.0, 1.0);
+	//~ item1->rotation = glm::vec3(0.0, 0.0, 45.0);
 	entities.push_back(item1);
 	
 	MeshObject* ground = new MeshObject();

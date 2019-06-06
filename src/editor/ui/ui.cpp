@@ -218,6 +218,7 @@ void UI::paramWidget(BaseParam * param, std::function<void()> callback)
 	Param<float> * p_float = nullptr;
 	//~ Param<std::string> * p_string = nullptr;
 	Param<glm::vec3> * p_vec3 = nullptr;
+	ParamMenu * p_menu = nullptr;
 	
 	if( ( p_int = dynamic_cast<Param<int>*>( param )))
 	{
@@ -226,8 +227,10 @@ void UI::paramWidget(BaseParam * param, std::function<void()> callback)
 		{
 			//~ printf("set int value\n");
 			p_int->setValue(_val);
+			callback();
 		}
-	}else if(( p_float = dynamic_cast<Param<float>*>( param )))
+	}
+	else if(( p_float = dynamic_cast<Param<float>*>( param )))
 	{
 		float _val = p_float->getValue();
 		if( ImGui::DragFloat(p_float->getName().c_str(), &_val, 0.05f))
@@ -237,7 +240,8 @@ void UI::paramWidget(BaseParam * param, std::function<void()> callback)
 			callback();
 		}
 				
-	}else if( ( p_vec3 = dynamic_cast<Param<glm::vec3>*>( param )))
+	}
+	else if( ( p_vec3 = dynamic_cast<Param<glm::vec3>*>( param )))
 	{
 		glm::vec3 _val = p_vec3->getValue();
 		
@@ -251,10 +255,7 @@ void UI::paramWidget(BaseParam * param, std::function<void()> callback)
 					p_vec3->getValue().z
 				)
 			);
-			
-			
-			
-			
+			callback();			
 		}
 		ImGui::NextColumn();
 		if(ImGui::DragFloat("Y", &_val.y, 0.05f))
@@ -266,6 +267,7 @@ void UI::paramWidget(BaseParam * param, std::function<void()> callback)
 					p_vec3->getValue().z
 				)
 			);
+			callback();
 		}
 		ImGui::NextColumn();	
 		if(ImGui::DragFloat("Z", &_val.z, 0.05f))
@@ -277,8 +279,28 @@ void UI::paramWidget(BaseParam * param, std::function<void()> callback)
 					_val.z
 				)
 			);
+			callback();
 		}
 		
 		
+	}
+	else if((p_menu = dynamic_cast<ParamMenu*>(param)))
+	{
+		static int choice = 0;
+		if(ImGui::BeginCombo(p_menu->getName().c_str(), p_menu->entries[choice].first.c_str(),0))
+		{
+			int inc = 0;
+			for(auto entry : p_menu->entries)
+			{
+				if(ImGui::Selectable(entry.first.c_str(), choice == inc))
+				{
+					choice = inc;
+					p_menu->setValue(choice);
+					callback();
+				}
+				inc++;
+			}
+			ImGui::EndCombo();
+		}
 	}
 }

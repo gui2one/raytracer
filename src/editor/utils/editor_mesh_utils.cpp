@@ -1,5 +1,10 @@
 #include "editor_mesh_utils.h"
 
+static float degToRad(float degrees)
+{
+	return degrees / 180.0 * PI;
+}
+
 namespace EditorMeshUtils{
 	
 	Mesh makeQuad(float width, float length)
@@ -64,4 +69,70 @@ namespace EditorMeshUtils{
 		
 		return mesh;
 	}
+	
+	Mesh makeGrid(float width, float length, int segs_width, int segs_length)
+	{
+		Mesh mesh;
+		
+		
+		std::vector<Point> points;
+		for (int j = 0; j < segs_length; j++)
+		{
+			
+			for (int i = 0; i < segs_width; i++)
+			{			
+				points.push_back(Point(width / (segs_width-1) * (i)  , length / (segs_length-1) * (j), 0.0));
+				//~ points.push_back(Point(width / (segs_width-1) * (i)  , length / (segs_length-1) * (j+1), 0.0));
+				//~ points.push_back(Point(width / (segs_width-1) * (i+1), length / (segs_length-1) * (j+1), 0.0));
+				//~ points.push_back(Point(width / (segs_width-1) * (i+1), length / (segs_length-1) * (j), 0.0));			
+			}
+		}
+		
+
+		
+		
+		mesh.points = points;
+		
+		std::vector<Face> faces;
+		int num_faces = (segs_width-1) * (segs_length-1);
+		for (int i = 0; i < num_faces; i++)
+		{
+			Face face;
+			face.setVertices({ Vertex(i*4), Vertex(i*4 + 1), Vertex(i*4 + 2), Vertex(i*4 + 3)});
+			faces.push_back(face);			
+		}
+		
+
+		mesh.faces = faces;		
+		
+		return mesh;
+	}
+	
+	void translate(Mesh& _mesh, glm::vec3 _vec)
+	{
+		for (size_t i = 0; i < _mesh.points.size(); i++)
+		{
+			_mesh.points[i].position = _mesh.points[i].position + _vec;
+		}
+		
+	}
+
+	void scale(Mesh& _mesh, glm::vec3 _scale)
+	{
+		for (size_t i = 0; i < _mesh.points.size(); i++)
+		{
+			_mesh.points[i].position = _mesh.points[i].position * _scale;
+		}	
+	}
+
+	void rotate(Mesh& _mesh, glm::vec3 _rot)
+	{
+		for (size_t i = 0; i < _mesh.points.size(); i++)
+		{
+			_mesh.points[i].position = glm::rotateX(_mesh.points[i].position, degToRad(_rot.x));
+			_mesh.points[i].position = glm::rotateY(_mesh.points[i].position, degToRad(_rot.y));
+			_mesh.points[i].position = glm::rotateZ(_mesh.points[i].position, degToRad(_rot.z));
+			
+		}	
+	}	
 };

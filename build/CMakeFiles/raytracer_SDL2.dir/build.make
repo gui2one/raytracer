@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pi/projects/raytracer_SDL2/build
+CMAKE_SOURCE_DIR = /home/pi/projects/raytracer/build
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pi/projects/raytracer_SDL2/build
+CMAKE_BINARY_DIR = /home/pi/projects/raytracer/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/raytracer_SDL2.dir/depend.make
@@ -57,147 +57,147 @@ include CMakeFiles/raytracer_SDL2.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/raytracer_SDL2.dir/flags.make
 
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.o: CMakeFiles/raytracer_SDL2.dir/flags.make
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.o: /home/pi/projects/raytracer_SDL2/src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.o -c /home/pi/projects/raytracer_SDL2/src/main.cpp
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.o: CMakeFiles/raytracer_SDL2.dir/flags.make
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.o: /home/pi/projects/raytracer/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.o -c /home/pi/projects/raytracer/src/main.cpp
 
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/projects/raytracer_SDL2/src/main.cpp > CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.i
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/projects/raytracer/src/main.cpp > CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.i
 
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/projects/raytracer_SDL2/src/main.cpp -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.s
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/projects/raytracer/src/main.cpp -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.s
 
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.o.requires:
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.o.requires:
 
-.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.o.requires
+.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.o.requires
 
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.o.provides: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.o.requires
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.o.provides.build
-.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.o.provides
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.o.provides: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.o.requires
+	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.o.provides.build
+.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.o.provides
 
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.o.provides.build: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.o
-
-
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o: CMakeFiles/raytracer_SDL2.dir/flags.make
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o: /home/pi/projects/raytracer_SDL2/src/renderer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o -c /home/pi/projects/raytracer_SDL2/src/renderer.cpp
-
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/projects/raytracer_SDL2/src/renderer.cpp > CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.i
-
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/projects/raytracer_SDL2/src/renderer.cpp -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.s
-
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o.requires:
-
-.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o.requires
-
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o.provides: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o.requires
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o.provides.build
-.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o.provides
-
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o.provides.build: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.o.provides.build: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.o
 
 
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o: CMakeFiles/raytracer_SDL2.dir/flags.make
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o: /home/pi/projects/raytracer_SDL2/src/camera.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o -c /home/pi/projects/raytracer_SDL2/src/camera.cpp
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.o: CMakeFiles/raytracer_SDL2.dir/flags.make
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.o: /home/pi/projects/raytracer/src/renderer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.o -c /home/pi/projects/raytracer/src/renderer.cpp
 
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/projects/raytracer_SDL2/src/camera.cpp > CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.i
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/projects/raytracer/src/renderer.cpp > CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.i
 
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/projects/raytracer_SDL2/src/camera.cpp -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.s
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/projects/raytracer/src/renderer.cpp -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.s
 
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o.requires:
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.o.requires:
 
-.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o.requires
+.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.o.requires
 
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o.provides: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o.requires
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o.provides.build
-.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o.provides
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.o.provides: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.o.requires
+	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.o.provides.build
+.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.o.provides
 
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o.provides.build: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o
-
-
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o: CMakeFiles/raytracer_SDL2.dir/flags.make
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o: /home/pi/projects/raytracer_SDL2/src/kdnode.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o -c /home/pi/projects/raytracer_SDL2/src/kdnode.cpp
-
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/projects/raytracer_SDL2/src/kdnode.cpp > CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.i
-
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/projects/raytracer_SDL2/src/kdnode.cpp -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.s
-
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o.requires:
-
-.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o.requires
-
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o.provides: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o.requires
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o.provides.build
-.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o.provides
-
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o.provides.build: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.o.provides.build: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.o
 
 
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o: CMakeFiles/raytracer_SDL2.dir/flags.make
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o: /home/pi/projects/raytracer_SDL2/src/raycaster.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o -c /home/pi/projects/raytracer_SDL2/src/raycaster.cpp
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.o: CMakeFiles/raytracer_SDL2.dir/flags.make
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.o: /home/pi/projects/raytracer/src/camera.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.o -c /home/pi/projects/raytracer/src/camera.cpp
 
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/projects/raytracer_SDL2/src/raycaster.cpp > CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.i
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/projects/raytracer/src/camera.cpp > CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.i
 
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/projects/raytracer_SDL2/src/raycaster.cpp -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.s
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/projects/raytracer/src/camera.cpp -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.s
 
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o.requires:
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.o.requires:
 
-.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o.requires
+.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.o.requires
 
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o.provides: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o.requires
-	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o.provides.build
-.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o.provides
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.o.provides: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.o.requires
+	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.o.provides.build
+.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.o.provides
 
-CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o.provides.build: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.o.provides.build: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.o
+
+
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.o: CMakeFiles/raytracer_SDL2.dir/flags.make
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.o: /home/pi/projects/raytracer/src/kdnode.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.o -c /home/pi/projects/raytracer/src/kdnode.cpp
+
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/projects/raytracer/src/kdnode.cpp > CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.i
+
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/projects/raytracer/src/kdnode.cpp -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.s
+
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.o.requires:
+
+.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.o.requires
+
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.o.provides: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.o.requires
+	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.o.provides.build
+.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.o.provides
+
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.o.provides.build: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.o
+
+
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.o: CMakeFiles/raytracer_SDL2.dir/flags.make
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.o: /home/pi/projects/raytracer/src/raycaster.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.o -c /home/pi/projects/raytracer/src/raycaster.cpp
+
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/projects/raytracer/src/raycaster.cpp > CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.i
+
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/projects/raytracer/src/raycaster.cpp -o CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.s
+
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.o.requires:
+
+.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.o.requires
+
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.o.provides: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.o.requires
+	$(MAKE) -f CMakeFiles/raytracer_SDL2.dir/build.make CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.o.provides.build
+.PHONY : CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.o.provides
+
+CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.o.provides.build: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.o
 
 
 # Object files for target raytracer_SDL2
 raytracer_SDL2_OBJECTS = \
-"CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.o" \
-"CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o" \
-"CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o" \
-"CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o" \
-"CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o"
+"CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.o" \
+"CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.o" \
+"CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.o" \
+"CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.o" \
+"CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.o"
 
 # External object files for target raytracer_SDL2
 raytracer_SDL2_EXTERNAL_OBJECTS =
 
-raytracer_SDL2: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.o
-raytracer_SDL2: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o
-raytracer_SDL2: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o
-raytracer_SDL2: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o
-raytracer_SDL2: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o
+raytracer_SDL2: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.o
+raytracer_SDL2: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.o
+raytracer_SDL2: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.o
+raytracer_SDL2: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.o
+raytracer_SDL2: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.o
 raytracer_SDL2: CMakeFiles/raytracer_SDL2.dir/build.make
 raytracer_SDL2: libPCHLib.a
 raytracer_SDL2: libcoreLib.a
 raytracer_SDL2: CMakeFiles/raytracer_SDL2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pi/projects/raytracer_SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable raytracer_SDL2"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pi/projects/raytracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable raytracer_SDL2"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/raytracer_SDL2.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -205,11 +205,11 @@ CMakeFiles/raytracer_SDL2.dir/build: raytracer_SDL2
 
 .PHONY : CMakeFiles/raytracer_SDL2.dir/build
 
-CMakeFiles/raytracer_SDL2.dir/requires: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/main.cpp.o.requires
-CMakeFiles/raytracer_SDL2.dir/requires: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/renderer.cpp.o.requires
-CMakeFiles/raytracer_SDL2.dir/requires: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/camera.cpp.o.requires
-CMakeFiles/raytracer_SDL2.dir/requires: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/kdnode.cpp.o.requires
-CMakeFiles/raytracer_SDL2.dir/requires: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer_SDL2/src/raycaster.cpp.o.requires
+CMakeFiles/raytracer_SDL2.dir/requires: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/main.cpp.o.requires
+CMakeFiles/raytracer_SDL2.dir/requires: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/renderer.cpp.o.requires
+CMakeFiles/raytracer_SDL2.dir/requires: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/camera.cpp.o.requires
+CMakeFiles/raytracer_SDL2.dir/requires: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/kdnode.cpp.o.requires
+CMakeFiles/raytracer_SDL2.dir/requires: CMakeFiles/raytracer_SDL2.dir/home/pi/projects/raytracer/src/raycaster.cpp.o.requires
 
 .PHONY : CMakeFiles/raytracer_SDL2.dir/requires
 
@@ -218,6 +218,6 @@ CMakeFiles/raytracer_SDL2.dir/clean:
 .PHONY : CMakeFiles/raytracer_SDL2.dir/clean
 
 CMakeFiles/raytracer_SDL2.dir/depend:
-	cd /home/pi/projects/raytracer_SDL2/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pi/projects/raytracer_SDL2/build /home/pi/projects/raytracer_SDL2/build /home/pi/projects/raytracer_SDL2/build /home/pi/projects/raytracer_SDL2/build /home/pi/projects/raytracer_SDL2/build/CMakeFiles/raytracer_SDL2.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/pi/projects/raytracer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pi/projects/raytracer/build /home/pi/projects/raytracer/build /home/pi/projects/raytracer/build /home/pi/projects/raytracer/build /home/pi/projects/raytracer/build/CMakeFiles/raytracer_SDL2.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/raytracer_SDL2.dir/depend
 
