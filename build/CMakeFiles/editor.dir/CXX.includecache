@@ -531,6 +531,8 @@ mesh_generators/mesh_generator.h
 /home/pi/projects/raytracer/src/editor/mesh_generators/mesh_generator.h
 mesh_generators/plane_mesh_generator.h
 /home/pi/projects/raytracer/src/editor/mesh_generators/plane_mesh_generator.h
+kdnode2.h
+/home/pi/projects/raytracer/src/editor/kdnode2.h
 
 /home/pi/projects/raytracer/src/editor/kdnode2.cpp
 kdnode2.h

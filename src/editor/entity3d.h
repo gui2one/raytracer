@@ -6,6 +6,7 @@
 #include "ogl_geometry_data.h"
 #include "mesh_generators/mesh_generator.h"
 #include "mesh_generators/plane_mesh_generator.h"
+#include "kdnode2.h"
 
 class Entity3D
 {
@@ -28,6 +29,8 @@ public:
 	
 	bool is_selected = false;
 	
+	KDNode * kd_node;
+	
 private:
 
 
@@ -45,6 +48,7 @@ public :
 	
 	void buildVBO();
 	void draw() override;
+	void buildKDTree(int _limit);
 	
 	void setMeshGenerator(MESH_GENERATOR_TYPE _type);
 	void updateMeshGenerator();
@@ -52,6 +56,8 @@ public :
 	
 	MeshGenerator * generator;
 	Mesh mesh;
+	
+	
 	
 	
 private:

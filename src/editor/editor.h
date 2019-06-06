@@ -80,29 +80,33 @@ public :
 	SDL_Renderer * w_renderer;	
 	SDL_GLContext gl_context;
 	
-	
-	
-	// KD Nodes and raycasting stuff
-	void buildKDTree(Entity3D * entity, int _limit = 5);
-	void displayKDTree();
-	void collectKDBoungingBoxes(KDNode* node_ptr);
-	void buildKDTreeBBoxes(std::vector<KDBoundingBox> bboxes);	
 	int kd_polygon_limit;
 	
-	std::vector<KDNode *> kd_nodes;
+	// KD Nodes and raycasting stuff
+	//~ void buildKDTree(Entity3D * entity, int _limit = 5);
+	//~ void displayKDTree();
+	//~ void collectKDBoungingBoxes(KDNode* node_ptr);
+	//~ void buildKDTreeBBoxes(std::vector<KDBoundingBox> bboxes);	
 	
 	
+	//~ std::vector<KDNode *> kd_nodes;
 	
-	std::vector<KDBoundingBox> kd_bboxes;
-	GLenum kdtree_vbo = 0, kdtree_ibo = 0;
 	
-	std::vector<float> kdtree_vertices;
-	std::vector<unsigned int> kdtree_indices;	
+	//~ 
+	//~ std::vector<KDBoundingBox> kd_bboxes;
+	//~ GLenum kdtree_vbo = 0, kdtree_ibo = 0;
+	//~ 
+	//~ std::vector<float> kdtree_vertices;
+	//~ std::vector<unsigned int> kdtree_indices;	
 
 
 	ConstructionGrid c_grid;
 	bool show_construction_grid = true;
 	void toggleConstructionGrid();
+	
+	bool show_wireframe = false;
+	
+	int cur_entity_id = -1;
 	
 	//~ UI ui;
 };

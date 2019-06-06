@@ -1,10 +1,26 @@
 #include "entity3d.h"
 
+static void vec_mult_by_matrix( glm::vec3 & _vec, glm::mat4 & _mat, bool invert = false)
+{
+
+        glm::vec4 temp_vec4 = glm::vec4(_vec.x, _vec.y, _vec.z,1.0f);
+
+
+        if( invert){
+                _vec = glm::inverse(_mat) * temp_vec4 ;
+        } else{
+                _vec = _mat * temp_vec4;
+                //~ printf("__VEC X : %.3f\n", _vec.x);
+        }
+
+}
+
 Entity3D::Entity3D():
 	position(glm::vec3(0.0,0.0,0.0)),
 	rotation(glm::vec3(0.0,0.0,0.0)),
 	scale(glm::vec3(1.0,1.0,1.0)),
-	name("entity3d")
+	name("entity3d"),
+	kd_node(nullptr)
 {
 	
 }
@@ -43,10 +59,11 @@ MeshObject::MeshObject() : Entity3D(), generator(nullptr)
 void MeshObject::setMeshGenerator(MESH_GENERATOR_TYPE _type)
 {
 	switch(_type){
-		case PLANE_MESH_GENERATOR :
+		case GRID_MESH_GENERATOR :
 			generator = new PlaneMeshGenerator();
 			
 			mesh = generator->generate();
+			//~ buildVBO();
 			break;
 	}
 }
@@ -61,6 +78,7 @@ void MeshObject::updateMeshGenerator()
 		
 	}
 }
+
 void MeshObject::buildVBO()
 {
 	
@@ -129,10 +147,10 @@ void MeshObject::buildVBO()
 	
 	
 	
+	buildKDTree(5);
+	
 	
 }
-
-
 
 void MeshObject::draw()
 {
@@ -159,7 +177,59 @@ void MeshObject::draw()
 	//~ printf("--- Drawing MeshObject  -----\n");
 }
 
+void MeshObject::buildKDTree(int _limit)
+{
+	
+	//~ int _limit = 5;
+	std::vector<Triangle*> tris;
+	//~ tris.reserve(entities[mesh_id]->mesh.faces.size());
+
+	for (size_t i = 0; i < mesh.faces.size(); i++)
+	{
+		
+		// triangulate face if needed ... 
+		for (size_t j = 0; j < mesh.faces[i].getNumVertices()-2; j++)
+		{
+			
+			glm::vec3 A, B, C;
+			A = B = C = glm::vec3(0.0, 0.0, 0.0);
+
+	
+			applyTransforms();
+			// apply transforms matrix
+			glm::vec3 tempA = mesh.points[ mesh.faces[i].getVertex(0).point_id ].position;
+			vec_mult_by_matrix(tempA, transforms, false);
+
+			glm::vec3 tempB = mesh.points[ mesh.faces[i].getVertex(1+j).point_id ].position;
+			vec_mult_by_matrix(tempB, transforms, false);				
+
+			glm::vec3 tempC = mesh.points[ mesh.faces[i].getVertex(2+j).point_id ].position;
+			vec_mult_by_matrix(tempC, transforms, false);							
+			
+			A = tempA;
+			B = tempB;
+			C = tempC;
+
+			//~ printf("vec3 value -> %.3f %.3f %.3f\n", A.x, A.y, A.z);
+
+			Triangle* tri_ptr = new Triangle(A, B, C);
+			tri_ptr->id = i;
+			//~ tris.emplace_back(tri_ptr);
+			tris.push_back(tri_ptr);
+			
+		}
+
+	}
+
+	kd_node = new KDNode(_limit);
+	kd_node = kd_node->build(tris, 0);	
+	
+	printf("TRIANGLES --> %d\n", kd_node->triangles.size());
+}
+
 MeshObject::~MeshObject()
 {
 	printf("--- Delete MeshObject\n");
 }
+
+

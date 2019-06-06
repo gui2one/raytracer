@@ -77,6 +77,13 @@ void UI::optionsDialog()
 		m_editor->toggleConstructionGrid();		
 	}
 	
+	static bool show_wireframe = m_editor->show_wireframe;
+	if(ImGui::CheckboxFlags("wireframe", (unsigned int*)&show_wireframe, 1))
+	{
+		m_editor->show_wireframe = show_wireframe;		
+		printf("%s --\n", (m_editor->show_wireframe == true ? "true":"false"));
+	}	
+	
 	ImGui::End();
 }
 
@@ -94,6 +101,7 @@ void UI::entitiesDialog()
 		{
 			if(ImGui::Selectable(entity->name.c_str(), inc == cur)){
 				cur = inc;
+				m_editor->cur_entity_id = cur;
 			}
 			inc++;
 		}

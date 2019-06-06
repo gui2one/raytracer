@@ -563,6 +563,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/editor_camera.cpp.o:
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/editor_camera.cpp.o: /home/pi/projects/raytracer/src/editor/editor_camera.cpp
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/editor_camera.cpp.o: /home/pi/projects/raytracer/src/editor/editor_camera.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/editor_camera.cpp.o: /home/pi/projects/raytracer/src/editor/entity3d.h
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/editor_camera.cpp.o: /home/pi/projects/raytracer/src/editor/kdnode2.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/editor_camera.cpp.o: /home/pi/projects/raytracer/src/editor/mesh_generators/mesh_generator.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/editor_camera.cpp.o: /home/pi/projects/raytracer/src/editor/mesh_generators/plane_mesh_generator.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/editor_camera.cpp.o: /home/pi/projects/raytracer/src/editor/ogl_geometry_data.h
@@ -571,6 +572,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/editor_camera.cpp.o:
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/editor_camera.cpp.o: /home/pi/projects/raytracer/src/editor/utils/editor_mesh_utils.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/editor_camera.cpp.o: /home/pi/projects/raytracer/src/mesh.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/editor_camera.cpp.o: /home/pi/projects/raytracer/src/pch.h
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/editor_camera.cpp.o: /home/pi/projects/raytracer/src/ray.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/editor_camera.cpp.o: /home/pi/projects/raytracer/src/rtmaterial.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/editor_camera.cpp.o: /home/pi/projects/raytracer/src/texture.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/editor_camera.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/./ext/matrix_double2x2.hpp
@@ -808,6 +810,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: ../s
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/color.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/editor/entity3d.cpp
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/editor/entity3d.h
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/editor/kdnode2.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/editor/mesh_generators/mesh_generator.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/editor/mesh_generators/plane_mesh_generator.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/editor/ogl_geometry_data.h
@@ -815,6 +818,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /hom
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/editor/utils/editor_mesh_utils.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/mesh.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/pch.h
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/ray.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/rtmaterial.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/texture.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/./ext/matrix_double2x2.hpp

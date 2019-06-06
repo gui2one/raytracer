@@ -7,7 +7,7 @@
 
 enum MESH_GENERATOR_TYPE
 {
-	PLANE_MESH_GENERATOR
+	GRID_MESH_GENERATOR
 };
 
 class MeshGenerator
