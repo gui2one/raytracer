@@ -92,19 +92,29 @@ namespace EditorMeshUtils{
 		
 		
 		mesh.points = points;
-		
+		printf("num points in Grid : %d\n", points.size());
 		std::vector<Face> faces;
-		int num_faces = (segs_width-1) * (segs_length-1);
-		for (int i = 0; i < num_faces; i++)
+		//~ int num_faces = (segs_width-1) * (segs_length-1);
+
+		for (int j = 0; j < segs_length-1; j++)
 		{
-			Face face;
-			face.setVertices({ Vertex(i*4), Vertex(i*4 + 1), Vertex(i*4 + 2), Vertex(i*4 + 3)});
-			faces.push_back(face);			
+			for (int i = 0; i < segs_width-1; i++)
+			{
+				Face face;
+				face.setVertices(
+					{ 
+						Vertex(i+ j * (segs_width-1)), 
+						Vertex(i+ j * (segs_width-1) + 1), 
+						Vertex(i+ j * (segs_width-1) + segs_width +1),
+						Vertex(i+ j * (segs_width-1) + segs_width)
+					}
+				);
+				faces.push_back(face);			
+			}
 		}
-		
 
 		mesh.faces = faces;		
-		
+		printf("num faces in Grid : %d\n", faces.size());
 		return mesh;
 	}
 	

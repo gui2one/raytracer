@@ -23,7 +23,7 @@ set(CMAKE_BUILD_TYPE "Debug")
 
 
 
-set(PROJECT_ROOT ~/projects/raytracer_SDL2/)
+set(PROJECT_ROOT ~/projects/raytracer/)
 
 include_directories(../src/include/)
 include_directories(../src/include/opensubdiv)
