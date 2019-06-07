@@ -146,8 +146,8 @@ void MeshObject::buildVBO()
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));		
 	
 	
-	
-	buildKDTree(5);
+	deleteKDTree();
+	buildKDTree(50);
 	
 	
 }
@@ -179,7 +179,7 @@ void MeshObject::draw()
 
 void MeshObject::buildKDTree(int _limit)
 {
-	
+
 	//~ int _limit = 5;
 	std::vector<Triangle*> tris;
 	//~ tris.reserve(entities[mesh_id]->mesh.faces.size());
@@ -220,11 +220,27 @@ void MeshObject::buildKDTree(int _limit)
 		}
 
 	}
+	
+
 
 	kd_node = new KDNode(_limit);
 	kd_node = kd_node->build(tris, 0);	
 	
 	printf("TRIANGLES --> %d\n", kd_node->triangles.size());
+}
+
+
+void MeshObject::deleteKDTree()
+{
+	printf("Trying to delete KDNode\n");
+	if(kd_node != nullptr)
+	{
+		delete kd_node;
+		printf("\tdeleted KDNode\n");
+	}else{
+		printf("\tKDNode is NULL\n");
+	}
+	
 }
 
 MeshObject::~MeshObject()

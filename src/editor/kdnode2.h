@@ -5,6 +5,7 @@
 #include "../ray.h"
 
 
+
 struct KDBoundingBox{
 	
 	
@@ -21,7 +22,8 @@ struct Triangle{
 	
 	Triangle();
 	Triangle(glm::vec3 _A, glm::vec3 _B, glm::vec3 _C);
-	
+	Triangle(const Triangle& other);
+	~Triangle();
 	
 	glm::vec3 A, B, C;
 	unsigned int id = 0;
@@ -34,6 +36,8 @@ class KDNode
 {
 	public:
 		KDNode(int polygons_limit = 50);
+		
+		~KDNode();
 		KDNode * left;
 		KDNode * right;
 		

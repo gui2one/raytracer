@@ -23,12 +23,12 @@ PlaneMeshGenerator::PlaneMeshGenerator()
 	
 	param_segs_width = new Param<int>();
 	param_segs_width->setName("Segs Width");
-	param_segs_width->setValue(3);
+	param_segs_width->setValue(5);
 	params.push_back(param_segs_width);	
 	
 	param_segs_length = new Param<int>();
 	param_segs_length->setName("Segs Length");
-	param_segs_length->setValue(3);
+	param_segs_length->setValue(5);
 	params.push_back(param_segs_length);		
 	
 

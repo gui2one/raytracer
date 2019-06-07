@@ -89,6 +89,10 @@ Triangle::Triangle(glm::vec3 _A, glm::vec3 _B, glm::vec3 _C)
 	C = _C;		
 }
 
+Triangle::Triangle(const Triangle& other) // copy constructor
+{
+	printf("COPY TRIANGLE\n");
+}
 KDBoundingBox Triangle::getBoundingBox()
 {
 	glm::vec3 max = glm::vec3(-1000000000.0, -1000000000.0, -1000000000.0);
@@ -168,6 +172,11 @@ glm::vec3 Triangle::getMidPoint()
 	glm::vec3 mid_point = A + B + C;
 	return (mid_point / 3.0f);
 }
+
+Triangle::~Triangle()
+{
+	printf("\tdelete Triangle --\n");
+}
 //// end Triangle implementation
 
 //// Implementing KD Node
@@ -184,12 +193,12 @@ KDNode * KDNode::build(std::vector<Triangle*>& tris, int _depth) const
 	//~ printf("\tNum Triangles : %d\n", tris.size());
 	
 	
-	KDNode* node = new KDNode();
+	KDNode * node = new KDNode();
 	node->depth = _depth;
 	node->triangles = tris;
 	node->left = NULL;
 	node->right = NULL;
-	node->bbox = KDBoundingBox();
+	//~ node->bbox = KDBoundingBox();
 	
 	if(tris.size() == 0)
 		return node;
@@ -274,4 +283,29 @@ KDNode * KDNode::build(std::vector<Triangle*>& tris, int _depth) const
 	
 }
 
+KDNode::~KDNode()
+{
+	if( depth != -1)
+	{
+		//~ for (Triangle* tri : triangles)
+		//~ {
+			//~ if(tri != nullptr)
+				//~ delete tri;
+		//~ }
+		triangles.clear();	
+		printf("KDNode DESTRUCTOR. Depth : %d\n", depth);
+		if(left != NULL)
+		{
+			delete left;
+		}
+		if(right != NULL)
+		{
+			delete right;
+		}	
+	}
+	
 
+	
+	
+
+}
