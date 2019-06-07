@@ -7,7 +7,7 @@ int main(int argc, char** argv){
 	
 	
 	
-	printf("Hello Editor\n");
+	//~ printf("Hello Editor\n");
 	Editor editor;
 	UI ui;
 	editor.init();

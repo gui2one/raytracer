@@ -62,42 +62,25 @@ public :
 
 	bool mouse_over_ui = false;
 	bool keyboard_captured = false;
-	
-	//~ std::vector<unsigned int> selected_entities;
+
 	
 	std::vector<Entity3D*> entities;
 	std::vector<OGL_geometry_data> OGL_geometry_datas;
 	
 	// window params
 	int w_width, w_height;
-	
-	// TTF_Font* font;
+
 	bool is_running = true;
 	
 	int update_inc = 0;
 	
 	SDL_Window * window;
-	SDL_Renderer * w_renderer;	
+	//~ SDL_Renderer * w_renderer;	
 	SDL_GLContext gl_context;
 	
 	int kd_polygon_limit;
 	
-	// KD Nodes and raycasting stuff
-	//~ void buildKDTree(Entity3D * entity, int _limit = 5);
-	//~ void displayKDTree();
-	//~ void collectKDBoungingBoxes(KDNode* node_ptr);
-	//~ void buildKDTreeBBoxes(std::vector<KDBoundingBox> bboxes);	
-	
-	
-	//~ std::vector<KDNode *> kd_nodes;
-	
-	
-	//~ 
-	//~ std::vector<KDBoundingBox> kd_bboxes;
-	//~ GLenum kdtree_vbo = 0, kdtree_ibo = 0;
-	//~ 
-	//~ std::vector<float> kdtree_vertices;
-	//~ std::vector<unsigned int> kdtree_indices;	
+
 
 
 	ConstructionGrid c_grid;
@@ -107,7 +90,6 @@ public :
 	bool show_wireframe = false;
 	
 	int cur_entity_id = -1;
-	
-	//~ UI ui;
+
 };
 #endif /* EDITOR_H */

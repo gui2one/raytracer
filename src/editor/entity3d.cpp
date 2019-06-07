@@ -60,11 +60,17 @@ void MeshObject::setMeshGenerator(MESH_GENERATOR_TYPE _type)
 {
 	switch(_type){
 		case GRID_MESH_GENERATOR :
-			generator = new PlaneMeshGenerator();
+			generator = new GridMeshGenerator();
 			
 			mesh = generator->generate();
-			//~ buildVBO();
+			
 			break;
+		case BOX_MESH_GENERATOR :
+			generator = new BoxMeshGenerator();
+			
+			mesh = generator->generate();
+			
+			break;			
 	}
 }
 

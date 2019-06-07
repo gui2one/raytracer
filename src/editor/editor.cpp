@@ -101,7 +101,8 @@ void Editor::init()
 	glewExperimental = GL_TRUE;
 
 	MeshObject * box = new MeshObject();
-	box->mesh = EditorMeshUtils::makeSimpleBox();
+	box->setMeshGenerator(BOX_MESH_GENERATOR);
+	box->position = glm::vec3(3.0, 3.0, 3.0);
 	box->buildVBO();
 	entities.push_back(box);
 	
@@ -159,6 +160,8 @@ void Editor::init()
 	//~ }
 	
 	c_grid.init();
+	
+	//~ printf("INIT!!!\n");
 
 }
 
@@ -273,18 +276,18 @@ void Editor::manageEvents()
 							if((p_mesh = dynamic_cast<MeshObject*>(entity))){
 								if(p_mesh->kd_node != nullptr)
 								{
-									printf("check kdnode\n");
-									printf("check kdnode. num triangles : %d\n", p_mesh->kd_node->triangles.size());
+									//~ printf("check kdnode\n");
+									//~ printf("check kdnode. num triangles : %d\n", p_mesh->kd_node->triangles.size());
 									kd_nodes2.push_back(p_mesh->kd_node);
 								}
 							}
 						}
 						
 						caster.intersectKDNodes(ray, kd_nodes2, hit_datas, false);
-						printf("got hit ??? \n");
+						//~ printf("got hit ??? \n");
 						if(hit_datas.size() > 0 )
 						{
-							printf("got hit\n");
+							//~ printf("got hit\n");
 							if(keyboard_state[SDL_SCANCODE_LSHIFT])
 							{
 								
@@ -331,14 +334,14 @@ void Editor::manageEvents()
 		if(Event.type == SDL_WINDOWEVENT){
 		
 			if (Event.window.event == SDL_WINDOWEVENT_RESIZED  || Event.window.event == SDL_WINDOWEVENT_MAXIMIZED) {
-				printf("MESSAGE:Resizing window... %d %d\n", Event.window.data1, Event.window.data2);
+				//~ printf("MESSAGE:Resizing window... %d %d\n", Event.window.data1, Event.window.data2);
 				
 				w_width = Event.window.data1;
 				w_height = Event.window.data2;
 				
 			}
 			if(Event.window.event == SDL_WINDOWEVENT_MINIMIZED){
-				printf("MESSAGE:Minimizing window...\n" );
+				//~ printf("MESSAGE:Minimizing window...\n" );
 			}
 		}
 	}
@@ -569,164 +572,7 @@ void Editor::toggleConstructionGrid()
 	show_construction_grid = !show_construction_grid;
 }
 
-//~ void Editor::buildKDTree(Entity3D * entity, int _limit)
-//~ {
-//~ 
-	//~ Entity3D  * p = entity;
-	//~ MeshObject * mesh_p = nullptr;
-	//~ if( (mesh_p = dynamic_cast<MeshObject *>(p)))
-	//~ {
-		//~ std::vector<Triangle*> tris;
-		//~ 
-//~ 
-		//~ for (size_t i = 0; i < mesh_p->mesh.faces.size(); i++)
-		//~ {
-			//~ // triangulate face if needed ... 
-			//~ for (size_t j = 0; j < mesh_p->mesh.faces[i].getNumVertices()-2; j++)
-			//~ {
-				//~ 
-				//~ glm::vec3 A, B, C;
-				//~ A = B = C = glm::vec3(0.0, 0.0, 0.0);
-//~ 
-		//~ 
-				//~ mesh_p->applyTransforms();
-				//~ // apply transforms matrix
-				//~ glm::vec3 tempA = mesh_p->mesh.points[ mesh_p->mesh.faces[i].getVertex(0).point_id ].position;
-				//~ vec_mult_by_matrix(tempA, mesh_p->transforms, false);
-//~ 
-				//~ glm::vec3 tempB = mesh_p->mesh.points[ mesh_p->mesh.faces[i].getVertex(1+j).point_id ].position;
-				//~ vec_mult_by_matrix(tempB, mesh_p->transforms, false);				
-//~ 
-				//~ glm::vec3 tempC = mesh_p->mesh.points[ mesh_p->mesh.faces[i].getVertex(2+j).point_id ].position;
-				//~ vec_mult_by_matrix(tempC, mesh_p->transforms, false);							
-				//~ 
-				//~ A = tempA;
-				//~ B = tempB;
-				//~ C = tempC;
-//~ 
-		//~ 
-//~ 
-				//~ Triangle* tri_ptr = new Triangle(A, B, C);
-				//~ tri_ptr->id = i;
-				//~ 
-				//~ tris.push_back(tri_ptr);
-				//~ 
-			//~ }
-//~ 
-		//~ }
-//~ 
-		//~ KDNode * kd_node = new KDNode(_limit);
-		//~ kd_node = kd_node->build(tris, 0);
-		//~ kd_nodes.push_back(kd_node);
-	//~ }
-//~ 
-//~ }
 
-//~ void Editor::collectKDBoungingBoxes(KDNode* node_ptr)
-//~ {
-	//~ 
-	//~ kd_bboxes.push_back(node_ptr->bbox);
-	//~ if( node_ptr->left->triangles.size() > 0)
-	//~ {
-		//~ collectKDBoungingBoxes(node_ptr->left);
-	//~ }
-	//~ if( node_ptr->right->triangles.size() > 0)
-	//~ {
-		//~ collectKDBoungingBoxes(node_ptr->right);
-	//~ }
-//~ 
-	//~ 
-//~ }
-
-//~ void Editor::buildKDTreeBBoxes(std::vector<KDBoundingBox> bboxes)
-//~ {
-	//~ kdtree_vertices.clear();
-	//~ kdtree_indices.clear();
-//~ 
-	//~ for (size_t box_id = 0; box_id < bboxes.size(); box_id++)
-	//~ {
-//~ 
-		//~ // bottom 4 points
-		//~ kdtree_vertices.insert( kdtree_vertices.end(), { bboxes[box_id].min.x, bboxes[box_id].min.y, bboxes[box_id].min.z});
-		//~ kdtree_vertices.insert( kdtree_vertices.end(), { bboxes[box_id].max.x, bboxes[box_id].min.y, bboxes[box_id].min.z});
-		//~ kdtree_vertices.insert( kdtree_vertices.end(), { bboxes[box_id].max.x, bboxes[box_id].max.y, bboxes[box_id].min.z});
-		//~ kdtree_vertices.insert( kdtree_vertices.end(), { bboxes[box_id].min.x, bboxes[box_id].max.y, bboxes[box_id].min.z});
-//~ 
-		//~ // top 4 points
-		//~ kdtree_vertices.insert( kdtree_vertices.end(), { bboxes[box_id].min.x, bboxes[box_id].min.y, bboxes[box_id].max.z});
-		//~ kdtree_vertices.insert( kdtree_vertices.end(), { bboxes[box_id].max.x, bboxes[box_id].min.y, bboxes[box_id].max.z});
-		//~ kdtree_vertices.insert( kdtree_vertices.end(), { bboxes[box_id].max.x, bboxes[box_id].max.y, bboxes[box_id].max.z});
-		//~ kdtree_vertices.insert( kdtree_vertices.end(), { bboxes[box_id].min.x, bboxes[box_id].max.y, bboxes[box_id].max.z});
-//~ 
-//~ 
-//~ 
-		//~ std::vector<unsigned int> indices = {
-//~ 
-			//~ 0,1,1,2,2,3,3,0,
-			//~ 4,5,5,6,6,7,7,4,
-			//~ 0,4,1,5,2,6,3,7
-		//~ };
-//~ 
-		//~ for (size_t i = 0; i < indices.size(); i++)
-		//~ {
-			//~ indices[i] += box_id * 8;
-		//~ }
-//~ 
-		//~ kdtree_indices.insert(kdtree_indices.end(), indices.begin(), indices.end());
-//~ 
-//~ 
-	//~ }
-//~ 
-//~ 
-	//~ 
-	//~ if(kdtree_vbo == 0)
-	//~ {
-		//~ GLCall(glGenBuffers(1, &kdtree_vbo));
-	//~ 
-	//~ }else{		
-		//~ GLCall(glDeleteBuffers(1, &kdtree_vbo));
-		//~ GLCall(glGenBuffers(1, &kdtree_vbo));
-	//~ }	
-	//~ GLCall(glGenBuffers(1,&kdtree_vbo));
-	//~ 
-//~ 
-	//~ GLCall(glBindBuffer(GL_ARRAY_BUFFER, kdtree_vbo));
-	//~ GLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(float)* kdtree_vertices.size(), kdtree_vertices.data(), GL_STATIC_DRAW));
-	//~ GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
-//~ 
-	//~ if(kdtree_ibo == 0)
-	//~ {
-		//~ GLCall(glGenBuffers(1, &kdtree_ibo));
-	//~ }else{		
-		//~ GLCall(glDeleteBuffers(1, &kdtree_ibo));
-		//~ GLCall(glGenBuffers(1, &kdtree_ibo));
-	//~ }
-	//~ 
-	//~ GLCall(glGenBuffers(1,&kdtree_ibo));
-//~ 
-	//~ GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, kdtree_ibo));
-	//~ GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int)* kdtree_indices.size(), kdtree_indices.data(), GL_STATIC_DRAW));
-	//~ GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
-//~ 
-//~ }
-//~ 
-//~ void Editor::displayKDTree()
-//~ {
-//~ 
-	//~ GLCall(glBindBuffer(GL_ARRAY_BUFFER, kdtree_vbo));
-	//~ GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, kdtree_ibo));
-	//~ GLCall(glEnableVertexAttribArray(0));
-//~ 
-	//~ GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0));
-//~ 
-//~ 
-	//~ GLCall(glDrawElements(GL_LINES, kdtree_indices.size() , GL_UNSIGNED_INT, nullptr ));
-//~ 
-	//~ GLCall(glDisableVertexAttribArray(0));
-	//~ GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
-	//~ GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
-//~ 
-//~ }
 
 Editor::~Editor()
 {

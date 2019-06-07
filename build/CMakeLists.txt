@@ -19,7 +19,7 @@ ENDIF()
 set(CMAKE_CXX_FLAGS -std=c++14)
 add_definitions(-Wall -Wno-unused-function)
 #~ set(CMAKE_CXX_FLAGS -Wall)
-set(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_BUILD_TYPE Release)
 
 
 
@@ -141,7 +141,8 @@ add_executable(editor
 	
 	../src/editor/utils/editor_mesh_utils.cpp
 	../src/editor/mesh_generators/mesh_generator.cpp
-	../src/editor/mesh_generators/plane_mesh_generator.cpp
+	../src/editor/mesh_generators/grid_mesh_generator.cpp
+	../src/editor/mesh_generators/box_mesh_generator.cpp
 )
 
 target_link_libraries(editor coreLib)

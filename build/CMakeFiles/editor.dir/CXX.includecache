@@ -529,8 +529,10 @@ ogl_geometry_data.h
 /home/pi/projects/raytracer/src/editor/ogl_geometry_data.h
 mesh_generators/mesh_generator.h
 /home/pi/projects/raytracer/src/editor/mesh_generators/mesh_generator.h
-mesh_generators/plane_mesh_generator.h
-/home/pi/projects/raytracer/src/editor/mesh_generators/plane_mesh_generator.h
+mesh_generators/grid_mesh_generator.h
+/home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.h
+mesh_generators/box_mesh_generator.h
+/home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.h
 kdnode2.h
 /home/pi/projects/raytracer/src/editor/kdnode2.h
 
@@ -552,6 +554,26 @@ editor.h
 ui/ui.h
 /home/pi/projects/raytracer/src/editor/ui/ui.h
 
+/home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.cpp
+box_mesh_generator.h
+/home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.h
+
+/home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.h
+mesh_generator.h
+/home/pi/projects/raytracer/src/editor/mesh_generators/mesh_generator.h
+../utils/editor_mesh_utils.h
+/home/pi/projects/raytracer/src/editor/utils/editor_mesh_utils.h
+
+/home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.cpp
+grid_mesh_generator.h
+/home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.h
+
+/home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.h
+mesh_generator.h
+/home/pi/projects/raytracer/src/editor/mesh_generators/mesh_generator.h
+../utils/editor_mesh_utils.h
+/home/pi/projects/raytracer/src/editor/utils/editor_mesh_utils.h
+
 /home/pi/projects/raytracer/src/editor/mesh_generators/mesh_generator.cpp
 mesh_generator.h
 /home/pi/projects/raytracer/src/editor/mesh_generators/mesh_generator.h
@@ -563,16 +585,6 @@ mesh_generator.h
 /home/pi/projects/raytracer/src/mesh.h
 ../param.h
 /home/pi/projects/raytracer/src/editor/param.h
-
-/home/pi/projects/raytracer/src/editor/mesh_generators/plane_mesh_generator.cpp
-plane_mesh_generator.h
-/home/pi/projects/raytracer/src/editor/mesh_generators/plane_mesh_generator.h
-
-/home/pi/projects/raytracer/src/editor/mesh_generators/plane_mesh_generator.h
-mesh_generator.h
-/home/pi/projects/raytracer/src/editor/mesh_generators/mesh_generator.h
-../utils/editor_mesh_utils.h
-/home/pi/projects/raytracer/src/editor/utils/editor_mesh_utils.h
 
 /home/pi/projects/raytracer/src/editor/ogl_geometry_data.h
 

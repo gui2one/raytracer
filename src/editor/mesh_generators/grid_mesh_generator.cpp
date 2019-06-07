@@ -1,7 +1,7 @@
-#include "plane_mesh_generator.h"
+#include "grid_mesh_generator.h"
 
 
-PlaneMeshGenerator::PlaneMeshGenerator()
+GridMeshGenerator::GridMeshGenerator()
 	: MeshGenerator()
 {
 	
@@ -35,7 +35,7 @@ PlaneMeshGenerator::PlaneMeshGenerator()
 
 }
 
-Mesh PlaneMeshGenerator::generate()
+Mesh GridMeshGenerator::generate()
 {
 	//~ std::cout << "PLANE Generator Generate function" << std::endl;
 	

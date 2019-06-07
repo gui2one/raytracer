@@ -4,8 +4,11 @@
 #include "../pch.h"
 #include "../mesh.h"
 #include "ogl_geometry_data.h"
+
 #include "mesh_generators/mesh_generator.h"
-#include "mesh_generators/plane_mesh_generator.h"
+#include "mesh_generators/grid_mesh_generator.h"
+#include "mesh_generators/box_mesh_generator.h"
+
 #include "kdnode2.h"
 
 class Entity3D

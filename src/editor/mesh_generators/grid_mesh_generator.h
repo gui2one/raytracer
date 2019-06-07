@@ -1,12 +1,12 @@
-#ifndef PLANE_MESH_GENERATOR_H
-#define PLANE_MESH_GENERATOR_H
+#ifndef GRID_MESH_GENERATOR_H
+#define GRID_MESH_GENERATOR_H
 
 #include "mesh_generator.h"
 #include "../utils/editor_mesh_utils.h"
-class PlaneMeshGenerator: public MeshGenerator
+class GridMeshGenerator: public MeshGenerator
 {
 	public:
-		PlaneMeshGenerator();
+		GridMeshGenerator();
 			
 		Mesh generate();
 	private:
@@ -19,4 +19,4 @@ class PlaneMeshGenerator: public MeshGenerator
 		/* add your private declarations */
 };
 
-#endif /* PLANE_MESH_GENERATOR_H */ 
+#endif /* GRID_MESH_GENERATOR_H */ 

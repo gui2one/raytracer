@@ -5,9 +5,11 @@
 #include "../../mesh.h"
 #include "../param.h"
 
+
 enum MESH_GENERATOR_TYPE
 {
-	GRID_MESH_GENERATOR
+	GRID_MESH_GENERATOR,
+	BOX_MESH_GENERATOR
 };
 
 class MeshGenerator

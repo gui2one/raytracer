@@ -5,6 +5,30 @@ static float degToRad(float degrees)
 	return degrees / 180.0 * PI;
 }
 
+static void offset_indices(std::vector<unsigned int>& indices, int offset)
+{
+	for (size_t i = 0; i < indices.size(); i++)
+	{
+		indices[i] += offset;
+	}
+	
+}
+
+//~ static void offsetFacesPointID(std::vector<Face>& faces, int offset)
+//~ {
+	//~ for (Face face : faces)
+	//~ {
+		//~ for (size_t i = 0; i < face.getNumVertices(); i++)
+		//~ {
+			//~ auto cur_id = face.getVertex(i).point_id;
+			//~ cur_id += offset;
+			//~ face.getVertex(i).point_id = cur_id;
+		//~ }
+		//~ 
+	//~ }
+	//~ 
+//~ }
+
 namespace EditorMeshUtils{
 	
 	Mesh makeQuad(float width, float length)
@@ -91,9 +115,9 @@ namespace EditorMeshUtils{
 				face.setVertices(
 					{ 
 						Vertex(i+ j * (segs_width)), 
-						Vertex(i+ j * (segs_width) + 1), 
+						Vertex(i+ j * (segs_width) + segs_width),
 						Vertex(i+ j * (segs_width) + segs_width +1),
-						Vertex(i+ j * (segs_width) + segs_width)
+						Vertex(i+ j * (segs_width) + 1)
 					}
 				);
 				faces.push_back(face);			
@@ -103,6 +127,48 @@ namespace EditorMeshUtils{
 		mesh.faces = faces;		
 		
 		return mesh;
+	}
+	
+	Mesh merge(Mesh& mesh1, Mesh& mesh2)
+	{
+		Mesh merged = mesh1;
+		Mesh temp2 = mesh2;
+
+		merged.points.insert(
+			merged.points.end(), temp2.points.begin(), temp2.points.end()
+		);
+		
+
+		
+		for (size_t face_id = 0; face_id < temp2.faces.size(); face_id++)
+		{
+			for (size_t vert_id = 0; vert_id < temp2.faces[face_id].vertices.size(); vert_id++)
+			{
+				Vertex * cur_vert = &temp2.faces[face_id].vertices[vert_id];
+				
+				
+				unsigned int cur_id = temp2.faces[face_id].getVertex(vert_id).point_id;
+				cur_id += (unsigned int)mesh1.points.size();
+				
+				
+				
+				cur_vert->setPointID(cur_id);
+				
+				
+				temp2.faces[face_id].getVertex(vert_id).setPointID(cur_id);
+				
+				
+				
+			}
+			
+		}	
+		
+
+		merged.faces.insert(
+			merged.faces.end(), temp2.faces.begin(), temp2.faces.end()
+		);
+		
+		return merged;
 	}
 	
 	void translate(Mesh& _mesh, glm::vec3 _vec)

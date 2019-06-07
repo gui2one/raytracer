@@ -16,7 +16,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/raycaster2.cpp.o"
   "CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/utils/editor_mesh_utils.cpp.o"
   "CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/mesh_generator.cpp.o"
-  "CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/plane_mesh_generator.cpp.o"
+  "CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.cpp.o"
+  "CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.cpp.o"
   "editor.pdb"
   "editor"
 )

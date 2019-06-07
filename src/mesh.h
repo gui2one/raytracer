@@ -39,6 +39,11 @@ struct Vertex
 		//~ printf("copy Vertex !!\n");
 	}
 	
+	inline void setPointID(unsigned int _id)
+	{
+		point_id = _id;
+	}
+	
 	
 	
 	unsigned int point_id;
@@ -60,8 +65,10 @@ class Face
 		inline size_t getNumVertices(){ return vertices.size(); }
 		inline Vertex getVertex(int _id) const { return vertices[_id];}
 		inline void setVertices( std::vector<Vertex> _vertices){ vertices = _vertices; }
-	private :
+		
 		std::vector<Vertex> vertices;
+	private :
+		
 };
 
 struct BoundingBox
