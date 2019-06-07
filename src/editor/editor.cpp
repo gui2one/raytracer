@@ -265,7 +265,7 @@ void Editor::manageEvents()
 						Ray ray = caster.castRay(cd, *(cameras[cur_cam_id]));
 						
 						std::vector<HitData> hit_datas;
-						std::vector<KDNode*> kd_nodes2;
+						std::vector<std::shared_ptr<KDNode> > kd_nodes2;
 						for (Entity3D* entity: entities)
 						{
 							MeshObject * p_mesh = nullptr;

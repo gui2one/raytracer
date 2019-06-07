@@ -2,7 +2,7 @@
 #define PCH_H
 
 #include <algorithm>
-
+#include <memory>
 #include <GL/glew.h>
 
 #include <SDL2/SDL.h>

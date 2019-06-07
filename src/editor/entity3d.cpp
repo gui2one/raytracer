@@ -181,7 +181,7 @@ void MeshObject::buildKDTree(int _limit)
 {
 
 	//~ int _limit = 5;
-	std::vector<Triangle*> tris;
+	std::vector<std::shared_ptr<Triangle> > tris;
 	//~ tris.reserve(entities[mesh_id]->mesh.faces.size());
 
 	for (size_t i = 0; i < mesh.faces.size(); i++)
@@ -212,7 +212,7 @@ void MeshObject::buildKDTree(int _limit)
 
 			//~ printf("vec3 value -> %.3f %.3f %.3f\n", A.x, A.y, A.z);
 
-			Triangle* tri_ptr = new Triangle(A, B, C);
+			std::shared_ptr<Triangle> tri_ptr = std::make_shared<Triangle>(A, B, C);
 			tri_ptr->id = i;
 			//~ tris.emplace_back(tri_ptr);
 			tris.push_back(tri_ptr);
@@ -223,23 +223,23 @@ void MeshObject::buildKDTree(int _limit)
 	
 
 
-	kd_node = new KDNode(_limit);
+	kd_node = std::make_shared<KDNode>(_limit);
 	kd_node = kd_node->build(tris, 0);	
 	
-	printf("TRIANGLES --> %d\n", kd_node->triangles.size());
+	//~ printf("TRIANGLES --> %d\n", kd_node->triangles.size());
 }
 
 
 void MeshObject::deleteKDTree()
 {
-	printf("Trying to delete KDNode\n");
-	if(kd_node != nullptr)
-	{
-		delete kd_node;
-		printf("\tdeleted KDNode\n");
-	}else{
-		printf("\tKDNode is NULL\n");
-	}
+	//~ printf("Trying to delete KDNode\n");
+	//~ if(kd_node != nullptr)
+	//~ {
+		//~ delete kd_node;
+		//~ printf("\tdeleted KDNode\n");
+	//~ }else{
+		//~ printf("\tKDNode is NULL\n");
+	//~ }
 	
 }
 

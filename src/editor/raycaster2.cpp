@@ -154,7 +154,7 @@ glm::vec3 Raycaster::screenToWorld_2(ClickData click_data, const Camera& camera)
 	return screen_pos;
 }
 
-bool Raycaster::intersectKDNode(Ray& ray, KDNode * kd_node, int mesh_id, std::vector<HitData>& hit_datas, bool bail_early)
+bool Raycaster::intersectKDNode(Ray& ray, std::shared_ptr<KDNode> kd_node, int mesh_id, std::vector<HitData>& hit_datas, bool bail_early)
 {
 	
 	//~ bool hit;
@@ -213,7 +213,7 @@ bool Raycaster::intersectKDNode(Ray& ray, KDNode * kd_node, int mesh_id, std::ve
 	return false;
 }
 
-bool Raycaster::intersectKDNodes(Ray& ray, std::vector<KDNode *> kd_nodes, std::vector<HitData>& hit_datas, bool bail_early)
+bool Raycaster::intersectKDNodes(Ray& ray, std::vector<std::shared_ptr<KDNode>> kd_nodes, std::vector<HitData>& hit_datas, bool bail_early)
 {
 	int num_hits = 0;
 	for (size_t i = 0; i < kd_nodes.size(); i++)

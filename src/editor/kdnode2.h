@@ -6,6 +6,8 @@
 
 
 
+
+
 struct KDBoundingBox{
 	
 	
@@ -38,17 +40,17 @@ class KDNode
 		KDNode(int polygons_limit = 50);
 		
 		~KDNode();
-		KDNode * left;
-		KDNode * right;
+		std::shared_ptr<KDNode> left;
+		std::shared_ptr<KDNode> right;
 		
 		
-		KDNode * build(std::vector<Triangle*>& tris, int depth) const;
+		std::shared_ptr<KDNode> build(std::vector<std::shared_ptr<Triangle> >& tris, int depth) const;
 		
 		
 		int polygons_limit;
 		
 		KDBoundingBox bbox;
-		std::vector<Triangle*> triangles;
+		std::vector<std::shared_ptr<Triangle> > triangles;
 		int depth = -1;
 				
 	private:

@@ -175,7 +175,7 @@ glm::vec3 Triangle::getMidPoint()
 
 Triangle::~Triangle()
 {
-	printf("\tdelete Triangle --\n");
+	//~ printf("\tdelete Triangle --\n");
 }
 //// end Triangle implementation
 
@@ -186,14 +186,14 @@ KDNode::KDNode(int limit)
 	polygons_limit = limit;
 }
 
-KDNode * KDNode::build(std::vector<Triangle*>& tris, int _depth) const
+std::shared_ptr<KDNode> KDNode::build(std::vector<std::shared_ptr<Triangle> >& tris, int _depth) const
 {
 	
 	//~ printf("-- Building KDNode. Depth : %d\n", depth);
 	//~ printf("\tNum Triangles : %d\n", tris.size());
 	
 	
-	KDNode * node = new KDNode();
+	std::shared_ptr<KDNode> node = std::make_shared<KDNode>();
 	node->depth = _depth;
 	node->triangles = tris;
 	node->left = NULL;
@@ -206,10 +206,10 @@ KDNode * KDNode::build(std::vector<Triangle*>& tris, int _depth) const
 	if(tris.size() == 1)
 	{
 		node->bbox = tris[0]->getBoundingBox();
-		node->left = new KDNode();
-		node->right = new KDNode();
-		node->left->triangles = std::vector<Triangle*>();
-		node->right->triangles = std::vector<Triangle*>();
+		node->left  = std::make_shared<KDNode>();
+		node->right = std::make_shared<KDNode>();
+		node->left->triangles  = std::vector<std::shared_ptr<Triangle> >();
+		node->right->triangles = std::vector<std::shared_ptr<Triangle> >();
 		
 		return node;
 	}
@@ -240,8 +240,8 @@ KDNode * KDNode::build(std::vector<Triangle*>& tris, int _depth) const
 	
 	
 	
-	std::vector<Triangle*> left_tris;
-	std::vector<Triangle*> right_tris;
+	std::vector<std::shared_ptr<Triangle> > left_tris;
+	std::vector<std::shared_ptr<Triangle> > right_tris;
 	int axis = node->bbox.getLongestAxis();
 	
 
@@ -270,10 +270,10 @@ KDNode * KDNode::build(std::vector<Triangle*>& tris, int _depth) const
 	}else{
 		
 		//~ printf("reached polygon limit of %d!!\n", polygons_limit);
-		node->left = new KDNode();
-		node->right = new KDNode();
-		node->left->triangles = std::vector<Triangle*>();
-		node->right->triangles = std::vector<Triangle*>();
+		node->left = std::make_shared<KDNode>();
+		node->right = std::make_shared<KDNode>();
+		node->left->triangles = std::vector<std::shared_ptr<Triangle> >();
+		node->right->triangles = std::vector<std::shared_ptr<Triangle> >();
 	}
 	
 	return node;
@@ -285,26 +285,9 @@ KDNode * KDNode::build(std::vector<Triangle*>& tris, int _depth) const
 
 KDNode::~KDNode()
 {
-	if( depth != -1)
-	{
-		//~ for (Triangle* tri : triangles)
-		//~ {
-			//~ if(tri != nullptr)
-				//~ delete tri;
-		//~ }
-		triangles.clear();	
-		printf("KDNode DESTRUCTOR. Depth : %d\n", depth);
-		if(left != NULL)
-		{
-			delete left;
-		}
-		if(right != NULL)
-		{
-			delete right;
-		}	
-	}
-	
 
+	
+	//~ printf("KDNode Destructor\n");
 	
 	
 

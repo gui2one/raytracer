@@ -29,7 +29,7 @@ public:
 	
 	bool is_selected = false;
 	
-	KDNode * kd_node;
+	std::shared_ptr<KDNode> kd_node;
 	
 private:
 
