@@ -23,7 +23,7 @@ public:
 	void hideAllDialogs();
 	void draw();
 	
-	void paramWidget(BaseParam * param, std::function<void()> callback = [](){});
+	void paramWidget( BaseParam * param, int imgui_ID, std::function<void()> callback = [](){});
 		
 		
 	bool b_show_options_dialog = false;

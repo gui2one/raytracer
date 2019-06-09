@@ -23,7 +23,7 @@ void main()
 	//~ lightDir = normalize(u_light_positions[0] - f_pos);  
 	diff = max(dot(norm, lightDir), 0.0);
 	
-	color = diff * f_color;	
+	color = vec4(diff * vec3(f_color), 1.0);	
 	//~ color = diff * f_color * texture2D(u_tex,f_t_coords);
 	//~ color = vec4(1.0,0.0,0.0,1.0);
 	

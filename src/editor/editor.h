@@ -1,6 +1,7 @@
 #ifndef EDITOR_H
 #define EDITOR_H
 
+#include <regex>
 #include "../pch.h"
 #include "../scene_file_loader.h"
 #include "../shader.h"
@@ -11,7 +12,8 @@
 
 #include "raycaster2.h"
 #include "kdnode2.h"
-#include <regex>
+
+#include "handles/base_handle.h"
 
 #include "../vendor/imgui/imgui_impl_sdl.h"
 
@@ -28,7 +30,11 @@ public :
 	
 
 	void init();
-	
+	void initHandlesFBODepthBuffer();
+	void initHandlesFBOTexture();
+	void initHandlesFBO();
+	void renderHandlesFBO();
+	void displayHandlesFBO();
 
 	void manageEvents();
 	void buildDisplayGeoData();
@@ -45,7 +51,10 @@ public :
 	std::string uniqueEntityName(std::string _str);
 	~Editor();
 	
-	Shader default_shader, line_shader;
+	Shader 
+		default_shader, 
+		line_shader,
+		fbo_shader;
 	
 	std::vector<Camera*> cameras;	
 	int cur_cam_id = -1;	
@@ -90,6 +99,12 @@ public :
 	bool show_wireframe = false;
 	
 	int cur_entity_id = -1;
-
+	
+	BaseHandle * handle;
+	
+	unsigned int handles_fbo = 0;
+	unsigned int handles_fbo_depth = 0;
+	unsigned int handles_fbo_texture = 0;
+	unsigned int handles_fbo_vbo = 0; //// for 'screen'
 };
 #endif /* EDITOR_H */

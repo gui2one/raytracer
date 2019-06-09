@@ -17,7 +17,7 @@ Mesh::Mesh(const Mesh& other):translate(other.translate), rotate(other.rotate),	
 
 Mesh::~Mesh()
 {
-	
+	//~ printf("just DELETED Mesh \n");
 }
 
 void Mesh::triangulate()
@@ -83,7 +83,7 @@ void Mesh::printData()
 			printf(" %d", faces[face_id].getVertex(i).point_id);
 		}
 		
-		printf("\n");
+		//~ printf("\n");
 		
 		printf("normal --> %.2f %.2f %.2f\n",faces[face_id].getVertex(0).normal.x, faces[face_id].getVertex(0).normal.y, faces[face_id].getVertex(0).normal.z);
 	
@@ -94,69 +94,63 @@ void Mesh::printData()
 
 void Mesh::computeNormals()
 {
-	// compute flat face normals
-	//~ if( faces.size() > 2)
-	//~ {
-		for (size_t face_id = 0; face_id < faces.size(); face_id++)
+
+
+	for (size_t face_id = 0; face_id < faces.size(); face_id++)
+	{
+		Point pA = points[faces[face_id].getVertex(0).point_id];
+		Point pB = points[faces[face_id].getVertex(1).point_id];
+		Point pC = points[faces[face_id].getVertex(2).point_id];
+		
+		glm::vec3 AB = pB.position - pA.position;
+		glm::vec3 AC = pC.position - pA.position;
+		
+		glm::vec3 cross = glm::normalize(glm::cross(glm::normalize(AB), glm::normalize(AC)));
+		
+		std::vector<Vertex> vertices;
+		for (size_t vert_id = 0; vert_id < faces[face_id].getNumVertices(); vert_id++)
 		{
-			Point pA = points[faces[face_id].getVertex(0).point_id];
-			Point pB = points[faces[face_id].getVertex(1).point_id];
-			Point pC = points[faces[face_id].getVertex(2).point_id];
-			
-			glm::vec3 AB = pB.position - pA.position;
-			glm::vec3 AC = pC.position - pA.position;
-			
-			glm::vec3 cross = glm::normalize(glm::cross(glm::normalize(AB), glm::normalize(AC)));
-			
-			std::vector<Vertex> vertices;
-			for (size_t vert_id = 0; vert_id < faces[face_id].getNumVertices(); vert_id++)
-			{
-				Vertex vert(faces[face_id].getVertex(vert_id).point_id);
-				vert.normal = cross;
-				vertices.push_back(vert);
-			}
-			
-			faces[face_id].setVertices(vertices);
-			
+			Vertex vert(faces[face_id].getVertex(vert_id).point_id);
+			vert.normal = cross;
+			vertices.push_back(vert);
 		}
 		
-		// compute points normals
+		faces[face_id].setVertices(vertices);
 		
-		// create an array of vec3 for normals
-		std::vector<glm::vec3> point_normals(points.size());
-		std::vector<int> num_normals(points.size());
-		// init values to zeros
-		for (size_t i = 0; i < point_normals.size(); i++)
+	}
+	
+	// compute points normals
+	
+	// create an array of vec3 for normals
+	std::vector<glm::vec3> point_normals(points.size());
+	std::vector<int> num_normals(points.size());
+	// init values to zeros
+	for (size_t i = 0; i < point_normals.size(); i++)
+	{
+		point_normals[i] = glm::vec3(0.0, 0.0, 0.0);
+		num_normals[i] = 0;
+	}
+	
+	for (size_t face_id = 0; face_id < faces.size(); face_id++)
+	{
+		for (size_t vert_id = 0; vert_id < faces[face_id].getNumVertices(); vert_id++)
 		{
-			point_normals[i] = glm::vec3(0.0, 0.0, 0.0);
-			num_normals[i] = 0;
-		}
-		
-		for (size_t face_id = 0; face_id < faces.size(); face_id++)
-		{
-			for (size_t vert_id = 0; vert_id < faces[face_id].getNumVertices(); vert_id++)
-			{
-				int point_id = faces[face_id].getVertex(vert_id).point_id;
-				//~ Point point = points[point_id];
-				
-				num_normals[point_id]++;
-				point_normals[point_id] = point_normals[point_id] + faces[face_id].getVertex(vert_id).normal;
-			}			
-		}		
-		
-		for (size_t i = 0; i < point_normals.size(); i++)
-		{
-			point_normals[i] /= num_normals[i];
+			int point_id = faces[face_id].getVertex(vert_id).point_id;
+			//~ Point point = points[point_id];
 			
-			// finally set normal on point
-			points[i].normal = point_normals[i];
-		}
+			num_normals[point_id]++;
+			point_normals[point_id] = point_normals[point_id] + faces[face_id].getVertex(vert_id).normal;
+		}			
+	}		
+	
+	for (size_t i = 0; i < point_normals.size(); i++)
+	{
+		point_normals[i] /= num_normals[i];
 		
-		
-		
-		
-		
-	//~ }
+		// finally set normal on point
+		points[i].normal = point_normals[i] * -1.0f; //// inverting ?
+	}
+
 }
 
 

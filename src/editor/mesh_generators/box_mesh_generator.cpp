@@ -40,21 +40,59 @@ BoxMeshGenerator::BoxMeshGenerator()
 
 Mesh BoxMeshGenerator::generate()
 {
-	//~ std::cout << "PLANE Generator Generate function" << std::endl;
-	
-	//~ Mesh mesh = EditorMeshUtils::makeQuad(param_width->getValue(), param_length->getValue());
+	Mesh other_side;
+	//// Z facing sides
 	Mesh mesh = EditorMeshUtils::makeGrid(
 		param_width->getValue(), 
 		param_length->getValue(), 
 		param_segs_width->getValue(), 
 		param_segs_length->getValue()
 	);
-	
-	Mesh other_side = mesh;
+	EditorMeshUtils::translate(mesh, glm::vec3(0.0, 0.0, param_height->getValue() / 2.0));
+	other_side = mesh;
 	EditorMeshUtils::rotate(other_side, glm::vec3(180.0, 0.0, 0.0));
-	EditorMeshUtils::translate(other_side, glm::vec3(0.0, 0.0, 1.0));
+	//~ EditorMeshUtils::translate(other_side, glm::vec3(0.0, 0.0, 0.0));
 	mesh = EditorMeshUtils::merge(mesh, other_side);
 	
+	
+	//// X facing sides
+	
+	Mesh x_facing = EditorMeshUtils::makeGrid(		
+		param_height->getValue(), 
+		param_length->getValue(), 		
+		param_segs_height->getValue(),
+		param_segs_length->getValue() 
+	);
+	EditorMeshUtils::translate(x_facing, glm::vec3(0.0, 0.0, param_width->getValue() / 2.0));
+	
+	other_side = x_facing;
+	EditorMeshUtils::rotate(other_side, glm::vec3(180.0, 0.0, 0.0));
+	//~ EditorMeshUtils::translate(other_side, glm::vec3(0.0, 0.0, 0.0));
+	x_facing = EditorMeshUtils::merge(x_facing, other_side);
+	EditorMeshUtils::rotate(x_facing, glm::vec3(0.0, -90.0, 0.0));	
+	
+	mesh = EditorMeshUtils::merge(mesh, x_facing);
+	
+	
+	//// Y facing sides
+	
+	Mesh y_facing = EditorMeshUtils::makeGrid(		
+		
+		param_width->getValue(), 		
+		param_height->getValue(), 
+		
+		param_segs_width->getValue() ,
+		param_segs_height->getValue()
+	);
+	EditorMeshUtils::translate(y_facing, glm::vec3(0.0, 0.0, param_length->getValue() / 2.0));
+	
+	other_side = y_facing;
+	EditorMeshUtils::rotate(other_side, glm::vec3(180.0, 0.0, 0.0));
+	//~ EditorMeshUtils::translate(other_side, glm::vec3(0.0, 0.0, 0.0));
+	y_facing = EditorMeshUtils::merge(y_facing, other_side);
+	EditorMeshUtils::rotate(y_facing, glm::vec3(-90.0, 0.0, 0.0));	
+	
+	mesh = EditorMeshUtils::merge(mesh, y_facing);	
 	mesh.computeNormals();
 	
 	return mesh;

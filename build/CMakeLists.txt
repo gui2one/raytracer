@@ -143,6 +143,9 @@ add_executable(editor
 	../src/editor/mesh_generators/mesh_generator.cpp
 	../src/editor/mesh_generators/grid_mesh_generator.cpp
 	../src/editor/mesh_generators/box_mesh_generator.cpp
+	
+	
+	../src/editor/handles/base_handle.cpp
 )
 
 target_link_libraries(editor coreLib)

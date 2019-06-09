@@ -481,6 +481,8 @@ editor.h
 /home/pi/projects/raytracer/src/editor/editor.h
 
 /home/pi/projects/raytracer/src/editor/editor.h
+regex
+-
 ../pch.h
 /home/pi/projects/raytracer/src/pch.h
 ../scene_file_loader.h
@@ -499,8 +501,8 @@ raycaster2.h
 /home/pi/projects/raytracer/src/editor/raycaster2.h
 kdnode2.h
 /home/pi/projects/raytracer/src/editor/kdnode2.h
-regex
--
+handles/base_handle.h
+/home/pi/projects/raytracer/src/editor/handles/base_handle.h
 ../vendor/imgui/imgui_impl_sdl.h
 /home/pi/projects/raytracer/src/vendor/imgui/imgui_impl_sdl.h
 
@@ -535,6 +537,16 @@ mesh_generators/box_mesh_generator.h
 /home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.h
 kdnode2.h
 /home/pi/projects/raytracer/src/editor/kdnode2.h
+
+/home/pi/projects/raytracer/src/editor/handles/base_handle.cpp
+base_handle.h
+/home/pi/projects/raytracer/src/editor/handles/base_handle.h
+
+/home/pi/projects/raytracer/src/editor/handles/base_handle.h
+../../pch.h
+/home/pi/projects/raytracer/src/pch.h
+../utils/editor_gizmo_utils.h
+/home/pi/projects/raytracer/src/editor/utils/editor_gizmo_utils.h
 
 /home/pi/projects/raytracer/src/editor/kdnode2.cpp
 kdnode2.h

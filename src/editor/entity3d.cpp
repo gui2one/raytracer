@@ -23,11 +23,23 @@ Entity3D::Entity3D():
 	kd_node(nullptr)
 {
 	
+	param_position = new Param<glm::vec3>();
+	param_position->setName("Position");
+	params.push_back(param_position);
+	
+	param_rotation = new Param<glm::vec3>();
+	param_rotation->setName("Rotation");	
+	params.push_back(param_rotation);
+	
+	param_scale = new Param<glm::vec3>();
+	param_scale->setValue(glm::vec3(1.0, 1.0, 1.0));
+	param_scale->setName("scale");		
+	params.push_back(param_scale);
 }
 
 void Entity3D::draw()
 {
-	printf("--- Drawing Entity3D  -----\n");
+	printf("--- Drawing Entity3D  ----- Weird .... \n");
 }
 
 void Entity3D::applyTransforms()
@@ -35,11 +47,18 @@ void Entity3D::applyTransforms()
 	glm::mat4 temp = glm::mat4(1.0f);
 	
 	
-	temp = glm::rotate(temp, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
-	temp = glm::rotate(temp, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
-	temp = glm::rotate(temp, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
-	temp = glm::translate(temp, position);
-	temp = glm::scale(temp , scale);
+	//~ temp = glm::rotate(temp, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+	//~ temp = glm::rotate(temp, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+	//~ temp = glm::rotate(temp, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+	//~ temp = glm::translate(temp, position);
+	//~ temp = glm::scale(temp , scale);
+	
+	temp = glm::translate(temp, param_position->getValue());
+	temp = glm::rotate(temp, glm::radians(param_rotation->getValue().x), glm::vec3(1.0f, 0.0f, 0.0f));
+	temp = glm::rotate(temp, glm::radians(param_rotation->getValue().y), glm::vec3(0.0f, 1.0f, 0.0f));
+	temp = glm::rotate(temp, glm::radians(param_rotation->getValue().z), glm::vec3(0.0f, 0.0f, 1.0f));
+	
+	temp = glm::scale(temp , param_scale->getValue());
 	
 	transforms = temp;	
 }
@@ -63,13 +82,13 @@ void MeshObject::setMeshGenerator(MESH_GENERATOR_TYPE _type)
 			generator = new GridMeshGenerator();
 			
 			mesh = generator->generate();
-			
+			generator_type = GRID_MESH_GENERATOR;
 			break;
 		case BOX_MESH_GENERATOR :
 			generator = new BoxMeshGenerator();
 			
 			mesh = generator->generate();
-			
+			generator_type = BOX_MESH_GENERATOR;
 			break;			
 	}
 }

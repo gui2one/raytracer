@@ -23,7 +23,12 @@ void UI::init(Editor* editor)
     ImGui_ImplOpenGL3_Init(glsl_version);
 
     // Setup Style
-    ImGui::StyleColorsDark();	
+    //~ ImGui::StyleColorsDark();	
+    
+	
+    ImGuiStyle& style = ImGui::GetStyle();
+    style.WindowRounding = 0.02f;	
+    
     
     //~ editor->addMeshObject();
 }
@@ -81,7 +86,7 @@ void UI::optionsDialog()
 	if(ImGui::CheckboxFlags("wireframe", (unsigned int*)&show_wireframe, 1))
 	{
 		m_editor->show_wireframe = show_wireframe;		
-		printf("%s --\n", (m_editor->show_wireframe == true ? "true":"false"));
+		//~ printf("%s --\n", (m_editor->show_wireframe == true ? "true":"false"));
 	}	
 	
 	ImGui::End();
@@ -106,6 +111,11 @@ void UI::entitiesDialog()
 			inc++;
 		}
 		ImGui::ListBoxFooter();
+		
+		if(ImGui::Button("Add Entity"))
+		{
+			m_editor->addMeshObject();
+		}
 	}	
 	ImGui::End();
 	// display params
@@ -117,16 +127,64 @@ void UI::entitiesDialog()
 		if((p_mesh = dynamic_cast<MeshObject*>( m_editor->entities[cur])))
 		{
 			ImGui::Text("Mesh Object");
-			if(p_mesh->generator != nullptr)
+			
+			if(ImGui::BeginTabBar("Main"))
 			{
-				for(auto param : p_mesh->generator->params)
+				if(ImGui::BeginTabItem("Transforms"))
 				{
-					paramWidget(param, [p_mesh](){
-						p_mesh->updateMeshGenerator();
-					});
+					int inc = 0;
+					for(auto param : m_editor->entities[cur]->params)
+					{
+						paramWidget(param, inc, [](){});
+						inc++;
+					}
+					ImGui::EndTabItem();
+				}
+				if(ImGui::BeginTabItem("Generator"))
+				{
+					std::vector<const char*> generator_types_strings = {"...", "Grid Mesh", "Box Mesh"};
+					static int cur_choice = 0;
+					if( p_mesh->generator != nullptr)
+					{
+						char label[100];
+						sprintf(label, "current generatpr : %s", generator_types_strings[(int)p_mesh->generator_type+1]);
+						ImGui::Text( label );
+						//~ cur_choice = p_mesh->generator_type;
+					}
+					
+					if(ImGui::BeginCombo("Choose", generator_types_strings[cur_choice+1],0)){
+						
+						for (size_t i = 0; i < generator_types_strings.size()-1; i++)
+						{
+							if(ImGui::Selectable( generator_types_strings[i+1], false))
+							{
+								cur_choice = i;
+								p_mesh->setMeshGenerator((MESH_GENERATOR_TYPE)cur_choice);
+							}
+						}
+						
+						
+						
+						ImGui::EndCombo();
+					}
+					
+					if(p_mesh->generator != nullptr)
+					{
+						int inc = 0;
+						for(auto param : p_mesh->generator->params)
+						{
+							paramWidget(param, inc, [p_mesh](){
+								p_mesh->updateMeshGenerator();
+							});
+							
+							inc++;
+						}
+					}
+					ImGui::EndTabItem();
 				}
 				
 				
+				ImGui::EndTabBar();
 			}
 		}
 	}	
@@ -198,8 +256,7 @@ void UI::draw()
 	ImGui_ImplSDL2_NewFrame(m_window);
 	ImGui::NewFrame();
 	//~ static bool show_another_window = true;
-	
-	
+
 	
 	ImGuiIO& io = ImGui::GetIO();
 	m_editor->mouse_over_ui = io.WantCaptureMouse;
@@ -220,7 +277,7 @@ void UI::draw()
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void UI::paramWidget(BaseParam * param, std::function<void()> callback)
+void UI::paramWidget(BaseParam * param, int imgui_ID, std::function<void()> callback)
 {
 	Param<int> * p_int = nullptr;
 	Param<float> * p_float = nullptr;
@@ -253,8 +310,11 @@ void UI::paramWidget(BaseParam * param, std::function<void()> callback)
 	{
 		glm::vec3 _val = p_vec3->getValue();
 		
+		ImGui::PushID((const void*)imgui_ID);
+		
+		ImGui::Text(p_vec3->getName().c_str());
 		ImGui::Columns(3);
-		if(ImGui::DragFloat("X", &_val.x, 0.05f))
+		if(ImGui::DragFloat("##X", &_val.x, 0.05f))
 		{
 			p_vec3->setValue(
 				glm::vec3(
@@ -266,7 +326,7 @@ void UI::paramWidget(BaseParam * param, std::function<void()> callback)
 			callback();			
 		}
 		ImGui::NextColumn();
-		if(ImGui::DragFloat("Y", &_val.y, 0.05f))
+		if(ImGui::DragFloat("##Y", &_val.y, 0.05f))
 		{
 			p_vec3->setValue(
 				glm::vec3(
@@ -278,7 +338,7 @@ void UI::paramWidget(BaseParam * param, std::function<void()> callback)
 			callback();
 		}
 		ImGui::NextColumn();	
-		if(ImGui::DragFloat("Z", &_val.z, 0.05f))
+		if(ImGui::DragFloat("##Z", &_val.z, 0.05f))
 		{
 			p_vec3->setValue(
 				glm::vec3(
@@ -290,6 +350,8 @@ void UI::paramWidget(BaseParam * param, std::function<void()> callback)
 			callback();
 		}
 		
+		ImGui::Columns(1);
+		ImGui::PopID();
 		
 	}
 	else if((p_menu = dynamic_cast<ParamMenu*>(param)))

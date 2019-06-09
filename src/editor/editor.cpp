@@ -102,7 +102,7 @@ void Editor::init()
 
 	MeshObject * box = new MeshObject();
 	box->setMeshGenerator(BOX_MESH_GENERATOR);
-	box->position = glm::vec3(3.0, 3.0, 3.0);
+	box->position = glm::vec3(0.0, 0.0, 2.0);
 	box->buildVBO();
 	entities.push_back(box);
 	
@@ -110,7 +110,7 @@ void Editor::init()
 	ground->name = "ground";
 	
 	ground->setMeshGenerator(GRID_MESH_GENERATOR);
-	ground->scale = glm::vec3(5.0,5.0,5.0);
+	//~ ground->scale = glm::vec3(5.0,5.0,5.0);
 	
 	entities.push_back(ground);
 	ground->buildVBO();
@@ -124,6 +124,11 @@ void Editor::init()
 	line_shader.loadFragmentShaderSource("../src/editor/shaders/line_shader.frag");
 
 	line_shader.createShader();		
+	
+	fbo_shader.loadVertexShaderSource("../src/editor/shaders/fbo_shader.vert");
+	fbo_shader.loadFragmentShaderSource("../src/editor/shaders/fbo_shader.frag");
+
+	fbo_shader.createShader();		
 	
 	Camera* camera = new Camera();
 	camera->position = glm::vec3(5.0, 2.0 , 3.0);
@@ -144,25 +149,183 @@ void Editor::init()
 	camera2->name = uniqueEntityName(camera2->name);
 	cameras.push_back(camera2);	
 	
-	//~ if(entities.size() > 0)
-	//~ {
-		//~ for(auto entity : entities)
-		//~ {
-			//~ buildKDTree(entity);
-		//~ }
-				//~ 
-		//~ for(auto node : kd_nodes)
-		//~ {
-			//~ collectKDBoungingBoxes(node);
-		//~ }
-		//~ 
-		//~ buildKDTreeBBoxes(kd_bboxes);		
-	//~ }
-	
+	//// init construction grid
 	c_grid.init();
-	
-	//~ printf("INIT!!!\n");
 
+	handle = new TranslateHandle();
+	
+	GLCall(glCullFace(GL_FRONT));
+	GLCall(glEnable(GL_TEXTURE_2D));
+	GLCall(glEnable(GL_BLEND));
+	GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+	
+	initHandlesFBO();
+}
+
+void Editor::initHandlesFBODepthBuffer()
+{
+
+	if(handles_fbo_depth != 0)
+	{
+		glDeleteRenderbuffersEXT(1, &handles_fbo_depth);
+		glGenRenderbuffersEXT(1, &handles_fbo_depth); // Generate one render buffer and store the ID in fbo_depth
+	}else{
+		glGenRenderbuffersEXT(1, &handles_fbo_depth); // Generate one render buffer and store the ID in fbo_depth
+	}
+	glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, handles_fbo_depth); // Bind the fbo_depth render buffer
+
+	glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT, w_width, w_height); // Set the render buffer storage to be a depth component, with a width and height of the window
+
+	glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, handles_fbo_depth); // Set the render buffer of this buffer to the depth buffer
+
+	glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, 0); // Unbind the render buffer
+}
+
+void Editor::initHandlesFBOTexture() 
+{
+	if( handles_fbo_texture != 0)
+	{
+		glDeleteTextures(1, &handles_fbo_texture);
+		glGenTextures(1, &handles_fbo_texture); // Generate one texture
+	}else{
+		glGenTextures(1, &handles_fbo_texture); // Generate one texture
+	}
+	glBindTexture(GL_TEXTURE_2D, handles_fbo_texture); // Bind the texture fbo_texture
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w_width, w_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL); // Create a standard texture with the width and height of our window
+
+	// Setup the basic texture parameters
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+	// Unbind the texture
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void Editor::initHandlesFBO() 
+{
+	initHandlesFBODepthBuffer(); // Initialize our frame buffer depth buffer
+
+	initHandlesFBOTexture(); // Initialize our frame buffer texture
+
+	if(handles_fbo != 0)
+	{
+		glDeleteFramebuffersEXT(1, &handles_fbo); 
+	}
+	
+	glGenFramebuffersEXT(1, &handles_fbo); // Generate one frame buffer and store the ID in fbo
+	
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, handles_fbo); // Bind our frame buffer
+
+	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, handles_fbo_texture, 0); // Attach the texture fbo_texture to the color buffer in our frame buffer
+
+	glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, handles_fbo_depth); // Attach the depth buffer fbo_depth to our frame buffer
+
+	GLenum status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT); // Check that status of our generated frame buffer
+
+	if (status != GL_FRAMEBUFFER_COMPLETE_EXT) // If the frame buffer does not report back as complete
+	{
+		std::cout << "Couldn't create frame buffer" << std::endl; // Output an error to the console
+		exit(0); // Exit the application
+	}
+
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0); // Unbind our frame buffer
+	
+	
+	//// init 'screen'
+	//~ GLCall(glDeleteBuffers(1, &handles_fbo_vbo));
+	if(handles_fbo_vbo != 0)
+	{
+		glDeleteBuffers(1, &handles_fbo_vbo);
+	}
+	GLCall(glGenBuffers(1, &handles_fbo_vbo));
+
+
+	float fbo_vertices[6*3 + 6*2] = {
+		// position        //uvs:
+		-1.0,-1.0, 0.0,    0.0, 0.0,
+		 1.0,-1.0, 0.0,    1.0, 0.0,
+		 1.0, 1.0, 0.0,    1.0, 1.0,
+
+		-1.0,-1.0, 0.0,    0.0, 0.0,
+		 1.0, 1.0, 0.0,    1.0, 1.0,
+		-1.0, 1.0, 0.0,    0.0, 1.0
+
+	};
+
+	GLCall(glBindBuffer(GL_ARRAY_BUFFER, handles_fbo_vbo));
+	GLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(float) * (6*3 + 6*2), fbo_vertices, GL_DYNAMIC_DRAW));
+	GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));		
+}
+
+void Editor::renderHandlesFBO()
+{
+	glm::mat4 model = glm::mat4(1.0f);
+	glm::mat4 view = glm::mat4(1.0f);
+
+
+	//~ GLCall(glEnable(GL_CULL_FACE));
+	//~ GLCall(glCullFace(GL_FRONT));
+	view *= glm::lookAt(
+		cameras[cur_cam_id]->position, //glm::vec3(0.0,  0.0, 3.0),
+		cameras[cur_cam_id]->target_position, //glm::vec3(0.0,  0.0, 0.0),
+		cameras[cur_cam_id]->up_vector //glm::vec3(0.0,  1.0, 0.0)
+	);
+
+	line_shader.useProgram();
+	
+	
+	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(cameras[cur_cam_id]->projection)));
+	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "view"), 1, GL_FALSE, glm::value_ptr(view)));	
+	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));	
+	
+	GLCall(glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, handles_fbo)); // Bind our frame buffer for rendering 
+	GLCall(glPushAttrib(GL_VIEWPORT_BIT | GL_ENABLE_BIT)); // Push our glEnable and glViewport states 
+	GLCall(glViewport(0, 0, w_width, w_height)); // Set the size of the frame buffer view port 
+	 
+	GLCall(glClearColor (0.0f, 0.0f, 0.0f, 0.0f)); // Set the clear colour 
+	GLCall(glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)); // Clear the depth and colour buffers 
+
+	GLCall(glPolygonMode( GL_FRONT_AND_BACK, GL_FILL ));
+
+	handle->draw();
+	 
+	GLCall(glPopAttrib()); // Restore our glEnable and glViewport states 
+	GLCall(glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0)); // Unbind our texture 	
+}
+
+
+void Editor::displayHandlesFBO()
+{
+	GLCall(glEnable(GL_BLEND));
+	GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+	fbo_shader.useProgram();
+	
+	GLCall(glActiveTexture(GL_TEXTURE0));
+	GLCall(glBindTexture(GL_TEXTURE_2D, handles_fbo_texture));
+	//~ GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w_width, w_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, render_buffer_data.data()));
+	
+	GLCall(glBindBuffer(GL_ARRAY_BUFFER, handles_fbo_vbo));
+
+	GLCall(glEnableVertexAttribArray(0));
+	GLCall(glEnableVertexAttribArray(1));
+	GLCall(glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, 0));
+	GLCall(glVertexAttribPointer(1,2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)(sizeof(float) * 3)));
+
+
+
+	GLCall(glDrawArrays(GL_TRIANGLES, 0, 6));
+
+
+	GLCall(glDisableVertexAttribArray(0));
+	GLCall(glDisableVertexAttribArray(1));
+	GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
+	GLCall(glBindTexture(GL_TEXTURE_2D, 0));
+	
+	GLCall(glUseProgram(0));
+	
 }
 
 void Editor::manageEvents()
@@ -339,6 +502,8 @@ void Editor::manageEvents()
 				w_width = Event.window.data1;
 				w_height = Event.window.data2;
 				
+				initHandlesFBO();
+				
 			}
 			if(Event.window.event == SDL_WINDOWEVENT_MINIMIZED){
 				//~ printf("MESSAGE:Minimizing window...\n" );
@@ -349,11 +514,12 @@ void Editor::manageEvents()
 
 void Editor::update()
 {
-	
-	
-	
+
 	manageEvents();
 
+
+
+	
 	//~ camera_u_pos += 0.01;
 	setCamPosFromPolar(
 		cameras[cur_cam_id]->orbit_u, 
@@ -367,12 +533,13 @@ void Editor::update()
 	//~ GLCall(glDisable(GL_CULL_FACE));
 	GLCall(glEnable(GL_DEPTH_TEST));
 
+	GLCall(glDisable(GL_BLEND));
 	
 
 	GLCall(glViewport(0,0,w_width, w_height));
-
-	GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 	GLCall(glClearColor(0.2,0.2,0.2,1.0));
+	GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+	
 
 
 	cameras[cur_cam_id]->setProjection(45.0f * (float)PI / 180.0f, (float)w_width / (float)w_height, 0.01f, 100.0f);
@@ -383,7 +550,8 @@ void Editor::update()
 	glm::mat4 view = glm::mat4(1.0f);
 
 
-
+	//~ GLCall(glEnable(GL_CULL_FACE));
+	//~ GLCall(glCullFace(GL_FRONT));
 	view *= glm::lookAt(
 		cameras[cur_cam_id]->position, //glm::vec3(0.0,  0.0, 3.0),
 		cameras[cur_cam_id]->target_position, //glm::vec3(0.0,  0.0, 0.0),
@@ -453,29 +621,34 @@ void Editor::update()
 	
 	GLCall(glUseProgram(0));
 
-	model = glm::mat4(1.0f);
-	
-	line_shader.useProgram();
-	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
-	
-	GLCall(glUniform4f(glGetUniformLocation(line_shader.m_id, "u_color"), 0.3, 1.0, 0.3, 1.0 ));
+
 	//~ displayKDTree();
 
 
-
+	model = glm::mat4(1.0f);
 	
 	if(show_construction_grid)
-	{
+	{		
+		line_shader.useProgram();
+		GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
 		
+		GLCall(glUniform4f(glGetUniformLocation(line_shader.m_id, "u_color"), 0.3, 1.0, 0.3, 1.0 ));		
 		//~ GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 0.5, 0.5, 0.5, 1.0 ));
 		c_grid.draw(line_shader);
+			
+		GLCall(glUseProgram(0));
+		
 	}
 	
-	GLCall(glUseProgram(0));
-	
-	//~ ui.draw();
 
-	//~ update_inc++;
+	renderHandlesFBO();
+	GLCall(glDisable(GL_DEPTH_TEST));
+	
+	GLCall(glPolygonMode( GL_FRONT_AND_BACK, GL_FILL ));	
+	
+	displayHandlesFBO();
+	
+
 	
 }
 

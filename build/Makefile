@@ -324,6 +324,33 @@ home/pi/projects/raytracer/src/editor/entity3d.cpp.s:
 	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.s
 .PHONY : home/pi/projects/raytracer/src/editor/entity3d.cpp.s
 
+home/pi/projects/raytracer/src/editor/handles/base_handle.o: home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.o
+
+.PHONY : home/pi/projects/raytracer/src/editor/handles/base_handle.o
+
+# target to build an object file
+home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.o:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.o
+.PHONY : home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.o
+
+home/pi/projects/raytracer/src/editor/handles/base_handle.i: home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.i
+
+.PHONY : home/pi/projects/raytracer/src/editor/handles/base_handle.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.i:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.i
+.PHONY : home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.i
+
+home/pi/projects/raytracer/src/editor/handles/base_handle.s: home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.s
+
+.PHONY : home/pi/projects/raytracer/src/editor/handles/base_handle.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.s:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.s
+.PHONY : home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.s
+
 home/pi/projects/raytracer/src/editor/kdnode2.o: home/pi/projects/raytracer/src/editor/kdnode2.cpp.o
 
 .PHONY : home/pi/projects/raytracer/src/editor/kdnode2.o
@@ -1191,6 +1218,9 @@ help:
 	@echo "... home/pi/projects/raytracer/src/editor/entity3d.o"
 	@echo "... home/pi/projects/raytracer/src/editor/entity3d.i"
 	@echo "... home/pi/projects/raytracer/src/editor/entity3d.s"
+	@echo "... home/pi/projects/raytracer/src/editor/handles/base_handle.o"
+	@echo "... home/pi/projects/raytracer/src/editor/handles/base_handle.i"
+	@echo "... home/pi/projects/raytracer/src/editor/handles/base_handle.s"
 	@echo "... home/pi/projects/raytracer/src/editor/kdnode2.o"
 	@echo "... home/pi/projects/raytracer/src/editor/kdnode2.i"
 	@echo "... home/pi/projects/raytracer/src/editor/kdnode2.s"

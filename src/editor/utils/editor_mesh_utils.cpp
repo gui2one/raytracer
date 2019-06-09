@@ -14,20 +14,21 @@ static void offset_indices(std::vector<unsigned int>& indices, int offset)
 	
 }
 
-//~ static void offsetFacesPointID(std::vector<Face>& faces, int offset)
-//~ {
-	//~ for (Face face : faces)
-	//~ {
-		//~ for (size_t i = 0; i < face.getNumVertices(); i++)
-		//~ {
-			//~ auto cur_id = face.getVertex(i).point_id;
-			//~ cur_id += offset;
-			//~ face.getVertex(i).point_id = cur_id;
-		//~ }
-		//~ 
-	//~ }
-	//~ 
-//~ }
+static void offsetFacesPointID(std::vector<Face>& faces, int offset)
+{
+	for (size_t face_id = 0; face_id < faces.size(); face_id++)
+	{
+		for (size_t vert_id = 0; vert_id < faces[face_id].getNumVertices(); vert_id++)
+		{
+			Vertex* cur_vert = &faces[face_id].vertices[vert_id];
+			
+			cur_vert->setPointID(cur_vert->point_id + offset);
+			
+		}
+		
+	}
+	
+}
 
 namespace EditorMeshUtils{
 	
@@ -98,7 +99,13 @@ namespace EditorMeshUtils{
 			
 			for (int i = 0; i < segs_width; i++)
 			{			
-				points.push_back(Point(width / (segs_width-1) * (i)  , length / (segs_length-1) * (j), 0.0));			
+				points.push_back(
+					Point(
+						(width / (segs_width-1) * i) - width / 2, 
+						(length / (segs_length-1) * j) - length / 2, 
+						0.0
+						)
+					);			
 			}
 		}
 		
@@ -115,9 +122,9 @@ namespace EditorMeshUtils{
 				face.setVertices(
 					{ 
 						Vertex(i+ j * (segs_width)), 
-						Vertex(i+ j * (segs_width) + segs_width),
+						Vertex(i+ j * (segs_width) + 1),
 						Vertex(i+ j * (segs_width) + segs_width +1),
-						Vertex(i+ j * (segs_width) + 1)
+						Vertex(i+ j * (segs_width) + segs_width)
 					}
 				);
 				faces.push_back(face);			
@@ -139,30 +146,7 @@ namespace EditorMeshUtils{
 		);
 		
 
-		
-		for (size_t face_id = 0; face_id < temp2.faces.size(); face_id++)
-		{
-			for (size_t vert_id = 0; vert_id < temp2.faces[face_id].vertices.size(); vert_id++)
-			{
-				Vertex * cur_vert = &temp2.faces[face_id].vertices[vert_id];
-				
-				
-				unsigned int cur_id = temp2.faces[face_id].getVertex(vert_id).point_id;
-				cur_id += (unsigned int)mesh1.points.size();
-				
-				
-				
-				cur_vert->setPointID(cur_id);
-				
-				
-				temp2.faces[face_id].getVertex(vert_id).setPointID(cur_id);
-				
-				
-				
-			}
-			
-		}	
-		
+		offsetFacesPointID(temp2.faces, mesh1.points.size());
 
 		merged.faces.insert(
 			merged.faces.end(), temp2.faces.begin(), temp2.faces.end()

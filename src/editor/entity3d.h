@@ -32,6 +32,13 @@ public:
 	
 	bool is_selected = false;
 	
+	Entity3D * parent;
+	
+	std::vector<BaseParam*> params;	
+	Param<glm::vec3> * param_position;
+	Param<glm::vec3> * param_rotation;
+	Param<glm::vec3> * param_scale;
+	
 	std::shared_ptr<KDNode> kd_node;
 	
 private:
@@ -60,6 +67,7 @@ public :
 	unsigned int m_vbo=0, m_ibo=0;
 	
 	MeshGenerator * generator;
+	MESH_GENERATOR_TYPE generator_type;
 	Mesh mesh;
 	
 	

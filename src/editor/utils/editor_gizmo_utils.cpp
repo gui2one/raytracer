@@ -66,6 +66,49 @@ namespace EditorGizmoUtils
 		
 	}
 	
+	
+	OGL_geometry_data makeCone(float radius, float length, int segs_radius, int segs_length)
+	{
+		OGL_geometry_data cone_data;
+		
+		std::vector<float> verts;
+		verts.clear();
+		
+		for (int j = 0; j < segs_length; j++)
+		{
+			for (int i = 0; i < segs_radius; i++)
+			{
+				verts.push_back(sin( (float)i / (segs_radius-1)*PI*2) * radius);
+				verts.push_back(cos( (float)i / (segs_radius-1)*PI*2) * radius);
+				verts.push_back((float)j / (segs_length-1) * length);
+			}
+			
+		}
+		
+		
+		std::vector<unsigned int> indices;
+		indices.clear();
+		for (int j = 0; j < segs_length-1; j++)
+		{
+			for (int i = 0; i < segs_radius -1; i++)
+			{
+				indices.push_back((i + j * segs_radius) );
+				indices.push_back((i + j * segs_radius) + 1 );
+				indices.push_back((i + j * segs_radius) + segs_radius + 1);
+				
+				indices.push_back((i + j * segs_radius) );
+				indices.push_back((i + j * segs_radius) + segs_radius + 1);
+				indices.push_back((i + j * segs_radius) + segs_radius );
+			}
+		}
+		
+		cone_data.vertices = verts;
+		cone_data.indices = indices;
+		return cone_data;
+		
+
+	}
+	
 	OGL_geometry_data merge(const OGL_geometry_data& geo1, const OGL_geometry_data& geo2)
 	{
 		OGL_geometry_data merge_data, temp_data;
