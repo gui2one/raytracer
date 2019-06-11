@@ -65,8 +65,7 @@ namespace EditorGizmoUtils
 		return box_data;
 		
 	}
-	
-	
+		
 	OGL_geometry_data makeCone(float radius, float length, int segs_radius, int segs_length)
 	{
 		OGL_geometry_data cone_data;
@@ -139,7 +138,6 @@ namespace EditorGizmoUtils
 		}
 		
 	}
-
 
 	void rotate(OGL_geometry_data& geo_data, glm::vec3 values, EDITOR_GIZMO_ROTATION_ORDER order)
 	{

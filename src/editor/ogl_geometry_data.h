@@ -10,6 +10,8 @@ struct OGL_geometry_data
 	glm::vec3 rotate = glm::vec3(0.0, 0.0, 0.0);
 	glm::vec3 scale = glm::vec3(1.0, 1.0, 1.0);
 	
+
+	
 };
 
 #endif /* OGL_GEOMETRY_DATA_H */

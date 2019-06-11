@@ -80,6 +80,9 @@ void Camera::buildDisplayData()
 	
 	
 	OGL_geometry_data main_geo_data = EditorGizmoUtils::merge(main_box_data, prism);
+	
+	
+	
 	main_vertices = main_geo_data.vertices;
 	main_indices = main_geo_data.indices;	
 		
@@ -115,11 +118,14 @@ void Camera::draw()
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, main_vbo));
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, main_ibo));
 	GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0));
+
 	
 	GLCall(glEnableVertexAttribArray(0));
+
 	GLCall(glDrawElements(GL_LINES, main_indices.size(), GL_UNSIGNED_INT, nullptr));
 	
 	GLCall(glDisableVertexAttribArray(0));
+
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));	
 	
