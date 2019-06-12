@@ -19,7 +19,7 @@ class BaseHandle
 		glm::vec3 scale;
 		
 		
-		unsigned int m_vbo, m_ibo;
+		unsigned int m_vbo = 0, m_ibo = 0;
 	private:
 		/* add your private declarations */
 };

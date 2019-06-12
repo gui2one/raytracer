@@ -9,7 +9,10 @@ static void offset_indices(std::vector<unsigned int>& indices, int offset)
 	
 }
 
-
+static float lerpf(float a, float b, float ratio)
+{
+	return (b-a) * ratio + a;
+}
 
 static double degToRad(double degrees)
 {
@@ -170,7 +173,7 @@ namespace EditorGizmoUtils
 
 	}
 	
-	OGL_DATA_2 makeCone2(float radius, float length, int segs_radius, int segs_length)
+	OGL_DATA_2 makeCone2(float radius1, float radius2, float length, int segs_radius, int segs_length)
 	{
 		OGL_DATA_2 cone_data;
 		
@@ -181,9 +184,11 @@ namespace EditorGizmoUtils
 		{
 			for (int i = 0; i < segs_radius; i++)
 			{
+				float height_ratio = (float)j / (segs_length-1);
+				float radius = lerpf(radius1, radius2, height_ratio);
 				verts.push_back(sin( (float)i / (segs_radius-1)*PI*2) * radius);
 				verts.push_back(cos( (float)i / (segs_radius-1)*PI*2) * radius);
-				verts.push_back((float)j / (segs_length-1) * length);
+				verts.push_back(height_ratio * length);
 			}
 			
 		}

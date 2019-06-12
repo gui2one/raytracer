@@ -1,7 +1,7 @@
 #include "base_handle.h"
 
 
-BaseHandle::BaseHandle()
+BaseHandle::BaseHandle() : position(glm::vec3(0.0,0.0,0.0)), rotation(glm::vec3(0.0,0.0,0.0)),scale(glm::vec3(1.0,1.0,1.0))
 {
 	
 }
@@ -24,17 +24,17 @@ TranslateHandle::~TranslateHandle()
 {
 	
 }
+
 void TranslateHandle::buildDisplayData()
 {
-	geo_data = EditorGizmoUtils::makeCone2(0.1, 2.0, 12, 2);
+	geo_data = EditorGizmoUtils::makeCone2(0.02,0.02, 0.9, 10, 2);
 	
-	//// try and add colors	
-	for (size_t i = 0; i < geo_data.positions.size(); i+=3)
-	{
-		geo_data.colors.insert(
-			geo_data.colors.begin(), { 1.0, 0.0 , 0.0}
-		);
-	}	
+	OGL_DATA_2 pointy_end = EditorGizmoUtils::makeCone2(0.04, 0.0, 0.1, 10, 2);
+	EditorGizmoUtils::translate2(pointy_end, glm::vec3(0.0,0.0,0.9));
+	
+	geo_data = EditorGizmoUtils::merge2(geo_data, pointy_end);
+		
+	geo_data.setColor(1.0, 0.0, 0.0);
 	//~ printf("geo_data num positions : %d\n" , geo_data.positions.size());
 	//~ printf("geo_data num indices : %d\n" , geo_data.indices.size());
 

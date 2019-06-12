@@ -153,6 +153,7 @@ void Editor::init()
 	c_grid.init();
 
 	handle = new TranslateHandle();
+	//~ handle->position = glm::vec3(0.0, 0.0, 0.0);
 	
 	GLCall(glCullFace(GL_FRONT));
 	GLCall(glEnable(GL_TEXTURE_2D));
@@ -263,11 +264,14 @@ void Editor::initHandlesFBO()
 void Editor::renderHandlesFBO()
 {
 	glm::mat4 model = glm::mat4(1.0f);
+	
+	float cam_distance = glm::distance(handle->position, cameras[cur_cam_id]->position);
+	float scale = cam_distance / 8.0f;
+	//~ printf("%f \n", scale);
+	model  = glm::scale(model , glm::vec3(scale, scale, scale));
+	
 	glm::mat4 view = glm::mat4(1.0f);
 
-
-	//~ GLCall(glEnable(GL_CULL_FACE));
-	//~ GLCall(glCullFace(GL_FRONT));
 	view *= glm::lookAt(
 		cameras[cur_cam_id]->position, //glm::vec3(0.0,  0.0, 3.0),
 		cameras[cur_cam_id]->target_position, //glm::vec3(0.0,  0.0, 0.0),
@@ -334,10 +338,6 @@ void Editor::manageEvents()
 	
     SDL_Event Event;
     
-    
-    
-    
-	
 	while (SDL_PollEvent(&Event))
 	{
 		

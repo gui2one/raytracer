@@ -16,8 +16,8 @@ class Camera : public Entity3D
 		void setProjection(float angle, float aspect, float near, float far);
 		
 		void applyTransforms() ; //override;
+		
 		void buildDisplayData();
-		void buildDisplayData2();
 		void draw(); // override;
 		float fov = 20.0;
 		glm::mat4 projection;

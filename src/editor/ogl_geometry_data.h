@@ -8,6 +8,21 @@ struct OGL_DATA_2
 	std::vector<float> uvs;
 	
 	std::vector<unsigned int> indices;
+	
+	
+	void setColor(float r, float g, float b){
+		if( colors.size() > 0) 
+			colors.clear();
+			
+		for (size_t i = 0; i < positions.size(); i+=3)
+		{
+			colors.insert(
+				colors.begin(), { r, g, b}
+			);
+		}
+		
+		
+	}
 };
 
 struct OGL_geometry_data

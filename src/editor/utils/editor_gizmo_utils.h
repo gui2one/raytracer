@@ -17,16 +17,16 @@ namespace EditorGizmoUtils
 {
 	
 	
-		OGL_geometry_data makeWireBox();
+		//~ OGL_geometry_data makeWireBox();
 		OGL_DATA_2 makeWireBox2();
 		
-		OGL_geometry_data makeWirePrism();
+		//~ OGL_geometry_data makeWirePrism();
 		OGL_DATA_2        makeWirePrism2();
 		
-		OGL_geometry_data makeCone(float radius, float length, int segs_radius, int segs_length);
-		OGL_DATA_2        makeCone2(float radius, float length, int segs_radius, int segs_length);
+		//~ OGL_geometry_data makeCone(float radius, float length, int segs_radius, int segs_length);
+		OGL_DATA_2        makeCone2(float radius1, float radius2, float length, int segs_radius, int segs_length);
 		
-		OGL_geometry_data merge(const OGL_geometry_data& geo1, const OGL_geometry_data& geo2);
+		//~ OGL_geometry_data merge(const OGL_geometry_data& geo1, const OGL_geometry_data& geo2);
 		OGL_DATA_2        merge2(const OGL_DATA_2& geo1, const OGL_DATA_2& geo2);
 		
 		void translate(OGL_geometry_data& geo_data, glm::vec3 values);
