@@ -173,7 +173,7 @@ void Camera::buildDisplayData2()
 	GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int)* main_indices.size(), main_indices.data(), GL_DYNAMIC_DRAW));
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));		
 	
-	printf("m_vbo from Camera --> %d\n", main_positions.size());
+	//~ printf("m_vbo from Camera --> %d\n", main_positions.size());
 
 }
 
