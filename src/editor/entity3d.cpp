@@ -119,8 +119,12 @@ void MeshObject::buildVBO()
 	{	
 		OGL_geo_data.vertices.insert(
 			OGL_geo_data.vertices.end(), {
+				
+				// pos
 				tri_copy.points[i].position.x, tri_copy.points[i].position.y, tri_copy.points[i].position.z,
+				// normals
 				tri_copy.points[i].normal.x, tri_copy.points[i].normal.y, tri_copy.points[i].normal.z,
+				// texture coords
 				1.0, 1.0
 			}
 		);			

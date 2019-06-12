@@ -33,7 +33,7 @@ class TranslateHandle: public BaseHandle
 		
 		void buildDisplayData();
 		void draw() override;
-		OGL_geometry_data geo_data;
+		OGL_DATA_2 geo_data;
 		
 	private:
 };
