@@ -1,6 +1,15 @@
 #ifndef OGL_GEOMETRY_DATA_H
 #define OGL_GEOMETRY_DATA_H
 
+struct OGL_DATA_2
+{
+	std::vector<float> positions;
+	std::vector<float> colors;
+	std::vector<float> uvs;
+	
+	std::vector<unsigned int> indices;
+};
+
 struct OGL_geometry_data
 {
 	std::vector<float> vertices;

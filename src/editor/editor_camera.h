@@ -17,6 +17,7 @@ class Camera : public Entity3D
 		
 		void applyTransforms() ; //override;
 		void buildDisplayData();
+		void buildDisplayData2();
 		void draw(); // override;
 		float fov = 20.0;
 		glm::mat4 projection;
@@ -43,6 +44,7 @@ class Camera : public Entity3D
 	private:
 	
 		std::vector<float> main_vertices;
+		std::vector<float> main_positions;
 		std::vector<unsigned int> main_indices;
 		/* add your private declarations */
 };

@@ -8,8 +8,8 @@ Camera::Camera() :
 	//~ printf("initializing Camera\n");
 	up_vector = glm::vec3(0.0,1.0,0.0);
 	target_position = glm::vec3(0.0,0.0,5.0);
-	buildDisplayData();
-	name = "camera";
+	buildDisplayData2();
+	name = "camera";	
 }
 
 Camera::Camera(const Camera& other): Entity3D()
@@ -112,19 +112,87 @@ void Camera::buildDisplayData()
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));		
 }
 
+
+void Camera::buildDisplayData2()
+{
+	//~ EditorGizmoUtils gizmo_utils;
+	OGL_DATA_2 main_box_data = EditorGizmoUtils::makeWireBox2();
+	EditorGizmoUtils::translate2(main_box_data, glm::vec3(0.0,0.0,0.5));
+	
+	OGL_DATA_2 prism = EditorGizmoUtils::makeWirePrism2();
+	EditorGizmoUtils::rotate2(prism, glm::vec3(180.0, 0.0, 0.0));
+	EditorGizmoUtils::translate2(prism, glm::vec3(0.0, 0.0, -0.5));
+	EditorGizmoUtils::scale2(prism, glm::vec3(0.6, 0.6, 0.6));
+	
+	
+	OGL_DATA_2 main_geo_data = EditorGizmoUtils::merge2(main_box_data, prism);
+	
+	
+	
+	main_positions = main_geo_data.positions;
+	main_indices = main_geo_data.indices;	
+		
+		
+	//// try and add colors
+	
+	for (size_t i = 0; i < main_positions.size(); i+=3)
+	{
+		//~ main_geo_data.colors.push_back(1.0);
+		main_geo_data.colors.insert(
+			main_geo_data.colors.begin(), { 0.0, 0.0 , 1.0}
+		);
+	}
+	
+	if(main_vbo == 0){
+		
+		GLCall(glGenBuffers(1, &main_vbo));
+		
+	}else{
+		GLCall(glDeleteBuffers(1, &main_vbo));
+		GLCall(glGenBuffers(1, &main_vbo));
+	}
+	
+	GLCall(glBindBuffer(GL_ARRAY_BUFFER, main_vbo));
+	
+	//~ GLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(float)* main_positions.size(), main_positions.data(), GL_DYNAMIC_DRAW));
+	GLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(float)* (main_positions.size() + main_geo_data.colors.size()), 0, GL_DYNAMIC_DRAW));
+	GLCall(glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float)* main_positions.size(), main_positions.data()));
+	GLCall(glBufferSubData(GL_ARRAY_BUFFER, sizeof(float)* main_positions.size(), sizeof(float)* main_geo_data.colors.size(), main_geo_data.colors.data()));
+	
+	GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));	
+	
+	if(main_ibo == 0)
+	{
+		GLCall(glGenBuffers(1, &main_ibo));
+	}else{		
+		GLCall(glDeleteBuffers(1, &main_ibo));
+		GLCall(glGenBuffers(1, &main_ibo));
+	}
+
+	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, main_ibo));
+	GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int)* main_indices.size(), main_indices.data(), GL_DYNAMIC_DRAW));
+	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));		
+	
+	printf("m_vbo from Camera --> %d\n", main_positions.size());
+
+}
+
 void Camera::draw()
 {
 	
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, main_vbo));
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, main_ibo));
 	GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0));
+	GLCall(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (const void *)(sizeof(float) * main_positions.size())));
 
 	
 	GLCall(glEnableVertexAttribArray(0));
+	GLCall(glEnableVertexAttribArray(1));
 
 	GLCall(glDrawElements(GL_LINES, main_indices.size(), GL_UNSIGNED_INT, nullptr));
 	
 	GLCall(glDisableVertexAttribArray(0));
+	GLCall(glDisableVertexAttribArray(1));
 
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));	
