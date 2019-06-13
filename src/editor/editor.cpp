@@ -476,7 +476,9 @@ void Editor::manageEvents()
 								entities[cur_entity_id]->is_selected = !entities[cur_entity_id]->is_selected;
 							}else{
 								unselectAll();
-								entities[hit_datas[0].mesh_id]->is_selected = true;
+								cur_entity_id = hit_datas[0].mesh_id;
+								entities[cur_entity_id]->is_selected = true;
+								
 								
 							}
 						}else{
@@ -659,14 +661,15 @@ void Editor::update()
 		
 	}
 	
-
-	renderHandlesFBO();
-	GLCall(glDisable(GL_DEPTH_TEST));
-	
-	GLCall(glPolygonMode( GL_FRONT_AND_BACK, GL_FILL ));	
-	
-	displayHandlesFBO();
-	
+	if( cur_entity_id != -1)
+	{
+		renderHandlesFBO();
+		GLCall(glDisable(GL_DEPTH_TEST));
+		
+		GLCall(glPolygonMode( GL_FRONT_AND_BACK, GL_FILL ));	
+		
+		displayHandlesFBO();
+	}
 
 	
 }
@@ -691,6 +694,7 @@ void Editor::unselectAll()
 	{
 		entity->is_selected = false;
 	}
+	//~ cur_entity_id = -1;
 }
 
 void Editor::addMeshObject()
