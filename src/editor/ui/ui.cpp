@@ -107,6 +107,8 @@ void UI::entitiesDialog()
 			if(ImGui::Selectable(entity->name.c_str(), inc == cur)){
 				cur = inc;
 				m_editor->cur_entity_id = cur;
+				m_editor->unselectAll();
+				m_editor->entities[cur]->is_selected = true;
 			}
 			inc++;
 		}
