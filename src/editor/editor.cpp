@@ -103,6 +103,7 @@ void Editor::init()
 	MeshObject * box = new MeshObject();
 	box->setMeshGenerator(BOX_MESH_GENERATOR);
 	box->position = glm::vec3(0.0, 0.0, 2.0);
+	box->applyTransforms();
 	box->buildVBO();
 	entities.push_back(box);
 	
@@ -264,10 +265,27 @@ void Editor::initHandlesFBO()
 void Editor::renderHandlesFBO()
 {
 	glm::mat4 model = glm::mat4(1.0f);
+
+	// check for selected entity
+	for (Entity3D* entity : entities)
+	{
+		if(entity->is_selected)
+		{
+			//~ entity->applyTransforms();
+			handle->position = entity->position;
+			handle->rotation = entity->rotation;
+			handle->applyTransforms();
+			//~ printf("handle pos --> %.3f %.3f %.3f\n", handle->position.x, handle->position.y, handle->position.z);
+			//~ printf("entity pos --> %.3f %.3f %.3f\n", entity->position.x, entity->position.y, entity->position.z);
+			break;
+		}
+	}
+	
 	
 	float cam_distance = glm::distance(handle->position, cameras[cur_cam_id]->position);
 	float scale = cam_distance / 8.0f;
 	//~ printf("%f \n", scale);
+	model = handle->transforms;
 	model  = glm::scale(model , glm::vec3(scale, scale, scale));
 	
 	glm::mat4 view = glm::mat4(1.0f);
@@ -559,6 +577,7 @@ void Editor::update()
 	);
 
 	default_shader.useProgram();
+	
 	
 	
 	GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(cameras[cur_cam_id]->projection)));

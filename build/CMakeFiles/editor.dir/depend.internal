@@ -1058,11 +1058,23 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/handles/base_handle.
  ../src/vendor/imgui/imgui.h
  ../src/vendor/imgui/imgui_impl_opengl3.h
  ../src/vendor/imgui/imgui_impl_sdl.h
+ /home/pi/projects/raytracer/src/color.h
+ /home/pi/projects/raytracer/src/editor/entity3d.h
  /home/pi/projects/raytracer/src/editor/handles/base_handle.cpp
  /home/pi/projects/raytracer/src/editor/handles/base_handle.h
+ /home/pi/projects/raytracer/src/editor/kdnode2.h
+ /home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.h
+ /home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.h
+ /home/pi/projects/raytracer/src/editor/mesh_generators/mesh_generator.h
  /home/pi/projects/raytracer/src/editor/ogl_geometry_data.h
+ /home/pi/projects/raytracer/src/editor/param.h
  /home/pi/projects/raytracer/src/editor/utils/editor_gizmo_utils.h
+ /home/pi/projects/raytracer/src/editor/utils/editor_mesh_utils.h
+ /home/pi/projects/raytracer/src/mesh.h
  /home/pi/projects/raytracer/src/pch.h
+ /home/pi/projects/raytracer/src/ray.h
+ /home/pi/projects/raytracer/src/rtmaterial.h
+ /home/pi/projects/raytracer/src/texture.h
  /home/pi/projects/raytracer/src/vendor/glm/./ext/matrix_double2x2.hpp
  /home/pi/projects/raytracer/src/vendor/glm/./ext/matrix_double2x2_precision.hpp
  /home/pi/projects/raytracer/src/vendor/glm/./ext/matrix_double2x3.hpp

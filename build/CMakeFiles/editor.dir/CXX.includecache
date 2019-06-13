@@ -547,6 +547,8 @@ base_handle.h
 /home/pi/projects/raytracer/src/pch.h
 ../utils/editor_gizmo_utils.h
 /home/pi/projects/raytracer/src/editor/utils/editor_gizmo_utils.h
+../entity3d.h
+/home/pi/projects/raytracer/src/editor/entity3d.h
 
 /home/pi/projects/raytracer/src/editor/kdnode2.cpp
 kdnode2.h

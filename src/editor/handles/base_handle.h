@@ -3,6 +3,7 @@
 
 #include "../../pch.h"
 #include "../utils/editor_gizmo_utils.h"
+#include "../entity3d.h"
 
 class BaseHandle
 {
@@ -11,13 +12,13 @@ class BaseHandle
 		virtual ~BaseHandle();
 		
 		virtual void draw(){};
-		
+		void applyTransforms();
 		glm::mat4 transforms;
 		
 		glm::vec3 position;
 		glm::vec3 rotation;
 		glm::vec3 scale;
-		
+		//~ 
 		
 		unsigned int m_vbo = 0, m_ibo = 0;
 	private:

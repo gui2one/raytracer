@@ -47,12 +47,10 @@ void Entity3D::applyTransforms()
 	glm::mat4 temp = glm::mat4(1.0f);
 	
 	
-	//~ temp = glm::rotate(temp, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
-	//~ temp = glm::rotate(temp, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
-	//~ temp = glm::rotate(temp, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
-	//~ temp = glm::translate(temp, position);
-	//~ temp = glm::scale(temp , scale);
-	
+	position = param_position->getValue();
+	rotation = param_rotation->getValue();
+	scale = param_scale->getValue();
+	//~ printf("entity pos --> %.3f %.3f %.3f\n", param_position->getValue().x, param_position->getValue().y, param_position->getValue().z);
 	temp = glm::translate(temp, param_position->getValue());
 	temp = glm::rotate(temp, glm::radians(param_rotation->getValue().x), glm::vec3(1.0f, 0.0f, 0.0f));
 	temp = glm::rotate(temp, glm::radians(param_rotation->getValue().y), glm::vec3(0.0f, 1.0f, 0.0f));

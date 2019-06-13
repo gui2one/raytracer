@@ -5,8 +5,6 @@ Camera::Camera() :
 	Entity3D(),	
 	target_position(glm::vec3(0.0,0.0,0.0)),
 	up_vector(glm::vec3(0.0,1.0,0.0))
-	
-	
 {
 	//~ printf("initializing Camera\n");
 	
@@ -74,16 +72,16 @@ void Camera::applyTransforms()
 void Camera::buildDisplayData()
 {
 	
-	OGL_DATA_2 main_box_data = EditorGizmoUtils::makeWireBox2();
-	EditorGizmoUtils::translate2(main_box_data, glm::vec3(0.0,0.0,0.5));
+	OGL_DATA_2 main_box_data = EditorGizmoUtils::makeWireBox();
+	EditorGizmoUtils::translate(main_box_data, glm::vec3(0.0,0.0,0.5));
 	
-	OGL_DATA_2 prism = EditorGizmoUtils::makeWirePrism2();
-	EditorGizmoUtils::rotate2(prism, glm::vec3(180.0, 0.0, 0.0));
-	EditorGizmoUtils::translate2(prism, glm::vec3(0.0, 0.0, -0.5));
-	EditorGizmoUtils::scale2(prism, glm::vec3(0.6, 0.6, 0.6));
+	OGL_DATA_2 prism = EditorGizmoUtils::makeWirePrism();
+	EditorGizmoUtils::rotate(prism, glm::vec3(180.0, 0.0, 0.0));
+	EditorGizmoUtils::translate(prism, glm::vec3(0.0, 0.0, -0.5));
+	EditorGizmoUtils::scale(prism, glm::vec3(0.6, 0.6, 0.6));
 	
 	
-	OGL_DATA_2 main_geo_data = EditorGizmoUtils::merge2(main_box_data, prism);
+	OGL_DATA_2 main_geo_data = EditorGizmoUtils::merge(main_box_data, prism);
 	
 	
 	
