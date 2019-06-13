@@ -137,6 +137,7 @@ void Editor::init()
 	camera->up_vector = glm::vec3(0.0, 0.0 , 1.0);	
 	camera->setProjection(45.0f * (float)PI / 180.0f, (float)w_width / (float)w_height, 0.01f, 100.0f);
 	camera->name = uniqueEntityName(camera->name);
+	entities.push_back(camera);
 	cameras.push_back(camera);
 	
 	cur_cam_id = 0;
@@ -148,6 +149,7 @@ void Editor::init()
 	camera2->up_vector = glm::vec3(0.0, 0.0 , 1.0);	
 	camera2->setProjection(45.0f * (float)PI / 180.0f, (float)w_width / (float)w_height, 0.01f, 100.0f);
 	camera2->name = uniqueEntityName(camera2->name);
+	entities.push_back(camera2);
 	cameras.push_back(camera2);	
 	
 	//// init construction grid
@@ -453,7 +455,7 @@ void Editor::manageEvents()
 						for (Entity3D* entity: entities)
 						{
 							MeshObject * p_mesh = nullptr;
-							
+							Camera * p_camera = nullptr;
 							if((p_mesh = dynamic_cast<MeshObject*>(entity))){
 								if(p_mesh->kd_node != nullptr)
 								{
@@ -461,6 +463,13 @@ void Editor::manageEvents()
 									//~ printf("check kdnode. num triangles : %d\n", p_mesh->kd_node->triangles.size());
 									kd_nodes2.push_back(p_mesh->kd_node);
 								}
+							}
+							if((p_camera = dynamic_cast<Camera*>(entity))){
+								kd_nodes2.push_back(p_camera->kd_node);
+								//~ if(p_camera->kd_node != nullptr)
+								//~ {
+									//~ 
+								//~ }
 							}
 						}
 						
@@ -600,18 +609,23 @@ void Editor::update()
 	{
 		//~ std::find(selected_entities.begin(), selected_entities.end(), (unsigned int)i);
 		
-		entities[i]->applyTransforms();
-		model = entities[i]->transforms;
-		GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
-		
-		if( entities[i]->is_selected)
+		MeshObject * p_mesh = nullptr;
+		if(( p_mesh = dynamic_cast<MeshObject*>(entities[i])))
 		{
-			GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 1.0, 1.0, 0.3, 1.0 ));
-		}else{	
-			GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 1.0, 1.0, 1.0, 1.0 ));
+			entities[i]->applyTransforms();
+			model = entities[i]->transforms;
+			GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
+			
+			if( entities[i]->is_selected)
+			{
+				GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 1.0, 1.0, 0.3, 1.0 ));
+			}else{	
+				GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 1.0, 1.0, 1.0, 1.0 ));
+			}
+			
+			entities[i]->draw();				
 		}
-		
-		entities[i]->draw();		
+	
 			
 			
 
@@ -722,13 +736,29 @@ void Editor::addCamera()
 {
 	Camera * cam = new Camera();
 	cam->name = uniqueEntityName(cam->name);
+	entities.push_back(cam);
 	cameras.push_back(cam);
 }
 
 void Editor::deleteCamera(int id)
 {
+	
+	auto it = std::find(entities.begin(), entities.end(), cameras[id]);
+	int entity_index;
+	if( it != entities.end())
+	{
+		std::cout << "Element Found" << std::endl;
+		entity_index = std::distance(entities.begin(), it);
+		//~ printf("index is %d\n", index);
+		entities.erase(entities.begin() + entity_index);
+		std::cout << "Element DELETED" << std::endl;
+		
+	}else{
+		std::cout << "Element Not Found" << std::endl;		
+	}
 	delete cameras[id];
 	cameras.erase(cameras.begin() + id);
+
 	if(cur_cam_id > (int)cameras.size()-1)
 	{
 		cur_cam_id = cameras.size()-1;

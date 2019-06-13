@@ -160,54 +160,57 @@ bool Raycaster::intersectKDNode(Ray& ray, std::shared_ptr<KDNode> kd_node, int m
 	//~ bool hit;
 	//~ KDNode * target = kd_node;
 	
-	if( kd_node->bbox.intersect(ray))
+	if( kd_node != nullptr)
 	{
-
-		if( kd_node->left->triangles.size() > 0 || kd_node->right->triangles.size() > 0)
+		if( kd_node->bbox.intersect(ray))
 		{
-			//~ printf("------- checking left and right \n");
-			bool hit_left = intersectKDNode(ray, kd_node->left,  mesh_id, hit_datas, bail_early);
-			bool hit_right = intersectKDNode(ray, kd_node->right, mesh_id, hit_datas, bail_early);
 
-			return hit_left || hit_right;
-			
-		}else{
-		
-			//~ printf("------- reached leaf\n");
-
-			for (size_t i = 0; i < kd_node->triangles.size(); i++)
+			if( kd_node->left->triangles.size() > 0 || kd_node->right->triangles.size() > 0)
 			{
-				glm::vec3 hit_pos;
-				glm::vec3 bary_coords;
-				bool hit_tri = ray_triangle_intersect(ray, kd_node->triangles[i]->A, kd_node->triangles[i]->B, kd_node->triangles[i]->C, hit_pos, bary_coords);
-				if(hit_tri)
-				{
-					glm::vec3 collide_dir = hit_pos - ray.origin;
-					if( glm::dot( collide_dir, ray.direction) > 0.0){
-						
-						HitData data;
-						data.position = hit_pos;
-						data.barycentric_coords = bary_coords;
-						data.ray_origin = ray.origin;
-						data.ray_direction = ray.direction;
-						data.face_id = kd_node->triangles[i]->id;
-						data.mesh_id = mesh_id;
-						hit_datas.push_back(data);
-						
-						if( bail_early ) return true;
-						//~ printf("TRIANGLE HIT !!!!!!\n");
-						//~ printf("\t id : %d\n", data.face_id);							
-					}
-				
-				}
-			}
+				//~ printf("------- checking left and right \n");
+				bool hit_left = intersectKDNode(ray, kd_node->left,  mesh_id, hit_datas, bail_early);
+				bool hit_right = intersectKDNode(ray, kd_node->right, mesh_id, hit_datas, bail_early);
 
+				return hit_left || hit_right;
+				
+			}else{
+			
+				//~ printf("------- reached leaf\n");
+
+				for (size_t i = 0; i < kd_node->triangles.size(); i++)
+				{
+					glm::vec3 hit_pos;
+					glm::vec3 bary_coords;
+					bool hit_tri = ray_triangle_intersect(ray, kd_node->triangles[i]->A, kd_node->triangles[i]->B, kd_node->triangles[i]->C, hit_pos, bary_coords);
+					if(hit_tri)
+					{
+						glm::vec3 collide_dir = hit_pos - ray.origin;
+						if( glm::dot( collide_dir, ray.direction) > 0.0){
+							
+							HitData data;
+							data.position = hit_pos;
+							data.barycentric_coords = bary_coords;
+							data.ray_origin = ray.origin;
+							data.ray_direction = ray.direction;
+							data.face_id = kd_node->triangles[i]->id;
+							data.mesh_id = mesh_id;
+							hit_datas.push_back(data);
+							
+							if( bail_early ) return true;
+							//~ printf("TRIANGLE HIT !!!!!!\n");
+							//~ printf("\t id : %d\n", data.face_id);							
+						}
+					
+					}
+				}
+
+				
+				
+				return true;
+			}
 			
 			
-			return true;
 		}
-		
-		
 	}
 	
 	return false;
