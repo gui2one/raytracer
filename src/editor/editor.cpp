@@ -744,25 +744,36 @@ void Editor::deleteCamera(int id)
 {
 	
 	auto it = std::find(entities.begin(), entities.end(), cameras[id]);
-	int entity_index;
+	int entity_index = -1;
 	if( it != entities.end())
 	{
 		std::cout << "Element Found" << std::endl;
 		entity_index = std::distance(entities.begin(), it);
+	
+	
 		//~ printf("index is %d\n", index);
 		entities.erase(entities.begin() + entity_index);
 		std::cout << "Element DELETED" << std::endl;
+		if(entity_index > (int)entities.size()-1)
+		{
+			cur_entity_id = entities.size()-1;
+		}	
 		
 	}else{
 		std::cout << "Element Not Found" << std::endl;		
 	}
+	
 	delete cameras[id];
+	//~ delete entities[cur_entity_id];
 	cameras.erase(cameras.begin() + id);
 
 	if(cur_cam_id > (int)cameras.size()-1)
 	{
 		cur_cam_id = cameras.size()-1;
 	}
+	
+	printf("current entity ID --> %d\n", cur_entity_id);
+	
 }
 
 std::string Editor::uniqueEntityName(std::string _str)

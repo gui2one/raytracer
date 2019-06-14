@@ -94,7 +94,7 @@ void UI::optionsDialog()
 
 void UI::entitiesDialog()
 {
-	static int cur = -1;
+	static int cur = m_editor->cur_entity_id;
 	ImGui::Begin("Entities", &b_show_entities_dialog);
 	
 	ImGui::PushItemWidth(-1);
