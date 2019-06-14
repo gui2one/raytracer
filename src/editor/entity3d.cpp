@@ -207,6 +207,7 @@ void MeshObject::draw()
 void MeshObject::buildKDTree(int _limit)
 {
 
+	deleteKDTree();
 	//~ int _limit = 5;
 	std::vector<std::shared_ptr<Triangle> > tris;
 	//~ tris.reserve(entities[mesh_id]->mesh.faces.size());

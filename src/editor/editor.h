@@ -56,8 +56,7 @@ public :
 		line_shader,
 		fbo_shader;
 	
-	std::vector<Camera*> cameras;	
-	int cur_cam_id = -1;	
+	
 	
 	bool left_mouse_button_down = false;
 	bool left_mouse_dragging = false;
@@ -73,7 +72,9 @@ public :
 	bool keyboard_captured = false;
 
 	
-	std::vector<Entity3D*> entities;
+	std::vector<std::shared_ptr<Entity3D> > entities;
+	std::vector<std::shared_ptr<Camera> > cameras;	
+	int cur_cam_id = -1;	
 	std::vector<OGL_geometry_data> OGL_geometry_datas;
 	
 	// window params

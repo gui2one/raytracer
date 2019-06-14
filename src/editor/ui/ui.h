@@ -17,7 +17,7 @@ public:
 	void menu();
 	void optionsDialog();
 	void entitiesDialog();
-	void camerasDialog();
+	//~ void camerasDialog();
 	
 	void showAllDialogs();
 	void hideAllDialogs();

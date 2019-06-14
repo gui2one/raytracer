@@ -53,7 +53,7 @@ void UI::menu()
         if (ImGui::BeginMenu("Windows"))
         {
             ImGui::MenuItem("Options", NULL, &b_show_options_dialog);
-            ImGui::MenuItem("Cameras", NULL, &b_show_cameras_dialog);
+            //~ ImGui::MenuItem("Cameras", NULL, &b_show_cameras_dialog);
             ImGui::MenuItem("Entities", NULL, &b_show_entities_dialog);
             ImGui::Separator();
             if(ImGui::MenuItem("Show All"))
@@ -102,13 +102,17 @@ void UI::entitiesDialog()
 	{
 		
 		int inc =0;
-		for(Entity3D* entity : m_editor->entities)
+		for(std::shared_ptr<Entity3D> entity : m_editor->entities)
 		{
-			if(ImGui::Selectable(entity->name.c_str(), inc == cur)){
+			if(ImGui::Selectable(entity->name.c_str(), inc == m_editor->cur_entity_id)){
 				cur = inc;
-				m_editor->cur_entity_id = cur;
-				m_editor->unselectAll();
-				m_editor->entities[cur]->is_selected = true;
+				
+				//~ if( m_editor->cur_entity_id != -1)
+				//~ {
+					m_editor->unselectAll();
+					m_editor->cur_entity_id = cur;
+					entity->is_selected = true;
+				//~ }
 			}
 			inc++;
 		}
@@ -124,9 +128,9 @@ void UI::entitiesDialog()
 	
 	ImGui::Begin("Params", &b_show_entities_dialog);
 	MeshObject * p_mesh = nullptr;
-	if( cur != -1)
+	if( m_editor->cur_entity_id != -1)
 	{
-		if((p_mesh = dynamic_cast<MeshObject*>( m_editor->entities[cur])))
+		if((p_mesh = dynamic_cast<MeshObject* >( m_editor->entities[m_editor->cur_entity_id].get())))
 		{
 			ImGui::Text("Mesh Object");
 			
@@ -135,9 +139,11 @@ void UI::entitiesDialog()
 				if(ImGui::BeginTabItem("Transforms"))
 				{
 					int inc = 0;
-					for(auto param : m_editor->entities[cur]->params)
+					for(auto param : m_editor->entities[m_editor->cur_entity_id]->params)
 					{
-						paramWidget(param, inc, [](){});
+						paramWidget(param, inc, [this](){
+							m_editor->entities[m_editor->cur_entity_id]->buildKDTree(50);
+							});
 						inc++;
 					}
 					ImGui::EndTabItem();
@@ -195,56 +201,56 @@ void UI::entitiesDialog()
 	
 }
 
-void UI::camerasDialog()
-{
-	ImGui::Begin("Cameras", &b_show_cameras_dialog);
-
-	ImGui::PushItemWidth(-1);
-	if( ImGui::ListBoxHeader(""))
-	{
-		int inc =0;
-		for(Camera* cam : m_editor->cameras)
-		{
-			if(ImGui::Selectable(cam->name.c_str(), inc == m_editor->cur_cam_id)){
-				m_editor->cur_cam_id = inc;
-			}
-			inc++;
-		}
-		ImGui::ListBoxFooter();
-	}
-	
-
-	ImGui::PushItemWidth(-1);
-	if(ImGui::Button("Add Camera"))
-	{
-		m_editor->addCamera();
-	}
-	ImGui::SameLine();
-	ImGui::PushItemWidth(-1);
-	if(ImGui::Button("Delete Camera"))
-	{		
-		if(m_editor->cameras.size() > 1)
-		{
-			printf("command delete camera : %d\n", m_editor->cur_cam_id);
-			m_editor->deleteCamera(m_editor->cur_cam_id);
-		}
-	}	
-	
-	ImGui::Columns(1);
-	ImGui::End();
-}
+//~ void UI::camerasDialog()
+//~ {
+	//~ ImGui::Begin("Cameras", &b_show_cameras_dialog);
+//~ 
+	//~ ImGui::PushItemWidth(-1);
+	//~ if( ImGui::ListBoxHeader(""))
+	//~ {
+		//~ int inc =0;
+		//~ for(std::shared_ptr<Camera> cam : m_editor->cameras)
+		//~ {
+			//~ if(ImGui::Selectable(cam->name.c_str(), inc == m_editor->cur_cam_id)){
+				//~ m_editor->cur_cam_id = inc;
+			//~ }
+			//~ inc++;
+		//~ }
+		//~ ImGui::ListBoxFooter();
+	//~ }
+	//~ 
+//~ 
+	//~ ImGui::PushItemWidth(-1);
+	//~ if(ImGui::Button("Add Camera"))
+	//~ {
+		//~ m_editor->addCamera();
+	//~ }
+	//~ ImGui::SameLine();
+	//~ ImGui::PushItemWidth(-1);
+	//~ if(ImGui::Button("Delete Camera"))
+	//~ {		
+		//~ if(m_editor->cameras.size() > 1)
+		//~ {
+			//~ printf("command delete camera : %d\n", m_editor->cur_cam_id);
+			//~ m_editor->deleteCamera(m_editor->cur_cam_id);
+		//~ }
+	//~ }	
+	//~ 
+	//~ ImGui::Columns(1);
+	//~ ImGui::End();
+//~ }
 
 void UI::showAllDialogs()
 {
 	b_show_options_dialog  = true;
-	b_show_cameras_dialog  = true;
+	//~ b_show_cameras_dialog  = true;
 	b_show_entities_dialog = true;
 }
 
 void UI::hideAllDialogs()
 {
 	b_show_options_dialog  = false;
-	b_show_cameras_dialog  = false;	
+	//~ b_show_cameras_dialog  = false;	
 	b_show_entities_dialog = false;
 }
 
@@ -267,9 +273,9 @@ void UI::draw()
 	menu();
 	if(b_show_options_dialog)
 		optionsDialog();
-
-	if(b_show_cameras_dialog)
-		camerasDialog();
+//~ 
+	//~ if(b_show_cameras_dialog)
+		//~ camerasDialog();
 	
 	if(b_show_entities_dialog)
 		entitiesDialog();	

@@ -41,6 +41,9 @@ public:
 	
 	std::shared_ptr<KDNode> kd_node;
 	
+	virtual void buildKDTree(int _limit){};
+	
+	virtual void deleteKDTree(){};	
 private:
 
 
@@ -58,9 +61,7 @@ public :
 	
 	void buildVBO();
 	void draw() override;
-	void buildKDTree(int _limit);
-	
-	void deleteKDTree();
+
 	
 	void setMeshGenerator(MESH_GENERATOR_TYPE _type);
 	void updateMeshGenerator();
@@ -69,6 +70,10 @@ public :
 	MeshGenerator * generator;
 	MESH_GENERATOR_TYPE generator_type;
 	Mesh mesh;
+	
+	void buildKDTree(int _limit) override;
+	
+	void deleteKDTree() override;	
 	
 	
 	

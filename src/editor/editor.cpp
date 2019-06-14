@@ -100,14 +100,14 @@ void Editor::init()
 	
 	glewExperimental = GL_TRUE;
 
-	MeshObject * box = new MeshObject();
+	std::shared_ptr<MeshObject> box =  std::make_shared<MeshObject>();
 	box->setMeshGenerator(BOX_MESH_GENERATOR);
 	box->position = glm::vec3(0.0, 0.0, 2.0);
 	box->applyTransforms();
 	box->buildVBO();
 	entities.push_back(box);
 	
-	MeshObject* ground = new MeshObject();
+	std::shared_ptr<MeshObject> ground = std::make_shared<MeshObject>();
 	ground->name = "ground";
 	
 	ground->setMeshGenerator(GRID_MESH_GENERATOR);
@@ -131,7 +131,7 @@ void Editor::init()
 
 	fbo_shader.createShader();		
 	
-	Camera* camera = new Camera();
+	std::shared_ptr<Camera> camera = std::make_shared<Camera>();
 	camera->position = glm::vec3(5.0, 2.0 , 3.0);
 	camera->target_position = glm::vec3(0.0, 0.0 , 0.0);
 	camera->up_vector = glm::vec3(0.0, 0.0 , 1.0);	
@@ -143,7 +143,7 @@ void Editor::init()
 	cur_cam_id = 0;
 	
 	
-	Camera * camera2 = new Camera();
+	std::shared_ptr<Camera> camera2 = std::make_shared<Camera>();
 	camera2->position = glm::vec3(5.0, 2.0 , 3.0);
 	camera2->target_position = glm::vec3(0.0, 0.0 , 0.0);
 	camera2->up_vector = glm::vec3(0.0, 0.0 , 1.0);	
@@ -269,7 +269,7 @@ void Editor::renderHandlesFBO()
 	glm::mat4 model = glm::mat4(1.0f);
 
 	// check for selected entity
-	for (Entity3D* entity : entities)
+	for (auto entity : entities)
 	{
 		if(entity->is_selected)
 		{
@@ -452,11 +452,11 @@ void Editor::manageEvents()
 						
 						std::vector<HitData> hit_datas;
 						std::vector<std::shared_ptr<KDNode> > kd_nodes2;
-						for (Entity3D* entity: entities)
+						for (auto entity: entities)
 						{
 							MeshObject * p_mesh = nullptr;
 							Camera * p_camera = nullptr;
-							if((p_mesh = dynamic_cast<MeshObject*>(entity))){
+							if((p_mesh = dynamic_cast<MeshObject*>(entity.get()))){
 								if(p_mesh->kd_node != nullptr)
 								{
 									//~ printf("check kdnode\n");
@@ -464,7 +464,7 @@ void Editor::manageEvents()
 									kd_nodes2.push_back(p_mesh->kd_node);
 								}
 							}
-							if((p_camera = dynamic_cast<Camera*>(entity))){
+							if((p_camera = dynamic_cast<Camera*>(entity.get()))){
 								kd_nodes2.push_back(p_camera->kd_node);
 								//~ if(p_camera->kd_node != nullptr)
 								//~ {
@@ -492,6 +492,7 @@ void Editor::manageEvents()
 							}
 						}else{
 							unselectAll();
+							
 						}									
 					}
 					
@@ -546,7 +547,7 @@ void Editor::update()
 
 	manageEvents();
 
-
+	
 
 	
 	//~ camera_u_pos += 0.01;
@@ -557,7 +558,7 @@ void Editor::update()
 		cameras[cur_cam_id]->orbit_center
 	);
 	
-	//~ printf("FOV %.3f\n",cameras[cur_cam_id]->fov);
+	
 
 	//~ GLCall(glDisable(GL_CULL_FACE));
 	GLCall(glEnable(GL_DEPTH_TEST));
@@ -610,7 +611,7 @@ void Editor::update()
 		//~ std::find(selected_entities.begin(), selected_entities.end(), (unsigned int)i);
 		
 		MeshObject * p_mesh = nullptr;
-		if(( p_mesh = dynamic_cast<MeshObject*>(entities[i])))
+		if(( p_mesh = dynamic_cast<MeshObject* >(entities[i].get())))
 		{
 			entities[i]->applyTransforms();
 			model = entities[i]->transforms;
@@ -638,7 +639,7 @@ void Editor::update()
 	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
 	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(cameras[cur_cam_id]->projection)));
 	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "view"), 1, GL_FALSE, glm::value_ptr(view)));		
-	for (Camera* cam : cameras)
+	for (std::shared_ptr<Camera> cam : cameras)
 	{
 		
 		if(cam != cameras[cur_cam_id])
@@ -704,11 +705,11 @@ void Editor::saveScene()
 
 void Editor::unselectAll()
 {
-	for(Entity3D* entity: entities)
+	for(auto entity: entities)
 	{
 		entity->is_selected = false;
 	}
-	//~ cur_entity_id = -1;
+	cur_entity_id = -1;
 }
 
 void Editor::addMeshObject()
@@ -716,7 +717,7 @@ void Editor::addMeshObject()
 	//~ printf("addMeshObject function fired !!! \n");
 	
 	MeshUtils mesh_utils;
-	MeshObject* obj2 = new MeshObject();
+	std::shared_ptr<MeshObject> obj2 = std::make_shared<MeshObject>();
 	obj2->name = "object 2";
 	Mesh mesh = mesh_utils.makeSimpleBox();
 	
@@ -734,7 +735,7 @@ void Editor::addMeshObject()
 
 void Editor::addCamera()
 {
-	Camera * cam = new Camera();
+	std::shared_ptr<Camera> cam = std::make_shared<Camera>();
 	cam->name = uniqueEntityName(cam->name);
 	entities.push_back(cam);
 	cameras.push_back(cam);
@@ -756,14 +757,15 @@ void Editor::deleteCamera(int id)
 		std::cout << "Element DELETED" << std::endl;
 		if(entity_index > (int)entities.size()-1)
 		{
-			cur_entity_id = entities.size()-1;
+			//~ cur_entity_id = entities.size()-1;
+			cur_entity_id = -1;
 		}	
 		
 	}else{
 		std::cout << "Element Not Found" << std::endl;		
 	}
 	
-	delete cameras[id];
+	//~ delete cameras[id];
 	//~ delete entities[cur_entity_id];
 	cameras.erase(cameras.begin() + id);
 
@@ -780,7 +782,7 @@ std::string Editor::uniqueEntityName(std::string _str)
 {
 	
 
-	for(Entity3D * entity : entities)
+	for(auto entity : entities)
 	{
 		if(_str == entity->name)
 		{
@@ -791,7 +793,7 @@ std::string Editor::uniqueEntityName(std::string _str)
 		}
 	}
 	
-	for(Camera * cam : cameras)
+	for(auto cam : cameras)
 	{
 		if(_str == cam->name)
 		{
