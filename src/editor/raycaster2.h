@@ -43,7 +43,7 @@ class Raycaster
 		bool ray_triangle_intersect(Ray& ray, glm::vec3& vtx_a, glm::vec3& vtx_b, glm::vec3& vtx_c, glm::vec3& hit_pos, glm::vec3& bary_coords);
 		
 
-		bool intersectKDNode(Ray& ray, std::shared_ptr<KDNode> kd_node, int mesh_id, std::vector<HitData>& hit_datas, bool bail_early = false);
+		bool intersectKDNode(Ray& ray, std::shared_ptr<KDNode> kd_node, const int& mesh_id, std::vector<HitData>& hit_datas, bool bail_early = false);
 		bool intersectKDNodes(Ray& ray, std::vector<std::shared_ptr<KDNode>> kd_nodes, std::vector<HitData>& hit_datas, bool bail_early = false);
 	
 		

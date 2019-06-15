@@ -23,7 +23,7 @@ public:
 		//~ 
 		
 	unsigned int m_vbo = 0, m_ibo = 0;
-	
+	OGL_DATA_2 geo_data;
 	std::shared_ptr<KDNode> kd_node;
 	
 private:
@@ -39,7 +39,9 @@ class TranslateHandle: public BaseHandle
 		
 		void buildDisplayData();
 		void draw() override;
-		OGL_DATA_2 geo_data;
+		void buildKDTree(int _limit) override;
+		
+		
 		
 	private:
 };

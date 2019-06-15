@@ -1,5 +1,20 @@
 #include "base_handle.h"
 
+static void vec_mult_by_matrix( glm::vec3 & _vec, glm::mat4 & _mat, bool invert = false)
+{
+
+        glm::vec4 temp_vec4 = glm::vec4(_vec.x, _vec.y, _vec.z,1.0f);
+
+
+        if( invert){
+                _vec = glm::inverse(_mat) * temp_vec4 ;
+        } else{
+                _vec = _mat * temp_vec4;
+                //~ printf("__VEC X : %.3f\n", _vec.x);
+        }
+
+}
+
 
 BaseHandle::BaseHandle() : 
 			position(glm::vec3(0.0,0.0,0.0)), 
@@ -18,8 +33,6 @@ void BaseHandle::applyTransforms()
 {
 	glm::mat4 temp = glm::mat4(1.0f);
 	
-	
-
 	//~ printf("entity pos --> %.3f %.3f %.3f\n", param_position->getValue().x, param_position->getValue().y, param_position->getValue().z);
 	temp = glm::translate(temp, position);
 	temp = glm::rotate(temp, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
@@ -44,15 +57,77 @@ TranslateHandle::~TranslateHandle()
 	
 }
 
+void TranslateHandle::buildKDTree(int _limit)
+{
+	//~ printf("building handle KDTree\n");
+	
+	//~ deleteKDTree();
+	//~ int _limit = 5;
+	std::vector<std::shared_ptr<Triangle> > tris;
+	//~ tris.reserve(entities[mesh_id]->mesh.faces.size());
 
+	for (size_t i = 0; i < geo_data.indices.size(); i+=3)
+	{
+		
+
+		int id_A = geo_data.indices[i+0];
+		int id_B = geo_data.indices[i+1];
+		int id_C = geo_data.indices[i+2];
+		glm::vec3 A, B, C;
+		A = B = C = glm::vec3(0.0, 0.0, 0.0);
+
+
+		applyTransforms();
+		// apply transforms matrix
+		glm::vec3 tempA = glm::vec3(
+			geo_data.positions[(id_A * 3) + 0],
+			geo_data.positions[(id_A * 3) + 1],
+			geo_data.positions[(id_A * 3) + 2] 
+		);
+		vec_mult_by_matrix(tempA, transforms, false);
+
+		glm::vec3 tempB = glm::vec3(
+			geo_data.positions[(id_B * 3) + 0],
+			geo_data.positions[(id_B * 3) + 1],
+			geo_data.positions[(id_B * 3) + 2] 
+		);
+		vec_mult_by_matrix(tempB, transforms, false);				
+
+		glm::vec3 tempC = glm::vec3(
+			geo_data.positions[(id_C * 3) + 0],
+			geo_data.positions[(id_C * 3) + 1],
+			geo_data.positions[(id_C * 3) + 2] 
+		);
+		vec_mult_by_matrix(tempC, transforms, false);							
+		
+		A = tempA;
+		B = tempB;
+		C = tempC;
+
+		//~ printf("vec3 value -> %.3f %.3f %.3f\n", A.x, A.y, A.z);
+
+		std::shared_ptr<Triangle> tri_ptr = std::make_shared<Triangle>(A, B, C);
+		tri_ptr->id = i/3;
+		//~ tris.emplace_back(tri_ptr);
+		tris.push_back(tri_ptr);
+		
+		
+
+	}
+	
+
+
+	kd_node = std::make_shared<KDNode>(_limit);
+	kd_node = kd_node->build(tris, 0);		
+}
 
 void TranslateHandle::buildDisplayData()
 {
 	// make main tube
-	geo_data = EditorGizmoUtils::makeCone(0.02,0.02, 0.9, 10, 2);
+	geo_data = EditorGizmoUtils::makeCone(0.05,0.05, 0.9, 10, 2);
 	
 	// make arrow head
-	OGL_DATA_2 pointy_end = EditorGizmoUtils::makeCone(0.04, 0.0, 0.1, 10, 2);
+	OGL_DATA_2 pointy_end = EditorGizmoUtils::makeCone(0.07, 0.0, 0.1, 10, 2);
 	EditorGizmoUtils::translate(pointy_end, glm::vec3(0.0,0.0,0.9));	
 	geo_data = EditorGizmoUtils::merge(geo_data, pointy_end);		
 	//~ EditorGizmoUtils::rotate(copy, glm::vec3(0.0, 0.0, 0.0))

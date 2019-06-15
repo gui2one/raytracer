@@ -156,6 +156,7 @@ void Editor::init()
 	c_grid.init();
 
 	handle = new TranslateHandle();
+	handle->buildKDTree(5);
 	//~ handle->position = glm::vec3(0.0, 0.0, 0.0);
 	
 	GLCall(glCullFace(GL_FRONT));
@@ -276,7 +277,8 @@ void Editor::renderHandlesFBO()
 			//~ entity->applyTransforms();
 			handle->position = entity->position;
 			handle->rotation = entity->rotation;
-			handle->applyTransforms();
+			
+			
 			//~ printf("handle pos --> %.3f %.3f %.3f\n", handle->position.x, handle->position.y, handle->position.z);
 			//~ printf("entity pos --> %.3f %.3f %.3f\n", entity->position.x, entity->position.y, entity->position.z);
 			break;
@@ -287,8 +289,13 @@ void Editor::renderHandlesFBO()
 	float cam_distance = glm::distance(handle->position, cameras[cur_cam_id]->position);
 	float scale = cam_distance / 8.0f;
 	//~ printf("%f \n", scale);
+	
+	handle->scale = glm::vec3(scale, scale, scale);
+	handle->applyTransforms();
 	model = handle->transforms;
-	model  = glm::scale(model , glm::vec3(scale, scale, scale));
+	//~ model  = glm::scale(model , glm::vec3(scale, scale, scale));
+	
+	handle->buildKDTree(5);
 	
 	glm::mat4 view = glm::mat4(1.0f);
 
@@ -398,7 +405,8 @@ void Editor::manageEvents()
 							cameras[cur_cam_id]->orbit_radius, 
 							cameras[cur_cam_id]->orbit_center
 						);	
-					}						
+					}
+								
 				}else if(Event.motion.state == SDL_BUTTON_RMASK){
 					
 					right_mouse_dragging = true;
@@ -430,103 +438,143 @@ void Editor::manageEvents()
 					}							
 				}
 			}
-
-				else if(Event.type == SDL_MOUSEBUTTONUP){
+			
+			else if( Event.type == SDL_MOUSEBUTTONDOWN){
+				if(Event.button.button == SDL_BUTTON_LEFT && !left_mouse_dragging)
+				{	
+					printf("left button down\n");	
 					
-					if(Event.button.button == SDL_BUTTON_LEFT && !left_mouse_dragging)
-					{
-						// normal click
-						
-						int x, y;
-						SDL_GetMouseState(&x, &y);
+					int x, y;
+					SDL_GetMouseState(&x, &y);
 
+					
+					ClickData cd;
+					cd.width = w_width;
+					cd.height = w_height;
+					cd.x = (double)x;
+					cd.y = (double)y;
+					Raycaster caster;
+					
+					Ray ray = caster.castRay(cd, *(cameras[cur_cam_id]));
+					
+					std::vector<HitData> hit_datas;
+					std::vector<std::shared_ptr<KDNode> > kd_nodes2;
+					
+					// first check handles
+					kd_nodes2.push_back(handle->kd_node);
+					
+					caster.intersectKDNodes(ray, kd_nodes2, hit_datas, false);
+					
+					
+					if( hit_datas.size() > 0)
+					{
+						printf("hit HANDLE !!!\n");
+						printf("\tnum triangles : %d\n", handle->geo_data.indices.size()/3);
+						printf("\tface ID : %d\n", hit_datas[0].face_id);
 						
-						ClickData cd;
-						cd.width = w_width;
-						cd.height = w_height;
-						cd.x = (double)x;
-						cd.y = (double)y;
-						Raycaster caster;
-						
-						Ray ray = caster.castRay(cd, *(cameras[cur_cam_id]));
-						
-						std::vector<HitData> hit_datas;
-						std::vector<std::shared_ptr<KDNode> > kd_nodes2;
-						
-						// first check handles
-						kd_nodes2.push_back(handle->kd_node);
-						
-						caster.intersectKDNodes(ray, kd_nodes2, hit_datas, false);
-						
-						
-						if( hit_datas.size() > 0)
-						{
-							printf("hit HANDLE !!!\n");
-						}
-						
-						// then check for entities
-						hit_datas.clear();
-						kd_nodes2.clear();
-						for (auto entity: entities)
-						{
-							MeshObject * p_mesh = nullptr;
-							Camera * p_camera = nullptr;
-							if((p_mesh = dynamic_cast<MeshObject*>(entity.get()))){
-								if(p_mesh->kd_node != nullptr)
-								{
-									//~ printf("check kdnode\n");
-									//~ printf("check kdnode. num triangles : %d\n", p_mesh->kd_node->triangles.size());
-									kd_nodes2.push_back(p_mesh->kd_node);
-								}
-							}
-							if((p_camera = dynamic_cast<Camera*>(entity.get()))){
-								kd_nodes2.push_back(p_camera->kd_node);
-								//~ if(p_camera->kd_node != nullptr)
-								//~ {
-									//~ 
-								//~ }
-							}
-						}
-						
-						caster.intersectKDNodes(ray, kd_nodes2, hit_datas, false);
-						//~ printf("got hit ??? \n");
-						if(hit_datas.size() > 0 )
-						{
-							//~ printf("got hit\n");
-							if(keyboard_state[SDL_SCANCODE_LSHIFT])
+					}					
+					left_mouse_dragging = false;
+				}		
+			}
+			
+			else if(Event.type == SDL_MOUSEBUTTONUP){
+				
+				if(Event.button.button == SDL_BUTTON_LEFT && !left_mouse_dragging)
+				{
+					// normal click
+					
+					int x, y;
+					SDL_GetMouseState(&x, &y);
+
+					
+					ClickData cd;
+					cd.width = w_width;
+					cd.height = w_height;
+					cd.x = (double)x;
+					cd.y = (double)y;
+					Raycaster caster;
+					
+					Ray ray = caster.castRay(cd, *(cameras[cur_cam_id]));
+					
+					std::vector<HitData> hit_datas;
+					std::vector<std::shared_ptr<KDNode> > kd_nodes2;
+					
+					//~ // first check handles
+					//~ kd_nodes2.push_back(handle->kd_node);
+					//~ 
+					//~ caster.intersectKDNodes(ray, kd_nodes2, hit_datas, false);
+					//~ 
+					//~ 
+					//~ if( hit_datas.size() > 0)
+					//~ {
+						//~ printf("hit HANDLE !!!\n");
+					//~ }
+					
+					// then check for entities
+					hit_datas.clear();
+					kd_nodes2.clear();
+					for (auto entity: entities)
+					{
+						MeshObject * p_mesh = nullptr;
+						Camera * p_camera = nullptr;
+						if((p_mesh = dynamic_cast<MeshObject*>(entity.get()))){
+							if(p_mesh->kd_node != nullptr)
 							{
-								
-								cur_entity_id = hit_datas[0].mesh_id;
-								entities[cur_entity_id]->is_selected = !entities[cur_entity_id]->is_selected;
-							}else{
-								unselectAll();
-								cur_entity_id = hit_datas[0].mesh_id;
-								entities[cur_entity_id]->is_selected = true;
-								
-								
+								//~ printf("check kdnode\n");
+								//~ printf("check kdnode. num triangles : %d\n", p_mesh->kd_node->triangles.size());
+								kd_nodes2.push_back(p_mesh->kd_node);
 							}
-						}else{
-							unselectAll();
-							
-						}									
+						}
+						if((p_camera = dynamic_cast<Camera*>(entity.get()))){
+							kd_nodes2.push_back(p_camera->kd_node);
+							//~ if(p_camera->kd_node != nullptr)
+							//~ {
+								//~ 
+							//~ }
+						}
 					}
 					
-					left_mouse_dragging = false;
-
-					
-				}else if(Event.type == SDL_MOUSEWHEEL){
-					
-					float norm_dist = glm::distance(cameras[cur_cam_id]->position, cameras[cur_cam_id]->orbit_center) / 5.0;
-					cameras[cur_cam_id]->orbit_radius += (float)Event.wheel.y * -0.15 * norm_dist;
-					
-					setCamPosFromPolar(
-						cameras[cur_cam_id]->orbit_u, 
-						cameras[cur_cam_id]->orbit_v, 
-						cameras[cur_cam_id]->orbit_radius, 
-						cameras[cur_cam_id]->orbit_center
-					);	
+					caster.intersectKDNodes(ray, kd_nodes2, hit_datas, false);
+					//~ printf("got hit ??? \n");
+					if(hit_datas.size() > 0 )
+					{
+						//~ printf("got hit\n");
+						if(keyboard_state[SDL_SCANCODE_LSHIFT])
+						{
+							
+							cur_entity_id = hit_datas[0].mesh_id;
+							entities[cur_entity_id]->is_selected = !entities[cur_entity_id]->is_selected;
+							//~ handle->buildKDTree(5);
+						}else{
+							unselectAll();
+							cur_entity_id = hit_datas[0].mesh_id;
+							entities[cur_entity_id]->is_selected = true;
+							//~ handle->buildKDTree(5);
+							
+							
+						}
+					}else{
+						unselectAll();
 						
+					}									
 				}
+				
+				left_mouse_dragging = false;
+
+				
+			}else if(Event.type == SDL_MOUSEWHEEL){
+				
+				float norm_dist = glm::distance(cameras[cur_cam_id]->position, cameras[cur_cam_id]->orbit_center) / 5.0;
+				cameras[cur_cam_id]->orbit_radius += (float)Event.wheel.y * -0.15 * norm_dist;
+				
+				setCamPosFromPolar(
+					cameras[cur_cam_id]->orbit_u, 
+					cameras[cur_cam_id]->orbit_v, 
+					cameras[cur_cam_id]->orbit_radius, 
+					cameras[cur_cam_id]->orbit_center
+				);	
+					
+			}
 			
 			
 			//~ else if(Event.type == SDL_KEYUP){
