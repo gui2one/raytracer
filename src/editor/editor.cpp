@@ -452,6 +452,21 @@ void Editor::manageEvents()
 						
 						std::vector<HitData> hit_datas;
 						std::vector<std::shared_ptr<KDNode> > kd_nodes2;
+						
+						// first check handles
+						kd_nodes2.push_back(handle->kd_node);
+						
+						caster.intersectKDNodes(ray, kd_nodes2, hit_datas, false);
+						
+						
+						if( hit_datas.size() > 0)
+						{
+							printf("hit HANDLE !!!\n");
+						}
+						
+						// then check for entities
+						hit_datas.clear();
+						kd_nodes2.clear();
 						for (auto entity: entities)
 						{
 							MeshObject * p_mesh = nullptr;
@@ -777,6 +792,21 @@ void Editor::deleteCamera(int id)
 	printf("current entity ID --> %d\n", cur_entity_id);
 	
 }
+
+void Editor::deleteEntity(int id)
+{
+
+	entities.erase(entities.begin() + id);
+
+	if(cur_entity_id > (int)entities.size()-1)
+	{
+		cur_entity_id = entities.size()-1;
+	}
+	
+	//~ printf("current entity ID --> %d\n", cur_entity_id);
+	
+}
+
 
 std::string Editor::uniqueEntityName(std::string _str)
 {

@@ -46,6 +46,7 @@ public :
 	void unselectAll();
 	void addMeshObject();
 	void addCamera();
+	void deleteEntity(int id);
 	void deleteCamera(int id);
 	
 	std::string uniqueEntityName(std::string _str);

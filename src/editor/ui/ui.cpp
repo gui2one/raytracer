@@ -122,6 +122,11 @@ void UI::entitiesDialog()
 		{
 			m_editor->addMeshObject();
 		}
+		
+		if(ImGui::Button("Delete"))
+		{
+			m_editor->deleteEntity(m_editor->cur_entity_id);
+		}		
 	}	
 	ImGui::End();
 	// display params
@@ -130,12 +135,12 @@ void UI::entitiesDialog()
 	MeshObject * p_mesh = nullptr;
 	if( m_editor->cur_entity_id != -1)
 	{
-		if((p_mesh = dynamic_cast<MeshObject* >( m_editor->entities[m_editor->cur_entity_id].get())))
-		{
+		
+		if(ImGui::BeginTabBar("Main"))
+		{		
+
 			ImGui::Text("Mesh Object");
 			
-			if(ImGui::BeginTabBar("Main"))
-			{
 				if(ImGui::BeginTabItem("Transforms"))
 				{
 					int inc = 0;
@@ -147,7 +152,10 @@ void UI::entitiesDialog()
 						inc++;
 					}
 					ImGui::EndTabItem();
-				}
+				}			
+			if((p_mesh = dynamic_cast<MeshObject* >( m_editor->entities[m_editor->cur_entity_id].get())))
+			{
+
 				if(ImGui::BeginTabItem("Generator"))
 				{
 					std::vector<const char*> generator_types_strings = {"...", "Grid Mesh", "Box Mesh"};

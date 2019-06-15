@@ -7,22 +7,27 @@
 
 class BaseHandle
 {
-	public:
-		BaseHandle();
-		virtual ~BaseHandle();
+public:
+	BaseHandle();
+	virtual ~BaseHandle();
+	virtual void buildKDTree(int _limit){};
+	virtual void deleteKDTree(){};			
 		
-		virtual void draw(){};
-		void applyTransforms();
-		glm::mat4 transforms;
-		
-		glm::vec3 position;
-		glm::vec3 rotation;
-		glm::vec3 scale;
+	virtual void draw(){};
+	void applyTransforms();
+	glm::mat4 transforms;
+	
+	glm::vec3 position;
+	glm::vec3 rotation;
+	glm::vec3 scale;
 		//~ 
 		
-		unsigned int m_vbo = 0, m_ibo = 0;
-	private:
-		/* add your private declarations */
+	unsigned int m_vbo = 0, m_ibo = 0;
+	
+	std::shared_ptr<KDNode> kd_node;
+	
+private:
+	/* add your private declarations */
 };
 
 class TranslateHandle: public BaseHandle

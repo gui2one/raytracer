@@ -18,6 +18,9 @@ public:
 	Entity3D();
 	
 	virtual void draw();
+	virtual void buildKDTree(int _limit){};
+	virtual void deleteKDTree(){};	
+
 	virtual ~Entity3D();
 	
 	void applyTransforms();
@@ -41,9 +44,7 @@ public:
 	
 	std::shared_ptr<KDNode> kd_node;
 	
-	virtual void buildKDTree(int _limit){};
-	
-	virtual void deleteKDTree(){};	
+
 private:
 
 

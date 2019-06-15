@@ -17,7 +17,7 @@ ENDIF()
 
 
 set(CMAKE_CXX_FLAGS -std=c++14)
-add_definitions(-Wall -Wno-unused-function)
+add_definitions(-Wall -Wno-unused-function -Wno-unused-local-typedefs)
 #~ set(CMAKE_CXX_FLAGS -Wall)
 set(CMAKE_BUILD_TYPE Release)
 

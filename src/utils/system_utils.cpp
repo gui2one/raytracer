@@ -15,15 +15,15 @@ DIR_CONTENT SystemUtils::read_directory(std::string dir_path)
 	std::vector<std::string> file_names;
 	struct dirent * sd;
 	struct stat st_buf;
-	int status;
+	//~ int status;
 	
-	while(sd = readdir(dir))
+	while( (sd = readdir(dir)))
 	{
 		std::string check_path = path;
 		check_path += "/";
 		check_path += sd->d_name;
 
-		status = stat(check_path.c_str(), &st_buf);
+		//~ status = stat(check_path.c_str(), &st_buf);
 		// printf("read dir\n");
 		
 		//~ printf("name --> %s\n", sd->d_name);

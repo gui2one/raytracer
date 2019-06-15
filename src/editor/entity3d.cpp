@@ -273,7 +273,7 @@ void MeshObject::deleteKDTree()
 
 MeshObject::~MeshObject()
 {
-	printf("--- Delete MeshObject\n");
+	//~ printf("--- Delete MeshObject\n");
 }
 
 

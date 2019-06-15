@@ -2,17 +2,18 @@
 
 //~ #define STB_IMAGE_IMPLEMENTATION
 //~ #include "vendor/stb_image.h"
-Texture::Texture():id(0),width(0), height(0), bpp(0)
+Texture::Texture():data(),id(0),width(0), height(0), bpp(0)
 {	
 	//~ std::cout << "creating texture object... " << "\n";	
 }
 
 Texture::Texture(const Texture& other):
+	data(other.data),
 	id(other.id),
 	width(other.width), 
 	height(other.height),
-	bpp(other.bpp),
-	data(other.data)
+	bpp(other.bpp)
+	
 {
 	printf("copy texture ...\n");
 }
