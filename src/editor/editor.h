@@ -102,7 +102,7 @@ public :
 	
 	int cur_entity_id = -1;
 	
-	BaseHandle * handle;
+	std::shared_ptr<BaseHandle> handle;
 	
 	unsigned int handles_fbo = 0;
 	unsigned int handles_fbo_depth = 0;

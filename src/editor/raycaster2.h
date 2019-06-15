@@ -7,6 +7,7 @@
 #include "../mesh.h"
 #include "kdnode2.h"
 #include "../ray.h"
+#include "handles/base_handle.h"
 
 
 struct HitData
@@ -46,6 +47,8 @@ class Raycaster
 		bool intersectKDNode(Ray& ray, std::shared_ptr<KDNode> kd_node, const int& mesh_id, std::vector<HitData>& hit_datas, bool bail_early = false);
 		bool intersectKDNodes(Ray& ray, std::vector<std::shared_ptr<KDNode>> kd_nodes, std::vector<HitData>& hit_datas, bool bail_early = false);
 	
+		
+		bool intersectHandles(Ray& ray, std::vector<std::shared_ptr<BaseHandle> > handles, std::vector<HitData>& hit_datas);
 		
 			
 	private:

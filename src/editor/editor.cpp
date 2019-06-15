@@ -155,7 +155,7 @@ void Editor::init()
 	//// init construction grid
 	c_grid.init();
 
-	handle = new TranslateHandle();
+	handle = std::make_shared<TranslateHandle>();
 	handle->buildKDTree(5);
 	//~ handle->position = glm::vec3(0.0, 0.0, 0.0);
 	
@@ -295,7 +295,7 @@ void Editor::renderHandlesFBO()
 	model = handle->transforms;
 	//~ model  = glm::scale(model , glm::vec3(scale, scale, scale));
 	
-	handle->buildKDTree(5);
+	//~ handle->buildKDTree(5);
 	
 	glm::mat4 view = glm::mat4(1.0f);
 
@@ -458,19 +458,21 @@ void Editor::manageEvents()
 					Ray ray = caster.castRay(cd, *(cameras[cur_cam_id]));
 					
 					std::vector<HitData> hit_datas;
-					std::vector<std::shared_ptr<KDNode> > kd_nodes2;
+					std::vector<std::shared_ptr<BaseHandle> > handles;
+					
+					
 					
 					// first check handles
-					kd_nodes2.push_back(handle->kd_node);
+					handles.push_back(handle);
 					
-					caster.intersectKDNodes(ray, kd_nodes2, hit_datas, false);
+					caster.intersectHandles(ray, handles, hit_datas);
 					
 					
 					if( hit_datas.size() > 0)
 					{
 						printf("hit HANDLE !!!\n");
-						printf("\tnum triangles : %d\n", handle->geo_data.indices.size()/3);
-						printf("\tface ID : %d\n", hit_datas[0].face_id);
+						//~ printf("\tnum triangles : %d\n", handle->geo_data.indices.size()/3);
+						//~ printf("\tface ID : %d\n", hit_datas[0].face_id);
 						
 					}					
 					left_mouse_dragging = false;

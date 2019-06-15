@@ -14,10 +14,10 @@ static float degToRad(float degrees)
 	return ((degrees * PI) / 180.0);
 }
 
-static void vec_mult_by_matrix( glm::vec3 & _vec, glm::mat4 & _mat, bool invert = false)
+static void vec_mult_by_matrix( glm::vec3 & _vec, glm::mat4 & _mat, bool invert = false, float w = 1.0f)
 {
     
-        glm::vec4 temp_vec4 = glm::vec4(_vec.x, _vec.y, _vec.z,1.0f);
+        glm::vec4 temp_vec4 = glm::vec4(_vec.x, _vec.y, _vec.z, w);
     
     
         if( invert){
@@ -44,6 +44,15 @@ static Ray offset_ray(Ray& src, float amount)
 	Ray ray;
 	ray.direction = src.direction;
 	ray.origin = src.origin + (glm::normalize(src.direction) * amount);
+	
+	return ray;
+}
+
+static Ray transform_ray(Ray& src, glm::mat4& matrix)
+{
+	Ray ray = src;
+	vec_mult_by_matrix(ray.origin, matrix, true, 1.0f);
+	vec_mult_by_matrix(ray.direction, matrix, true, 1.0f);
 	
 	return ray;
 }
@@ -113,14 +122,9 @@ Ray Raycaster::castRay(ClickData click_data, const Camera& camera)
 	
 
 	ray.origin = camera.position;
-	
-	// custom vec_mult_by matrix 
-	glm::vec4 temp_vec4 = glm::vec4(direction.x, direction.y, direction.z, 0.0f); // 0.0f !!! important for w element
-
-
-
-	ray.direction = glm::inverse(view_matrix) * temp_vec4 ;
-	
+		
+	vec_mult_by_matrix(direction, view_matrix, true, 0.0f);// 0.0f in w component in important!!!
+	ray.direction = direction;
 	
 
 	return ray;
@@ -245,3 +249,27 @@ bool Raycaster::intersectKDNodes(Ray& ray, std::vector<std::shared_ptr<KDNode>> 
 	
 }
 
+bool Raycaster::intersectHandles(Ray& ray, std::vector<std::shared_ptr<BaseHandle> > handles, std::vector<HitData>& hit_datas)
+{
+	int num_hit = 0;
+	int inc = 0;
+	for (std::shared_ptr<BaseHandle> handle : handles)
+	{
+		Ray t_ray = transform_ray(ray, handle->transforms);
+		
+		bool hit = intersectKDNode(t_ray, handle->kd_node, inc, hit_datas);
+		
+		if( hit)
+		{
+			num_hit++;
+		}
+		inc++;
+	}
+	
+	if( num_hit > 0)
+	{
+		return true;
+	}
+	
+	return false;
+}

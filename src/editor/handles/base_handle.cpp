@@ -59,7 +59,7 @@ TranslateHandle::~TranslateHandle()
 
 void TranslateHandle::buildKDTree(int _limit)
 {
-	//~ printf("building handle KDTree\n");
+	printf("building handle KDTree\n");
 	
 	//~ deleteKDTree();
 	//~ int _limit = 5;
@@ -84,21 +84,21 @@ void TranslateHandle::buildKDTree(int _limit)
 			geo_data.positions[(id_A * 3) + 1],
 			geo_data.positions[(id_A * 3) + 2] 
 		);
-		vec_mult_by_matrix(tempA, transforms, false);
+		//~ vec_mult_by_matrix(tempA, transforms, false);
 
 		glm::vec3 tempB = glm::vec3(
 			geo_data.positions[(id_B * 3) + 0],
 			geo_data.positions[(id_B * 3) + 1],
 			geo_data.positions[(id_B * 3) + 2] 
 		);
-		vec_mult_by_matrix(tempB, transforms, false);				
+		//~ vec_mult_by_matrix(tempB, transforms, false);				
 
 		glm::vec3 tempC = glm::vec3(
 			geo_data.positions[(id_C * 3) + 0],
 			geo_data.positions[(id_C * 3) + 1],
 			geo_data.positions[(id_C * 3) + 2] 
 		);
-		vec_mult_by_matrix(tempC, transforms, false);							
+		//~ vec_mult_by_matrix(tempC, transforms, false);							
 		
 		A = tempA;
 		B = tempB;

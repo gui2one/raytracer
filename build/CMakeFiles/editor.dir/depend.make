@@ -2578,6 +2578,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/raycaster2.cpp.o: ..
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/raycaster2.cpp.o: /home/pi/projects/raytracer/src/color.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/raycaster2.cpp.o: /home/pi/projects/raytracer/src/editor/editor_camera.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/raycaster2.cpp.o: /home/pi/projects/raytracer/src/editor/entity3d.h
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/raycaster2.cpp.o: /home/pi/projects/raytracer/src/editor/handles/base_handle.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/raycaster2.cpp.o: /home/pi/projects/raytracer/src/editor/kdnode2.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/raycaster2.cpp.o: /home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/raycaster2.cpp.o: /home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.h

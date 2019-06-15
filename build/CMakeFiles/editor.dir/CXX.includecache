@@ -621,6 +621,8 @@ kdnode2.h
 /home/pi/projects/raytracer/src/editor/kdnode2.h
 ../ray.h
 /home/pi/projects/raytracer/src/ray.h
+handles/base_handle.h
+/home/pi/projects/raytracer/src/editor/handles/base_handle.h
 
 /home/pi/projects/raytracer/src/editor/ui/ui.cpp
 ui.h
