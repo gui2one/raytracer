@@ -273,3 +273,28 @@ bool Raycaster::intersectHandles(Ray& ray, std::vector<std::shared_ptr<BaseHandl
 	
 	return false;
 }
+
+bool Raycaster::intersectEntities(Ray& ray, std::vector<std::shared_ptr<Entity3D> > entities, std::vector<HitData>& hit_datas)
+{
+	int num_hit = 0;
+	int inc = 0;
+	for (auto entity : entities)
+	{
+		Ray t_ray = transform_ray(ray, entity->transforms);
+		
+		bool hit = intersectKDNode(t_ray, entity->kd_node, inc, hit_datas);
+		
+		if( hit)
+		{
+			num_hit++;
+		}
+		inc++;
+	}
+	
+	if( num_hit > 0)
+	{
+		return true;
+	}
+	
+	return false;
+}

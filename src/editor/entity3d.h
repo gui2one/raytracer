@@ -19,7 +19,7 @@ public:
 	
 	virtual void draw();
 	virtual void buildKDTree(int _limit){};
-	virtual void deleteKDTree(){};	
+	
 
 	virtual ~Entity3D();
 	
@@ -73,8 +73,7 @@ public :
 	Mesh mesh;
 	
 	void buildKDTree(int _limit) override;
-	
-	void deleteKDTree() override;	
+
 	
 	
 	

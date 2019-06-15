@@ -536,7 +536,8 @@ void Editor::manageEvents()
 						}
 					}
 					
-					caster.intersectKDNodes(ray, kd_nodes2, hit_datas, false);
+					//~ caster.intersectKDNodes(ray, kd_nodes2, hit_datas, false);
+					caster.intersectEntities(ray, entities, hit_datas);
 					//~ printf("got hit ??? \n");
 					if(hit_datas.size() > 0 )
 					{

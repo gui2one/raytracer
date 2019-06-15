@@ -173,7 +173,7 @@ void MeshObject::buildVBO()
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));		
 	
 	
-	deleteKDTree();
+	
 	buildKDTree(50);
 	
 	
@@ -206,8 +206,8 @@ void MeshObject::draw()
 
 void MeshObject::buildKDTree(int _limit)
 {
-
-	deleteKDTree();
+	printf("building Entity3D kdtree\n");
+	
 	//~ int _limit = 5;
 	std::vector<std::shared_ptr<Triangle> > tris;
 	//~ tris.reserve(entities[mesh_id]->mesh.faces.size());
@@ -226,13 +226,13 @@ void MeshObject::buildKDTree(int _limit)
 			applyTransforms();
 			// apply transforms matrix
 			glm::vec3 tempA = mesh.points[ mesh.faces[i].getVertex(0).point_id ].position;
-			vec_mult_by_matrix(tempA, transforms, false);
+			//~ vec_mult_by_matrix(tempA, transforms, false);
 
 			glm::vec3 tempB = mesh.points[ mesh.faces[i].getVertex(1+j).point_id ].position;
-			vec_mult_by_matrix(tempB, transforms, false);				
+			//~ vec_mult_by_matrix(tempB, transforms, false);				
 
 			glm::vec3 tempC = mesh.points[ mesh.faces[i].getVertex(2+j).point_id ].position;
-			vec_mult_by_matrix(tempC, transforms, false);							
+			//~ vec_mult_by_matrix(tempC, transforms, false);							
 			
 			A = tempA;
 			B = tempB;
@@ -258,18 +258,7 @@ void MeshObject::buildKDTree(int _limit)
 }
 
 
-void MeshObject::deleteKDTree()
-{
-	//~ printf("Trying to delete KDNode\n");
-	//~ if(kd_node != nullptr)
-	//~ {
-		//~ delete kd_node;
-		//~ printf("\tdeleted KDNode\n");
-	//~ }else{
-		//~ printf("\tKDNode is NULL\n");
-	//~ }
-	
-}
+
 
 MeshObject::~MeshObject()
 {

@@ -49,6 +49,7 @@ class Raycaster
 	
 		
 		bool intersectHandles(Ray& ray, std::vector<std::shared_ptr<BaseHandle> > handles, std::vector<HitData>& hit_datas);
+		bool intersectEntities(Ray& ray, std::vector<std::shared_ptr<Entity3D> > entities, std::vector<HitData>& hit_datas);
 		
 			
 	private:
