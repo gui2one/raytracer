@@ -77,7 +77,44 @@ namespace EditorGizmoUtils
 		
 	}	
 		
+	OGL_DATA_2 makeSimpleBox()
+	{
+		OGL_DATA_2 geo_data;
 		
+		
+		
+		geo_data.positions.clear();
+		geo_data.indices.clear();
+		
+		geo_data.positions.insert(
+			geo_data.positions.end(), {
+				-0.5, -0.5, -0.5,
+				 0.5, -0.5, -0.5,
+				 0.5,  0.5, -0.5,
+				-0.5,  0.5, -0.5, 
+				
+				-0.5, -0.5,  0.5,
+				 0.5, -0.5,  0.5,
+				 0.5,  0.5,  0.5,
+				-0.5,  0.5,  0.5 			
+			}
+		);
+		
+		
+
+		geo_data.indices.insert(
+			geo_data.indices.end(), {
+				0,1,2, 0,2,3, // bottom face
+				4,5,6, 4,6,7, // top face
+				0,1,5, 0,5,4, // y facing 1
+				2,3,7, 2,7,6, // y facing 2
+				1,2,6, 1,6,5, // x facing 1
+				3,0,4, 3,4,7 // x facing 2				
+			}
+		);
+		
+		return geo_data;		
+	}	
 
 	OGL_DATA_2 makeCone(float radius1, float radius2, float length, int segs_radius, int segs_length)
 	{

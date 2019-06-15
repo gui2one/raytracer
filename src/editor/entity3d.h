@@ -18,7 +18,7 @@ public:
 	Entity3D();
 	
 	virtual void draw();
-	virtual void buildKDTree(int _limit){};
+	virtual void buildKDTree(int _limit = 5){};
 	
 
 	virtual ~Entity3D();
@@ -72,7 +72,7 @@ public :
 	MESH_GENERATOR_TYPE generator_type;
 	Mesh mesh;
 	
-	void buildKDTree(int _limit) override;
+	void buildKDTree(int _limit = 5) override;
 
 	
 	

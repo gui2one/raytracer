@@ -206,7 +206,7 @@ void MeshObject::draw()
 
 void MeshObject::buildKDTree(int _limit)
 {
-	printf("building Entity3D kdtree\n");
+	//~ printf("building Entity3D kdtree\n");
 	
 	//~ int _limit = 5;
 	std::vector<std::shared_ptr<Triangle> > tris;
@@ -220,29 +220,17 @@ void MeshObject::buildKDTree(int _limit)
 		{
 			
 			glm::vec3 A, B, C;
-			A = B = C = glm::vec3(0.0, 0.0, 0.0);
-
+			
 	
 			applyTransforms();
 			// apply transforms matrix
-			glm::vec3 tempA = mesh.points[ mesh.faces[i].getVertex(0).point_id ].position;
-			//~ vec_mult_by_matrix(tempA, transforms, false);
+			A = mesh.points[ mesh.faces[i].getVertex(0).point_id ].position;
+			B = mesh.points[ mesh.faces[i].getVertex(1+j).point_id ].position;	
+			C = mesh.points[ mesh.faces[i].getVertex(2+j).point_id ].position;
 
-			glm::vec3 tempB = mesh.points[ mesh.faces[i].getVertex(1+j).point_id ].position;
-			//~ vec_mult_by_matrix(tempB, transforms, false);				
-
-			glm::vec3 tempC = mesh.points[ mesh.faces[i].getVertex(2+j).point_id ].position;
-			//~ vec_mult_by_matrix(tempC, transforms, false);							
-			
-			A = tempA;
-			B = tempB;
-			C = tempC;
-
-			//~ printf("vec3 value -> %.3f %.3f %.3f\n", A.x, A.y, A.z);
 
 			std::shared_ptr<Triangle> tri_ptr = std::make_shared<Triangle>(A, B, C);
 			tri_ptr->id = i;
-			//~ tris.emplace_back(tri_ptr);
 			tris.push_back(tri_ptr);
 			
 		}
@@ -253,8 +241,7 @@ void MeshObject::buildKDTree(int _limit)
 
 	kd_node = std::make_shared<KDNode>(_limit);
 	kd_node = kd_node->build(tris, 0);	
-	
-	//~ printf("TRIANGLES --> %d\n", kd_node->triangles.size());
+
 }
 
 

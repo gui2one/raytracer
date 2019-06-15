@@ -19,13 +19,11 @@ class Camera : public Entity3D
 		
 		void buildDisplayData();
 		void draw(); // override;
+		void buildKDTree(int _limit = 5) override;
 		float fov = 20.0;
 		glm::mat4 projection;
 		
-		//~ glm::vec3 position;
-		//~ glm::vec3 rotation;
-		//~ glm::vec3 scale;
-		//~ 
+
 		glm::vec3 target_position;
 		glm::vec3 up_vector;
 		
@@ -39,7 +37,7 @@ class Camera : public Entity3D
 		double    orbit_radius = 5.0;
 		glm::vec3 orbit_center = glm::vec3(0.0, 0.0, 0.0);
 			
-		
+		OGL_DATA_2 click_geo;
 		
 	private:
 	

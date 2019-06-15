@@ -65,6 +65,10 @@ public :
 	bool right_mouse_button_down = false;
 	bool right_mouse_dragging = false;
 	
+	bool b_handle_clicked = false;
+	bool b_handle_dragged = false;
+	
+	
 	float mouse_old_x = 0.0;
 	float mouse_old_y = 0.0;
 	float mouse_delta_x, mouse_delta_y;	

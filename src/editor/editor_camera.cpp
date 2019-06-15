@@ -43,6 +43,7 @@ Camera::~Camera()
 	
 	
 }
+
 void Camera::setProjection(float angle, float aspect, float near, float far)
 { 
 	projection = glm::perspective(angle, aspect, near, far);
@@ -65,9 +66,6 @@ void Camera::applyTransforms()
 	
 	transforms = temp;		
 }
-
-
-
 
 void Camera::buildDisplayData()
 {
@@ -122,7 +120,71 @@ void Camera::buildDisplayData()
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));		
 	
 	
+	
+	// build click geo
 
+	click_geo = EditorGizmoUtils::makeSimpleBox();
+	buildKDTree();
+	
+}
+
+void Camera::buildKDTree(int _limit)
+{
+	printf("building Camera KDTree\n");
+
+	std::vector<std::shared_ptr<Triangle> > tris;
+
+
+	for (size_t i = 0; i < click_geo.indices.size(); i+=3)
+	{
+		
+
+		int id_A = click_geo.indices[i+0];
+		int id_B = click_geo.indices[i+1];
+		int id_C = click_geo.indices[i+2];
+		glm::vec3 A, B, C;
+		A = B = C = glm::vec3(0.0, 0.0, 0.0);
+
+
+		applyTransforms();
+		// apply transforms matrix
+		glm::vec3 tempA = glm::vec3(
+			click_geo.positions[(id_A * 3) + 0],
+			click_geo.positions[(id_A * 3) + 1],
+			click_geo.positions[(id_A * 3) + 2] 
+		);
+
+
+		glm::vec3 tempB = glm::vec3(
+			click_geo.positions[(id_B * 3) + 0],
+			click_geo.positions[(id_B * 3) + 1],
+			click_geo.positions[(id_B * 3) + 2] 
+		);
+			
+
+		glm::vec3 tempC = glm::vec3(
+			click_geo.positions[(id_C * 3) + 0],
+			click_geo.positions[(id_C * 3) + 1],
+			click_geo.positions[(id_C * 3) + 2] 
+		);
+						
+		
+		A = tempA;
+		B = tempB;
+		C = tempC;
+
+		//~ printf("vec3 value -> %.3f %.3f %.3f\n", A.x, A.y, A.z);
+
+		std::shared_ptr<Triangle> tri_ptr = std::make_shared<Triangle>(A, B, C);
+		tri_ptr->id = i/3;
+		tris.push_back(tri_ptr);
+		
+	}
+	
+
+
+	kd_node = std::make_shared<KDNode>(_limit);
+	kd_node = kd_node->build(tris, 0);			
 }
 
 void Camera::draw()

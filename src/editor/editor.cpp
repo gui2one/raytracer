@@ -384,7 +384,13 @@ void Editor::manageEvents()
 				if(Event.motion.state == SDL_BUTTON_LMASK )
 				{
 					left_mouse_dragging = true;
+					if( b_handle_clicked )
+					{
+						b_handle_dragged = true;
+						
+					}
 					
+					//~ printf("handle dragged --> %s\n", (b_handle_dragged == true ? "true": "false"));
 					if(keyboard_state[SDL_SCANCODE_LCTRL])
 					{
 						double rot_speed = 0.01;
@@ -442,7 +448,7 @@ void Editor::manageEvents()
 			else if( Event.type == SDL_MOUSEBUTTONDOWN){
 				if(Event.button.button == SDL_BUTTON_LEFT && !left_mouse_dragging)
 				{	
-					printf("left button down\n");	
+					//~ printf("left button down\n");	
 					
 					int x, y;
 					SDL_GetMouseState(&x, &y);
@@ -461,7 +467,7 @@ void Editor::manageEvents()
 					std::vector<std::shared_ptr<BaseHandle> > handles;
 					
 					
-					
+					handles.clear();
 					// first check handles
 					handles.push_back(handle);
 					
@@ -470,7 +476,8 @@ void Editor::manageEvents()
 					
 					if( hit_datas.size() > 0)
 					{
-						printf("hit HANDLE !!!\n");
+						//~ printf("hit HANDLE !!!\n");
+						b_handle_clicked = true;
 						//~ printf("\tnum triangles : %d\n", handle->geo_data.indices.size()/3);
 						//~ printf("\tface ID : %d\n", hit_datas[0].face_id);
 						
@@ -499,60 +506,23 @@ void Editor::manageEvents()
 					Ray ray = caster.castRay(cd, *(cameras[cur_cam_id]));
 					
 					std::vector<HitData> hit_datas;
-					std::vector<std::shared_ptr<KDNode> > kd_nodes2;
-					
-					//~ // first check handles
-					//~ kd_nodes2.push_back(handle->kd_node);
-					//~ 
-					//~ caster.intersectKDNodes(ray, kd_nodes2, hit_datas, false);
-					//~ 
-					//~ 
-					//~ if( hit_datas.size() > 0)
-					//~ {
-						//~ printf("hit HANDLE !!!\n");
-					//~ }
-					
-					// then check for entities
-					hit_datas.clear();
-					kd_nodes2.clear();
-					for (auto entity: entities)
-					{
-						MeshObject * p_mesh = nullptr;
-						Camera * p_camera = nullptr;
-						if((p_mesh = dynamic_cast<MeshObject*>(entity.get()))){
-							if(p_mesh->kd_node != nullptr)
-							{
-								//~ printf("check kdnode\n");
-								//~ printf("check kdnode. num triangles : %d\n", p_mesh->kd_node->triangles.size());
-								kd_nodes2.push_back(p_mesh->kd_node);
-							}
-						}
-						if((p_camera = dynamic_cast<Camera*>(entity.get()))){
-							kd_nodes2.push_back(p_camera->kd_node);
-							//~ if(p_camera->kd_node != nullptr)
-							//~ {
-								//~ 
-							//~ }
-						}
-					}
-					
-					//~ caster.intersectKDNodes(ray, kd_nodes2, hit_datas, false);
+		
 					caster.intersectEntities(ray, entities, hit_datas);
-					//~ printf("got hit ??? \n");
+					
 					if(hit_datas.size() > 0 )
 					{
-						//~ printf("got hit\n");
+						
 						if(keyboard_state[SDL_SCANCODE_LSHIFT])
 						{
 							
 							cur_entity_id = hit_datas[0].mesh_id;
 							entities[cur_entity_id]->is_selected = !entities[cur_entity_id]->is_selected;
-							//~ handle->buildKDTree(5);
+							
 						}else{
 							unselectAll();
 							cur_entity_id = hit_datas[0].mesh_id;
 							entities[cur_entity_id]->is_selected = true;
-							//~ handle->buildKDTree(5);
+							
 							
 							
 						}
@@ -563,6 +533,8 @@ void Editor::manageEvents()
 				}
 				
 				left_mouse_dragging = false;
+				b_handle_dragged  = false;
+				b_handle_clicked  = false;
 
 				
 			}else if(Event.type == SDL_MOUSEWHEEL){

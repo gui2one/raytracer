@@ -60,11 +60,9 @@ TranslateHandle::~TranslateHandle()
 void TranslateHandle::buildKDTree(int _limit)
 {
 	printf("building handle KDTree\n");
-	
-	//~ deleteKDTree();
-	//~ int _limit = 5;
+
 	std::vector<std::shared_ptr<Triangle> > tris;
-	//~ tris.reserve(entities[mesh_id]->mesh.faces.size());
+
 
 	for (size_t i = 0; i < geo_data.indices.size(); i+=3)
 	{

@@ -52,7 +52,7 @@ static Ray transform_ray(Ray& src, glm::mat4& matrix)
 {
 	Ray ray = src;
 	vec_mult_by_matrix(ray.origin, matrix, true, 1.0f);
-	vec_mult_by_matrix(ray.direction, matrix, true, 1.0f);
+	vec_mult_by_matrix(ray.direction, matrix, true, 0.0f);
 	
 	return ray;
 }

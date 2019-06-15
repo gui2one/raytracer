@@ -20,6 +20,7 @@ namespace EditorGizmoUtils
 		
 		OGL_DATA_2 makeWireBox();
 		OGL_DATA_2 makeWirePrism();
+		OGL_DATA_2 makeSimpleBox();
 		OGL_DATA_2 makeCone(float radius1, float radius2, float length, int segs_radius, int segs_length);
 		OGL_DATA_2 merge(const OGL_DATA_2& geo1, const OGL_DATA_2& geo2);
 		
