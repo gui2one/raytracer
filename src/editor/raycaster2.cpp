@@ -87,8 +87,6 @@ bool Raycaster::ray_triangle_intersect(Ray& ray, glm::vec3& vtx_a, glm::vec3& vt
 {
 		glm::vec3 plane_pos = (vtx_a + vtx_b + vtx_c);
 		plane_pos = plane_pos / 3.0f;
-
-		
 		
 		glm::vec3 plane_normal = glm::normalize(glm::cross( (vtx_b - vtx_a) , (vtx_c - vtx_a) ));
 		
@@ -280,7 +278,9 @@ bool Raycaster::intersectEntities(Ray& ray, std::vector<std::shared_ptr<Entity3D
 	int inc = 0;
 	for (auto entity : entities)
 	{
-		Ray t_ray = transform_ray(ray, entity->transforms);
+		glm::mat4 parent_t = entity->getParentsTransform();
+		parent_t *= entity->transforms;
+		Ray t_ray = transform_ray(ray, parent_t);
 		
 		bool hit = intersectKDNode(t_ray, entity->kd_node, inc, hit_datas);
 		

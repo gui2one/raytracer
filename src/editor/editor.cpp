@@ -387,10 +387,11 @@ void Editor::manageEvents()
 					if( b_handle_clicked )
 					{
 						b_handle_dragged = true;
+						printf("handle dragged --> %s\n", (b_handle_dragged == true ? "true": "false"));
 						
 					}
 					
-					//~ printf("handle dragged --> %s\n", (b_handle_dragged == true ? "true": "false"));
+					
 					if(keyboard_state[SDL_SCANCODE_LCTRL])
 					{
 						double rot_speed = 0.01;
@@ -651,8 +652,12 @@ void Editor::update()
 		MeshObject * p_mesh = nullptr;
 		if(( p_mesh = dynamic_cast<MeshObject* >(entities[i].get())))
 		{
+			model = glm::mat4(1.0f);
 			entities[i]->applyTransforms();
-			model = entities[i]->transforms;
+			
+			model *= entities[i]->getParentsTransform();
+			
+			model *= entities[i]->transforms;
 			GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
 			
 			if( entities[i]->is_selected)
@@ -674,7 +679,7 @@ void Editor::update()
 	GLCall(glUseProgram(0));
 	
 	line_shader.useProgram();
-	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
+	//~ GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
 	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(cameras[cur_cam_id]->projection)));
 	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "view"), 1, GL_FALSE, glm::value_ptr(view)));		
 	for (std::shared_ptr<Camera> cam : cameras)

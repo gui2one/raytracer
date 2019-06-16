@@ -27,7 +27,7 @@ void UI::init(Editor* editor)
     
 	
     ImGuiStyle& style = ImGui::GetStyle();
-    style.WindowRounding = 0.02f;	
+    //~ style.WindowRounding = 0.02f;	
     
     
     //~ editor->addMeshObject();
@@ -139,7 +139,7 @@ void UI::entitiesDialog()
 		if(ImGui::BeginTabBar("Main"))
 		{		
 
-			ImGui::Text("Mesh Object");
+			
 			
 				if(ImGui::BeginTabItem("Transforms"))
 				{
@@ -151,19 +151,47 @@ void UI::entitiesDialog()
 							});
 						inc++;
 					}
+					
+					ImGui::Separator();
+					
+					std::vector<std::shared_ptr<Entity3D> > parent_choices;
+					for(auto entity : m_editor->entities)
+					{
+						if(	entity != m_editor->entities[m_editor->cur_entity_id]
+						 && entity != m_editor->entities[m_editor->cur_entity_id]->parent
+						 && m_editor->entities[m_editor->cur_entity_id] != entity->parent
+						 )
+						{
+							parent_choices.push_back(entity);	
+						}
+					}
+					
+					if(ImGui::BeginCombo("Parent", "...", 0 )  )
+					{						
+						for(auto item : parent_choices)
+						{
+							if( ImGui::Selectable(item->name.c_str())) 
+							{
+								m_editor->entities[m_editor->cur_entity_id]->parent = item;
+							}
+						}
+						ImGui::EndCombo();
+					}
 					ImGui::EndTabItem();
 				}			
 			if((p_mesh = dynamic_cast<MeshObject* >( m_editor->entities[m_editor->cur_entity_id].get())))
 			{
+				
 
 				if(ImGui::BeginTabItem("Generator"))
 				{
+					ImGui::Text("Mesh Object");
 					std::vector<const char*> generator_types_strings = {"...", "Grid Mesh", "Box Mesh"};
 					static int cur_choice = 0;
 					if( p_mesh->generator != nullptr)
 					{
 						char label[100];
-						sprintf(label, "current generatpr : %s", generator_types_strings[(int)p_mesh->generator_type+1]);
+						sprintf(label, "current generator : %s", generator_types_strings[(int)p_mesh->generator_type+1]);
 						ImGui::Text( label );
 						//~ cur_choice = p_mesh->generator_type;
 					}

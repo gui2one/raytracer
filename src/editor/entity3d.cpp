@@ -20,6 +20,7 @@ Entity3D::Entity3D():
 	rotation(glm::vec3(0.0,0.0,0.0)),
 	scale(glm::vec3(1.0,1.0,1.0)),
 	name("entity3d"),
+	parent(nullptr),
 	kd_node(nullptr)
 {
 	
@@ -42,10 +43,39 @@ void Entity3D::draw()
 	printf("--- Drawing Entity3D  ----- Weird .... \n");
 }
 
+glm::mat4 Entity3D::getParentsTransform()
+{
+	glm::mat4 matrix = glm::mat4(1.0f);
+	std::shared_ptr<Entity3D> target = parent;
+	std::vector<glm::mat4> matrices;
+	int inc = 0;
+	while(target != nullptr)
+	{
+		//~ printf("Got a parent %d\n", inc);
+		target->applyTransforms();
+		//~ matrix *= target->transforms;
+		
+		
+		matrices.push_back(target->transforms);
+		target = target->parent;
+		
+		inc++;
+	}
+	
+	for(int i=matrices.size()-1; i >= 0; i--)
+	{
+		matrix *= matrices[i];
+	}
+	
+	return matrix;
+}
+
 void Entity3D::applyTransforms()
 {
+	//~ glm::mat4 parent_transforms = getParentsTransform();
 	glm::mat4 temp = glm::mat4(1.0f);
 	
+	//~ temp *= parent_transforms;
 	
 	position = param_position->getValue();
 	rotation = param_rotation->getValue();
@@ -59,6 +89,9 @@ void Entity3D::applyTransforms()
 	temp = glm::scale(temp , param_scale->getValue());
 	
 	transforms = temp;	
+	//~ transforms *= parent_transforms;
+	
+	
 }
 
 Entity3D::~Entity3D()

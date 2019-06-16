@@ -23,6 +23,7 @@ public:
 
 	virtual ~Entity3D();
 	
+	glm::mat4 getParentsTransform();
 	void applyTransforms();
 	glm::mat4 transforms;	
 	glm::vec3 position;
@@ -35,7 +36,7 @@ public:
 	
 	bool is_selected = false;
 	
-	Entity3D * parent;
+	std::shared_ptr<Entity3D> parent;
 	
 	std::vector<BaseParam*> params;	
 	Param<glm::vec3> * param_position;

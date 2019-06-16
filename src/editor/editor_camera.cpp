@@ -124,6 +124,7 @@ void Camera::buildDisplayData()
 	// build click geo
 
 	click_geo = EditorGizmoUtils::makeSimpleBox();
+	EditorGizmoUtils::translate(click_geo, glm::vec3(0.0,0.0,0.5));
 	buildKDTree();
 	
 }
