@@ -155,11 +155,25 @@ void UI::entitiesDialog()
 					ImGui::Separator();
 					
 					std::vector<std::shared_ptr<Entity3D> > parent_choices;
-					for(auto entity : m_editor->entities)
+					for(std::shared_ptr<Entity3D> entity : m_editor->entities)
 					{
+						std::vector<std::shared_ptr<Entity3D> > chain;
+						chain = entity->getParentChain();
+						auto pos = std::find(chain.begin(), chain.end(), m_editor->entities[m_editor->cur_entity_id] );
+						
+						bool is_sibling = false;
+						if( pos != chain.end() )
+						{
+							//~ printf("found !!!\n");
+							is_sibling = true;
+						}else{
+							//~ printf("not a sibling  !!!\n");
+							is_sibling = false;
+						}
 						if(	entity != m_editor->entities[m_editor->cur_entity_id]
 						 && entity != m_editor->entities[m_editor->cur_entity_id]->parent
 						 && m_editor->entities[m_editor->cur_entity_id] != entity->parent
+						 && !is_sibling
 						 )
 						{
 							parent_choices.push_back(entity);	
@@ -167,7 +181,11 @@ void UI::entitiesDialog()
 					}
 					
 					if(ImGui::BeginCombo("Parent", "...", 0 )  )
-					{						
+					{			
+							if( ImGui::Selectable("None")) 
+							{
+								m_editor->entities[m_editor->cur_entity_id]->parent = nullptr;
+							}
 						for(auto item : parent_choices)
 						{
 							if( ImGui::Selectable(item->name.c_str())) 

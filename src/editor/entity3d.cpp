@@ -70,6 +70,21 @@ glm::mat4 Entity3D::getParentsTransform()
 	return matrix;
 }
 
+std::vector<std::shared_ptr<Entity3D> > Entity3D::getParentChain()
+{
+	std::vector<std::shared_ptr<Entity3D> > result;
+	std::shared_ptr<Entity3D> target = parent;
+	
+	while (target != nullptr)
+	{
+		result.push_back(target);
+		
+		target = target->parent;
+	}
+	
+	return result;
+}
+
 void Entity3D::applyTransforms()
 {
 	//~ glm::mat4 parent_transforms = getParentsTransform();

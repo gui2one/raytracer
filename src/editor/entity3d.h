@@ -24,6 +24,7 @@ public:
 	virtual ~Entity3D();
 	
 	glm::mat4 getParentsTransform();
+	std::vector<std::shared_ptr<Entity3D> > getParentChain();
 	void applyTransforms();
 	glm::mat4 transforms;	
 	glm::vec3 position;
