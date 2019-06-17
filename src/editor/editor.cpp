@@ -6,10 +6,10 @@ static double degToRad(double degrees)
 	return degrees / 180.0 * PI;
 }
 
-static void vec_mult_by_matrix( glm::vec3 & _vec, glm::mat4 & _mat, bool invert = false)
+static void vec_mult_by_matrix( glm::vec3 & _vec, glm::mat4 & _mat, bool invert = false, float W = 1.0f)
 {
 
-        glm::vec4 temp_vec4 = glm::vec4(_vec.x, _vec.y, _vec.z,1.0f);
+        glm::vec4 temp_vec4 = glm::vec4(_vec.x, _vec.y, _vec.z, W);
 
 
         if( invert){
@@ -42,7 +42,28 @@ static std::string increment_name(std::string _name)
 	return s;
 }
 
+static glm::vec3 toEulerAngle(const glm::quat& q)//, double& roll, double& pitch, double& yaw)
+{
+	// roll (x-axis rotation)
+	double sinr_cosp = +2.0 * (q.w * q.x + q.y * q.z);
+	double cosr_cosp = +1.0 - 2.0 * (q.x * q.x + q.y * q.y);
+	double roll = atan2(sinr_cosp, cosr_cosp);
 
+	// pitch (y-axis rotation)
+	double pitch;
+	double sinp = +2.0 * (q.w * q.y - q.z * q.x);
+	if (fabs(sinp) >= 1)
+		pitch = copysign(M_PI / 2, sinp); // use 90 degrees if out of range
+	else
+		pitch = asin(sinp);
+
+	// yaw (z-axis rotation)
+	double siny_cosp = +2.0 * (q.w * q.z + q.x * q.y);
+	double cosy_cosp = +1.0 - 2.0 * (q.y * q.y + q.z * q.z);  
+	double yaw = atan2(siny_cosp, cosy_cosp);
+	
+	return glm::vec3((roll /PI) * 180.0, (pitch / PI) * 180.0, (yaw/ PI) * 180.0) * -1.0f;
+}
 Editor::Editor()
 {
 	//~ printf("--- CONSTRUCT Editor\n");
@@ -274,11 +295,22 @@ void Editor::renderHandlesFBO()
 	{
 		if(entity->is_selected)
 		{
+			
+			glm::mat4 final_t = entity->getParentsTransform();
+			final_t *= entity->transforms;
+			// extract rotation quaternion
+			glm::vec3 scale;
+			glm::quat rotation;
+			glm::vec3 translation;
+			glm::vec3 skew;
+			glm::vec4 perspective;
+			glm::decompose(final_t, scale, rotation, translation, skew,perspective);			
+			
+			rotation = glm::conjugate(rotation); // fix glm mistake
+			
 			//~ entity->applyTransforms();
-			handle->position = entity->position;
-			handle->rotation = entity->rotation;
-			
-			
+			handle->position = translation;			
+			handle->rotation = toEulerAngle(rotation);
 			//~ printf("handle pos --> %.3f %.3f %.3f\n", handle->position.x, handle->position.y, handle->position.z);
 			//~ printf("entity pos --> %.3f %.3f %.3f\n", entity->position.x, entity->position.y, entity->position.z);
 			break;
