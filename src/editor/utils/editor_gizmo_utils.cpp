@@ -205,6 +205,30 @@ namespace EditorGizmoUtils
 		
 	}
 		
+		
+	OGL_DATA_2 makeLine(glm::vec3 A, glm::vec3 B)
+	{
+		OGL_DATA_2 geo_data;
+		geo_data.positions.clear();
+		
+		geo_data.positions.insert(
+		
+			geo_data.positions.begin(),{
+				A.x, A.y, A.z, 
+				B.x, B.y, B.z
+			}
+		);
+		
+		geo_data.indices.insert(
+		
+			geo_data.indices.begin(),{
+				0,1
+			}
+		);
+		
+		return geo_data;
+	}
+	
 	void translate(OGL_DATA_2& geo_data, glm::vec3 values)
 	{
 		for (size_t i = 0; i < geo_data.positions.size(); i+=3)

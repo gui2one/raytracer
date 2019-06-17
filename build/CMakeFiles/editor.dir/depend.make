@@ -819,6 +819,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /hom
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/editor/mesh_generators/mesh_generator.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/editor/ogl_geometry_data.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/editor/param.h
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/editor/utils/editor_gizmo_utils.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/editor/utils/editor_mesh_utils.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/mesh.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o: /home/pi/projects/raytracer/src/pch.h

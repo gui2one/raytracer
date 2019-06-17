@@ -266,6 +266,7 @@ bool Raycaster::intersectHandles(Ray& ray, std::vector<std::shared_ptr<BaseHandl
 	
 	if( num_hit > 0)
 	{
+		
 		return true;
 	}
 	
@@ -293,6 +294,16 @@ bool Raycaster::intersectEntities(Ray& ray, std::vector<std::shared_ptr<Entity3D
 	
 	if( num_hit > 0)
 	{
+		std::sort(hit_datas.begin(), hit_datas.end(), [entities](HitData data1 , HitData data2)
+		{
+			//~ float scale1 = entities[data1.mesh_id]->scale;
+			float dist1 = glm::distance(data1.position, data1.ray_origin); // * (1.0f/scale1);
+			
+			//~ float scale2 = entities[data2.mesh_id]->scale;
+			float dist2 = glm::distance(data2.position, data2.ray_origin); // * (1.0f/scale2);
+			
+			return dist1 < dist2;
+		});			
 		return true;
 	}
 	

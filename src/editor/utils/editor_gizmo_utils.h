@@ -24,6 +24,7 @@ namespace EditorGizmoUtils
 		OGL_DATA_2 makeCone(float radius1, float radius2, float length, int segs_radius, int segs_length);
 		OGL_DATA_2 merge(const OGL_DATA_2& geo1, const OGL_DATA_2& geo2);
 		
+		OGL_DATA_2 makeLine(glm::vec3 A, glm::vec3 B);
 		
 		void translate(OGL_DATA_2& geo_data, glm::vec3 values);
 		void rotate(OGL_DATA_2& geo_data, glm::vec3 values, EDITOR_GIZMO_ROTATION_ORDER order = ROT_ORDER_XYZ);

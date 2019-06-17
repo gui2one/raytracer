@@ -820,6 +820,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/entity3d.cpp.o
  /home/pi/projects/raytracer/src/editor/mesh_generators/mesh_generator.h
  /home/pi/projects/raytracer/src/editor/ogl_geometry_data.h
  /home/pi/projects/raytracer/src/editor/param.h
+ /home/pi/projects/raytracer/src/editor/utils/editor_gizmo_utils.h
  /home/pi/projects/raytracer/src/editor/utils/editor_mesh_utils.h
  /home/pi/projects/raytracer/src/mesh.h
  /home/pi/projects/raytracer/src/pch.h

@@ -137,6 +137,11 @@ void Editor::init()
 	entities.push_back(ground);
 	ground->buildVBO();
 	
+	std::shared_ptr<NullObject> null_1 = std::make_shared<NullObject>();
+	null_1->buildVBO();
+	null_1->name = "null_1";
+	entities.push_back(null_1);
+	
 	default_shader.loadVertexShaderSource("../src/editor/shaders/basic_shader.vert");
 	default_shader.loadFragmentShaderSource("../src/editor/shaders/basic_shader.frag");
 
@@ -663,8 +668,7 @@ void Editor::update()
 	
 	
 	
-	GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(cameras[cur_cam_id]->projection)));
-	GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "view"), 1, GL_FALSE, glm::value_ptr(view)));
+
 
 	
 	if(show_wireframe == true)
@@ -682,8 +686,12 @@ void Editor::update()
 		//~ std::find(selected_entities.begin(), selected_entities.end(), (unsigned int)i);
 		
 		MeshObject * p_mesh = nullptr;
+		NullObject * p_null = nullptr;
 		if(( p_mesh = dynamic_cast<MeshObject* >(entities[i].get())))
 		{
+			default_shader.useProgram();
+			GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(cameras[cur_cam_id]->projection)));
+			GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "view"), 1, GL_FALSE, glm::value_ptr(view)));			
 			model = glm::mat4(1.0f);
 			entities[i]->applyTransforms();
 			
@@ -699,7 +707,33 @@ void Editor::update()
 				GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 1.0, 1.0, 1.0, 1.0 ));
 			}
 			
-			entities[i]->draw();				
+			entities[i]->draw();		
+			
+			GLCall(glUseProgram(0));		
+		}
+		else if( ( p_null = dynamic_cast<NullObject*>(entities[i].get())))
+		{
+			line_shader.useProgram();
+			GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(cameras[cur_cam_id]->projection)));
+			GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "view"), 1, GL_FALSE, glm::value_ptr(view)));				
+			model = glm::mat4(1.0f);
+			entities[i]->applyTransforms();
+			
+			model *= entities[i]->getParentsTransform();
+			
+			model *= entities[i]->transforms;
+			GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
+			
+			//~ if( entities[i]->is_selected)
+			//~ {
+				//~ GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 1.0, 1.0, 0.3, 1.0 ));
+			//~ }else{	
+				//~ GLCall(glUniform4f(glGetUniformLocation(default_shader.m_id, "u_color"), 1.0, 1.0, 1.0, 1.0 ));
+			//~ }
+			
+			entities[i]->draw();	
+			
+			GLCall(glUseProgram(0));			
 		}
 	
 			
@@ -708,7 +742,7 @@ void Editor::update()
 	}
 	
 	
-	GLCall(glUseProgram(0));
+	
 	
 	line_shader.useProgram();
 	//~ GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));

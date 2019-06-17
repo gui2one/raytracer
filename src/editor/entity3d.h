@@ -4,6 +4,7 @@
 #include "../pch.h"
 #include "../mesh.h"
 #include "ogl_geometry_data.h"
+#include "utils/editor_gizmo_utils.h"
 
 #include "mesh_generators/mesh_generator.h"
 #include "mesh_generators/grid_mesh_generator.h"
@@ -18,6 +19,7 @@ public:
 	Entity3D();
 	
 	virtual void draw();
+	virtual void buildVBO(){}
 	virtual void buildKDTree(int _limit = 5){};
 	
 
@@ -34,6 +36,7 @@ public:
 	
 	std::string name = "default_name";
 	OGL_geometry_data OGL_geo_data;
+	OGL_DATA_2 geo_data_2;
 	
 	bool is_selected = false;
 	
@@ -62,8 +65,9 @@ public :
 	
 	
 	
-	void buildVBO();
+	void buildVBO() override;
 	void draw() override;
+	
 
 	
 	void setMeshGenerator(MESH_GENERATOR_TYPE _type);
@@ -84,5 +88,19 @@ private:
 	
 };
 
-
+class NullObject : public Entity3D
+{
+public :
+	NullObject();
+	
+	void buildVBO() override;
+	void draw() override;	
+	void buildKDTree(int _limit = 5) override;
+	
+	unsigned int m_vbo=0, m_ibo=0;
+	
+	OGL_DATA_2 click_geo;
+private :
+	
+};
 #endif 

@@ -529,6 +529,8 @@ entity3d.h
 /home/pi/projects/raytracer/src/mesh.h
 ogl_geometry_data.h
 /home/pi/projects/raytracer/src/editor/ogl_geometry_data.h
+utils/editor_gizmo_utils.h
+/home/pi/projects/raytracer/src/editor/utils/editor_gizmo_utils.h
 mesh_generators/mesh_generator.h
 /home/pi/projects/raytracer/src/editor/mesh_generators/mesh_generator.h
 mesh_generators/grid_mesh_generator.h
