@@ -277,6 +277,7 @@ bool Raycaster::intersectEntities(Ray& ray, std::vector<std::shared_ptr<Entity3D
 {
 	int num_hit = 0;
 	int inc = 0;
+	std::vector<glm::mat4> matrices;
 	for (auto entity : entities)
 	{
 		glm::mat4 parent_t = entity->getParentsTransform();
@@ -284,7 +285,7 @@ bool Raycaster::intersectEntities(Ray& ray, std::vector<std::shared_ptr<Entity3D
 		Ray t_ray = transform_ray(ray, parent_t);
 		
 		bool hit = intersectKDNode(t_ray, entity->kd_node, inc, hit_datas);
-		
+		matrices.push_back(parent_t);
 		if( hit)
 		{
 			num_hit++;
@@ -294,13 +295,31 @@ bool Raycaster::intersectEntities(Ray& ray, std::vector<std::shared_ptr<Entity3D
 	
 	if( num_hit > 0)
 	{
-		std::sort(hit_datas.begin(), hit_datas.end(), [entities](HitData data1 , HitData data2)
+		std::sort(hit_datas.begin(), hit_datas.end(), [matrices](HitData data1 , HitData data2)
 		{
+			glm::vec3 scale1;
+			glm::quat rotation1;
+			glm::vec3 translation1;
+			glm::vec3 skew1;
+			glm::vec4 perspective1;
+			glm::decompose(matrices[data1.mesh_id], scale1, rotation1, translation1, skew1, perspective1);			
+			//~ rotation1 = glm::conjugate(rotation1); // fix glm mistake			
+			
+			glm::vec3 scale2;
+			glm::quat rotation2;
+			glm::vec3 translation2;
+			glm::vec3 skew2;
+			glm::vec4 perspective2;
+			glm::decompose(matrices[data2.mesh_id], scale2, rotation2, translation2, skew2, perspective2);				
+			//~ rotation2 = glm::conjugate(rotation2); // fix glm mistake			
+			
 			//~ float scale1 = entities[data1.mesh_id]->scale;
-			float dist1 = glm::distance(data1.position, data1.ray_origin); // * (1.0f/scale1);
+			float u_scale1 = glm::distance(scale1, glm::vec3(0.0,0.0,0.0));
+			float u_scale2 = glm::distance(scale2, glm::vec3(0.0,0.0,0.0));
+			float dist1 = glm::distance(data1.position, data1.ray_origin) * (u_scale1);
 			
 			//~ float scale2 = entities[data2.mesh_id]->scale;
-			float dist2 = glm::distance(data2.position, data2.ray_origin); // * (1.0f/scale2);
+			float dist2 = glm::distance(data2.position, data2.ray_origin) * (u_scale2);
 			
 			return dist1 < dist2;
 		});			

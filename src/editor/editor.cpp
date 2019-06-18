@@ -549,6 +549,8 @@ void Editor::manageEvents()
 					
 					if(hit_datas.size() > 0 )
 					{
+						float dist = glm::distance(hit_datas[0].ray_origin, hit_datas[0].position);
+						printf("Distance : %.3f\n", dist);
 						
 						if(keyboard_state[SDL_SCANCODE_LSHIFT])
 						{
