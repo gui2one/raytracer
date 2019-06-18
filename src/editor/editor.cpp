@@ -71,13 +71,17 @@ Editor::Editor()
 
 void Editor::setCamPosFromPolar(float u, float v, float _radius, glm::vec3 center)
 {
-        cameras[cur_cam_id]->position.x = (sin(u)* sin(v) * _radius) + center.x;
-        cameras[cur_cam_id]->position.y = (cos(u)* sin(v) * _radius) + center.y;
-        cameras[cur_cam_id]->position.z = (cos(v) * _radius) + center.z;
+	
+	float x = (sin(u)* sin(v) * _radius) + center.x;
+	float y = (cos(u)* sin(v) * _radius) + center.y;
+	float z = (cos(v) * _radius) + center.z;
 
-        cameras[cur_cam_id]->target_position = center;
+	cameras[cur_cam_id]->param_position->setValue( glm::vec3(x, y, z));
+	cameras[cur_cam_id]->target_position = center;
 
-        cameras[cur_cam_id]->up_vector = glm::vec3(0.0, 0.0, 1.0);
+	cameras[cur_cam_id]->up_vector = glm::vec3(0.0, 0.0, 1.0);
+	
+	cameras[cur_cam_id]->applyTransforms();
 }
 
 void Editor::cycleCameras()
@@ -165,6 +169,7 @@ void Editor::init()
 	camera->name = uniqueEntityName(camera->name);
 	entities.push_back(camera);
 	cameras.push_back(camera);
+	camera->buildKDTree();
 	
 	cur_cam_id = 0;
 	
@@ -177,6 +182,7 @@ void Editor::init()
 	camera2->name = uniqueEntityName(camera2->name);
 	entities.push_back(camera2);
 	cameras.push_back(camera2);	
+	camera2->buildKDTree();
 	
 	//// init construction grid
 	c_grid.init();
@@ -449,6 +455,8 @@ void Editor::manageEvents()
 							cameras[cur_cam_id]->orbit_radius, 
 							cameras[cur_cam_id]->orbit_center
 						);	
+						
+						
 					}
 								
 				}else if(Event.motion.state == SDL_BUTTON_RMASK){
@@ -753,8 +761,8 @@ void Editor::update()
 	for (std::shared_ptr<Camera> cam : cameras)
 	{
 		
-		if(cam != cameras[cur_cam_id])
-		{
+		//~ if(cam != cameras[cur_cam_id])
+		//~ {
 			model = glm::mat4(1.0f);		
 			cam->applyTransforms();
 			model *= cam->transforms;		
@@ -762,7 +770,7 @@ void Editor::update()
 			GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
 			GLCall(glUniform4f(glGetUniformLocation(line_shader.m_id, "u_color"), 0.0, 0.0, 1.0, 1.0 ));
 			cam->draw();
-		}
+		//~ }
 	}
 	
 	

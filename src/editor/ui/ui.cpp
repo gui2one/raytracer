@@ -147,7 +147,7 @@ void UI::entitiesDialog()
 					for(auto param : m_editor->entities[m_editor->cur_entity_id]->params)
 					{
 						paramWidget(param, inc, [this](){
-							//~ m_editor->entities[m_editor->cur_entity_id]->buildKDTree(50);
+							m_editor->entities[m_editor->cur_entity_id]->buildKDTree(50);
 							});
 						inc++;
 					}

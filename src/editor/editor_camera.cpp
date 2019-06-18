@@ -1,5 +1,19 @@
 #include "editor_camera.h"
 
+static void vec_mult_by_matrix( glm::vec3 & _vec, glm::mat4 & _mat, bool invert = false)
+{
+
+        glm::vec4 temp_vec4 = glm::vec4(_vec.x, _vec.y, _vec.z,1.0f);
+
+
+        if( invert){
+                _vec = glm::inverse(_mat) * temp_vec4 ;
+        } else{
+                _vec = _mat * temp_vec4;
+                //~ printf("__VEC X : %.3f\n", _vec.x);
+        }
+
+}
 
 Camera::Camera() : 
 	Entity3D(),	
@@ -55,14 +69,14 @@ void Camera::applyTransforms()
 	//~ printf("camera apply transforms\n");
 	glm::mat4 temp = glm::mat4(1.0f);
 	
-	glm::mat4 view = glm::lookAt(position, target_position, up_vector);
+	glm::mat4 view = glm::lookAt(param_position->getValue(), target_position, up_vector);
 
 	temp *= glm::inverse(view);
 	
 	
 	temp = glm::scale(temp , scale);
 	
-	
+	position = param_position->getValue();
 	
 	transforms = temp;		
 }
@@ -147,13 +161,16 @@ void Camera::buildKDTree(int _limit)
 		A = B = C = glm::vec3(0.0, 0.0, 0.0);
 
 
+		glm::mat4 parent_t = getParentsTransform();
 		applyTransforms();
-		// apply transforms matrix
+		parent_t *= transforms;
+		
 		glm::vec3 tempA = glm::vec3(
 			click_geo.positions[(id_A * 3) + 0],
 			click_geo.positions[(id_A * 3) + 1],
 			click_geo.positions[(id_A * 3) + 2] 
 		);
+		vec_mult_by_matrix(tempA, parent_t);
 
 
 		glm::vec3 tempB = glm::vec3(
@@ -161,6 +178,7 @@ void Camera::buildKDTree(int _limit)
 			click_geo.positions[(id_B * 3) + 1],
 			click_geo.positions[(id_B * 3) + 2] 
 		);
+		vec_mult_by_matrix(tempB, parent_t);
 			
 
 		glm::vec3 tempC = glm::vec3(
@@ -168,6 +186,7 @@ void Camera::buildKDTree(int _limit)
 			click_geo.positions[(id_C * 3) + 1],
 			click_geo.positions[(id_C * 3) + 2] 
 		);
+		vec_mult_by_matrix(tempC, parent_t);
 						
 		
 		A = tempA;

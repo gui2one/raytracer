@@ -26,10 +26,12 @@ Entity3D::Entity3D():
 	
 	param_position = new Param<glm::vec3>();
 	param_position->setName("Position");
+	param_position->setValue(glm::vec3(0.0, 0.0, 0.0));
 	params.push_back(param_position);
 	
 	param_rotation = new Param<glm::vec3>();
 	param_rotation->setName("Rotation");	
+	param_rotation->setValue(glm::vec3(0.0, 0.0, 0.0));
 	params.push_back(param_rotation);
 	
 	param_scale = new Param<glm::vec3>();
@@ -269,12 +271,18 @@ void MeshObject::buildKDTree(int _limit)
 			
 			glm::vec3 A, B, C;
 			
-	
+			glm::mat4 parent_t = getParentsTransform();
 			applyTransforms();
-			// apply transforms matrix
+			parent_t *= transforms;
+			
 			A = mesh.points[ mesh.faces[i].getVertex(0).point_id ].position;
+			vec_mult_by_matrix(A, parent_t);
+			
 			B = mesh.points[ mesh.faces[i].getVertex(1+j).point_id ].position;	
+			vec_mult_by_matrix(B, parent_t);
+			
 			C = mesh.points[ mesh.faces[i].getVertex(2+j).point_id ].position;
+			vec_mult_by_matrix(C, parent_t);
 
 
 			std::shared_ptr<Triangle> tri_ptr = std::make_shared<Triangle>(A, B, C);
@@ -376,21 +384,23 @@ void NullObject::buildKDTree(int _limit)
 		glm::vec3 A, B, C;
 		A = B = C = glm::vec3(0.0, 0.0, 0.0);
 
-
+		glm::mat4 parent_t = getParentsTransform();
 		applyTransforms();
+		parent_t *= transforms;
 		// apply transforms matrix
 		glm::vec3 tempA = glm::vec3(
 			click_geo.positions[(id_A * 3) + 0],
 			click_geo.positions[(id_A * 3) + 1],
 			click_geo.positions[(id_A * 3) + 2] 
 		);
-
+		vec_mult_by_matrix(tempA, parent_t, false);
 
 		glm::vec3 tempB = glm::vec3(
 			click_geo.positions[(id_B * 3) + 0],
 			click_geo.positions[(id_B * 3) + 1],
 			click_geo.positions[(id_B * 3) + 2] 
 		);
+		vec_mult_by_matrix(tempB, parent_t, false);
 			
 
 		glm::vec3 tempC = glm::vec3(
@@ -398,6 +408,7 @@ void NullObject::buildKDTree(int _limit)
 			click_geo.positions[(id_C * 3) + 1],
 			click_geo.positions[(id_C * 3) + 2] 
 		);
+		vec_mult_by_matrix(tempC, parent_t, false);
 						
 		
 		A = tempA;

@@ -15,7 +15,7 @@ class Camera : public Entity3D
 		~Camera();
 		void setProjection(float angle, float aspect, float near, float far);
 		
-		void applyTransforms() ; //override;
+		void applyTransforms();
 		
 		void buildDisplayData();
 		void draw(); // override;
