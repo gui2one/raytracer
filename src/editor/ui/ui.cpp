@@ -170,11 +170,7 @@ void UI::entitiesDialog()
 							//~ printf("not a sibling  !!!\n");
 							is_sibling = false;
 						}
-						if(	entity != m_editor->entities[m_editor->cur_entity_id]
-						 && entity != m_editor->entities[m_editor->cur_entity_id]->parent
-						 && m_editor->entities[m_editor->cur_entity_id] != entity->parent
-						 && !is_sibling
-						 )
+						if(	entity != m_editor->entities[m_editor->cur_entity_id] && !is_sibling )
 						{
 							parent_choices.push_back(entity);	
 						}

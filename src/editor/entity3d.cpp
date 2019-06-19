@@ -303,7 +303,7 @@ void MeshObject::buildKDTree(int _limit)
 
 MeshObject::~MeshObject()
 {
-	//~ printf("--- Delete MeshObject\n");
+	printf("--- Delete MeshObject\n");
 }
 
 //// implement NULL OBJECT

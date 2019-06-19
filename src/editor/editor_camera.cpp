@@ -51,7 +51,7 @@ Camera& Camera::operator=(const Camera& other)
 
 Camera::~Camera()
 {
-	//~ printf("Camera DESTRUCTOR\n");
+	printf("Camera DESTRUCTOR\n");
 	GLCall(glDeleteBuffers(1, &main_vbo));
 	GLCall(glDeleteBuffers(1, &main_ibo));
 	

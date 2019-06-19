@@ -172,7 +172,7 @@ void Editor::init()
 	camera->buildKDTree();
 	
 	cur_cam_id = 0;
-	
+	active_camera = camera;
 	
 	std::shared_ptr<Camera> camera2 = std::make_shared<Camera>();
 	camera2->position = glm::vec3(5.0, 2.0 , 3.0);
@@ -899,8 +899,18 @@ void Editor::deleteCamera(int id)
 
 void Editor::deleteEntity(int id)
 {
+	Camera * p_cam = nullptr;
+	
+	if(( p_cam = dynamic_cast<Camera*>(entities[id].get()) ))
+	{
+		cameras.erase(cameras.begin());
+	}
 
 	entities.erase(entities.begin() + id);
+	
+
+	
+
 
 	if(cur_entity_id > (int)entities.size()-1)
 	{

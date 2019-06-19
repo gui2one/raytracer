@@ -79,6 +79,10 @@ public :
 	
 	std::vector<std::shared_ptr<Entity3D> > entities;
 	std::vector<std::shared_ptr<Camera> > cameras;	
+	
+	std::shared_ptr<Camera> active_camera;
+	std::shared_ptr<Camera> user_view;
+	
 	int cur_cam_id = -1;	
 	std::vector<OGL_geometry_data> OGL_geometry_datas;
 	
