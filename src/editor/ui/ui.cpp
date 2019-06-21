@@ -154,6 +154,8 @@ void UI::entitiesDialog()
 					
 					ImGui::Separator();
 					
+					
+					// parenting
 					std::vector<std::shared_ptr<Entity3D> > parent_choices;
 					for(std::shared_ptr<Entity3D> entity : m_editor->entities)
 					{
@@ -191,6 +193,36 @@ void UI::entitiesDialog()
 						}
 						ImGui::EndCombo();
 					}
+					
+					
+					
+					// look at target
+					std::vector<std::shared_ptr<Entity3D> > target_choices;
+					for(std::shared_ptr<Entity3D> entity : m_editor->entities)
+					{
+
+						if(	entity != m_editor->entities[m_editor->cur_entity_id])
+						{
+							target_choices.push_back(entity);	
+						}
+					}	
+					
+					if(ImGui::BeginCombo("Look At Target", "...", 0 )  )
+					{			
+							if( ImGui::Selectable("None")) 
+							{
+								m_editor->entities[m_editor->cur_entity_id]->look_at_target = nullptr;
+							}
+						for(auto item : parent_choices)
+						{
+							if( ImGui::Selectable(item->name.c_str())) 
+							{
+								m_editor->entities[m_editor->cur_entity_id]->look_at_target = item;
+							}
+						}
+						ImGui::EndCombo();
+					}					
+									
 					ImGui::EndTabItem();
 				}			
 			if((p_mesh = dynamic_cast<MeshObject* >( m_editor->entities[m_editor->cur_entity_id].get())))

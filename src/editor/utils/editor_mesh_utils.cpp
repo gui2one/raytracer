@@ -152,7 +152,7 @@ namespace EditorMeshUtils{
 						cos(angle) * radius, 
 						sin(angle) * radius, 
 						
-						(float)j/ (float)(segs_height-1)
+						(float)j/ (float)(segs_height-1) * height
 						)
 					);			
 			}
@@ -180,18 +180,31 @@ namespace EditorMeshUtils{
 			}
 		}
 
-		// bottom cap
+		
 		if( segs_radius >= 3)
 		{
+			// bottom cap
 			std::vector<Vertex> bottom_verts;
 			for (int i = segs_radius-1; i >= 0 ; i--)
 			{
 				bottom_verts.push_back(Vertex(i));
 			}
 			
-			Face face;
-			face.setVertices(bottom_verts);
-			faces.push_back(face);				
+			Face bottom_face;
+			bottom_face.setVertices(bottom_verts);
+			faces.push_back(bottom_face);		
+			
+			
+			// top cap
+			std::vector<Vertex> top_verts;
+			for (int i = segs_radius * (segs_height-1); i < (segs_radius * segs_height)-1 ; i++)
+			{
+				top_verts.push_back(Vertex(i));
+			}
+			
+			Face top_face;
+			top_face.setVertices(top_verts);
+			faces.push_back(top_face);							
 		}
 		mesh.faces = faces;		
 		

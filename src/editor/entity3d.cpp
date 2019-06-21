@@ -17,6 +17,7 @@ Entity3D::Entity3D():
 	scale(glm::vec3(1.0,1.0,1.0)),
 	name("entity3d"),
 	parent(nullptr),
+	look_at_target(nullptr),
 	kd_node(nullptr)
 {
 	
@@ -94,10 +95,33 @@ void Entity3D::applyTransforms()
 	rotation = param_rotation->getValue();
 	scale = param_scale->getValue();
 	//~ printf("entity pos --> %.3f %.3f %.3f\n", param_position->getValue().x, param_position->getValue().y, param_position->getValue().z);
-	temp = glm::translate(temp, param_position->getValue());
+	
+
+
+	if( look_at_target != nullptr)
+	{
+		glm::mat4 parent_t = getParentsTransform();
+		glm::mat4 target_parent_t = look_at_target->getParentsTransform();
+		glm::vec3 t_pos = look_at_target->position;
+		vec_mult_by_matrix(t_pos, target_parent_t, false);
+		vec_mult_by_matrix(t_pos, parent_t, true);
+		glm::mat4 look_matrix = glm::lookAt(
+			param_position->getValue(),
+			t_pos,
+			glm::vec3(0.0, 0.0, 1.0)
+		);
+		
+		temp *= glm::inverse(look_matrix);
+	}else{
+		temp = glm::translate(temp, param_position->getValue());
+	}
+
 	temp = glm::rotate(temp, glm::radians(param_rotation->getValue().x), glm::vec3(1.0f, 0.0f, 0.0f));
 	temp = glm::rotate(temp, glm::radians(param_rotation->getValue().y), glm::vec3(0.0f, 1.0f, 0.0f));
 	temp = glm::rotate(temp, glm::radians(param_rotation->getValue().z), glm::vec3(0.0f, 0.0f, 1.0f));
+	
+
+
 	
 	temp = glm::scale(temp , param_scale->getValue());
 	

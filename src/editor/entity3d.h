@@ -42,6 +42,7 @@ public:
 	bool is_selected = false;
 	
 	std::shared_ptr<Entity3D> parent;
+	std::shared_ptr<Entity3D> look_at_target;
 	
 	std::vector<BaseParam*> params;	
 	Param<glm::vec3> * param_position;
