@@ -22,32 +22,35 @@ Camera::Camera() :
 {
 	//~ printf("initializing Camera\n");
 	
+	param_position->setValue( position);
 	name = "camera";
+	applyTransforms();
 	buildDisplayData();
 	
-}
-
-Camera::Camera(const Camera& other): Entity3D()
-{
-	up_vector = other.up_vector, 
-	target_position = other.target_position; 
-	fov = other.fov;
-	
-	printf("CAMERA COPY CONSTRUCTOR\n");
-}
-
-Camera::Camera(Camera&& other)// noexcept // move constructor
-: fov(other.fov)
-{
-	printf("MOVE CONSTRUCTOR\n");
-}
-
-Camera& Camera::operator=(const Camera& other)
-{
-	printf("COPY ASSIGNEMENT\n");
-	return *this = Camera(other);
 	
 }
+
+//~ Camera::Camera(const Camera& other): Entity3D()
+//~ {
+	//~ up_vector = other.up_vector, 
+	//~ target_position = other.target_position; 
+	//~ fov = other.fov;
+	//~ 
+	//~ printf("CAMERA COPY CONSTRUCTOR\n");
+//~ }
+//~ 
+//~ Camera::Camera(Camera&& other)// noexcept // move constructor
+//~ : fov(other.fov)
+//~ {
+	//~ printf("MOVE CONSTRUCTOR\n");
+//~ }
+//~ 
+//~ Camera& Camera::operator=(const Camera& other)
+//~ {
+	//~ printf("COPY ASSIGNEMENT\n");
+	//~ return *this = Camera(other);
+	//~ 
+//~ }
 
 Camera::~Camera()
 {
@@ -138,14 +141,14 @@ void Camera::buildDisplayData()
 	// build click geo
 
 	click_geo = EditorGizmoUtils::makeSimpleBox();
-	EditorGizmoUtils::translate(click_geo, glm::vec3(0.0,0.0,0.5));
+	EditorGizmoUtils::translate(click_geo, glm::vec3(0.0,0.0,0.51)); // just a little to much to give space to avoid mouse click
 	buildKDTree();
 	
 }
 
 void Camera::buildKDTree(int _limit)
 {
-	printf("building Camera KDTree\n");
+	//~ printf("building Camera KDTree\n");
 
 	std::vector<std::shared_ptr<Triangle> > tris;
 

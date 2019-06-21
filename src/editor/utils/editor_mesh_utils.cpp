@@ -136,6 +136,68 @@ namespace EditorMeshUtils{
 		return mesh;
 	}
 	
+	Mesh makeCylinder(float radius, float height, int segs_radius, int segs_height)
+	{	
+		Mesh mesh;
+				
+		std::vector<Point> points;
+		for (int j = 0; j < segs_height; j++)
+		{
+			
+			for (int i = 0; i < segs_radius; i++)
+			{			
+				float angle = ((float)i / (float)(segs_radius-1)) * PI * 2.0;
+				points.push_back(
+					Point(
+						cos(angle) * radius, 
+						sin(angle) * radius, 
+						
+						(float)j/ (float)(segs_height-1)
+						)
+					);			
+			}
+		}
+		
+		mesh.points = points;
+		
+		std::vector<Face> faces;
+		
+
+		for (int j = 0; j < segs_height-1; j++)
+		{
+			for (int i = 0; i < segs_radius-1; i++)
+			{
+				Face face;
+				face.setVertices(
+					{ 
+						Vertex(i+ j * (segs_radius)), 
+						Vertex(i+ j * (segs_radius) + 1),
+						Vertex(i+ j * (segs_radius) + segs_radius +1),
+						Vertex(i+ j * (segs_radius) + segs_radius)
+					}
+				);
+				faces.push_back(face);			
+			}
+		}
+
+		// bottom cap
+		if( segs_radius >= 3)
+		{
+			std::vector<Vertex> bottom_verts;
+			for (int i = segs_radius-1; i >= 0 ; i--)
+			{
+				bottom_verts.push_back(Vertex(i));
+			}
+			
+			Face face;
+			face.setVertices(bottom_verts);
+			faces.push_back(face);				
+		}
+		mesh.faces = faces;		
+		
+		return mesh;
+	}		
+	
 	Mesh merge(Mesh& mesh1, Mesh& mesh2)
 	{
 		Mesh merged = mesh1;

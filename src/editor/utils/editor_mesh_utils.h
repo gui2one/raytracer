@@ -10,7 +10,7 @@ namespace EditorMeshUtils{
 	Mesh makeSimpleBox();
 	
 	Mesh makeGrid(float width, float length, int segs_width, int segs_length);
-	
+	Mesh makeCylinder(float radius, float height, int segs_radius, int segs_height);
 	Mesh merge(Mesh& mesh1, Mesh& mesh2);
 	
 	void scale(Mesh& _mesh, glm::vec3 _scale);

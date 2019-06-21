@@ -72,16 +72,16 @@ Editor::Editor()
 void Editor::setCamPosFromPolar(float u, float v, float _radius, glm::vec3 center)
 {
 	
-	float x = (sin(u)* sin(v) * _radius) + center.x;
-	float y = (cos(u)* sin(v) * _radius) + center.y;
-	float z = (cos(v) * _radius) + center.z;
-
-	cameras[cur_cam_id]->param_position->setValue( glm::vec3(x, y, z));
-	cameras[cur_cam_id]->target_position = center;
-
-	cameras[cur_cam_id]->up_vector = glm::vec3(0.0, 0.0, 1.0);
-	
-	cameras[cur_cam_id]->applyTransforms();
+	//~ float x = (sin(u)* sin(v) * _radius) + center.x;
+	//~ float y = (cos(u)* sin(v) * _radius) + center.y;
+	//~ float z = (cos(v) * _radius) + center.z;
+//~ 
+	//~ cameras[cur_cam_id]->param_position->setValue( glm::vec3(x, y, z));
+	//~ cameras[cur_cam_id]->target_position = center;
+//~ 
+	//~ cameras[cur_cam_id]->up_vector = glm::vec3(0.0, 0.0, 1.0);
+	//~ 
+	//~ cameras[cur_cam_id]->applyTransforms();
 }
 
 void Editor::cycleCameras()
@@ -92,8 +92,9 @@ void Editor::cycleCameras()
 		
 	}else{
 		cur_cam_id = 0;
-		
 	}
+	
+	//~ cameras[cur_cam_id] = cameras[cur_cam_id];
 }
 
 void Editor::init()
@@ -110,6 +111,7 @@ void Editor::init()
 	
 	w_width = 700; 
 	w_height = 450; 
+	
 	if( SDL_Init(SDL_INIT_EVERYTHING) == 0){
 			//~ printf("SDL initialized correctly\n");
 	}     
@@ -161,27 +163,35 @@ void Editor::init()
 
 	fbo_shader.createShader();		
 	
+	
+	
+	user_view = std::make_shared<Camera>();
+	
+	
+	
+	
 	std::shared_ptr<Camera> camera = std::make_shared<Camera>();
-	camera->position = glm::vec3(5.0, 2.0 , 3.0);
+	camera->param_position->setValue(glm::vec3(5.0, 2.0 , 3.0));
 	camera->target_position = glm::vec3(0.0, 0.0 , 0.0);
 	camera->up_vector = glm::vec3(0.0, 0.0 , 1.0);	
 	camera->setProjection(45.0f * (float)PI / 180.0f, (float)w_width / (float)w_height, 0.01f, 100.0f);
 	camera->name = uniqueEntityName(camera->name);
+	
 	entities.push_back(camera);
-	cameras.push_back(camera);
+	//~ cameras.push_back(camera);
 	camera->buildKDTree();
 	
 	cur_cam_id = 0;
-	active_camera = camera;
+	
 	
 	std::shared_ptr<Camera> camera2 = std::make_shared<Camera>();
-	camera2->position = glm::vec3(5.0, 2.0 , 3.0);
+	camera2->param_position->setValue(glm::vec3(5.0, 2.0 , 3.0));
 	camera2->target_position = glm::vec3(0.0, 0.0 , 0.0);
 	camera2->up_vector = glm::vec3(0.0, 0.0 , 1.0);	
 	camera2->setProjection(45.0f * (float)PI / 180.0f, (float)w_width / (float)w_height, 0.01f, 100.0f);
 	camera2->name = uniqueEntityName(camera2->name);
 	entities.push_back(camera2);
-	cameras.push_back(camera2);	
+	//~ cameras.push_back(camera2);	
 	camera2->buildKDTree();
 	
 	//// init construction grid
@@ -194,9 +204,12 @@ void Editor::init()
 	GLCall(glCullFace(GL_FRONT));
 	GLCall(glEnable(GL_TEXTURE_2D));
 	GLCall(glEnable(GL_BLEND));
+	
 	GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 	
 	initHandlesFBO();
+	
+	collectCameras();
 }
 
 void Editor::initHandlesFBODepthBuffer()
@@ -342,16 +355,17 @@ void Editor::renderHandlesFBO()
 	
 	glm::mat4 view = glm::mat4(1.0f);
 
+	Camera * cur_cam = (Camera *)cameras[cur_cam_id].get();
 	view *= glm::lookAt(
-		cameras[cur_cam_id]->position, //glm::vec3(0.0,  0.0, 3.0),
-		cameras[cur_cam_id]->target_position, //glm::vec3(0.0,  0.0, 0.0),
-		cameras[cur_cam_id]->up_vector //glm::vec3(0.0,  1.0, 0.0)
+		cur_cam->position, //glm::vec3(0.0,  0.0, 3.0),
+		cur_cam->target_position, //glm::vec3(0.0,  0.0, 0.0),
+		cur_cam->up_vector //glm::vec3(0.0,  1.0, 0.0)
 	);
 
 	line_shader.useProgram();
 	
 	
-	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(cameras[cur_cam_id]->projection)));
+	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(cur_cam->projection)));
 	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "view"), 1, GL_FALSE, glm::value_ptr(view)));	
 	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));	
 	
@@ -373,6 +387,7 @@ void Editor::renderHandlesFBO()
 
 void Editor::displayHandlesFBO()
 {
+	GLCall(glDisable(GL_CULL_FACE));
 	GLCall(glEnable(GL_BLEND));
 	GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 	fbo_shader.useProgram();
@@ -438,22 +453,23 @@ void Editor::manageEvents()
 					if(keyboard_state[SDL_SCANCODE_LCTRL])
 					{
 						double rot_speed = 0.01;
+						Camera * cur_cam = (Camera *)cameras[cur_cam_id].get();
+						
+						cur_cam->orbit_u += (float)Event.motion.xrel * rot_speed;
+						cur_cam->orbit_v -= (float)Event.motion.yrel * rot_speed;
 
-						cameras[cur_cam_id]->orbit_u += (float)Event.motion.xrel * rot_speed;
-						cameras[cur_cam_id]->orbit_v -= (float)Event.motion.yrel * rot_speed;
-
-						if(cameras[cur_cam_id]->orbit_v < 0.2)
-								cameras[cur_cam_id]->orbit_v = 0.2;
-						else if(cameras[cur_cam_id]->orbit_v > PI-0.2)
-								cameras[cur_cam_id]->orbit_v = PI-0.2;
+						if(cur_cam->orbit_v < 0.2)
+								cur_cam->orbit_v = 0.2;
+						else if(cur_cam->orbit_v > PI-0.2)
+								cur_cam->orbit_v = PI-0.2;
 
 
 
 						setCamPosFromPolar(
-							cameras[cur_cam_id]->orbit_u, 
-							cameras[cur_cam_id]->orbit_v, 
-							cameras[cur_cam_id]->orbit_radius, 
-							cameras[cur_cam_id]->orbit_center
+							cur_cam->orbit_u, 
+							cur_cam->orbit_v, 
+							cur_cam->orbit_radius, 
+							cur_cam->orbit_center
 						);	
 						
 						
@@ -465,28 +481,29 @@ void Editor::manageEvents()
 					
 					if(keyboard_state[SDL_SCANCODE_LCTRL])
 					{
+						Camera * cur_cam = (Camera *)cameras[cur_cam_id].get();
 						mouse_delta_x = -(float)Event.motion.xrel;						
 						mouse_delta_y = -(float)Event.motion.yrel;
 						
 						glm::mat4 view = glm::lookAt(
-							cameras[cur_cam_id]->position,
-							cameras[cur_cam_id]->target_position,
-							cameras[cur_cam_id]->up_vector
+							cur_cam->position,
+							cur_cam->target_position,
+							cur_cam->up_vector
 							);
 				
 						glm::vec3 pan_dir = glm::vec3(mouse_delta_x, -mouse_delta_y, 0.0);
 				
 						vec_mult_by_matrix(pan_dir, view, true);
-						pan_dir = pan_dir - cameras[cur_cam_id]->position;
-						cameras[cur_cam_id]->orbit_center.x += pan_dir.x * 0.02;
-						cameras[cur_cam_id]->orbit_center.y += pan_dir.y * 0.02;
-						cameras[cur_cam_id]->orbit_center.z += pan_dir.z * 0.02;
+						pan_dir = pan_dir - cur_cam->position;
+						cur_cam->orbit_center.x += pan_dir.x * 0.02;
+						cur_cam->orbit_center.y += pan_dir.y * 0.02;
+						cur_cam->orbit_center.z += pan_dir.z * 0.02;
 				
 						setCamPosFromPolar(
-							cameras[cur_cam_id]->orbit_u, 
-							cameras[cur_cam_id]->orbit_v, 
-							cameras[cur_cam_id]->orbit_radius, 
-							cameras[cur_cam_id]->orbit_center);
+							cur_cam->orbit_u, 
+							cur_cam->orbit_v, 
+							cur_cam->orbit_radius, 
+							cur_cam->orbit_center);
 					}							
 				}
 			}
@@ -499,6 +516,7 @@ void Editor::manageEvents()
 					int x, y;
 					SDL_GetMouseState(&x, &y);
 
+					Camera * cur_cam = (Camera *)cameras[cur_cam_id].get();
 					
 					ClickData cd;
 					cd.width = w_width;
@@ -507,7 +525,7 @@ void Editor::manageEvents()
 					cd.y = (double)y;
 					Raycaster caster;
 					
-					Ray ray = caster.castRay(cd, *(cameras[cur_cam_id]));
+					Ray ray = caster.castRay(cd, *(cur_cam));
 					
 					std::vector<HitData> hit_datas;
 					std::vector<std::shared_ptr<BaseHandle> > handles;
@@ -537,7 +555,7 @@ void Editor::manageEvents()
 				if(Event.button.button == SDL_BUTTON_LEFT && !left_mouse_dragging)
 				{
 					// normal click
-					
+					Camera * cur_cam = (Camera *)cameras[cur_cam_id].get();
 					int x, y;
 					SDL_GetMouseState(&x, &y);
 
@@ -549,7 +567,7 @@ void Editor::manageEvents()
 					cd.y = (double)y;
 					Raycaster caster;
 					
-					Ray ray = caster.castRay(cd, *(cameras[cur_cam_id]));
+					Ray ray = caster.castRay(cd, *(cur_cam));
 					
 					std::vector<HitData> hit_datas;
 		
@@ -557,8 +575,8 @@ void Editor::manageEvents()
 					
 					if(hit_datas.size() > 0 )
 					{
-						float dist = glm::distance(hit_datas[0].ray_origin, hit_datas[0].position);
-						printf("Distance : %.3f\n", dist);
+						//~ float dist = glm::distance(hit_datas[0].ray_origin, hit_datas[0].position);
+						//~ printf("Distance : %.3f\n", dist);
 						
 						if(keyboard_state[SDL_SCANCODE_LSHIFT])
 						{
@@ -587,26 +605,27 @@ void Editor::manageEvents()
 				
 			}else if(Event.type == SDL_MOUSEWHEEL){
 				
-				float norm_dist = glm::distance(cameras[cur_cam_id]->position, cameras[cur_cam_id]->orbit_center) / 5.0;
-				cameras[cur_cam_id]->orbit_radius += (float)Event.wheel.y * -0.15 * norm_dist;
+				Camera * cur_cam = (Camera *)cameras[cur_cam_id].get();
+				float norm_dist = glm::distance(cur_cam->position, cur_cam->orbit_center) / 5.0;
+				cur_cam->orbit_radius += (float)Event.wheel.y * -0.15 * norm_dist;
 				
 				setCamPosFromPolar(
-					cameras[cur_cam_id]->orbit_u, 
-					cameras[cur_cam_id]->orbit_v, 
-					cameras[cur_cam_id]->orbit_radius, 
-					cameras[cur_cam_id]->orbit_center
+					cur_cam->orbit_u, 
+					cur_cam->orbit_v, 
+					cur_cam->orbit_radius, 
+					cur_cam->orbit_center
 				);	
 					
 			}
 			
 			
-			//~ else if(Event.type == SDL_KEYUP){
-				//~ if(Event.key.keysym.scancode == SDL_SCANCODE_C)
-				//~ {
-					//~ 
-					//~ cycleCameras();
-				//~ }
-			//~ }		
+			else if(Event.type == SDL_KEYUP){
+				if(Event.key.keysym.scancode == SDL_SCANCODE_C)
+				{
+					
+					cycleCameras();
+				}
+			}		
 
 		}
 		
@@ -630,7 +649,7 @@ void Editor::manageEvents()
 
 void Editor::update()
 {
-
+	Camera * cur_cam = (Camera *)cameras[cur_cam_id].get();
 	manageEvents();
 
 	
@@ -638,17 +657,17 @@ void Editor::update()
 	
 	//~ camera_u_pos += 0.01;
 	setCamPosFromPolar(
-		cameras[cur_cam_id]->orbit_u, 
-		cameras[cur_cam_id]->orbit_v, 
-		cameras[cur_cam_id]->orbit_radius, 
-		cameras[cur_cam_id]->orbit_center
+		cur_cam->orbit_u, 
+		cur_cam->orbit_v, 
+		cur_cam->orbit_radius, 
+		cur_cam->orbit_center
 	);
 	
 	
 
 	//~ GLCall(glDisable(GL_CULL_FACE));
 	GLCall(glEnable(GL_DEPTH_TEST));
-
+	GLCall(glEnable(GL_CULL_FACE));
 	GLCall(glDisable(GL_BLEND));
 	
 
@@ -658,7 +677,7 @@ void Editor::update()
 	
 
 
-	cameras[cur_cam_id]->setProjection(45.0f * (float)PI / 180.0f, (float)w_width / (float)w_height, 0.01f, 100.0f);
+	cur_cam->setProjection(45.0f * (float)PI / 180.0f, (float)w_width / (float)w_height, 0.01f, 100.0f);
 
 
 
@@ -669,9 +688,9 @@ void Editor::update()
 	//~ GLCall(glEnable(GL_CULL_FACE));
 	//~ GLCall(glCullFace(GL_FRONT));
 	view *= glm::lookAt(
-		cameras[cur_cam_id]->position, //glm::vec3(0.0,  0.0, 3.0),
-		cameras[cur_cam_id]->target_position, //glm::vec3(0.0,  0.0, 0.0),
-		cameras[cur_cam_id]->up_vector //glm::vec3(0.0,  1.0, 0.0)
+		cur_cam->position, //glm::vec3(0.0,  0.0, 3.0),
+		cur_cam->target_position, //glm::vec3(0.0,  0.0, 0.0),
+		cur_cam->up_vector //glm::vec3(0.0,  1.0, 0.0)
 	);
 
 	default_shader.useProgram();
@@ -686,7 +705,7 @@ void Editor::update()
 		GLCall(glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ));
 	}else{
 		
-		GLCall(glPolygonMode( GL_FRONT_AND_BACK, GL_FILL ));
+		GLCall(glPolygonMode( GL_FRONT, GL_FILL ));
 	}
 
 
@@ -700,7 +719,7 @@ void Editor::update()
 		if(( p_mesh = dynamic_cast<MeshObject* >(entities[i].get())))
 		{
 			default_shader.useProgram();
-			GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(cameras[cur_cam_id]->projection)));
+			GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(cur_cam->projection)));
 			GLCall(glUniformMatrix4fv(glGetUniformLocation(default_shader.m_id, "view"), 1, GL_FALSE, glm::value_ptr(view)));			
 			model = glm::mat4(1.0f);
 			entities[i]->applyTransforms();
@@ -724,7 +743,7 @@ void Editor::update()
 		else if( ( p_null = dynamic_cast<NullObject*>(entities[i].get())))
 		{
 			line_shader.useProgram();
-			GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(cameras[cur_cam_id]->projection)));
+			GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(cur_cam->projection)));
 			GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "view"), 1, GL_FALSE, glm::value_ptr(view)));				
 			model = glm::mat4(1.0f);
 			entities[i]->applyTransforms();
@@ -756,20 +775,20 @@ void Editor::update()
 	
 	line_shader.useProgram();
 	//~ GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
-	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(cameras[cur_cam_id]->projection)));
+	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "projection"), 1, GL_FALSE, glm::value_ptr(cur_cam->projection)));
 	GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "view"), 1, GL_FALSE, glm::value_ptr(view)));		
-	for (std::shared_ptr<Camera> cam : cameras)
+	for (std::shared_ptr<Entity3D> cam : cameras)
 	{
-		
+		Camera * cur_cam2 = (Camera *)cam.get();
 		//~ if(cam != cameras[cur_cam_id])
 		//~ {
 			model = glm::mat4(1.0f);		
-			cam->applyTransforms();
-			model *= cam->transforms;		
+			cur_cam2->applyTransforms();
+			model *= cur_cam2->transforms;		
 			
 			GLCall(glUniformMatrix4fv(glGetUniformLocation(line_shader.m_id, "model"), 1, GL_FALSE, glm::value_ptr(model)));
 			GLCall(glUniform4f(glGetUniformLocation(line_shader.m_id, "u_color"), 0.0, 0.0, 1.0, 1.0 ));
-			cam->draw();
+			cur_cam2->draw();
 		//~ }
 	}
 	
@@ -922,6 +941,20 @@ void Editor::deleteEntity(int id)
 }
 
 
+void Editor::collectCameras()
+{
+	cameras.clear();
+	for (auto entity : entities)
+	{
+		Camera * p_cam = nullptr;
+		if((p_cam = dynamic_cast<Camera*>(entity.get())))
+		{
+			cameras.push_back(entity);
+		}
+	}
+	
+}
+
 std::string Editor::uniqueEntityName(std::string _str)
 {
 	
@@ -959,5 +992,10 @@ void Editor::toggleConstructionGrid()
 
 Editor::~Editor()
 {
+	for(auto cam : cameras)
+	{
+		cam.reset();
+	}
+	//~ delete cameras[cur_cam_id];
 	//~ printf("--- DELETE Editor\n");
 }

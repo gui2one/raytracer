@@ -432,6 +432,33 @@ home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.cpp.s:
 	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.cpp.s
 .PHONY : home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.cpp.s
 
+home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.o: home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp.o
+
+.PHONY : home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.o
+
+# target to build an object file
+home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp.o:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp.o
+.PHONY : home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp.o
+
+home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.i: home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp.i
+
+.PHONY : home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp.i:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp.i
+.PHONY : home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp.i
+
+home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.s: home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp.s
+
+.PHONY : home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp.s:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp.s
+.PHONY : home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp.s
+
 home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.o: home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.cpp.o
 
 .PHONY : home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.o
@@ -1230,6 +1257,9 @@ help:
 	@echo "... home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.o"
 	@echo "... home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.i"
 	@echo "... home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.s"
+	@echo "... home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.o"
+	@echo "... home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.i"
+	@echo "... home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.s"
 	@echo "... home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.o"
 	@echo "... home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.i"
 	@echo "... home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.s"

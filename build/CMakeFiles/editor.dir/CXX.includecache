@@ -537,6 +537,8 @@ mesh_generators/grid_mesh_generator.h
 /home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.h
 mesh_generators/box_mesh_generator.h
 /home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.h
+mesh_generators/cylinder_mesh_generator.h
+/home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.h
 kdnode2.h
 /home/pi/projects/raytracer/src/editor/kdnode2.h
 
@@ -575,6 +577,16 @@ box_mesh_generator.h
 /home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.h
 
 /home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.h
+mesh_generator.h
+/home/pi/projects/raytracer/src/editor/mesh_generators/mesh_generator.h
+../utils/editor_mesh_utils.h
+/home/pi/projects/raytracer/src/editor/utils/editor_mesh_utils.h
+
+/home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp
+cylinder_mesh_generator.h
+/home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.h
+
+/home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.h
 mesh_generator.h
 /home/pi/projects/raytracer/src/editor/mesh_generators/mesh_generator.h
 ../utils/editor_mesh_utils.h

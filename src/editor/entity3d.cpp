@@ -2,17 +2,13 @@
 
 static void vec_mult_by_matrix( glm::vec3 & _vec, glm::mat4 & _mat, bool invert = false)
 {
+	glm::vec4 temp_vec4 = glm::vec4(_vec.x, _vec.y, _vec.z,1.0f);
 
-        glm::vec4 temp_vec4 = glm::vec4(_vec.x, _vec.y, _vec.z,1.0f);
-
-
-        if( invert){
-                _vec = glm::inverse(_mat) * temp_vec4 ;
-        } else{
-                _vec = _mat * temp_vec4;
-                //~ printf("__VEC X : %.3f\n", _vec.x);
-        }
-
+	if( invert){
+			_vec = glm::inverse(_mat) * temp_vec4 ;
+	}else{
+			_vec = _mat * temp_vec4;
+	}
 }
 
 Entity3D::Entity3D():
@@ -26,16 +22,16 @@ Entity3D::Entity3D():
 	
 	param_position = new Param<glm::vec3>();
 	param_position->setName("Position");
-	param_position->setValue(glm::vec3(0.0, 0.0, 0.0));
+	param_position->setValue(position);
 	params.push_back(param_position);
 	
 	param_rotation = new Param<glm::vec3>();
 	param_rotation->setName("Rotation");	
-	param_rotation->setValue(glm::vec3(0.0, 0.0, 0.0));
+	param_rotation->setValue(rotation);
 	params.push_back(param_rotation);
 	
 	param_scale = new Param<glm::vec3>();
-	param_scale->setValue(glm::vec3(1.0, 1.0, 1.0));
+	param_scale->setValue(scale);
 	param_scale->setName("scale");		
 	params.push_back(param_scale);
 }
@@ -137,7 +133,14 @@ void MeshObject::setMeshGenerator(MESH_GENERATOR_TYPE _type)
 			
 			mesh = generator->generate();
 			generator_type = BOX_MESH_GENERATOR;
-			break;			
+			break;	
+			
+		case CYLINDER_MESH_GENERATOR :
+			generator = new CylinderMeshGenerator();
+			
+			mesh = generator->generate();
+			generator_type = CYLINDER_MESH_GENERATOR;
+			break;	
 	}
 }
 
@@ -369,7 +372,7 @@ void NullObject::buildVBO()
 
 void NullObject::buildKDTree(int _limit)
 {
-	printf("building Null Object KDTree\n");
+	//~ printf("building Null Object KDTree\n");
 
 	std::vector<std::shared_ptr<Triangle> > tris;
 

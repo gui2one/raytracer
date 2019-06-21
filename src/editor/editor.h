@@ -49,6 +49,8 @@ public :
 	void deleteEntity(int id);
 	void deleteCamera(int id);
 	
+	void collectCameras();
+	
 	std::string uniqueEntityName(std::string _str);
 	~Editor();
 	
@@ -78,9 +80,11 @@ public :
 
 	
 	std::vector<std::shared_ptr<Entity3D> > entities;
-	std::vector<std::shared_ptr<Camera> > cameras;	
+	std::vector<std::shared_ptr<Entity3D> > cameras;	
 	
-	std::shared_ptr<Camera> active_camera;
+	std::vector<unsigned int> camera_ids;
+	
+	//~ Camera * active_camera;
 	std::shared_ptr<Camera> user_view;
 	
 	int cur_cam_id = -1;	

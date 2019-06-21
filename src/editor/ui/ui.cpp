@@ -27,7 +27,7 @@ void UI::init(Editor* editor)
     
 	
     ImGuiStyle& style = ImGui::GetStyle();
-    //~ style.WindowRounding = 0.02f;	
+    style.WindowRounding = 3.0f;	
     
     
     //~ editor->addMeshObject();
@@ -200,7 +200,7 @@ void UI::entitiesDialog()
 				if(ImGui::BeginTabItem("Generator"))
 				{
 					ImGui::Text("Mesh Object");
-					std::vector<const char*> generator_types_strings = {"...", "Grid Mesh", "Box Mesh"};
+					std::vector<const char*> generator_types_strings = {"...", "Grid Mesh", "Box Mesh", "Cylinder Mesh"};
 					static int cur_choice = 0;
 					if( p_mesh->generator != nullptr)
 					{

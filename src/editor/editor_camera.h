@@ -9,9 +9,9 @@ class Camera : public Entity3D
 {
 	public:
 		Camera();
-		Camera(const Camera& other);// copy constructor
-		Camera(Camera&& other); // move constructor
-		Camera& operator=(const Camera& other);
+		//~ Camera(const Camera& other);// copy constructor
+		//~ Camera(Camera&& other); // move constructor
+		//~ Camera& operator=(const Camera& other);
 		~Camera();
 		void setProjection(float angle, float aspect, float near, float far);
 		

@@ -9,6 +9,7 @@
 #include "mesh_generators/mesh_generator.h"
 #include "mesh_generators/grid_mesh_generator.h"
 #include "mesh_generators/box_mesh_generator.h"
+#include "mesh_generators/cylinder_mesh_generator.h"
 
 #include "kdnode2.h"
 
