@@ -23,11 +23,8 @@ static void offsetFacesPointID(std::vector<Face>& faces, int offset)
 			Vertex* cur_vert = &faces[face_id].vertices[vert_id];
 			
 			cur_vert->setPointID(cur_vert->point_id + offset);
-			
 		}
-		
 	}
-	
 }
 
 namespace EditorMeshUtils{
@@ -151,10 +148,9 @@ namespace EditorMeshUtils{
 					Point(
 						cos(angle) * radius, 
 						sin(angle) * radius, 
-						
 						(float)j/ (float)(segs_height-1) * height
-						)
-					);			
+					)
+				);			
 			}
 		}
 		

@@ -537,9 +537,57 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/cyli
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp.o.provides.build: CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp.o
 
 
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o: CMakeFiles/editor.dir/flags.make
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o: /home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o -c /home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp
+
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp > CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.i
+
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp -o CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.s
+
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o.requires:
+
+.PHONY : CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o.requires
+
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o.provides: CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o.requires
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o.provides.build
+.PHONY : CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o.provides
+
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o.provides.build: CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o
+
+
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o: CMakeFiles/editor.dir/flags.make
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o: /home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o -c /home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp
+
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp > CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.i
+
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp -o CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.s
+
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o.requires:
+
+.PHONY : CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o.requires
+
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o.provides: CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o.requires
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o.provides.build
+.PHONY : CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o.provides
+
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o.provides.build: CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o
+
+
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.o: CMakeFiles/editor.dir/flags.make
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.o: /home/pi/projects/raytracer/src/editor/handles/base_handle.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/projects/raytracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.o -c /home/pi/projects/raytracer/src/editor/handles/base_handle.cpp
 
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.i: cmake_force
@@ -583,6 +631,8 @@ editor_OBJECTS = \
 "CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.cpp.o" \
 "CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.cpp.o" \
 "CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp.o" \
+"CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o" \
+"CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o" \
 "CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.o"
 
 # External object files for target editor
@@ -608,12 +658,14 @@ editor: CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generat
 editor: CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.cpp.o
 editor: CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.cpp.o
 editor: CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp.o
+editor: CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o
+editor: CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o
 editor: CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.o
 editor: CMakeFiles/editor.dir/build.make
 editor: libcoreLib.a
 editor: libPCHLib.a
 editor: CMakeFiles/editor.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pi/projects/raytracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Linking CXX executable editor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pi/projects/raytracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Linking CXX executable editor"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/editor.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -641,6 +693,8 @@ CMakeFiles/editor.dir/requires: CMakeFiles/editor.dir/home/pi/projects/raytracer
 CMakeFiles/editor.dir/requires: CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.cpp.o.requires
 CMakeFiles/editor.dir/requires: CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.cpp.o.requires
 CMakeFiles/editor.dir/requires: CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp.o.requires
+CMakeFiles/editor.dir/requires: CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o.requires
+CMakeFiles/editor.dir/requires: CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o.requires
 CMakeFiles/editor.dir/requires: CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.o.requires
 
 .PHONY : CMakeFiles/editor.dir/requires

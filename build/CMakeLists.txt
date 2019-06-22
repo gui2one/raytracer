@@ -146,6 +146,9 @@ add_executable(editor
 	../src/editor/mesh_generators/cylinder_mesh_generator.cpp
 	
 	
+	../src/editor/mesh_filters/mesh_filter.cpp
+	../src/editor/mesh_filters/transform_mesh_filter.cpp
+	
 	../src/editor/handles/base_handle.cpp
 )
 

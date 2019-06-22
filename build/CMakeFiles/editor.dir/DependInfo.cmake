@@ -11,6 +11,8 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/pi/projects/raytracer/src/editor/handles/base_handle.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.o"
   "/home/pi/projects/raytracer/src/editor/kdnode2.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/kdnode2.cpp.o"
   "/home/pi/projects/raytracer/src/editor/main.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/main.cpp.o"
+  "/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o"
+  "/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o"
   "/home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.cpp.o"
   "/home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/cylinder_mesh_generator.cpp.o"
   "/home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.cpp" "/home/pi/projects/raytracer/build/CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_generators/grid_mesh_generator.cpp.o"

@@ -130,6 +130,10 @@ void Editor::init()
 	std::shared_ptr<MeshObject> box =  std::make_shared<MeshObject>();
 	box->setMeshGenerator(BOX_MESH_GENERATOR);
 	box->position = glm::vec3(0.0, 0.0, 2.0);
+	//~ printf("mesh filters num : %d", box->mesh_filters.size());
+	box->addMeshFilter(TRANSFORM_MESH_FILTER);
+	//~ printf("mesh filters num : %d", box->mesh_filters.size());
+	box->applyFilters();
 	box->applyTransforms();
 	box->buildVBO();
 	entities.push_back(box);
@@ -856,7 +860,7 @@ void Editor::addMeshObject()
 	
 	MeshUtils mesh_utils;
 	std::shared_ptr<MeshObject> obj2 = std::make_shared<MeshObject>();
-	obj2->name = "object 2";
+	obj2->name = uniqueEntityName("mesh_object");
 	Mesh mesh = mesh_utils.makeSimpleBox();
 	
 	mesh = mesh_utils.uniquePoints(mesh);
@@ -865,9 +869,19 @@ void Editor::addMeshObject()
 	
 	obj2->mesh = mesh;
 	obj2->buildVBO();
-	obj2->position = glm::vec3( (double)(entities.size()) * 0.5, 0.0, 0.0);
-	obj2->scale = glm::vec3(0.4,0.4,2.0);
+	
+	
 	entities.push_back(obj2);
+
+}
+
+void Editor::addNullObject()
+{
+
+	std::shared_ptr<NullObject> null_object = std::make_shared<NullObject>();
+	null_object->name = uniqueEntityName("null_object_1");
+	null_object->buildVBO();
+	entities.push_back(null_object);
 
 }
 

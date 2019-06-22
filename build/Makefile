@@ -405,6 +405,60 @@ home/pi/projects/raytracer/src/editor/main.cpp.s:
 	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/main.cpp.s
 .PHONY : home/pi/projects/raytracer/src/editor/main.cpp.s
 
+home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.o: home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o
+
+.PHONY : home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.o
+
+# target to build an object file
+home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o
+.PHONY : home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o
+
+home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.i: home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.i
+
+.PHONY : home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.i:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.i
+.PHONY : home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.i
+
+home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.s: home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.s
+
+.PHONY : home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.s:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.s
+.PHONY : home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.s
+
+home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.o: home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o
+
+.PHONY : home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.o
+
+# target to build an object file
+home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o
+.PHONY : home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o
+
+home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.i: home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.i
+
+.PHONY : home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.i:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.i
+.PHONY : home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.i
+
+home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.s: home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.s
+
+.PHONY : home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.s:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.s
+.PHONY : home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.s
+
 home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.o: home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.cpp.o
 
 .PHONY : home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.o
@@ -1254,6 +1308,12 @@ help:
 	@echo "... home/pi/projects/raytracer/src/editor/main.o"
 	@echo "... home/pi/projects/raytracer/src/editor/main.i"
 	@echo "... home/pi/projects/raytracer/src/editor/main.s"
+	@echo "... home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.o"
+	@echo "... home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.i"
+	@echo "... home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.s"
+	@echo "... home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.o"
+	@echo "... home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.i"
+	@echo "... home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.s"
 	@echo "... home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.o"
 	@echo "... home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.i"
 	@echo "... home/pi/projects/raytracer/src/editor/mesh_generators/box_mesh_generator.s"

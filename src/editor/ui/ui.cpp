@@ -1,6 +1,32 @@
 #include "ui.h"
 
 
+static std::string increment_name(std::string _name)
+{
+	std::string s = _name;
+	std::smatch m;
+	std::regex e("\\d+?$");
+	bool found = std::regex_search(_name, m, e);
+	if(found)
+	{
+		int num = std::stoi(m.str());
+		for(size_t i=0; i < std::strlen(m.str().c_str()); i++){
+			s.pop_back();
+		}
+		printf("found digit ! %d\n", num);
+		s += std::to_string(num+1);
+	}else{
+		s += "2";
+	}
+		
+	return s;
+}
+
+static std::string unique_name(std::string candidate, std::vector<std::string> names_set)
+{
+	return candidate;
+}
+
 UI::UI()
 {
 	
@@ -66,6 +92,24 @@ void UI::menu()
 			}			
             ImGui::EndMenu();
         }
+        
+        if(ImGui::BeginMenu("Add"))
+        {
+			if(ImGui::MenuItem("Mesh Object"))
+			{
+				m_editor->addMeshObject();
+			}
+			if(ImGui::MenuItem("Null Object"))
+			{
+				m_editor->addNullObject();
+			}
+			if(ImGui::MenuItem("Camera"))
+			{
+				m_editor->addCamera();
+			}			
+			
+			ImGui::EndMenu();
+		}
         
         ImGui::EndMainMenuBar();
 	}
@@ -265,6 +309,97 @@ void UI::entitiesDialog()
 						{
 							paramWidget(param, inc, [p_mesh](){
 								p_mesh->updateMeshGenerator();
+							});
+							
+							inc++;
+						}
+					}
+					ImGui::EndTabItem();
+				}
+				// MESH FILTERS
+				if(ImGui::BeginTabItem("Filters"))
+				{
+					std::vector<const char *> filter_types_strings = {"..." , "transform"};
+					
+					static int cur_choice = -1;
+					ImGui::Columns(2);
+					ImGui::PushItemWidth(-1);
+					if(ImGui::BeginCombo("##choose", filter_types_strings[cur_choice+1],0))
+					{
+						for (size_t i = 0; i < filter_types_strings.size()-1; i++)
+						{
+							if(ImGui::Selectable( filter_types_strings[i+1], false))
+							{
+								cur_choice = i;
+								
+							}
+						}
+						
+						ImGui::EndCombo();												
+					}
+					
+					ImGui::NextColumn();
+					if(ImGui::Button("Add"))
+					{
+						if(cur_choice != -1)
+						{
+							p_mesh->addMeshFilter((MESH_FILTER_TYPE)cur_choice);
+							p_mesh->applyFilters();
+						}
+					}
+					ImGui::PopItemWidth();
+					ImGui::Columns(1);
+					ImGui::PushItemWidth(-1);			
+					static int cur_selected_filter = -1;		
+					if(ImGui::ListBoxHeader("##Mesh Filters"))
+					{
+						
+						for (size_t i = 0; i < p_mesh->mesh_filters.size(); i++)
+						{
+							ImGui::PushItemWidth(-1);
+							if (ImGui::ArrowButton("##up", ImGuiDir_Up)) 
+							{
+								 printf("up pressed \n"); 
+							}
+							ImGui::SameLine();
+							ImGui::PushItemWidth(-1);
+							if (ImGui::ArrowButton("##down", ImGuiDir_Down)) 
+							{
+								 printf("down pressed \n"); 
+							}
+							ImGui::SameLine();		
+							
+							ImGui::PopItemWidth();					
+							if(ImGui::Selectable(
+								p_mesh->mesh_filters[i]->name.c_str(),
+								
+								cur_selected_filter == (int)i))
+							{
+								cur_selected_filter = i;
+							}
+						}
+						
+						ImGui::ListBoxFooter();
+					}
+					
+					ImGui::PopItemWidth();
+					
+					// display filter params
+					if(cur_selected_filter != -1 && cur_selected_filter <= (int)(p_mesh->mesh_filters.size()-1))
+					{
+						//~ static char _name[255] = {p_mesh->mesh_filters[cur_selected_filter].name.c_str()};
+						if(ImGui::InputText("name", (char *)p_mesh->mesh_filters[cur_selected_filter]->name.c_str() ,200 ))
+						{
+							
+						}
+						
+						int inc = 0;
+						for(auto param : p_mesh->mesh_filters[cur_selected_filter]->params)
+						{
+							paramWidget(param, inc, [p_mesh](){
+								p_mesh->applyFilters();
+								p_mesh->buildVBO();
+								
 							});
 							
 							inc++;

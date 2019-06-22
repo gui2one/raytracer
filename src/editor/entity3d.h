@@ -11,6 +11,11 @@
 #include "mesh_generators/box_mesh_generator.h"
 #include "mesh_generators/cylinder_mesh_generator.h"
 
+#include "mesh_filters/mesh_filter.h"
+#include "mesh_filters/transform_mesh_filter.h"
+
+
+
 #include "kdnode2.h"
 
 class Entity3D
@@ -80,6 +85,10 @@ public :
 	MESH_GENERATOR_TYPE generator_type;
 	Mesh mesh;
 	
+	
+	std::vector<std::shared_ptr<MeshFilter> > mesh_filters;
+	void addMeshFilter(MESH_FILTER_TYPE filter_type);
+	void applyFilters();
 	void buildKDTree(int _limit = 5) override;
 
 	

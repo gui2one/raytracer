@@ -179,6 +179,36 @@ void MeshObject::updateMeshGenerator()
 	}
 }
 
+void MeshObject::addMeshFilter(MESH_FILTER_TYPE filter_type)
+{
+	
+	switch(filter_type){
+		case TRANSFORM_MESH_FILTER :
+			std::shared_ptr<TransformMeshFilter> filter = std::make_shared<TransformMeshFilter>();
+			mesh_filters.push_back(filter);
+	}
+}
+
+void MeshObject::applyFilters()
+{
+	//~ printf("FILTER FUNCTION fired\n");
+	mesh = generator->generate();
+	for(auto filter : mesh_filters)
+	{
+		
+		TransformMeshFilter * p_transform = nullptr;
+		
+		if(( p_transform = dynamic_cast<TransformMeshFilter*>(filter.get())))
+		{
+			//~ printf("\tFILTER APPLY\n");
+			filter->applyFilter(mesh);
+		}
+	}
+	
+	buildVBO();
+	buildKDTree();
+}
+
 void MeshObject::buildVBO()
 {
 	
@@ -281,6 +311,7 @@ void MeshObject::draw()
 	//~ printf("--- Drawing MeshObject  -----\n");
 }
 
+
 void MeshObject::buildKDTree(int _limit)
 {
 	//~ printf("building Entity3D kdtree\n");
@@ -326,6 +357,7 @@ void MeshObject::buildKDTree(int _limit)
 	kd_node = kd_node->build(tris, 0);	
 
 }
+
 
 
 MeshObject::~MeshObject()
