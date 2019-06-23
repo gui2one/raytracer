@@ -180,95 +180,98 @@ void UI::entitiesDialog()
 	if( m_editor->cur_entity_id != -1)
 	{
 		
+		if(ImGui::InputText("name", (char *)m_editor->entities[m_editor->cur_entity_id]->name.c_str() ,200 ))
+		{
+
+		}		
 		if(ImGui::BeginTabBar("Main"))
 		{		
 
-			
-			
-				if(ImGui::BeginTabItem("Transforms"))
+			if(ImGui::BeginTabItem("Transforms"))
+			{
+				int inc = 0;
+				for(auto param : m_editor->entities[m_editor->cur_entity_id]->params)
 				{
-					int inc = 0;
-					for(auto param : m_editor->entities[m_editor->cur_entity_id]->params)
+					paramWidget(param, inc, [this](){
+						m_editor->entities[m_editor->cur_entity_id]->buildKDTree(50);
+						});
+					inc++;
+				}
+				
+				ImGui::Separator();
+				
+				
+				// parenting
+				std::vector<std::shared_ptr<Entity3D> > parent_choices;
+				for(std::shared_ptr<Entity3D> entity : m_editor->entities)
+				{
+					std::vector<std::shared_ptr<Entity3D> > chain;
+					chain = entity->getParentChain();
+					auto pos = std::find(chain.begin(), chain.end(), m_editor->entities[m_editor->cur_entity_id] );
+					
+					bool is_sibling = false;
+					if( pos != chain.end() )
 					{
-						paramWidget(param, inc, [this](){
-							m_editor->entities[m_editor->cur_entity_id]->buildKDTree(50);
-							});
-						inc++;
+						//~ printf("found !!!\n");
+						is_sibling = true;
+					}else{
+						//~ printf("not a sibling  !!!\n");
+						is_sibling = false;
 					}
-					
-					ImGui::Separator();
-					
-					
-					// parenting
-					std::vector<std::shared_ptr<Entity3D> > parent_choices;
-					for(std::shared_ptr<Entity3D> entity : m_editor->entities)
+					if(	entity != m_editor->entities[m_editor->cur_entity_id] && !is_sibling )
 					{
-						std::vector<std::shared_ptr<Entity3D> > chain;
-						chain = entity->getParentChain();
-						auto pos = std::find(chain.begin(), chain.end(), m_editor->entities[m_editor->cur_entity_id] );
-						
-						bool is_sibling = false;
-						if( pos != chain.end() )
-						{
-							//~ printf("found !!!\n");
-							is_sibling = true;
-						}else{
-							//~ printf("not a sibling  !!!\n");
-							is_sibling = false;
-						}
-						if(	entity != m_editor->entities[m_editor->cur_entity_id] && !is_sibling )
-						{
-							parent_choices.push_back(entity);	
-						}
+						parent_choices.push_back(entity);	
 					}
-					
-					if(ImGui::BeginCombo("Parent", "...", 0 )  )
-					{			
-							if( ImGui::Selectable("None")) 
-							{
-								m_editor->entities[m_editor->cur_entity_id]->parent = nullptr;
-							}
-						for(auto item : parent_choices)
+				}
+				
+				if(ImGui::BeginCombo("Parent", "...", 0 )  )
+				{			
+						if( ImGui::Selectable("None")) 
 						{
-							if( ImGui::Selectable(item->name.c_str())) 
-							{
-								m_editor->entities[m_editor->cur_entity_id]->parent = item;
-							}
+							m_editor->entities[m_editor->cur_entity_id]->parent = nullptr;
 						}
-						ImGui::EndCombo();
-					}
-					
-					
-					
-					// look at target
-					std::vector<std::shared_ptr<Entity3D> > target_choices;
-					for(std::shared_ptr<Entity3D> entity : m_editor->entities)
+					for(auto item : parent_choices)
 					{
+						if( ImGui::Selectable(item->name.c_str())) 
+						{
+							m_editor->entities[m_editor->cur_entity_id]->parent = item;
+						}
+					}
+					ImGui::EndCombo();
+				}
+				
+				
+				
+				// look at target
+				std::vector<std::shared_ptr<Entity3D> > target_choices;
+				for(std::shared_ptr<Entity3D> entity : m_editor->entities)
+				{
 
-						if(	entity != m_editor->entities[m_editor->cur_entity_id])
+					if(	entity != m_editor->entities[m_editor->cur_entity_id])
+					{
+						target_choices.push_back(entity);	
+					}
+				}	
+				
+				if(ImGui::BeginCombo("Look At Target", "...", 0 )  )
+				{			
+						if( ImGui::Selectable("None")) 
 						{
-							target_choices.push_back(entity);	
+							m_editor->entities[m_editor->cur_entity_id]->look_at_target = nullptr;
 						}
-					}	
+					for(auto item : parent_choices)
+					{
+						if( ImGui::Selectable(item->name.c_str())) 
+						{
+							m_editor->entities[m_editor->cur_entity_id]->look_at_target = item;
+						}
+					}
+					ImGui::EndCombo();
+				}					
+								
+				ImGui::EndTabItem();
+			}	
 					
-					if(ImGui::BeginCombo("Look At Target", "...", 0 )  )
-					{			
-							if( ImGui::Selectable("None")) 
-							{
-								m_editor->entities[m_editor->cur_entity_id]->look_at_target = nullptr;
-							}
-						for(auto item : parent_choices)
-						{
-							if( ImGui::Selectable(item->name.c_str())) 
-							{
-								m_editor->entities[m_editor->cur_entity_id]->look_at_target = item;
-							}
-						}
-						ImGui::EndCombo();
-					}					
-									
-					ImGui::EndTabItem();
-				}			
 			if((p_mesh = dynamic_cast<MeshObject* >( m_editor->entities[m_editor->cur_entity_id].get())))
 			{
 				
