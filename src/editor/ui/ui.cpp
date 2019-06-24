@@ -54,7 +54,14 @@ void UI::init(Editor* editor)
 	
     ImGuiStyle& style = ImGui::GetStyle();
     style.WindowRounding = 3.0f;	
+	ImVec4* colors = style.Colors;
+	//~ colors[ImGuiCol_TitleBgActive]   = ImVec4(0.68f, 0.31f, 0.20f, 1.00f);
+	colors[ImGuiCol_TabActive]       = ImVec4(0.68f, 0.31f, 0.20f, 1.00f);
+	//~ colors[ImGuiCol_Border]     = ImVec4(0.68f, 0.31f, 0.20f, 1.00f);
+	colors[ImGuiCol_WindowBg]        = ImVec4(0.059f, 0.059f, 0.059f, 1.00f);
     
+    
+    style.FrameBorderSize = 0.0f;
     
     //~ editor->addMeshObject();
 }
@@ -359,20 +366,50 @@ void UI::entitiesDialog()
 						
 						for (size_t i = 0; i < p_mesh->mesh_filters.size(); i++)
 						{
-							ImGui::PushItemWidth(-1);
-							if (ImGui::ArrowButton("##up", ImGuiDir_Up)) 
+							ImGui::PushID((void *)i);
+							ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0,0));							
+							//~ ImGui::PushItemWidth(-1);
+							
+							if (ImGui::ArrowButton("##up", ImGuiDir_Down)) 
 							{
-								 printf("up pressed \n"); 
+								if(i < p_mesh->mesh_filters.size()-1)
+								{
+									p_mesh->moveMeshFilter(i, i+1);
+									printf("moving filter UP the pile\n"); 
+									p_mesh->applyFilters();
+								}
+								 
+								 
 							}
 							ImGui::SameLine();
-							ImGui::PushItemWidth(-1);
-							if (ImGui::ArrowButton("##down", ImGuiDir_Down)) 
+							ImGui::PopStyleVar();
+							//~ ImGui::PushItemWidth(-1);
+
+							if (ImGui::ArrowButton("##down", ImGuiDir_Up)) 
 							{
-								 printf("down pressed \n"); 
+								if(i > 0)
+								{
+									p_mesh->moveMeshFilter(i, i-1);
+									printf("moving filter DOWN the pile\n"); 
+									p_mesh->applyFilters();
+								} 
 							}
 							ImGui::SameLine();		
+
+
+							if (ImGui::Button("X")) 
+							{
+
+									p_mesh->deleteMeshFilter(i);
+									printf("Deleting filter from the pile\n"); 
+									p_mesh->applyFilters();
+								 
+							}
+							ImGui::SameLine();		
+
+							//~ ImGui::PopItemWidth();
 							
-							ImGui::PopItemWidth();					
+												
 							if(ImGui::Selectable(
 								p_mesh->mesh_filters[i]->name.c_str(),
 								
@@ -380,6 +417,8 @@ void UI::entitiesDialog()
 							{
 								cur_selected_filter = i;
 							}
+							
+							ImGui::PopID();
 						}
 						
 						ImGui::ListBoxFooter();
@@ -421,44 +460,7 @@ void UI::entitiesDialog()
 	
 }
 
-//~ void UI::camerasDialog()
-//~ {
-	//~ ImGui::Begin("Cameras", &b_show_cameras_dialog);
-//~ 
-	//~ ImGui::PushItemWidth(-1);
-	//~ if( ImGui::ListBoxHeader(""))
-	//~ {
-		//~ int inc =0;
-		//~ for(std::shared_ptr<Camera> cam : m_editor->cameras)
-		//~ {
-			//~ if(ImGui::Selectable(cam->name.c_str(), inc == m_editor->cur_cam_id)){
-				//~ m_editor->cur_cam_id = inc;
-			//~ }
-			//~ inc++;
-		//~ }
-		//~ ImGui::ListBoxFooter();
-	//~ }
-	//~ 
-//~ 
-	//~ ImGui::PushItemWidth(-1);
-	//~ if(ImGui::Button("Add Camera"))
-	//~ {
-		//~ m_editor->addCamera();
-	//~ }
-	//~ ImGui::SameLine();
-	//~ ImGui::PushItemWidth(-1);
-	//~ if(ImGui::Button("Delete Camera"))
-	//~ {		
-		//~ if(m_editor->cameras.size() > 1)
-		//~ {
-			//~ printf("command delete camera : %d\n", m_editor->cur_cam_id);
-			//~ m_editor->deleteCamera(m_editor->cur_cam_id);
-		//~ }
-	//~ }	
-	//~ 
-	//~ ImGui::Columns(1);
-	//~ ImGui::End();
-//~ }
+
 
 void UI::showAllDialogs()
 {
@@ -542,6 +544,10 @@ void UI::paramWidget(BaseParam * param, int imgui_ID, std::function<void()> call
 		
 		ImGui::Text(p_vec3->getName().c_str());
 		ImGui::Columns(3);
+		ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0.91f, 0.05f, 0.05f, 0.25f));
+		ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);
+		ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0,0));	
+		ImGui::PushItemWidth(-1);	
 		if(ImGui::DragFloat("##X", &_val.x, 0.05f))
 		{
 			p_vec3->setValue(
@@ -553,7 +559,19 @@ void UI::paramWidget(BaseParam * param, int imgui_ID, std::function<void()> call
 			);
 			callback();			
 		}
+		
+		ImGui::PopStyleColor();
+		ImGui::PopStyleVar();
+		ImGui::PopStyleVar();
+		ImGui::PopItemWidth();	
+		
 		ImGui::NextColumn();
+		
+		ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0.05f, 0.91f, 0.05f, 0.25f));
+		ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);		
+		ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0,0));	
+		ImGui::PushItemWidth(-1);	
+		
 		if(ImGui::DragFloat("##Y", &_val.y, 0.05f))
 		{
 			p_vec3->setValue(
@@ -565,7 +583,18 @@ void UI::paramWidget(BaseParam * param, int imgui_ID, std::function<void()> call
 			);
 			callback();
 		}
+		ImGui::PopStyleColor();
+		ImGui::PopStyleVar();
+		ImGui::PopStyleVar();
+		ImGui::PopItemWidth();	
+			
 		ImGui::NextColumn();	
+		
+		ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0.05f, 0.05f, 0.91f, 0.25f));
+		ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);	
+		ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0,0));	
+		ImGui::PushItemWidth(-1);	
+				
 		if(ImGui::DragFloat("##Z", &_val.z, 0.05f))
 		{
 			p_vec3->setValue(
@@ -578,6 +607,10 @@ void UI::paramWidget(BaseParam * param, int imgui_ID, std::function<void()> call
 			callback();
 		}
 		
+		ImGui::PopStyleColor();
+		ImGui::PopStyleVar();		
+		ImGui::PopStyleVar();		
+		ImGui::PopItemWidth();	
 		ImGui::Columns(1);
 		ImGui::PopID();
 		

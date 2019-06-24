@@ -88,6 +88,8 @@ public :
 	
 	std::vector<std::shared_ptr<MeshFilter> > mesh_filters;
 	void addMeshFilter(MESH_FILTER_TYPE filter_type);
+	void deleteMeshFilter(unsigned int id);
+	void moveMeshFilter(int _origin, int _dest);
 	void applyFilters();
 	void buildKDTree(int _limit = 5) override;
 

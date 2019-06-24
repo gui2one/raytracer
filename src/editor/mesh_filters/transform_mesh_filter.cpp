@@ -24,6 +24,8 @@ void TransformMeshFilter::applyFilter(Mesh& mesh)
 	//~ printf("applying filter\n");
 	//~ printf("num faces : %d\n", mesh.faces.size());
 	EditorMeshUtils::translate(mesh, param_position->getValue());
+	EditorMeshUtils::rotate(mesh, param_rotation->getValue());
+	EditorMeshUtils::scale(mesh, param_scale->getValue());
 }
 
 

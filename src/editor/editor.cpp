@@ -72,16 +72,21 @@ Editor::Editor()
 void Editor::setCamPosFromPolar(float u, float v, float _radius, glm::vec3 center)
 {
 	
-	//~ float x = (sin(u)* sin(v) * _radius) + center.x;
-	//~ float y = (cos(u)* sin(v) * _radius) + center.y;
-	//~ float z = (cos(v) * _radius) + center.z;
-//~ 
-	//~ cameras[cur_cam_id]->param_position->setValue( glm::vec3(x, y, z));
-	//~ cameras[cur_cam_id]->target_position = center;
-//~ 
-	//~ cameras[cur_cam_id]->up_vector = glm::vec3(0.0, 0.0, 1.0);
-	//~ 
-	//~ cameras[cur_cam_id]->applyTransforms();
+	float x = (sin(u)* sin(v) * _radius) + center.x;
+	float y = (cos(u)* sin(v) * _radius) + center.y;
+	float z = (cos(v) * _radius) + center.z;
+
+	Camera * p_cam = nullptr;
+	if( (p_cam = dynamic_cast<Camera *>(cameras[cur_cam_id].get())))
+	{
+		p_cam->param_position->setValue( glm::vec3(x, y, z));
+		p_cam->target_position = center;
+
+		p_cam->up_vector = glm::vec3(0.0, 0.0, 1.0);
+		
+		p_cam->applyTransforms();
+		p_cam->buildKDTree();
+	}
 }
 
 void Editor::cycleCameras()

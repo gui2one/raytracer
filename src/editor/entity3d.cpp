@@ -189,24 +189,39 @@ void MeshObject::addMeshFilter(MESH_FILTER_TYPE filter_type)
 	}
 }
 
+void MeshObject::deleteMeshFilter(unsigned int id)
+{
+	mesh_filters.erase(mesh_filters.begin() + id);
+}
+
+void MeshObject::moveMeshFilter(int _origin, int _dest)
+{
+        std::shared_ptr<MeshFilter> save = mesh_filters[_origin];
+        mesh_filters.erase(mesh_filters.begin()+_origin);
+        mesh_filters.insert(mesh_filters.begin() + _dest, save);
+}
+
+
 void MeshObject::applyFilters()
 {
-	//~ printf("FILTER FUNCTION fired\n");
-	mesh = generator->generate();
-	for(auto filter : mesh_filters)
+	if(mesh_filters.size() > 0)
 	{
-		
-		TransformMeshFilter * p_transform = nullptr;
-		
-		if(( p_transform = dynamic_cast<TransformMeshFilter*>(filter.get())))
+		mesh = generator->generate();
+		for(auto filter : mesh_filters)
 		{
-			//~ printf("\tFILTER APPLY\n");
-			filter->applyFilter(mesh);
+			
+			TransformMeshFilter * p_transform = nullptr;
+			
+			if(( p_transform = dynamic_cast<TransformMeshFilter*>(filter.get())))
+			{
+				//~ printf("\tFILTER APPLY\n");
+				filter->applyFilter(mesh);
+			}
 		}
+		
+		buildVBO();
 	}
 	
-	buildVBO();
-	buildKDTree();
 }
 
 void MeshObject::buildVBO()
