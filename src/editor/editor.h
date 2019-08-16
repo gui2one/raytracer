@@ -17,6 +17,8 @@
 
 #include "../vendor/imgui/imgui_impl_sdl.h"
 
+#include "actions.h"
+
 
 
 
@@ -121,5 +123,7 @@ public :
 	unsigned int handles_fbo_depth = 0;
 	unsigned int handles_fbo_texture = 0;
 	unsigned int handles_fbo_vbo = 0; //// for 'screen'
+	
+	std::vector<Action> actions;
 };
 #endif /* EDITOR_H */

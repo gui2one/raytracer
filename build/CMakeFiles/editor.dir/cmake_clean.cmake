@@ -22,6 +22,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/mesh_filter.cpp.o"
   "CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/mesh_filters/transform_mesh_filter.cpp.o"
   "CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/handles/base_handle.cpp.o"
+  "CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/actions.cpp.o"
   "editor.pdb"
   "editor"
 )

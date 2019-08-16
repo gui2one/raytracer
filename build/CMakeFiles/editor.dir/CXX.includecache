@@ -466,6 +466,14 @@ imgui_user.h
 pch.h
 /home/pi/projects/raytracer/src/pch.h
 
+/home/pi/projects/raytracer/src/editor/actions.cpp
+actions.h
+/home/pi/projects/raytracer/src/editor/actions.h
+
+/home/pi/projects/raytracer/src/editor/actions.h
+../pch.h
+/home/pi/projects/raytracer/src/pch.h
+
 /home/pi/projects/raytracer/src/editor/construction_grid.cpp
 construction_grid.h
 /home/pi/projects/raytracer/src/editor/construction_grid.h
@@ -505,6 +513,8 @@ handles/base_handle.h
 /home/pi/projects/raytracer/src/editor/handles/base_handle.h
 ../vendor/imgui/imgui_impl_sdl.h
 /home/pi/projects/raytracer/src/vendor/imgui/imgui_impl_sdl.h
+actions.h
+/home/pi/projects/raytracer/src/editor/actions.h
 
 /home/pi/projects/raytracer/src/editor/editor_camera.cpp
 editor_camera.h

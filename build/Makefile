@@ -216,6 +216,33 @@ home/pi/projects/raytracer/src/color.cpp.s:
 	$(MAKE) -f CMakeFiles/coreLib.dir/build.make CMakeFiles/coreLib.dir/home/pi/projects/raytracer/src/color.cpp.s
 .PHONY : home/pi/projects/raytracer/src/color.cpp.s
 
+home/pi/projects/raytracer/src/editor/actions.o: home/pi/projects/raytracer/src/editor/actions.cpp.o
+
+.PHONY : home/pi/projects/raytracer/src/editor/actions.o
+
+# target to build an object file
+home/pi/projects/raytracer/src/editor/actions.cpp.o:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/actions.cpp.o
+.PHONY : home/pi/projects/raytracer/src/editor/actions.cpp.o
+
+home/pi/projects/raytracer/src/editor/actions.i: home/pi/projects/raytracer/src/editor/actions.cpp.i
+
+.PHONY : home/pi/projects/raytracer/src/editor/actions.i
+
+# target to preprocess a source file
+home/pi/projects/raytracer/src/editor/actions.cpp.i:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/actions.cpp.i
+.PHONY : home/pi/projects/raytracer/src/editor/actions.cpp.i
+
+home/pi/projects/raytracer/src/editor/actions.s: home/pi/projects/raytracer/src/editor/actions.cpp.s
+
+.PHONY : home/pi/projects/raytracer/src/editor/actions.s
+
+# target to generate assembly for a file
+home/pi/projects/raytracer/src/editor/actions.cpp.s:
+	$(MAKE) -f CMakeFiles/editor.dir/build.make CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/actions.cpp.s
+.PHONY : home/pi/projects/raytracer/src/editor/actions.cpp.s
+
 home/pi/projects/raytracer/src/editor/construction_grid.o: home/pi/projects/raytracer/src/editor/construction_grid.cpp.o
 
 .PHONY : home/pi/projects/raytracer/src/editor/construction_grid.o
@@ -1287,6 +1314,9 @@ help:
 	@echo "... home/pi/projects/raytracer/src/color.o"
 	@echo "... home/pi/projects/raytracer/src/color.i"
 	@echo "... home/pi/projects/raytracer/src/color.s"
+	@echo "... home/pi/projects/raytracer/src/editor/actions.o"
+	@echo "... home/pi/projects/raytracer/src/editor/actions.i"
+	@echo "... home/pi/projects/raytracer/src/editor/actions.s"
 	@echo "... home/pi/projects/raytracer/src/editor/construction_grid.o"
 	@echo "... home/pi/projects/raytracer/src/editor/construction_grid.i"
 	@echo "... home/pi/projects/raytracer/src/editor/construction_grid.s"

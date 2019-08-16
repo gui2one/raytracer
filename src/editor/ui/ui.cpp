@@ -22,11 +22,13 @@ static std::string increment_name(std::string _name)
 	return s;
 }
 
+// TODO
 static std::string unique_name(std::string candidate, std::vector<std::string> names_set)
 {
 	return candidate;
 }
-
+//
+ 
 UI::UI()
 {
 	

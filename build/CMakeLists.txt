@@ -44,6 +44,7 @@ include_directories(~/Downloads/boost_1_50_0)
 link_directories(${PROJECT_ROOT}/src/libs/)
 link_directories(${PROJECT_ROOT}/src/libs/opensubdiv)
 link_directories(/usr/include/SDL2)
+link_directories(/usr/local/lib)
 
 
 #~ link_directories(../src/include/google/)
@@ -150,6 +151,11 @@ add_executable(editor
 	../src/editor/mesh_filters/transform_mesh_filter.cpp
 	
 	../src/editor/handles/base_handle.cpp
+	../src/editor/actions.cpp
+	
+	
+	
+	
 )
 
 target_link_libraries(editor coreLib)
