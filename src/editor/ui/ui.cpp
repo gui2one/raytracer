@@ -133,6 +133,7 @@ void UI::optionsDialog()
 	if(ImGui::CheckboxFlags("show grid", (unsigned int*)&show_grid, 1))
 	{
 		m_editor->toggleConstructionGrid();		
+
 	}
 	
 	static bool show_wireframe = m_editor->show_wireframe;
@@ -523,7 +524,10 @@ void UI::paramWidget(BaseParam * param, int imgui_ID, std::function<void()> call
 		if( ImGui::DragInt(p_int->getName().c_str(), &_val))
 		{
 			//~ printf("set int value\n");
-			p_int->setValue(_val);
+			//~ p_int->setValue(_val);
+			
+			ActionParamChange<int> action(p_int, _val);
+			m_editor->actions.push_back(action);
 			callback();
 		}
 	}
@@ -533,7 +537,9 @@ void UI::paramWidget(BaseParam * param, int imgui_ID, std::function<void()> call
 		if( ImGui::DragFloat(p_float->getName().c_str(), &_val, 0.05f))
 		{
 			//~ printf("set int value\n");
-			p_float->setValue(_val);
+			//~ p_float->setValue(_val);
+			ActionParamChange<float> action(p_float, _val);
+			m_editor->actions.push_back(action);			
 			callback();
 		}
 				

@@ -473,6 +473,8 @@ actions.h
 /home/pi/projects/raytracer/src/editor/actions.h
 ../pch.h
 /home/pi/projects/raytracer/src/pch.h
+param.h
+/home/pi/projects/raytracer/src/editor/param.h
 
 /home/pi/projects/raytracer/src/editor/construction_grid.cpp
 construction_grid.h

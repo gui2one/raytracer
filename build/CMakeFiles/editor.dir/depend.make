@@ -19,6 +19,7 @@ CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/actions.cpp.o: ../sr
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/actions.cpp.o: ../src/vendor/imgui/imgui_impl_sdl.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/actions.cpp.o: /home/pi/projects/raytracer/src/editor/actions.cpp
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/actions.cpp.o: /home/pi/projects/raytracer/src/editor/actions.h
+CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/actions.cpp.o: /home/pi/projects/raytracer/src/editor/param.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/actions.cpp.o: /home/pi/projects/raytracer/src/pch.h
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/actions.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/./ext/matrix_double2x2.hpp
 CMakeFiles/editor.dir/home/pi/projects/raytracer/src/editor/actions.cpp.o: /home/pi/projects/raytracer/src/vendor/glm/./ext/matrix_double2x2_precision.hpp
