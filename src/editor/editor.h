@@ -124,6 +124,6 @@ public :
 	unsigned int handles_fbo_texture = 0;
 	unsigned int handles_fbo_vbo = 0; //// for 'screen'
 	
-	std::vector<Action> actions;
+	std::vector< std::shared_ptr<Action> > actions;
 };
 #endif /* EDITOR_H */

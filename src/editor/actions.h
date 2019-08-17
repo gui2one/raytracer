@@ -15,11 +15,14 @@ struct ParamSnapshot{
 	}
 };
 */
+
 class Action{
 public:
 	Action(){}
-	virtual void Do(){};
-	virtual void Undo(){};
+	virtual void redo(){};
+	virtual void undo(){};
+	
+	//~ std::pair< BaseParam *, float > old_value, new_value;
 	
 private:
 };
@@ -29,16 +32,28 @@ class ActionParamChange : public Action{
 
 public:
 
-	ActionParamChange(Param<T> * param, T val){
-		old_value.first = param;
-		old_value.second = param->getValue();
-		printf("old value stored\n");
+	ActionParamChange(Param<T> * param, T old, T val, std::function<void()> callback) : Action(){
+		m_param = param;
+		m_callback = callback;
+		old_value = old;
+		new_value = val;
+		//~ printf("old value stored : %s\n", param->getName().c_str());
+		
+		
 		param->setValue(val);
+		
+		callback();
 	};
-	void Do()override{} ;
-	void Undo()override{} ;
+	void redo()override{};
 	
-	std::pair< Param<T>*, T > old_value, new_value;
+	void undo()override{
+		m_param->setValue(old_value);
+		m_callback();
+	} ;
+	
+	Param<T> * m_param;
+	T old_value, new_value;
+	std::function<void()> m_callback;
 		
 private:
 };

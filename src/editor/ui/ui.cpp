@@ -90,6 +90,7 @@ void UI::menu()
             ImGui::MenuItem("Options", NULL, &b_show_options_dialog);
             //~ ImGui::MenuItem("Cameras", NULL, &b_show_cameras_dialog);
             ImGui::MenuItem("Entities", NULL, &b_show_entities_dialog);
+            ImGui::MenuItem("Actions", NULL, &b_show_actions_dialog);
             ImGui::Separator();
             if(ImGui::MenuItem("Show All"))
             {
@@ -463,13 +464,77 @@ void UI::entitiesDialog()
 	
 }
 
-
+void UI::actionsDialog(){
+	
+	
+	ImGui::Begin("Actions");
+	
+	if( ImGui::Button("Undo")){
+		if( m_editor->actions.size() > 0){
+			
+			ActionParamChange<int> * p_action_int = nullptr; 
+			ActionParamChange<float> * p_action_float = nullptr; 
+			ActionParamChange<glm::vec3> * p_action_vec3 = nullptr; 
+			
+			if( (p_action_int  = dynamic_cast<ActionParamChange<int> *>(m_editor->actions[0].get()))){			
+				p_action_int->undo();
+				m_editor->actions.erase(m_editor->actions.begin());
+			}else if( (p_action_float  = dynamic_cast<ActionParamChange<float> *>(m_editor->actions[0].get()))){			
+				p_action_float->undo();
+				m_editor->actions.erase(m_editor->actions.begin());
+			}else if( (p_action_vec3  = dynamic_cast<ActionParamChange<glm::vec3> *>(m_editor->actions[0].get()))){			
+				p_action_vec3->undo();
+				m_editor->actions.erase(m_editor->actions.begin());
+			}
+		}
+	}
+	
+	int inc = 0;
+	for(auto action : m_editor->actions){
+		
+		
+		ActionParamChange<int> * p_action_int = nullptr; 
+		ActionParamChange<float> * p_action_float = nullptr; 
+		ActionParamChange<glm::vec3> * p_action_vec3 = nullptr; 
+		
+		if( (p_action_int  = dynamic_cast<ActionParamChange<int> *>(action.get()))){
+			ImGui::Text(
+				"%s from %d to %d", 
+				p_action_int->m_param->getName().c_str(),
+				p_action_int->old_value,
+				p_action_int->new_value
+			);
+			//~ printf("%s\n", p_action_int->m_param->getName().c_str());
+			//~ printf("%s\n", action.old_value.first->getName().c_str());
+		}else if((p_action_float  = dynamic_cast<ActionParamChange<float> *>(action.get()))){
+			ImGui::Text(
+				"%s from %.3f to %.3f", 
+				p_action_float->m_param->getName().c_str(),
+				p_action_float->old_value,
+				p_action_float->new_value
+			);
+		}else if((p_action_vec3  = dynamic_cast<ActionParamChange<glm::vec3> *>(action.get()))){
+			ImGui::Text(
+				"%s from [%.3f, %.3f, %.3f] to [%.3f, %.3f, %.3f]", 
+				p_action_vec3->m_param->getName().c_str(),
+				p_action_vec3->old_value.x,p_action_vec3->old_value.y,p_action_vec3->old_value.z,
+				p_action_vec3->new_value.x, p_action_vec3->new_value.y, p_action_vec3->new_value.z
+			);
+		}
+		//~ ImGui::Text(action.old_value.first->getName().c_str());
+		
+		inc++;
+	}
+	ImGui::End();	
+	
+}
 
 void UI::showAllDialogs()
 {
 	b_show_options_dialog  = true;
 	//~ b_show_cameras_dialog  = true;
 	b_show_entities_dialog = true;
+	b_show_actions_dialog = true;
 }
 
 void UI::hideAllDialogs()
@@ -477,6 +542,7 @@ void UI::hideAllDialogs()
 	b_show_options_dialog  = false;
 	//~ b_show_cameras_dialog  = false;	
 	b_show_entities_dialog = false;
+	b_show_actions_dialog = false;
 }
 
 
@@ -503,7 +569,11 @@ void UI::draw()
 		//~ camerasDialog();
 	
 	if(b_show_entities_dialog)
-		entitiesDialog();	
+		entitiesDialog();
+		
+	if(b_show_actions_dialog)
+		actionsDialog();		
+			
 
 	ImGui::Render();	
 	
@@ -521,32 +591,33 @@ void UI::paramWidget(BaseParam * param, int imgui_ID, std::function<void()> call
 	if( ( p_int = dynamic_cast<Param<int>*>( param )))
 	{
 		int _val = p_int->getValue();
+		int _old = _val;
 		if( ImGui::DragInt(p_int->getName().c_str(), &_val))
 		{
-			//~ printf("set int value\n");
-			//~ p_int->setValue(_val);
-			
-			ActionParamChange<int> action(p_int, _val);
-			m_editor->actions.push_back(action);
-			callback();
+			std::shared_ptr< ActionParamChange<int> > action = std::make_shared<ActionParamChange<int>>(p_int, _old, _val, callback);
+			//~ m_editor->actions.push_back(action);
+			m_editor->actions.insert( m_editor->actions.begin(), action);
+			//~ callback();
 		}
 	}
 	else if(( p_float = dynamic_cast<Param<float>*>( param )))
 	{
 		float _val = p_float->getValue();
+		float _old = _val;
 		if( ImGui::DragFloat(p_float->getName().c_str(), &_val, 0.05f))
 		{
-			//~ printf("set int value\n");
-			//~ p_float->setValue(_val);
-			ActionParamChange<float> action(p_float, _val);
-			m_editor->actions.push_back(action);			
-			callback();
+			std::shared_ptr< ActionParamChange<float> > action = std::make_shared<ActionParamChange<float>>(p_float, _old, _val, callback);
+			m_editor->actions.insert( m_editor->actions.begin(), action);
+			//~ callback();
 		}
 				
 	}
 	else if( ( p_vec3 = dynamic_cast<Param<glm::vec3>*>( param )))
 	{
+		bool value_changed = false;
+		
 		glm::vec3 _val = p_vec3->getValue();
+		glm::vec3 _old = _val;
 		
 		ImGui::PushID((const void*)imgui_ID);
 		
@@ -558,14 +629,19 @@ void UI::paramWidget(BaseParam * param, int imgui_ID, std::function<void()> call
 		ImGui::PushItemWidth(-1);	
 		if(ImGui::DragFloat("##X", &_val.x, 0.05f))
 		{
-			p_vec3->setValue(
-				glm::vec3(
-					_val.x,
-					p_vec3->getValue().y,
-					p_vec3->getValue().z
-				)
-			);
-			callback();			
+	
+			
+			printf("%.3f\n", _val.x);
+			value_changed = true;	
+			//~ p_vec3->setValue(
+				//~ glm::vec3(
+					//~ _val.x,
+					//~ p_vec3->getValue().y,
+					//~ p_vec3->getValue().z
+				//~ )
+			//~ );
+			//~ 
+			//~ callback();			
 		}
 		
 		ImGui::PopStyleColor();
@@ -582,14 +658,15 @@ void UI::paramWidget(BaseParam * param, int imgui_ID, std::function<void()> call
 		
 		if(ImGui::DragFloat("##Y", &_val.y, 0.05f))
 		{
-			p_vec3->setValue(
-				glm::vec3(
-					p_vec3->getValue().x,
-					_val.y,
-					p_vec3->getValue().z
-				)
-			);
-			callback();
+			value_changed = true;
+			//~ p_vec3->setValue(
+				//~ glm::vec3(
+					//~ p_vec3->getValue().x,
+					//~ _val.y,
+					//~ p_vec3->getValue().z
+				//~ )
+			//~ );
+			//~ callback();
 		}
 		ImGui::PopStyleColor();
 		ImGui::PopStyleVar();
@@ -605,14 +682,15 @@ void UI::paramWidget(BaseParam * param, int imgui_ID, std::function<void()> call
 				
 		if(ImGui::DragFloat("##Z", &_val.z, 0.05f))
 		{
-			p_vec3->setValue(
-				glm::vec3(
-					p_vec3->getValue().x,
-					p_vec3->getValue().y,
-					_val.z
-				)
-			);
-			callback();
+			value_changed = true;
+			//~ p_vec3->setValue(
+				//~ glm::vec3(
+					//~ p_vec3->getValue().x,
+					//~ p_vec3->getValue().y,
+					//~ _val.z
+				//~ )
+			//~ );
+			//~ callback();
 		}
 		
 		ImGui::PopStyleColor();
@@ -621,6 +699,14 @@ void UI::paramWidget(BaseParam * param, int imgui_ID, std::function<void()> call
 		ImGui::PopItemWidth();	
 		ImGui::Columns(1);
 		ImGui::PopID();
+		
+		
+		if( value_changed ){
+			std::shared_ptr< ActionParamChange<glm::vec3> > action = std::make_shared<ActionParamChange<glm::vec3>>(p_vec3, _old, _val, callback);
+			m_editor->actions.insert( m_editor->actions.begin(), action);	
+			
+			
+		}
 		
 	}
 	else if((p_menu = dynamic_cast<ParamMenu*>(param)))
