@@ -69,7 +69,7 @@ enum ENTITY_TYPE{
 class ActionEditorAddEntity : public Action
 {
 public:
-	ActionEditorAddEntity(std::shared_ptr<Editor> editor, ENTITY_TYPE type);
+	ActionEditorAddEntity(ENTITY_TYPE type);
 	
 	void redo()override{};
 	void undo()override;

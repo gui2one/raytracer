@@ -1,6 +1,6 @@
 #include "actions.h"
 
-ActionEditorAddEntity::ActionEditorAddEntity(std::shared_ptr<Editor> editor, ENTITY_TYPE type) : Action()
+ActionEditorAddEntity::ActionEditorAddEntity(ENTITY_TYPE type) : Action()
 {
 	m_type = type;
 	if( m_type == CAMERA ){
