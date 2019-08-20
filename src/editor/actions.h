@@ -2,6 +2,7 @@
 #define ACTIONS_H
 
 #include "../pch.h"
+
 #include "param.h"
 
 /*
@@ -58,5 +59,25 @@ public:
 private:
 };
 
+
+enum ENTITY_TYPE{
+	MESH_OBJECT,
+	CAMERA,
+	NULL_OBJECT
+};
+
+class ActionEditorAddEntity : public Action
+{
+public:
+	ActionEditorAddEntity(std::shared_ptr<Editor> editor, ENTITY_TYPE type);
+	
+	void redo()override{};
+	void undo()override;
+	
+	ENTITY_TYPE m_type;
+	
+private:
+	
+};
 #endif /* ACTIONS_H */
 
